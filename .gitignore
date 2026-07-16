@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+results/*/
+results/*.csv
+!results/.gitkeep
+.venv/
+
+# Third-party baseline snapshots are cloned locally, not vendored into this repo.
+# See README ("What is wired") for the clone commands.
+subjects/flask/
+subjects/django/
+subjects/*/
+!subjects/.gitkeep
+!subjects/subjects.json

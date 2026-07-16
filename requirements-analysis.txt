@@ -1,0 +1,9 @@
+# Pinned analysis toolchain for the agentic-vs-human benchmark harness.
+# CPD is not a Python package; it ships with PMD and is installed in the
+# Dockerfile. Everything else the harness needs is below.
+
+radon==6.0.1          # cyclomatic complexity + Maintainability Index
+complexipy==0.4.0     # cognitive complexity (SonarSource algorithm)
+bandit==1.7.8         # security findings
+pylint==3.1.0         # code smells
+pytest==8.1.1         # oracle test runner

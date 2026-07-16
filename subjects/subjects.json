@@ -1,0 +1,56 @@
+{
+  "_comment": "Registry of the study subjects. `path` is the source root that the analysis pipeline walks (relative to the repo root). Frozen snapshots are mounted/checked out under subjects/<id>/. Set `available: false` for a subject whose snapshot is not present locally; the pipeline will skip it and note the omission in results.",
+  "subjects": [
+    {
+      "id": "flask",
+      "label": "Flask (H)",
+      "kind": "human",
+      "pair": "flask",
+      "path": "subjects/flask/src/flask",
+      "snapshot": "pallets/flask@3.0.3",
+      "oracle": "flask",
+      "available": true
+    },
+    {
+      "id": "swe_flask",
+      "label": "SWE-agent (A)",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/swe-agent-flask/src",
+      "snapshot": "swe-agent-1.0.0 + claude-sonnet-4",
+      "oracle": "flask",
+      "available": false
+    },
+    {
+      "id": "openhands_flask",
+      "label": "OpenHands (A)",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/openhands-flask/src",
+      "snapshot": "openhands-0.14.0 + gpt-4o",
+      "oracle": "flask",
+      "available": false
+    },
+    {
+      "id": "django",
+      "label": "Django mod. (H)",
+      "kind": "human",
+      "pair": "django",
+      "path": "subjects/django/django",
+      "snapshot": "django/django@5.0.6 (urls/ + views/)",
+      "oracle": "django",
+      "available": true,
+      "include": ["urls", "views"]
+    },
+    {
+      "id": "swe_django",
+      "label": "SWE-agent/Dj. (A)",
+      "kind": "agentic",
+      "pair": "django",
+      "path": "subjects/swe-agent-django/src",
+      "snapshot": "swe-agent-1.0.0 + claude-sonnet-4",
+      "oracle": "django",
+      "available": false
+    }
+  ]
+}

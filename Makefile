@@ -6,7 +6,7 @@ SUBJECTS ?=            # e.g. make all SUBJECTS="flask swe_flask"
 SUBJ_ARG := $(if $(SUBJECTS),--subjects $(SUBJECTS),)
 
 .PHONY: all repo_stats correctness complexity smells security duplication \
-        aggregate tables clean docker docker-run help
+        significance aggregate tables clean docker docker-run help
 
 all: ## Run every stage + aggregate (the paper's `make all`)
 	$(PYTHON) run_all.py $(SUBJ_ARG)
@@ -28,6 +28,9 @@ security: ## RQ4 Bandit findings
 
 duplication: ## RQ5 CPD duplication
 	$(PYTHON) run_all.py --stages duplication $(SUBJ_ARG)
+
+significance: ## Mann-Whitney U / Fisher's exact vs. each pair's human baseline
+	$(PYTHON) run_all.py --stages significance $(SUBJ_ARG)
 
 aggregate tables: ## Rebuild CSV tables from existing result JSON
 	$(PYTHON) run_all.py --stages aggregate

@@ -54,6 +54,7 @@ def _parse(xml_text: str) -> dict:
     total_dup_lines = 0
     max_tokens = 0
     parsed = []
+    by_file: dict[str, int] = {}
     for d in blocks:
         lines = int(d.get("lines", "0"))
         tokens = int(d.get("tokens", "0"))
@@ -63,32 +64,52 @@ def _parse(xml_text: str) -> dict:
         redundant_copies = max(len(occurrences) - 1, 1)
         total_dup_lines += lines * redundant_copies
         max_tokens = max(max_tokens, tokens)
-        parsed.append({
-            "lines": lines,
-            "tokens": tokens,
-            "occurrences": [
-                {"path": f.get("path"), "line": int(f.get("line", "0"))}
-                for f in occurrences
-            ],
-        })
+        occ_records = []
+        for f in occurrences:
+            path = f.get("path")
+            # Credit every physical occurrence (not just the "extra" copies)
+            # toward its own file, so per-file duplication reflects how much
+            # of *that file* is copy-pasted, independent of which occurrence
+            # is treated as the "original" for the repo-wide waste total.
+            by_file[path] = by_file.get(path, 0) + lines
+            occ_records.append({"path": path, "line": int(f.get("line", "0"))})
+        parsed.append({"lines": lines, "tokens": tokens, "occurrences": occ_records})
     return {
         "duplicated_blocks": len(blocks),
         "duplicated_loc": total_dup_lines,
         "max_block_tokens": max_tokens,
         "blocks": parsed,
+        "by_file": by_file,
     }
 
 
 def analyze(subject: common.Subject, total_loc: int) -> dict:
-    result = _parse(_run_cpd(subject.target_paths()))
+    parsed = _parse(_run_cpd(subject.target_paths()))
     loc = total_loc or 1
-    result.update({
+
+    files_info = []
+    for f in subject.python_files():
+        rel = str(f.relative_to(subject.root))
+        floc = common.loc_for_file(f).loc
+        dup = parsed["by_file"].get(str(f.resolve()), 0)
+        files_info.append({
+            "file": rel,
+            "loc": floc,
+            "duplicated_loc": dup,
+            "duplicated_pct": round(100.0 * dup / floc, 1) if floc else 0.0,
+        })
+
+    return {
         "subject": subject.id,
         "label": subject.label,
-        "duplicated_pct": round(100.0 * result["duplicated_loc"] / loc, 1),
+        "duplicated_blocks": parsed["duplicated_blocks"],
+        "duplicated_loc": parsed["duplicated_loc"],
+        "duplicated_pct": round(100.0 * parsed["duplicated_loc"] / loc, 1),
+        "max_block_tokens": parsed["max_block_tokens"],
         "min_tokens": MIN_TOKENS,
-    })
-    return result
+        "blocks": parsed["blocks"],
+        "files": files_info,
+    }
 
 
 def run(subject_ids: list[str] | None = None) -> None:

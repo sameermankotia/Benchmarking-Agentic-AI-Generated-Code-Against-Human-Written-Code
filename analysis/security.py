@@ -1,8 +1,9 @@
 """RQ4 security vulnerability density via Bandit.
 
 Runs Bandit's CLI with the full default plugin set, keeps Medium-confidence or
-higher findings (paper §3.5.4), normalises by LOC, and maps Bandit test IDs to
-CWE classes following Cotroneo et al.
+higher findings (paper §3.5.4), normalises per 100 LOC (same convention as the
+pylint smell density in §3.5.3 and paper Table 5), and maps Bandit test IDs to
+CWE classes following Cotroneo et al. and paper Table 6.
 """
 
 from __future__ import annotations
@@ -14,13 +15,16 @@ from pathlib import Path
 
 from . import common
 
-# Bandit test-id -> CWE, per paper §3.5.4.
+# Bandit test-id -> CWE, per paper §3.5.4 / Table 6.
 CWE_MAP = {
     "B101": "CWE-617",   # assert used
     "B105": "CWE-259",   # hardcoded password string
     "B106": "CWE-259",   # hardcoded password funcarg
     "B107": "CWE-259",   # hardcoded password default
     "B311": "CWE-330",   # insecure random
+    "B324": "CWE-327",   # weak crypto hash (e.g. md5/sha1 for security use)
+    "B501": "CWE-295",   # improper certificate/TLS validation
+    "B502": "CWE-295",   # weak SSL/TLS protocol version
     "B602": "CWE-78",    # subprocess shell=True
     "B608": "CWE-89",    # SQL injection
 }
@@ -35,7 +39,24 @@ def _run_bandit(targets: list[Path]) -> dict:
     # Bandit exits 1 when it finds issues; JSON is still on stdout.
     if not proc.stdout.strip():
         raise RuntimeError(f"bandit produced no output: {proc.stderr.strip()}")
-    return json.loads(proc.stdout)
+    report = json.loads(proc.stdout)
+    # Bandit degrades silently: a plugin can crash on every single file (e.g.
+    # a pinned Bandit too old for the Python version it's *run under* — not
+    # the subject's Python — hits removed-in-3.12 ast.Num/ast.Str aliases)
+    # and still return exit 0 with "results": []. A 0-finding report is
+    # indistinguishable from "genuinely clean" unless we also check for
+    # per-file scan errors; treat any as fatal rather than reporting a false
+    # zero that would corrupt the RQ4 density and Fisher's-exact tests.
+    errors = report.get("errors") or []
+    if errors:
+        sample = errors[0].get("reason", "unknown error")
+        raise RuntimeError(
+            f"bandit failed to scan {len(errors)} file(s) (e.g. '{sample}'); "
+            "refusing to report a finding count that would silently be too "
+            "low. This usually means the pinned bandit version doesn't "
+            "support the Python interpreter running it — try a newer bandit "
+            "or run via the Docker path (python:3.11-slim, paper §3.6).")
+    return report
 
 
 def analyze(subject: common.Subject, total_loc: int) -> dict:
@@ -71,7 +92,7 @@ def analyze(subject: common.Subject, total_loc: int) -> dict:
         "subject": subject.id,
         "label": subject.label,
         "total_findings": len(kept),
-        "density_per_kloc": round(1000.0 * len(kept) / loc, 2),
+        "density_per_100_loc": round(100.0 * len(kept) / loc, 2),
         "by_severity": by_severity,
         "by_cwe": dict(sorted(by_cwe.items(), key=lambda kv: -kv[1])),
         "findings": kept,
@@ -87,10 +108,14 @@ def run(subject_ids: list[str] | None = None) -> None:
         stats = common.read_result("repo_stats", subject.id)
         loc = stats["loc"] if stats else sum(
             common.loc_for_file(f).loc for f in subject.python_files())
-        payload = analyze(subject, loc)
+        try:
+            payload = analyze(subject, loc)
+        except RuntimeError as e:
+            print(f"[security] SKIP {subject.id}: {e}")
+            continue
         common.write_result("security", subject.id, payload)
         print(f"[security] {subject.id}: {payload['total_findings']} findings "
-              f"({payload['density_per_kloc']}/kLOC)")
+              f"({payload['density_per_100_loc']}/100 LOC)")
 
 
 if __name__ == "__main__":

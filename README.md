@@ -14,6 +14,12 @@ paper's tables as CSV. Five quality dimensions, five research questions:
 | RQ4 | Security density        | Bandit (+ CWE mapping)          | `analysis/security.py`     |
 | RQ5 | Code duplication        | CPD (PMD)                       | `analysis/duplication.py`  |
 
+Every dimension above is also tested for statistical significance against
+the matched human baseline in the same pair — Mann-Whitney U for the
+per-function/per-file distributions (RQ2, RQ3, RQ5) and Fisher's exact for
+the pass/fail and severity counts (RQ1, RQ4) — by `analysis/significance.py`
+(see "Statistical testing" below).
+
 ## Layout
 
 ```
@@ -22,7 +28,7 @@ subjects/<id>/           frozen snapshots (git submodules / mounted read-only)
 oracle/flask, oracle/django   specification-derived oracle suites + conftest
 analysis/                one module per stage + common helpers + aggregator
 run_all.py               orchestrator (`make all` calls this)
-results/<dimension>/     per-subject result JSON
+results/<dimension>/     per-subject result JSON (includes results/significance/)
 results/tables/          aggregated CSV tables (the paper tables)
 Dockerfile, Makefile     hermetic execution (paper §3.6)
 ```
@@ -35,6 +41,7 @@ pip install -r requirements-analysis.txt      # CPD/PMD via Docker only
 make all                                       # all subjects, all stages
 make all SUBJECTS="flask swe_flask"            # subset
 make complexity                                # one stage
+make significance                              # Mann-Whitney U / Fisher's exact
 make tables                                    # re-aggregate existing JSON
 ```
 
@@ -83,15 +90,62 @@ present data supports.
   per-function cognitive complexity. Thresholds match the paper: CC > 10,
   CogC > 15, MI < 65.
 - **Security** — Bandit's full default plugin set, filtered to Medium-confidence
-  or higher, normalised per kLOC, with test-ids mapped to CWE classes
-  (§3.5.4).
+  or higher, normalised per 100 LOC (same convention as the pylint density
+  below), with test-ids mapped to CWE classes (§3.5.4). Findings also carry
+  their raw Bandit test-id, so `analysis/aggregate.py` can render the
+  Bandit-ID -> CWE breakdown (`table_cwe_<pair>.csv`, paper Table 6)
+  independently of the collapsed per-CWE counts in `table_security.csv`.
 - **Smells** — pylint JSON reporter; F/I categories dropped (§3.5.3); reported
   as totals, per-100-LOC density, and C/R/W/E breakdown.
 - **Duplication** — CPD with a 50-token minimum; duplicated blocks, duplicated
-  LOC, duplicated fraction, and largest block in tokens.
+  LOC, duplicated fraction, largest block in tokens, and a per-file duplicated
+  LOC / duplicated-% breakdown (feeds the file-level significance test below).
 - **Correctness** — each oracle suite runs against a subject through the
   canonical `sut` import (see `oracle/conftest.py`); JUnit XML is bucketed into
   the paper's behavioural categories by test-file stem.
+
+### Statistical testing
+
+`analysis/significance.py` runs after the five dimension stages and tests
+each **agentic** subject against the **human baseline in its own pair**
+(SWE-agent/OpenHands-Flask vs. Flask; SWE-agent-Django vs. the Django
+module):
+
+- **Mann-Whitney U** (two-sided) on the per-function CC and CogC
+  distributions (RQ2) and the per-file MI and duplicated-LOC-%
+  distributions (RQ3, RQ5) — complexity and duplication are right-skewed, so
+  a rank-based test is more appropriate than a *t*-test. Effect size is
+  reported as rank-biserial correlation (Kerby 2014's simple-difference
+  formula, `r = 1 - 2U/(n_agentic * n_human)`); `r > 0` means the agentic
+  distribution skews higher (worse, for CC/CogC/duplication) or lower
+  (worse, for MI) than the human baseline.
+- **Fisher's exact test** (two-sided) on the oracle pass/fail 2x2 tables, per
+  behavioural category and overall (RQ1), and on the Bandit severity-band 2x2
+  tables (RQ4), since several cells have small counts and a chi-square
+  approximation would be unreliable there.
+
+All tests use alpha = 0.05. Results are written to
+`results/significance/<agentic_id>.json` and folded back into Tables 3
+(complexity), 4 (maintainability/MI), 5 (security), and 7 (duplication) as
+added p-value / effect-size rows, and into Table 2 (correctness) as added
+per-category p-value columns, by `analysis/aggregate.py`. A cell reads
+`ref.` for the human baseline itself (nothing to test it against) and `-`
+where the upstream dimension data wasn't available.
+
+Run it standalone with `make significance` once `make complexity`,
+`make correctness`, `make security`, and `make duplication` have produced
+their JSON for both a pair's human baseline and at least one agentic
+subject in that pair.
+
+### Cross-repository consistency
+
+`analysis/aggregate.py` also renders one `table_quality_gap_<agentic_id>.csv`
+per agentic subject (paper Tables 8-9): oracle pass rate, mean CC, mean
+CogC, mean MI, security findings/100 LOC, and duplicated LOC%, each as
+human-baseline value, agentic value, and a delta (percentage points for the
+pass rate, MI points for MI, relative % otherwise) — the same format used to
+argue that quality gaps are consistent in direction and magnitude across
+both repository pairs and both agentic systems.
 
 Determinism: identical inputs + pinned tools (`requirements-analysis.txt`,
 pinned PMD in the Dockerfile) yield numerically identical `results/`.

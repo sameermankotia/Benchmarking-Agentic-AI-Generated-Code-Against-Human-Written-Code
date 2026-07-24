@@ -50,22 +50,29 @@ def _mi_score(path: Path) -> float | None:
 
 
 def _cogc_records(path: Path) -> list[dict]:
-    """Per-function cognitive complexity via complexipy."""
+    """Per-function cognitive complexity via complexipy.
+
+    complexipy 0.4.0 (the version this harness pins) exposes its Rust
+    binding as ``complexipy.rust.main(path, is_dir, is_url, max_complexity,
+    file_level)`` -> list[FileComplexity], not the ``file_complexity()``
+    convenience function added in later releases. Called with
+    ``is_dir=False`` this returns a single-element list for one file; each
+    function record carries only ``name`` and ``complexity`` in this
+    version (no line number).
+    """
     try:
-        from complexipy import file_complexity
+        from complexipy import rust
     except ImportError:
         return []
     try:
-        fc = file_complexity(str(path))
+        files = rust.main(str(path), False, False, 0, False)
     except Exception:
         return []
+    if not files:
+        return []
     out = []
-    for fn in getattr(fc, "functions", []):
-        out.append({
-            "name": fn.name,
-            "lineno": getattr(fn, "line_start", getattr(fn, "line", 0)),
-            "cogc": fn.complexity,
-        })
+    for fn in files[0].functions:
+        out.append({"name": fn.name, "lineno": 0, "cogc": fn.complexity})
     return out
 
 

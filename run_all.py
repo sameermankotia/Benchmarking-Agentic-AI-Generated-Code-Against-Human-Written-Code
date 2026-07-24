@@ -7,9 +7,11 @@ Usage:
     python run_all.py --stages repo_stats complexity aggregate
 
 Stages run in dependency order: repo_stats first (its LOC feeds the density
-metrics), then the five dimensions, then aggregate. Missing snapshots or
-uninstalled external tools are reported and skipped, not fatal — the pipeline
-always produces whatever tables the available data supports.
+metrics), then the five dimensions, then significance (Mann-Whitney U /
+Fisher's exact against each pair's human baseline, requiring the five
+dimensions' per-subject JSON to already exist), then aggregate. Missing
+snapshots or uninstalled external tools are reported and skipped, not fatal —
+the pipeline always produces whatever tables the available data supports.
 """
 
 from __future__ import annotations
@@ -19,7 +21,7 @@ import sys
 import time
 
 from analysis import (aggregate, complexity, correctness, duplication,
-                      repo_stats, security, smells)
+                      repo_stats, security, significance, smells)
 
 STAGES = {
     "repo_stats": repo_stats.run,
@@ -28,9 +30,10 @@ STAGES = {
     "smells": smells.run,
     "security": security.run,
     "duplication": duplication.run,
+    "significance": significance.run,
 }
 ORDER = ["repo_stats", "correctness", "complexity", "smells",
-         "security", "duplication"]
+         "security", "duplication", "significance"]
 
 
 def main() -> int:

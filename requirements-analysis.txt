@@ -4,6 +4,13 @@
 
 radon==6.0.1          # cyclomatic complexity + Maintainability Index
 complexipy==0.4.0     # cognitive complexity (SonarSource algorithm)
-bandit==1.7.8         # security findings
+bandit==1.9.4         # security findings (1.7.8 silently reports 0 findings on
+                       # Python >= 3.12: several plugins reference the
+                       # removed ast.Num/ast.Str aliases and crash per-file;
+                       # analysis/security.py now detects and refuses to
+                       # report through that failure mode, but 1.9.4 avoids
+                       # hitting it at all under any currently supported
+                       # Python, matching the paper's Docker environment)
 pylint==3.1.0         # code smells
 pytest==8.1.1         # oracle test runner
+scipy==1.16.2         # Mann-Whitney U / Fisher's exact significance testing

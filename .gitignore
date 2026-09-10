@@ -1,9 +1,10 @@
 __pycache__/
 *.pyc
-results/*/
-results/*.csv
-!results/.gitkeep
 .venv/
+
+# Frozen measurement outputs (results/) and pipeline logs (logs/) ARE committed:
+# the replication package must ship the raw numbers the paper reports, not just
+# the code that produces them. Re-running the pipeline overwrites them in place.
 
 # Third-party baseline snapshots are cloned locally, not vendored into this repo.
 # See README ("What is wired") for the clone commands.

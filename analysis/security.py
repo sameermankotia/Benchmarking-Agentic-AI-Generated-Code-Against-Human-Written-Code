@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 from . import common
@@ -34,7 +35,8 @@ MIN_CONFIDENCE = "MEDIUM"
 
 
 def _run_bandit(targets: list[Path]) -> dict:
-    cmd = ["bandit", "-r", *[str(t) for t in targets], "-f", "json", "-q"]
+    cmd = [sys.executable, "-m", "bandit", "-r",
+           *[str(t) for t in targets], "-f", "json", "-q"]
     proc = subprocess.run(cmd, capture_output=True, text=True)
     # Bandit exits 1 when it finds issues; JSON is still on stdout.
     if not proc.stdout.strip():

@@ -1,0 +1,13 @@
+metric,Flask (H),Django mod. (H)
+Mean Maintainability Index,64.1,75.1
+Median Maintainability Index,59.3,74.8
+Files with MI < 65 (%),66.7,35.7
+Min file MI,24.1,13.3
+Mann-Whitney U p (MI vs. human baseline),ref.,ref.
+Rank-biserial r (MI),ref.,ref.
+Total pylint findings,277,388
+Convention violations (C),144,195
+Refactoring suggestions (R),48,76
+Warnings (W),58,106
+Error-category findings (E),27,11
+Findings / 100 LOC,6.53,11.02

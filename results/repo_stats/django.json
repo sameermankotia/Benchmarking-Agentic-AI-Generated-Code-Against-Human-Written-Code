@@ -1,0 +1,14 @@
+{
+  "avg_function_length": 14.0,
+  "classes": 69,
+  "comment_density_pct": 5.8,
+  "docstring_coverage_pct": 53.4,
+  "functions": 296,
+  "kind": "human",
+  "label": "Django mod. (H)",
+  "language": "Python",
+  "loc": 3520,
+  "source_files": 28,
+  "subject": "django",
+  "test_files": 0
+}

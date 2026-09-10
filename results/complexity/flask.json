@@ -1,0 +1,4414 @@
+{
+  "cc": {
+    "max": 23,
+    "mean": 2.8,
+    "median": 2.0,
+    "n": 380,
+    "pct_over_threshold": 2.4,
+    "records": [
+      {
+        "cc": 2,
+        "file": "__init__.py",
+        "lineno": 46,
+        "name": "__getattr__"
+      },
+      {
+        "cc": 3,
+        "file": "app.py",
+        "lineno": 72,
+        "name": "_make_timedelta"
+      },
+      {
+        "cc": 5,
+        "file": "app.py",
+        "lineno": 79,
+        "name": "Flask"
+      },
+      {
+        "cc": 3,
+        "file": "app.py",
+        "lineno": 218,
+        "name": "Flask.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "app.py",
+        "lineno": 273,
+        "name": "Flask.get_send_file_max_age"
+      },
+      {
+        "cc": 2,
+        "file": "app.py",
+        "lineno": 300,
+        "name": "Flask.send_static_file"
+      },
+      {
+        "cc": 2,
+        "file": "app.py",
+        "lineno": 322,
+        "name": "Flask.open_resource"
+      },
+      {
+        "cc": 1,
+        "file": "app.py",
+        "lineno": 349,
+        "name": "Flask.open_instance_resource"
+      },
+      {
+        "cc": 4,
+        "file": "app.py",
+        "lineno": 361,
+        "name": "Flask.create_jinja_environment"
+      },
+      {
+        "cc": 5,
+        "file": "app.py",
+        "lineno": 401,
+        "name": "Flask.create_url_adapter"
+      },
+      {
+        "cc": 5,
+        "file": "app.py",
+        "lineno": 441,
+        "name": "Flask.raise_routing_exception"
+      },
+      {
+        "cc": 5,
+        "file": "app.py",
+        "lineno": 469,
+        "name": "Flask.update_template_context"
+      },
+      {
+        "cc": 2,
+        "file": "app.py",
+        "lineno": 497,
+        "name": "Flask.make_shell_context"
+      },
+      {
+        "cc": 12,
+        "file": "app.py",
+        "lineno": 509,
+        "name": "Flask.run"
+      },
+      {
+        "cc": 2,
+        "file": "app.py",
+        "lineno": 632,
+        "name": "Flask.test_client"
+      },
+      {
+        "cc": 2,
+        "file": "app.py",
+        "lineno": 690,
+        "name": "Flask.test_cli_runner"
+      },
+      {
+        "cc": 4,
+        "file": "app.py",
+        "lineno": 707,
+        "name": "Flask.handle_http_exception"
+      },
+      {
+        "cc": 7,
+        "file": "app.py",
+        "lineno": 742,
+        "name": "Flask.handle_user_exception"
+      },
+      {
+        "cc": 6,
+        "file": "app.py",
+        "lineno": 774,
+        "name": "Flask.handle_exception"
+      },
+      {
+        "cc": 1,
+        "file": "app.py",
+        "lineno": 827,
+        "name": "Flask.log_exception"
+      },
+      {
+        "cc": 4,
+        "file": "app.py",
+        "lineno": 842,
+        "name": "Flask.dispatch_request"
+      },
+      {
+        "cc": 3,
+        "file": "app.py",
+        "lineno": 867,
+        "name": "Flask.full_dispatch_request"
+      },
+      {
+        "cc": 3,
+        "file": "app.py",
+        "lineno": 885,
+        "name": "Flask.finalize_request"
+      },
+      {
+        "cc": 1,
+        "file": "app.py",
+        "lineno": 916,
+        "name": "Flask.make_default_options_response"
+      },
+      {
+        "cc": 2,
+        "file": "app.py",
+        "lineno": 929,
+        "name": "Flask.ensure_sync"
+      },
+      {
+        "cc": 2,
+        "file": "app.py",
+        "lineno": 943,
+        "name": "Flask.async_to_sync"
+      },
+      {
+        "cc": 12,
+        "file": "app.py",
+        "lineno": 966,
+        "name": "Flask.url_for"
+      },
+      {
+        "cc": 16,
+        "file": "app.py",
+        "lineno": 1092,
+        "name": "Flask.make_response"
+      },
+      {
+        "cc": 8,
+        "file": "app.py",
+        "lineno": 1233,
+        "name": "Flask.preprocess_request"
+      },
+      {
+        "cc": 6,
+        "file": "app.py",
+        "lineno": 1260,
+        "name": "Flask.process_response"
+      },
+      {
+        "cc": 5,
+        "file": "app.py",
+        "lineno": 1288,
+        "name": "Flask.do_teardown_request"
+      },
+      {
+        "cc": 3,
+        "file": "app.py",
+        "lineno": 1322,
+        "name": "Flask.do_teardown_appcontext"
+      },
+      {
+        "cc": 1,
+        "file": "app.py",
+        "lineno": 1348,
+        "name": "Flask.app_context"
+      },
+      {
+        "cc": 1,
+        "file": "app.py",
+        "lineno": 1369,
+        "name": "Flask.request_context"
+      },
+      {
+        "cc": 1,
+        "file": "app.py",
+        "lineno": 1385,
+        "name": "Flask.test_request_context"
+      },
+      {
+        "cc": 6,
+        "file": "app.py",
+        "lineno": 1441,
+        "name": "Flask.wsgi_app"
+      },
+      {
+        "cc": 1,
+        "file": "app.py",
+        "lineno": 1491,
+        "name": "Flask.__call__"
+      },
+      {
+        "cc": 3,
+        "file": "blueprints.py",
+        "lineno": 18,
+        "name": "Blueprint"
+      },
+      {
+        "cc": 1,
+        "file": "blueprints.py",
+        "lineno": 19,
+        "name": "Blueprint.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "blueprints.py",
+        "lineno": 55,
+        "name": "Blueprint.get_send_file_max_age"
+      },
+      {
+        "cc": 2,
+        "file": "blueprints.py",
+        "lineno": 82,
+        "name": "Blueprint.send_static_file"
+      },
+      {
+        "cc": 2,
+        "file": "blueprints.py",
+        "lineno": 104,
+        "name": "Blueprint.open_resource"
+      },
+      {
+        "cc": 12,
+        "file": "cli.py",
+        "lineno": 41,
+        "name": "find_best_app"
+      },
+      {
+        "cc": 3,
+        "file": "cli.py",
+        "lineno": 94,
+        "name": "_called_with_wrong_args"
+      },
+      {
+        "cc": 14,
+        "file": "cli.py",
+        "lineno": 120,
+        "name": "find_app_by_string"
+      },
+      {
+        "cc": 6,
+        "file": "cli.py",
+        "lineno": 200,
+        "name": "prepare_import"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 230,
+        "name": "locate_app"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 236,
+        "name": "locate_app"
+      },
+      {
+        "cc": 5,
+        "file": "cli.py",
+        "lineno": 241,
+        "name": "locate_app"
+      },
+      {
+        "cc": 3,
+        "file": "cli.py",
+        "lineno": 267,
+        "name": "get_version"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 366,
+        "name": "with_appcontext"
+      },
+      {
+        "cc": 2,
+        "file": "cli.py",
+        "lineno": 426,
+        "name": "_set_app"
+      },
+      {
+        "cc": 4,
+        "file": "cli.py",
+        "lineno": 454,
+        "name": "_set_debug"
+      },
+      {
+        "cc": 3,
+        "file": "cli.py",
+        "lineno": 479,
+        "name": "_env_file_callback"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 680,
+        "name": "_path_is_ancestor"
+      },
+      {
+        "cc": 9,
+        "file": "cli.py",
+        "lineno": 687,
+        "name": "load_dotenv"
+      },
+      {
+        "cc": 5,
+        "file": "cli.py",
+        "lineno": 748,
+        "name": "show_server_banner"
+      },
+      {
+        "cc": 10,
+        "file": "cli.py",
+        "lineno": 810,
+        "name": "_validate_key"
+      },
+      {
+        "cc": 5,
+        "file": "cli.py",
+        "lineno": 917,
+        "name": "run_command"
+      },
+      {
+        "cc": 6,
+        "file": "cli.py",
+        "lineno": 983,
+        "name": "shell_command"
+      },
+      {
+        "cc": 18,
+        "file": "cli.py",
+        "lineno": 1043,
+        "name": "routes_command"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 1104,
+        "name": "main"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 37,
+        "name": "NoAppException"
+      },
+      {
+        "cc": 6,
+        "file": "cli.py",
+        "lineno": 293,
+        "name": "ScriptInfo"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 302,
+        "name": "ScriptInfo.__init__"
+      },
+      {
+        "cc": 8,
+        "file": "cli.py",
+        "lineno": 319,
+        "name": "ScriptInfo.load_app"
+      },
+      {
+        "cc": 2,
+        "file": "cli.py",
+        "lineno": 391,
+        "name": "AppGroup"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 399,
+        "name": "AppGroup.command"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 415,
+        "name": "AppGroup.group"
+      },
+      {
+        "cc": 5,
+        "file": "cli.py",
+        "lineno": 514,
+        "name": "FlaskGroup"
+      },
+      {
+        "cc": 5,
+        "file": "cli.py",
+        "lineno": 543,
+        "name": "FlaskGroup.__init__"
+      },
+      {
+        "cc": 4,
+        "file": "cli.py",
+        "lineno": 580,
+        "name": "FlaskGroup._load_plugin_commands"
+      },
+      {
+        "cc": 5,
+        "file": "cli.py",
+        "lineno": 597,
+        "name": "FlaskGroup.get_command"
+      },
+      {
+        "cc": 3,
+        "file": "cli.py",
+        "lineno": 624,
+        "name": "FlaskGroup.list_commands"
+      },
+      {
+        "cc": 4,
+        "file": "cli.py",
+        "lineno": 645,
+        "name": "FlaskGroup.make_context"
+      },
+      {
+        "cc": 3,
+        "file": "cli.py",
+        "lineno": 669,
+        "name": "FlaskGroup.parse_args"
+      },
+      {
+        "cc": 5,
+        "file": "cli.py",
+        "lineno": 762,
+        "name": "CertParamType"
+      },
+      {
+        "cc": 1,
+        "file": "cli.py",
+        "lineno": 770,
+        "name": "CertParamType.__init__"
+      },
+      {
+        "cc": 6,
+        "file": "cli.py",
+        "lineno": 773,
+        "name": "CertParamType.convert"
+      },
+      {
+        "cc": 3,
+        "file": "cli.py",
+        "lineno": 849,
+        "name": "SeparatedPathType"
+      },
+      {
+        "cc": 2,
+        "file": "cli.py",
+        "lineno": 855,
+        "name": "SeparatedPathType.convert"
+      },
+      {
+        "cc": 2,
+        "file": "config.py",
+        "lineno": 20,
+        "name": "ConfigAttribute"
+      },
+      {
+        "cc": 1,
+        "file": "config.py",
+        "lineno": 23,
+        "name": "ConfigAttribute.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "config.py",
+        "lineno": 30,
+        "name": "ConfigAttribute.__get__"
+      },
+      {
+        "cc": 1,
+        "file": "config.py",
+        "lineno": 33,
+        "name": "ConfigAttribute.__get__"
+      },
+      {
+        "cc": 3,
+        "file": "config.py",
+        "lineno": 35,
+        "name": "ConfigAttribute.__get__"
+      },
+      {
+        "cc": 1,
+        "file": "config.py",
+        "lineno": 46,
+        "name": "ConfigAttribute.__set__"
+      },
+      {
+        "cc": 5,
+        "file": "config.py",
+        "lineno": 50,
+        "name": "Config"
+      },
+      {
+        "cc": 2,
+        "file": "config.py",
+        "lineno": 94,
+        "name": "Config.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "config.py",
+        "lineno": 102,
+        "name": "Config.from_envvar"
+      },
+      {
+        "cc": 7,
+        "file": "config.py",
+        "lineno": 126,
+        "name": "Config.from_prefixed_env"
+      },
+      {
+        "cc": 4,
+        "file": "config.py",
+        "lineno": 190,
+        "name": "Config.from_pyfile"
+      },
+      {
+        "cc": 4,
+        "file": "config.py",
+        "lineno": 221,
+        "name": "Config.from_object"
+      },
+      {
+        "cc": 5,
+        "file": "config.py",
+        "lineno": 259,
+        "name": "Config.from_file"
+      },
+      {
+        "cc": 4,
+        "file": "config.py",
+        "lineno": 307,
+        "name": "Config.from_mapping"
+      },
+      {
+        "cc": 5,
+        "file": "config.py",
+        "lineno": 326,
+        "name": "Config.get_namespace"
+      },
+      {
+        "cc": 1,
+        "file": "config.py",
+        "lineno": 369,
+        "name": "Config.__repr__"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 117,
+        "name": "after_this_request"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 155,
+        "name": "copy_current_request_context"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 196,
+        "name": "has_request_context"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 228,
+        "name": "has_app_context"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 29,
+        "name": "_AppCtxGlobals"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 52,
+        "name": "_AppCtxGlobals.__getattr__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 58,
+        "name": "_AppCtxGlobals.__setattr__"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 61,
+        "name": "_AppCtxGlobals.__delattr__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 67,
+        "name": "_AppCtxGlobals.get"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 78,
+        "name": "_AppCtxGlobals.pop"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 92,
+        "name": "_AppCtxGlobals.setdefault"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 104,
+        "name": "_AppCtxGlobals.__contains__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 107,
+        "name": "_AppCtxGlobals.__iter__"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 110,
+        "name": "_AppCtxGlobals.__repr__"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 238,
+        "name": "AppContext"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 245,
+        "name": "AppContext.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 251,
+        "name": "AppContext.push"
+      },
+      {
+        "cc": 4,
+        "file": "ctx.py",
+        "lineno": 256,
+        "name": "AppContext.pop"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 274,
+        "name": "AppContext.__enter__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 278,
+        "name": "AppContext.__exit__"
+      },
+      {
+        "cc": 3,
+        "file": "ctx.py",
+        "lineno": 287,
+        "name": "RequestContext"
+      },
+      {
+        "cc": 3,
+        "file": "ctx.py",
+        "lineno": 309,
+        "name": "RequestContext.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 337,
+        "name": "RequestContext.copy"
+      },
+      {
+        "cc": 2,
+        "file": "ctx.py",
+        "lineno": 357,
+        "name": "RequestContext.match_request"
+      },
+      {
+        "cc": 6,
+        "file": "ctx.py",
+        "lineno": 367,
+        "name": "RequestContext.push"
+      },
+      {
+        "cc": 7,
+        "file": "ctx.py",
+        "lineno": 396,
+        "name": "RequestContext.pop"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 433,
+        "name": "RequestContext.__enter__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 437,
+        "name": "RequestContext.__exit__"
+      },
+      {
+        "cc": 1,
+        "file": "ctx.py",
+        "lineno": 445,
+        "name": "RequestContext.__repr__"
+      },
+      {
+        "cc": 1,
+        "file": "debughelpers.py",
+        "lineno": 81,
+        "name": "attach_enctype_error_multidict"
+      },
+      {
+        "cc": 8,
+        "file": "debughelpers.py",
+        "lineno": 107,
+        "name": "_dump_loader_info"
+      },
+      {
+        "cc": 13,
+        "file": "debughelpers.py",
+        "lineno": 124,
+        "name": "explain_template_loading_attempts"
+      },
+      {
+        "cc": 1,
+        "file": "debughelpers.py",
+        "lineno": 17,
+        "name": "UnexpectedUnicodeError"
+      },
+      {
+        "cc": 3,
+        "file": "debughelpers.py",
+        "lineno": 23,
+        "name": "DebugFilesKeyError"
+      },
+      {
+        "cc": 3,
+        "file": "debughelpers.py",
+        "lineno": 28,
+        "name": "DebugFilesKeyError.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "debughelpers.py",
+        "lineno": 46,
+        "name": "DebugFilesKeyError.__str__"
+      },
+      {
+        "cc": 4,
+        "file": "debughelpers.py",
+        "lineno": 50,
+        "name": "FormDataRoutingRedirect"
+      },
+      {
+        "cc": 3,
+        "file": "debughelpers.py",
+        "lineno": 57,
+        "name": "FormDataRoutingRedirect.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "helpers.py",
+        "lineno": 27,
+        "name": "get_debug_flag"
+      },
+      {
+        "cc": 2,
+        "file": "helpers.py",
+        "lineno": 35,
+        "name": "get_load_dotenv"
+      },
+      {
+        "cc": 2,
+        "file": "helpers.py",
+        "lineno": 50,
+        "name": "stream_with_context"
+      },
+      {
+        "cc": 3,
+        "file": "helpers.py",
+        "lineno": 127,
+        "name": "make_response"
+      },
+      {
+        "cc": 1,
+        "file": "helpers.py",
+        "lineno": 176,
+        "name": "url_for"
+      },
+      {
+        "cc": 2,
+        "file": "helpers.py",
+        "lineno": 230,
+        "name": "redirect"
+      },
+      {
+        "cc": 2,
+        "file": "helpers.py",
+        "lineno": 254,
+        "name": "abort"
+      },
+      {
+        "cc": 1,
+        "file": "helpers.py",
+        "lineno": 277,
+        "name": "get_template_attribute"
+      },
+      {
+        "cc": 1,
+        "file": "helpers.py",
+        "lineno": 299,
+        "name": "flash"
+      },
+      {
+        "cc": 6,
+        "file": "helpers.py",
+        "lineno": 333,
+        "name": "get_flashed_messages"
+      },
+      {
+        "cc": 2,
+        "file": "helpers.py",
+        "lineno": 375,
+        "name": "_prepare_send_file_kwargs"
+      },
+      {
+        "cc": 1,
+        "file": "helpers.py",
+        "lineno": 388,
+        "name": "send_file"
+      },
+      {
+        "cc": 1,
+        "file": "helpers.py",
+        "lineno": 514,
+        "name": "send_from_directory"
+      },
+      {
+        "cc": 10,
+        "file": "helpers.py",
+        "lineno": 557,
+        "name": "get_root_path"
+      },
+      {
+        "cc": 2,
+        "file": "helpers.py",
+        "lineno": 615,
+        "name": "_split_blueprint_path"
+      },
+      {
+        "cc": 2,
+        "file": "json/__init__.py",
+        "lineno": 13,
+        "name": "dumps"
+      },
+      {
+        "cc": 2,
+        "file": "json/__init__.py",
+        "lineno": 47,
+        "name": "dump"
+      },
+      {
+        "cc": 2,
+        "file": "json/__init__.py",
+        "lineno": 77,
+        "name": "loads"
+      },
+      {
+        "cc": 2,
+        "file": "json/__init__.py",
+        "lineno": 108,
+        "name": "load"
+      },
+      {
+        "cc": 1,
+        "file": "json/__init__.py",
+        "lineno": 138,
+        "name": "jsonify"
+      },
+      {
+        "cc": 6,
+        "file": "json/provider.py",
+        "lineno": 108,
+        "name": "_default"
+      },
+      {
+        "cc": 3,
+        "file": "json/provider.py",
+        "lineno": 19,
+        "name": "JSONProvider"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 38,
+        "name": "JSONProvider.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 41,
+        "name": "JSONProvider.dumps"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 49,
+        "name": "JSONProvider.dump"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 59,
+        "name": "JSONProvider.loads"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 67,
+        "name": "JSONProvider.load"
+      },
+      {
+        "cc": 7,
+        "file": "json/provider.py",
+        "lineno": 75,
+        "name": "JSONProvider._prepare_response_obj"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 89,
+        "name": "JSONProvider.response"
+      },
+      {
+        "cc": 3,
+        "file": "json/provider.py",
+        "lineno": 124,
+        "name": "DefaultJSONProvider"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 166,
+        "name": "DefaultJSONProvider.dumps"
+      },
+      {
+        "cc": 1,
+        "file": "json/provider.py",
+        "lineno": 181,
+        "name": "DefaultJSONProvider.loads"
+      },
+      {
+        "cc": 4,
+        "file": "json/provider.py",
+        "lineno": 189,
+        "name": "DefaultJSONProvider.response"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 60,
+        "name": "JSONTag"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 69,
+        "name": "JSONTag.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 73,
+        "name": "JSONTag.check"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 77,
+        "name": "JSONTag.to_json"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 82,
+        "name": "JSONTag.to_python"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 87,
+        "name": "JSONTag.tag"
+      },
+      {
+        "cc": 3,
+        "file": "json/tag.py",
+        "lineno": 93,
+        "name": "TagDict"
+      },
+      {
+        "cc": 3,
+        "file": "json/tag.py",
+        "lineno": 103,
+        "name": "TagDict.check"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 110,
+        "name": "TagDict.to_json"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 114,
+        "name": "TagDict.to_python"
+      },
+      {
+        "cc": 3,
+        "file": "json/tag.py",
+        "lineno": 119,
+        "name": "PassDict"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 122,
+        "name": "PassDict.check"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 125,
+        "name": "PassDict.to_json"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 133,
+        "name": "TagTuple"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 137,
+        "name": "TagTuple.check"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 140,
+        "name": "TagTuple.to_json"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 143,
+        "name": "TagTuple.to_python"
+      },
+      {
+        "cc": 3,
+        "file": "json/tag.py",
+        "lineno": 147,
+        "name": "PassList"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 150,
+        "name": "PassList.check"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 153,
+        "name": "PassList.to_json"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 159,
+        "name": "TagBytes"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 163,
+        "name": "TagBytes.check"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 166,
+        "name": "TagBytes.to_json"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 169,
+        "name": "TagBytes.to_python"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 173,
+        "name": "TagMarkup"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 181,
+        "name": "TagMarkup.check"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 184,
+        "name": "TagMarkup.to_json"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 187,
+        "name": "TagMarkup.to_python"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 191,
+        "name": "TagUUID"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 195,
+        "name": "TagUUID.check"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 198,
+        "name": "TagUUID.to_json"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 201,
+        "name": "TagUUID.to_python"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 205,
+        "name": "TagDateTime"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 209,
+        "name": "TagDateTime.check"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 212,
+        "name": "TagDateTime.to_json"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 215,
+        "name": "TagDateTime.to_python"
+      },
+      {
+        "cc": 4,
+        "file": "json/tag.py",
+        "lineno": 219,
+        "name": "TaggedJSONSerializer"
+      },
+      {
+        "cc": 2,
+        "file": "json/tag.py",
+        "lineno": 249,
+        "name": "TaggedJSONSerializer.__init__"
+      },
+      {
+        "cc": 5,
+        "file": "json/tag.py",
+        "lineno": 256,
+        "name": "TaggedJSONSerializer.register"
+      },
+      {
+        "cc": 3,
+        "file": "json/tag.py",
+        "lineno": 289,
+        "name": "TaggedJSONSerializer.tag"
+      },
+      {
+        "cc": 3,
+        "file": "json/tag.py",
+        "lineno": 297,
+        "name": "TaggedJSONSerializer.untag"
+      },
+      {
+        "cc": 5,
+        "file": "json/tag.py",
+        "lineno": 309,
+        "name": "TaggedJSONSerializer._untag_scan"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 321,
+        "name": "TaggedJSONSerializer.dumps"
+      },
+      {
+        "cc": 1,
+        "file": "json/tag.py",
+        "lineno": 325,
+        "name": "TaggedJSONSerializer.loads"
+      },
+      {
+        "cc": 2,
+        "file": "logging.py",
+        "lineno": 16,
+        "name": "wsgi_errors_stream"
+      },
+      {
+        "cc": 5,
+        "file": "logging.py",
+        "lineno": 31,
+        "name": "has_level_handler"
+      },
+      {
+        "cc": 4,
+        "file": "logging.py",
+        "lineno": 58,
+        "name": "create_logger"
+      },
+      {
+        "cc": 3,
+        "file": "sansio/app.py",
+        "lineno": 52,
+        "name": "_make_timedelta"
+      },
+      {
+        "cc": 3,
+        "file": "sansio/app.py",
+        "lineno": 59,
+        "name": "App"
+      },
+      {
+        "cc": 3,
+        "file": "sansio/app.py",
+        "lineno": 282,
+        "name": "App.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 413,
+        "name": "App._check_setup_finished"
+      },
+      {
+        "cc": 3,
+        "file": "sansio/app.py",
+        "lineno": 426,
+        "name": "App.name"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 443,
+        "name": "App.logger"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 470,
+        "name": "App.jinja_env"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 479,
+        "name": "App.create_jinja_environment"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 482,
+        "name": "App.make_config"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 498,
+        "name": "App.make_aborter"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 510,
+        "name": "App.auto_find_instance_path"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 523,
+        "name": "App.create_global_jinja_loader"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 536,
+        "name": "App.select_jinja_autoescape"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 550,
+        "name": "App.debug"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 563,
+        "name": "App.debug"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 570,
+        "name": "App.register_blueprint"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 597,
+        "name": "App.iter_blueprints"
+      },
+      {
+        "cc": 12,
+        "file": "sansio/app.py",
+        "lineno": 605,
+        "name": "App.add_url_rule"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 664,
+        "name": "App.template_filter"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 686,
+        "name": "App.add_template_filter"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 698,
+        "name": "App.template_test"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 727,
+        "name": "App.add_template_test"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 741,
+        "name": "App.template_global"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/app.py",
+        "lineno": 765,
+        "name": "App.add_template_global"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 779,
+        "name": "App.teardown_appcontext"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 813,
+        "name": "App.shell_context_processor"
+      },
+      {
+        "cc": 7,
+        "file": "sansio/app.py",
+        "lineno": 823,
+        "name": "App._find_error_handler"
+      },
+      {
+        "cc": 6,
+        "file": "sansio/app.py",
+        "lineno": 848,
+        "name": "App.trap_http_exception"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 883,
+        "name": "App.should_ignore_error"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/app.py",
+        "lineno": 893,
+        "name": "App.redirect"
+      },
+      {
+        "cc": 5,
+        "file": "sansio/app.py",
+        "lineno": 911,
+        "name": "App.inject_url_defaults"
+      },
+      {
+        "cc": 6,
+        "file": "sansio/app.py",
+        "lineno": 932,
+        "name": "App.handle_url_build_error"
+      },
+      {
+        "cc": 5,
+        "file": "sansio/blueprints.py",
+        "lineno": 34,
+        "name": "BlueprintSetupState"
+      },
+      {
+        "cc": 3,
+        "file": "sansio/blueprints.py",
+        "lineno": 41,
+        "name": "BlueprintSetupState.__init__"
+      },
+      {
+        "cc": 5,
+        "file": "sansio/blueprints.py",
+        "lineno": 87,
+        "name": "BlueprintSetupState.add_url_rule"
+      },
+      {
+        "cc": 3,
+        "file": "sansio/blueprints.py",
+        "lineno": 119,
+        "name": "Blueprint"
+      },
+      {
+        "cc": 4,
+        "file": "sansio/blueprints.py",
+        "lineno": 174,
+        "name": "Blueprint.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/blueprints.py",
+        "lineno": 213,
+        "name": "Blueprint._check_setup_finished"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 224,
+        "name": "Blueprint.record"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 233,
+        "name": "Blueprint.record_once"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 246,
+        "name": "Blueprint.make_setup_state"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/blueprints.py",
+        "lineno": 256,
+        "name": "Blueprint.register_blueprint"
+      },
+      {
+        "cc": 23,
+        "file": "sansio/blueprints.py",
+        "lineno": 273,
+        "name": "Blueprint.register"
+      },
+      {
+        "cc": 6,
+        "file": "sansio/blueprints.py",
+        "lineno": 379,
+        "name": "Blueprint._merge_blueprint_funcs"
+      },
+      {
+        "cc": 6,
+        "file": "sansio/blueprints.py",
+        "lineno": 413,
+        "name": "Blueprint.add_url_rule"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 444,
+        "name": "Blueprint.app_template_filter"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 461,
+        "name": "Blueprint.add_app_template_filter"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 478,
+        "name": "Blueprint.app_template_test"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 497,
+        "name": "Blueprint.add_app_template_test"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 516,
+        "name": "Blueprint.app_template_global"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 535,
+        "name": "Blueprint.add_app_template_global"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 554,
+        "name": "Blueprint.before_app_request"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 564,
+        "name": "Blueprint.after_app_request"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 574,
+        "name": "Blueprint.teardown_app_request"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 584,
+        "name": "Blueprint.app_context_processor"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 596,
+        "name": "Blueprint.app_errorhandler"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 613,
+        "name": "Blueprint.app_url_value_preprocessor"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 625,
+        "name": "Blueprint.app_url_defaults"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 42,
+        "name": "setupmethod"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 701,
+        "name": "_endpoint_from_view_func"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 709,
+        "name": "_path_is_relative_to"
+      },
+      {
+        "cc": 10,
+        "file": "sansio/scaffold.py",
+        "lineno": 718,
+        "name": "_find_package_path"
+      },
+      {
+        "cc": 5,
+        "file": "sansio/scaffold.py",
+        "lineno": 763,
+        "name": "find_package"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 52,
+        "name": "Scaffold"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 75,
+        "name": "Scaffold.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 217,
+        "name": "Scaffold.__repr__"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 220,
+        "name": "Scaffold._check_setup_finished"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 224,
+        "name": "Scaffold.static_folder"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 234,
+        "name": "Scaffold.static_folder"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 241,
+        "name": "Scaffold.has_static_folder"
+      },
+      {
+        "cc": 3,
+        "file": "sansio/scaffold.py",
+        "lineno": 249,
+        "name": "Scaffold.static_url_path"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 265,
+        "name": "Scaffold.static_url_path"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 272,
+        "name": "Scaffold.jinja_loader"
+      },
+      {
+        "cc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 284,
+        "name": "Scaffold._method_route"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 296,
+        "name": "Scaffold.get"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 304,
+        "name": "Scaffold.post"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 312,
+        "name": "Scaffold.put"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 320,
+        "name": "Scaffold.delete"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 328,
+        "name": "Scaffold.patch"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 336,
+        "name": "Scaffold.route"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 368,
+        "name": "Scaffold.add_url_rule"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 436,
+        "name": "Scaffold.endpoint"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 460,
+        "name": "Scaffold.before_request"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 487,
+        "name": "Scaffold.after_request"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 508,
+        "name": "Scaffold.teardown_request"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 542,
+        "name": "Scaffold.context_processor"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 559,
+        "name": "Scaffold.url_value_preprocessor"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 584,
+        "name": "Scaffold.url_defaults"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 598,
+        "name": "Scaffold.errorhandler"
+      },
+      {
+        "cc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 642,
+        "name": "Scaffold.register_error_handler"
+      },
+      {
+        "cc": 6,
+        "file": "sansio/scaffold.py",
+        "lineno": 657,
+        "name": "Scaffold._get_exc_class_and_code"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 280,
+        "name": "_lazy_sha1"
+      },
+      {
+        "cc": 2,
+        "file": "sessions.py",
+        "lineno": 24,
+        "name": "SessionMixin"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 28,
+        "name": "SessionMixin.permanent"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 33,
+        "name": "SessionMixin.permanent"
+      },
+      {
+        "cc": 2,
+        "file": "sessions.py",
+        "lineno": 53,
+        "name": "SecureCookieSession"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 75,
+        "name": "SecureCookieSession.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 82,
+        "name": "SecureCookieSession.__getitem__"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 86,
+        "name": "SecureCookieSession.get"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 90,
+        "name": "SecureCookieSession.setdefault"
+      },
+      {
+        "cc": 2,
+        "file": "sessions.py",
+        "lineno": 95,
+        "name": "NullSession"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 101,
+        "name": "NullSession._fail"
+      },
+      {
+        "cc": 2,
+        "file": "sessions.py",
+        "lineno": 112,
+        "name": "SessionInterface"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 162,
+        "name": "SessionInterface.make_null_session"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 174,
+        "name": "SessionInterface.is_null_session"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 183,
+        "name": "SessionInterface.get_cookie_name"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 187,
+        "name": "SessionInterface.get_cookie_domain"
+      },
+      {
+        "cc": 2,
+        "file": "sessions.py",
+        "lineno": 199,
+        "name": "SessionInterface.get_cookie_path"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 207,
+        "name": "SessionInterface.get_cookie_httponly"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 214,
+        "name": "SessionInterface.get_cookie_secure"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 220,
+        "name": "SessionInterface.get_cookie_samesite"
+      },
+      {
+        "cc": 2,
+        "file": "sessions.py",
+        "lineno": 227,
+        "name": "SessionInterface.get_expiration_time"
+      },
+      {
+        "cc": 3,
+        "file": "sessions.py",
+        "lineno": 237,
+        "name": "SessionInterface.should_set_cookie"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 253,
+        "name": "SessionInterface.open_session"
+      },
+      {
+        "cc": 1,
+        "file": "sessions.py",
+        "lineno": 267,
+        "name": "SessionInterface.save_session"
+      },
+      {
+        "cc": 5,
+        "file": "sessions.py",
+        "lineno": 288,
+        "name": "SecureCookieSessionInterface"
+      },
+      {
+        "cc": 2,
+        "file": "sessions.py",
+        "lineno": 307,
+        "name": "SecureCookieSessionInterface.get_signing_serializer"
+      },
+      {
+        "cc": 4,
+        "file": "sessions.py",
+        "lineno": 320,
+        "name": "SecureCookieSessionInterface.open_session"
+      },
+      {
+        "cc": 5,
+        "file": "sessions.py",
+        "lineno": 334,
+        "name": "SecureCookieSessionInterface.save_session"
+      },
+      {
+        "cc": 3,
+        "file": "templating.py",
+        "lineno": 24,
+        "name": "_default_template_ctx_processor"
+      },
+      {
+        "cc": 1,
+        "file": "templating.py",
+        "lineno": 126,
+        "name": "_render"
+      },
+      {
+        "cc": 1,
+        "file": "templating.py",
+        "lineno": 138,
+        "name": "render_template"
+      },
+      {
+        "cc": 1,
+        "file": "templating.py",
+        "lineno": 153,
+        "name": "render_template_string"
+      },
+      {
+        "cc": 2,
+        "file": "templating.py",
+        "lineno": 165,
+        "name": "_stream"
+      },
+      {
+        "cc": 1,
+        "file": "templating.py",
+        "lineno": 188,
+        "name": "stream_template"
+      },
+      {
+        "cc": 1,
+        "file": "templating.py",
+        "lineno": 207,
+        "name": "stream_template_string"
+      },
+      {
+        "cc": 3,
+        "file": "templating.py",
+        "lineno": 39,
+        "name": "Environment"
+      },
+      {
+        "cc": 2,
+        "file": "templating.py",
+        "lineno": 45,
+        "name": "Environment.__init__"
+      },
+      {
+        "cc": 4,
+        "file": "templating.py",
+        "lineno": 52,
+        "name": "DispatchingJinjaLoader"
+      },
+      {
+        "cc": 1,
+        "file": "templating.py",
+        "lineno": 57,
+        "name": "DispatchingJinjaLoader.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "templating.py",
+        "lineno": 60,
+        "name": "DispatchingJinjaLoader.get_source"
+      },
+      {
+        "cc": 5,
+        "file": "templating.py",
+        "lineno": 67,
+        "name": "DispatchingJinjaLoader._get_source_explained"
+      },
+      {
+        "cc": 3,
+        "file": "templating.py",
+        "lineno": 91,
+        "name": "DispatchingJinjaLoader._get_source_fast"
+      },
+      {
+        "cc": 4,
+        "file": "templating.py",
+        "lineno": 101,
+        "name": "DispatchingJinjaLoader._iter_loaders"
+      },
+      {
+        "cc": 5,
+        "file": "templating.py",
+        "lineno": 111,
+        "name": "DispatchingJinjaLoader.list_templates"
+      },
+      {
+        "cc": 2,
+        "file": "testing.py",
+        "lineno": 100,
+        "name": "_get_werkzeug_version"
+      },
+      {
+        "cc": 7,
+        "file": "testing.py",
+        "lineno": 26,
+        "name": "EnvironBuilder"
+      },
+      {
+        "cc": 10,
+        "file": "testing.py",
+        "lineno": 48,
+        "name": "EnvironBuilder.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "testing.py",
+        "lineno": 88,
+        "name": "EnvironBuilder.json_dumps"
+      },
+      {
+        "cc": 3,
+        "file": "testing.py",
+        "lineno": 109,
+        "name": "FlaskClient"
+      },
+      {
+        "cc": 1,
+        "file": "testing.py",
+        "lineno": 125,
+        "name": "FlaskClient.__init__"
+      },
+      {
+        "cc": 4,
+        "file": "testing.py",
+        "lineno": 136,
+        "name": "FlaskClient.session_transaction"
+      },
+      {
+        "cc": 2,
+        "file": "testing.py",
+        "lineno": 185,
+        "name": "FlaskClient._copy_environ"
+      },
+      {
+        "cc": 1,
+        "file": "testing.py",
+        "lineno": 193,
+        "name": "FlaskClient._request_from_builder_args"
+      },
+      {
+        "cc": 7,
+        "file": "testing.py",
+        "lineno": 204,
+        "name": "FlaskClient.open"
+      },
+      {
+        "cc": 2,
+        "file": "testing.py",
+        "lineno": 249,
+        "name": "FlaskClient.__enter__"
+      },
+      {
+        "cc": 1,
+        "file": "testing.py",
+        "lineno": 255,
+        "name": "FlaskClient.__exit__"
+      },
+      {
+        "cc": 3,
+        "file": "testing.py",
+        "lineno": 265,
+        "name": "FlaskCliRunner"
+      },
+      {
+        "cc": 1,
+        "file": "testing.py",
+        "lineno": 271,
+        "name": "FlaskCliRunner.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "testing.py",
+        "lineno": 275,
+        "name": "FlaskCliRunner.invoke"
+      },
+      {
+        "cc": 4,
+        "file": "views.py",
+        "lineno": 16,
+        "name": "View"
+      },
+      {
+        "cc": 1,
+        "file": "views.py",
+        "lineno": 78,
+        "name": "View.dispatch_request"
+      },
+      {
+        "cc": 4,
+        "file": "views.py",
+        "lineno": 86,
+        "name": "View.as_view"
+      },
+      {
+        "cc": 7,
+        "file": "views.py",
+        "lineno": 138,
+        "name": "MethodView"
+      },
+      {
+        "cc": 7,
+        "file": "views.py",
+        "lineno": 165,
+        "name": "MethodView.__init_subclass__"
+      },
+      {
+        "cc": 4,
+        "file": "views.py",
+        "lineno": 182,
+        "name": "MethodView.dispatch_request"
+      },
+      {
+        "cc": 4,
+        "file": "wrappers.py",
+        "lineno": 18,
+        "name": "Request"
+      },
+      {
+        "cc": 2,
+        "file": "wrappers.py",
+        "lineno": 56,
+        "name": "Request.max_content_length"
+      },
+      {
+        "cc": 2,
+        "file": "wrappers.py",
+        "lineno": 64,
+        "name": "Request.endpoint"
+      },
+      {
+        "cc": 3,
+        "file": "wrappers.py",
+        "lineno": 79,
+        "name": "Request.blueprint"
+      },
+      {
+        "cc": 2,
+        "file": "wrappers.py",
+        "lineno": 98,
+        "name": "Request.blueprints"
+      },
+      {
+        "cc": 5,
+        "file": "wrappers.py",
+        "lineno": 114,
+        "name": "Request._load_form_data"
+      },
+      {
+        "cc": 4,
+        "file": "wrappers.py",
+        "lineno": 129,
+        "name": "Request.on_json_loading_failed"
+      },
+      {
+        "cc": 3,
+        "file": "wrappers.py",
+        "lineno": 139,
+        "name": "Response"
+      },
+      {
+        "cc": 2,
+        "file": "wrappers.py",
+        "lineno": 164,
+        "name": "Response.max_cookie_size"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 28,
+    "mean": 2.1,
+    "median": 0.5,
+    "n": 334,
+    "pct_over_threshold": 1.2,
+    "records": [
+      {
+        "cogc": 1,
+        "file": "__init__.py",
+        "lineno": 0,
+        "name": "__getattr__"
+      },
+      {
+        "cogc": 0,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::__call__"
+      },
+      {
+        "cogc": 0,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::app_context"
+      },
+      {
+        "cogc": 0,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::log_exception"
+      },
+      {
+        "cogc": 0,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::make_default_options_response"
+      },
+      {
+        "cogc": 0,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::open_instance_resource"
+      },
+      {
+        "cogc": 0,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::request_context"
+      },
+      {
+        "cogc": 0,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::test_request_context"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::async_to_sync"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::ensure_sync"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::make_shell_context"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::open_resource"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::send_static_file"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::test_cli_runner"
+      },
+      {
+        "cogc": 1,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::test_client"
+      },
+      {
+        "cogc": 2,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::do_teardown_appcontext"
+      },
+      {
+        "cogc": 2,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::get_send_file_max_age"
+      },
+      {
+        "cogc": 2,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::raise_routing_exception"
+      },
+      {
+        "cogc": 2,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "_make_timedelta"
+      },
+      {
+        "cogc": 3,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::dispatch_request"
+      },
+      {
+        "cogc": 3,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::finalize_request"
+      },
+      {
+        "cogc": 3,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::full_dispatch_request"
+      },
+      {
+        "cogc": 3,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::handle_http_exception"
+      },
+      {
+        "cogc": 4,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::create_jinja_environment"
+      },
+      {
+        "cogc": 5,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::create_url_adapter"
+      },
+      {
+        "cogc": 6,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::handle_exception"
+      },
+      {
+        "cogc": 6,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::handle_user_exception"
+      },
+      {
+        "cogc": 7,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::do_teardown_request"
+      },
+      {
+        "cogc": 7,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::update_template_context"
+      },
+      {
+        "cogc": 8,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::process_response"
+      },
+      {
+        "cogc": 8,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::wsgi_app"
+      },
+      {
+        "cogc": 14,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::run"
+      },
+      {
+        "cogc": 15,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::url_for"
+      },
+      {
+        "cogc": 16,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::preprocess_request"
+      },
+      {
+        "cogc": 22,
+        "file": "app.py",
+        "lineno": 0,
+        "name": "Flask::make_response"
+      },
+      {
+        "cogc": 0,
+        "file": "blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::open_resource"
+      },
+      {
+        "cogc": 1,
+        "file": "blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::send_static_file"
+      },
+      {
+        "cogc": 2,
+        "file": "blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::get_send_file_max_age"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "AppGroup::group"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "CertParamType::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "ScriptInfo::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "SeparatedPathType::convert"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "_path_is_ancestor"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "locate_app"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "locate_app"
+      },
+      {
+        "cogc": 0,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "main"
+      },
+      {
+        "cogc": 1,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "_set_app"
+      },
+      {
+        "cogc": 2,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "AppGroup::command"
+      },
+      {
+        "cogc": 2,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "FlaskGroup::list_commands"
+      },
+      {
+        "cogc": 2,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "FlaskGroup::parse_args"
+      },
+      {
+        "cogc": 2,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "_env_file_callback"
+      },
+      {
+        "cogc": 2,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "get_version"
+      },
+      {
+        "cogc": 2,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "with_appcontext"
+      },
+      {
+        "cogc": 3,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "FlaskGroup::_load_plugin_commands"
+      },
+      {
+        "cogc": 3,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "FlaskGroup::make_context"
+      },
+      {
+        "cogc": 3,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "_set_debug"
+      },
+      {
+        "cogc": 3,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "show_server_banner"
+      },
+      {
+        "cogc": 4,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "FlaskGroup::__init__"
+      },
+      {
+        "cogc": 4,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "FlaskGroup::get_command"
+      },
+      {
+        "cogc": 5,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "_called_with_wrong_args"
+      },
+      {
+        "cogc": 5,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "locate_app"
+      },
+      {
+        "cogc": 5,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "run_command"
+      },
+      {
+        "cogc": 5,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "shell_command"
+      },
+      {
+        "cogc": 6,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "prepare_import"
+      },
+      {
+        "cogc": 8,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "ScriptInfo::load_app"
+      },
+      {
+        "cogc": 8,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "routes_command"
+      },
+      {
+        "cogc": 9,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "CertParamType::convert"
+      },
+      {
+        "cogc": 10,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "load_dotenv"
+      },
+      {
+        "cogc": 11,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "_validate_key"
+      },
+      {
+        "cogc": 15,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "find_app_by_string"
+      },
+      {
+        "cogc": 19,
+        "file": "cli.py",
+        "lineno": 0,
+        "name": "find_best_app"
+      },
+      {
+        "cogc": 0,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::__repr__"
+      },
+      {
+        "cogc": 0,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "ConfigAttribute::__get__"
+      },
+      {
+        "cogc": 0,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "ConfigAttribute::__get__"
+      },
+      {
+        "cogc": 0,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "ConfigAttribute::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "ConfigAttribute::__set__"
+      },
+      {
+        "cogc": 2,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "ConfigAttribute::__get__"
+      },
+      {
+        "cogc": 3,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::from_envvar"
+      },
+      {
+        "cogc": 4,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::from_file"
+      },
+      {
+        "cogc": 4,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::from_mapping"
+      },
+      {
+        "cogc": 4,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::from_object"
+      },
+      {
+        "cogc": 4,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::from_pyfile"
+      },
+      {
+        "cogc": 7,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::get_namespace"
+      },
+      {
+        "cogc": 12,
+        "file": "config.py",
+        "lineno": 0,
+        "name": "Config::from_prefixed_env"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "AppContext::__enter__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "AppContext::__exit__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "AppContext::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "AppContext::push"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::__enter__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::__exit__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::__repr__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::copy"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::__contains__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::__iter__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::__setattr__"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::get"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::setdefault"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "has_app_context"
+      },
+      {
+        "cogc": 0,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "has_request_context"
+      },
+      {
+        "cogc": 1,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::match_request"
+      },
+      {
+        "cogc": 1,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::__delattr__"
+      },
+      {
+        "cogc": 1,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::__getattr__"
+      },
+      {
+        "cogc": 1,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::__repr__"
+      },
+      {
+        "cogc": 1,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "_AppCtxGlobals::pop"
+      },
+      {
+        "cogc": 1,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "after_this_request"
+      },
+      {
+        "cogc": 1,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "copy_current_request_context"
+      },
+      {
+        "cogc": 2,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::__init__"
+      },
+      {
+        "cogc": 6,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "AppContext::pop"
+      },
+      {
+        "cogc": 6,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::push"
+      },
+      {
+        "cogc": 14,
+        "file": "ctx.py",
+        "lineno": 0,
+        "name": "RequestContext::pop"
+      },
+      {
+        "cogc": 0,
+        "file": "debughelpers.py",
+        "lineno": 0,
+        "name": "DebugFilesKeyError::__str__"
+      },
+      {
+        "cogc": 1,
+        "file": "debughelpers.py",
+        "lineno": 0,
+        "name": "DebugFilesKeyError::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "debughelpers.py",
+        "lineno": 0,
+        "name": "FormDataRoutingRedirect::__init__"
+      },
+      {
+        "cogc": 3,
+        "file": "debughelpers.py",
+        "lineno": 0,
+        "name": "attach_enctype_error_multidict"
+      },
+      {
+        "cogc": 12,
+        "file": "debughelpers.py",
+        "lineno": 0,
+        "name": "_dump_loader_info"
+      },
+      {
+        "cogc": 14,
+        "file": "debughelpers.py",
+        "lineno": 0,
+        "name": "explain_template_loading_attempts"
+      },
+      {
+        "cogc": 0,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "flash"
+      },
+      {
+        "cogc": 0,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "get_debug_flag"
+      },
+      {
+        "cogc": 0,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "get_template_attribute"
+      },
+      {
+        "cogc": 0,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "send_file"
+      },
+      {
+        "cogc": 0,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "send_from_directory"
+      },
+      {
+        "cogc": 0,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "url_for"
+      },
+      {
+        "cogc": 1,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "_prepare_send_file_kwargs"
+      },
+      {
+        "cogc": 1,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "_split_blueprint_path"
+      },
+      {
+        "cogc": 1,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "abort"
+      },
+      {
+        "cogc": 1,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "get_load_dotenv"
+      },
+      {
+        "cogc": 1,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "redirect"
+      },
+      {
+        "cogc": 2,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "make_response"
+      },
+      {
+        "cogc": 3,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "stream_with_context"
+      },
+      {
+        "cogc": 5,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "get_flashed_messages"
+      },
+      {
+        "cogc": 8,
+        "file": "helpers.py",
+        "lineno": 0,
+        "name": "get_root_path"
+      },
+      {
+        "cogc": 0,
+        "file": "json/__init__.py",
+        "lineno": 0,
+        "name": "jsonify"
+      },
+      {
+        "cogc": 1,
+        "file": "json/__init__.py",
+        "lineno": 0,
+        "name": "dump"
+      },
+      {
+        "cogc": 1,
+        "file": "json/__init__.py",
+        "lineno": 0,
+        "name": "dumps"
+      },
+      {
+        "cogc": 1,
+        "file": "json/__init__.py",
+        "lineno": 0,
+        "name": "load"
+      },
+      {
+        "cogc": 1,
+        "file": "json/__init__.py",
+        "lineno": 0,
+        "name": "loads"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "DefaultJSONProvider::dumps"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "DefaultJSONProvider::loads"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "JSONProvider::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "JSONProvider::dump"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "JSONProvider::dumps"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "JSONProvider::load"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "JSONProvider::loads"
+      },
+      {
+        "cogc": 0,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "JSONProvider::response"
+      },
+      {
+        "cogc": 3,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "DefaultJSONProvider::response"
+      },
+      {
+        "cogc": 5,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "JSONProvider::_prepare_response_obj"
+      },
+      {
+        "cogc": 5,
+        "file": "json/provider.py",
+        "lineno": 0,
+        "name": "_default"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "JSONTag::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "JSONTag::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "JSONTag::tag"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "JSONTag::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "JSONTag::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "PassDict::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "PassDict::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "PassList::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "PassList::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagBytes::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagBytes::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagBytes::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagDateTime::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagDateTime::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagDateTime::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagDict::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagDict::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagDict::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagMarkup::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagMarkup::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagMarkup::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagTuple::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagTuple::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagTuple::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagUUID::check"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagUUID::to_json"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TagUUID::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TaggedJSONSerializer::dumps"
+      },
+      {
+        "cogc": 0,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TaggedJSONSerializer::loads"
+      },
+      {
+        "cogc": 1,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TaggedJSONSerializer::__init__"
+      },
+      {
+        "cogc": 2,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TaggedJSONSerializer::_untag_scan"
+      },
+      {
+        "cogc": 2,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TaggedJSONSerializer::untag"
+      },
+      {
+        "cogc": 3,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TaggedJSONSerializer::tag"
+      },
+      {
+        "cogc": 5,
+        "file": "json/tag.py",
+        "lineno": 0,
+        "name": "TaggedJSONSerializer::register"
+      },
+      {
+        "cogc": 1,
+        "file": "logging.py",
+        "lineno": 0,
+        "name": "wsgi_errors_stream"
+      },
+      {
+        "cogc": 3,
+        "file": "logging.py",
+        "lineno": 0,
+        "name": "create_logger"
+      },
+      {
+        "cogc": 5,
+        "file": "logging.py",
+        "lineno": 0,
+        "name": "has_level_handler"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::add_template_filter"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::add_template_global"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::add_template_test"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::create_global_jinja_loader"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::create_jinja_environment"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::debug"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::iter_blueprints"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::jinja_env"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::logger"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::make_aborter"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::redirect"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::register_blueprint"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::shell_context_processor"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::should_ignore_error"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::teardown_appcontext"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::template_filter"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::template_global"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::template_test"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::_check_setup_finished"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::auto_find_instance_path"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::debug"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::make_config"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::select_jinja_autoescape"
+      },
+      {
+        "cogc": 2,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::__init__"
+      },
+      {
+        "cogc": 2,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "_make_timedelta"
+      },
+      {
+        "cogc": 3,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::name"
+      },
+      {
+        "cogc": 4,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::trap_http_exception"
+      },
+      {
+        "cogc": 7,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::handle_url_build_error"
+      },
+      {
+        "cogc": 7,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::inject_url_defaults"
+      },
+      {
+        "cogc": 12,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::add_url_rule"
+      },
+      {
+        "cogc": 14,
+        "file": "sansio/app.py",
+        "lineno": 0,
+        "name": "App::_find_error_handler"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::add_app_template_filter"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::add_app_template_global"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::add_app_template_test"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::after_app_request"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::app_context_processor"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::app_errorhandler"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::app_template_filter"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::app_template_global"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::app_template_test"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::app_url_defaults"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::app_url_value_preprocessor"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::before_app_request"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::make_setup_state"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::record"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::teardown_app_request"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::_check_setup_finished"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::register_blueprint"
+      },
+      {
+        "cogc": 2,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::record_once"
+      },
+      {
+        "cogc": 2,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "BlueprintSetupState::__init__"
+      },
+      {
+        "cogc": 3,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::__init__"
+      },
+      {
+        "cogc": 4,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::add_url_rule"
+      },
+      {
+        "cogc": 5,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "BlueprintSetupState::add_url_rule"
+      },
+      {
+        "cogc": 9,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::_merge_blueprint_funcs"
+      },
+      {
+        "cogc": 28,
+        "file": "sansio/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::register"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::__repr__"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::_check_setup_finished"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::add_url_rule"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::after_request"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::before_request"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::context_processor"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::delete"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::endpoint"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::errorhandler"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::get"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::has_static_folder"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::patch"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::post"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::put"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::register_error_handler"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::route"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::teardown_request"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::url_defaults"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::url_value_preprocessor"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "_endpoint_from_view_func"
+      },
+      {
+        "cogc": 0,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "setupmethod"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::_method_route"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::jinja_loader"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::static_folder"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::static_folder"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::static_url_path"
+      },
+      {
+        "cogc": 1,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "_path_is_relative_to"
+      },
+      {
+        "cogc": 2,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::static_url_path"
+      },
+      {
+        "cogc": 6,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "Scaffold::_get_exc_class_and_code"
+      },
+      {
+        "cogc": 6,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "find_package"
+      },
+      {
+        "cogc": 11,
+        "file": "sansio/scaffold.py",
+        "lineno": 0,
+        "name": "_find_package_path"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "NullSession::_fail"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SecureCookieSession::__getitem__"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SecureCookieSession::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SecureCookieSession::get"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SecureCookieSession::setdefault"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::get_cookie_domain"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::get_cookie_httponly"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::get_cookie_name"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::get_cookie_path"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::get_cookie_samesite"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::get_cookie_secure"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::is_null_session"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::make_null_session"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::open_session"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::save_session"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::should_set_cookie"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionMixin::permanent"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionMixin::permanent"
+      },
+      {
+        "cogc": 0,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "_lazy_sha1"
+      },
+      {
+        "cogc": 1,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SecureCookieSessionInterface::get_signing_serializer"
+      },
+      {
+        "cogc": 1,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SessionInterface::get_expiration_time"
+      },
+      {
+        "cogc": 3,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SecureCookieSessionInterface::open_session"
+      },
+      {
+        "cogc": 5,
+        "file": "sessions.py",
+        "lineno": 0,
+        "name": "SecureCookieSessionInterface::save_session"
+      },
+      {
+        "cogc": 0,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "DispatchingJinjaLoader::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "_render"
+      },
+      {
+        "cogc": 0,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "render_template"
+      },
+      {
+        "cogc": 0,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "render_template_string"
+      },
+      {
+        "cogc": 0,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "stream_template"
+      },
+      {
+        "cogc": 0,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "stream_template_string"
+      },
+      {
+        "cogc": 1,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "DispatchingJinjaLoader::get_source"
+      },
+      {
+        "cogc": 1,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "Environment::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "_stream"
+      },
+      {
+        "cogc": 2,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "_default_template_ctx_processor"
+      },
+      {
+        "cogc": 3,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "DispatchingJinjaLoader::_get_source_fast"
+      },
+      {
+        "cogc": 4,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "DispatchingJinjaLoader::_iter_loaders"
+      },
+      {
+        "cogc": 7,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "DispatchingJinjaLoader::_get_source_explained"
+      },
+      {
+        "cogc": 7,
+        "file": "templating.py",
+        "lineno": 0,
+        "name": "DispatchingJinjaLoader::list_templates"
+      },
+      {
+        "cogc": 0,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "EnvironBuilder::json_dumps"
+      },
+      {
+        "cogc": 0,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskCliRunner::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskClient::__exit__"
+      },
+      {
+        "cogc": 0,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskClient::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskClient::_request_from_builder_args"
+      },
+      {
+        "cogc": 1,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskClient::__enter__"
+      },
+      {
+        "cogc": 1,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskClient::_copy_environ"
+      },
+      {
+        "cogc": 1,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "_get_werkzeug_version"
+      },
+      {
+        "cogc": 2,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskCliRunner::invoke"
+      },
+      {
+        "cogc": 3,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskClient::session_transaction"
+      },
+      {
+        "cogc": 7,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "FlaskClient::open"
+      },
+      {
+        "cogc": 11,
+        "file": "testing.py",
+        "lineno": 0,
+        "name": "EnvironBuilder::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "views.py",
+        "lineno": 0,
+        "name": "View::dispatch_request"
+      },
+      {
+        "cogc": 2,
+        "file": "views.py",
+        "lineno": 0,
+        "name": "MethodView::dispatch_request"
+      },
+      {
+        "cogc": 4,
+        "file": "views.py",
+        "lineno": 0,
+        "name": "View::as_view"
+      },
+      {
+        "cogc": 13,
+        "file": "views.py",
+        "lineno": 0,
+        "name": "MethodView::__init_subclass__"
+      },
+      {
+        "cogc": 1,
+        "file": "wrappers.py",
+        "lineno": 0,
+        "name": "Request::blueprints"
+      },
+      {
+        "cogc": 1,
+        "file": "wrappers.py",
+        "lineno": 0,
+        "name": "Request::endpoint"
+      },
+      {
+        "cogc": 1,
+        "file": "wrappers.py",
+        "lineno": 0,
+        "name": "Request::max_content_length"
+      },
+      {
+        "cogc": 1,
+        "file": "wrappers.py",
+        "lineno": 0,
+        "name": "Response::max_cookie_size"
+      },
+      {
+        "cogc": 2,
+        "file": "wrappers.py",
+        "lineno": 0,
+        "name": "Request::_load_form_data"
+      },
+      {
+        "cogc": 2,
+        "file": "wrappers.py",
+        "lineno": 0,
+        "name": "Request::blueprint"
+      },
+      {
+        "cogc": 4,
+        "file": "wrappers.py",
+        "lineno": 0,
+        "name": "Request::on_json_loading_failed"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "Flask (H)",
+  "mi": {
+    "files": [
+      {
+        "file": "__init__.py",
+        "mi": 58.32
+      },
+      {
+        "file": "__main__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "app.py",
+        "mi": 24.14
+      },
+      {
+        "file": "blueprints.py",
+        "mi": 83.02
+      },
+      {
+        "file": "cli.py",
+        "mi": 27.96
+      },
+      {
+        "file": "config.py",
+        "mi": 57.31
+      },
+      {
+        "file": "ctx.py",
+        "mi": 54.32
+      },
+      {
+        "file": "debughelpers.py",
+        "mi": 56.88
+      },
+      {
+        "file": "globals.py",
+        "mi": 100.0
+      },
+      {
+        "file": "helpers.py",
+        "mi": 46.22
+      },
+      {
+        "file": "json/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "json/provider.py",
+        "mi": 58.28
+      },
+      {
+        "file": "json/tag.py",
+        "mi": 58.88
+      },
+      {
+        "file": "logging.py",
+        "mi": 82.53
+      },
+      {
+        "file": "sansio/app.py",
+        "mi": 32.87
+      },
+      {
+        "file": "sansio/blueprints.py",
+        "mi": 46.99
+      },
+      {
+        "file": "sansio/scaffold.py",
+        "mi": 43.83
+      },
+      {
+        "file": "sessions.py",
+        "mi": 59.63
+      },
+      {
+        "file": "signals.py",
+        "mi": 100.0
+      },
+      {
+        "file": "templating.py",
+        "mi": 61.09
+      },
+      {
+        "file": "testing.py",
+        "mi": 60.12
+      },
+      {
+        "file": "typing.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views.py",
+        "mi": 61.02
+      },
+      {
+        "file": "wrappers.py",
+        "mi": 65.18
+      }
+    ],
+    "mean": 64.1,
+    "median": 59.3,
+    "min": 24.1,
+    "n": 24,
+    "pct_below_threshold": 66.7,
+    "threshold": 65
+  },
+  "subject": "flask"
+}

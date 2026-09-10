@@ -1,0 +1,19 @@
+Agentic-vs-Human benchmark harness - pipeline run log
+generated (UTC): 2026-09-10T22:46:22Z
+base commit:     5ef0731925589ea23d56fb1cd5e81484748b1b6b  (+ packaging changes staged in this commit)
+python:          Python 3.11.15   (matches Dockerfile python:3.11-slim)
+platform:        Darwin 24.2.0 arm64
+subjects:        flask (pallets/flask@3.0.3), django (django/django@5.0.6, urls+views)
+                 agentic snapshots are not part of this harness checkout
+
+analysis toolchain == requirements-analysis.txt, verbatim:
+  bandit==1.9.4
+  complexipy==0.4.0
+  pylint==3.1.0
+  pytest==8.1.1
+  radon==6.0.1
+  scipy==1.16.2
+
+not exercised here:
+  - duplication (RQ5): needs PMD 7.0.0 + a JRE; Docker path only (make docker-run)
+  - significance:      needs >=1 available agentic subject per pair

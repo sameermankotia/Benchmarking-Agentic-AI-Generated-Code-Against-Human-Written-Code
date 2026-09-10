@@ -1,0 +1,39 @@
+Subject snapshot manifest
+=========================
+
+Every subject is pinned to an exact upstream commit. The human baselines are
+cloned from their public repositories at the tags/SHAs below; the agentic
+subjects are frozen at the final commit of their generation run and are
+distributed in the separate generation bundle (they are not reproducible from
+this harness -- see README, "Agentic subjects").
+
+Human baselines (cloned into subjects/<id>/ before running the pipeline)
+-----------------------------------------------------------------------
+id         upstream                       tag      commit SHA
+flask      github.com/pallets/flask       3.0.3    c12a5d874c5a014495eb2db8a73f40037bc813ac
+django     github.com/django/django       5.0.6    2719a7f8c161233f45d34b624a9df9392c86cc1b
+flask_0_1  github.com/pallets/flask       0.1      8605cc310d260c3b08160881b09da26c2cc95f8d
+
+  flask     : analysis scope is src/flask/  (the core package)
+  django    : analysis scope is django/urls/ and django/views/  (see subjects.json "include")
+  flask_0_1 : maturity control, structural metrics only, no oracle evaluation
+
+Clone commands
+--------------
+git clone --depth 1 --branch 3.0.3 https://github.com/pallets/flask  subjects/flask
+git clone --depth 1 --branch 5.0.6 https://github.com/django/django  subjects/django
+git clone --depth 1 --branch 0.1   https://github.com/pallets/flask  subjects/flask-0.1
+
+Agentic subjects (from the generation bundle; register with available: true once present)
+----------------------------------------------------------------------------------------
+id               agent + model                             spec pair   runs
+swe_flask        SWE-agent 1.0.0  + claude-sonnet-4-20250514   flask       5
+openhands_flask  OpenHands 0.14.0 + gpt-4o-2024-11-20          flask       5
+swe_django       SWE-agent 1.0.0  + claude-sonnet-4-20250514   django      5
+
+Analysis toolchain
+------------------
+Pinned in requirements-analysis.txt (Radon, complexipy, Bandit, pylint, pytest).
+CPD ships with PMD 7.0.0, installed in the Dockerfile. The exact interpreter and
+resolved tool versions for the committed results/ are recorded in
+logs/environment.txt.

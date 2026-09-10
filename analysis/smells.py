@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 from pathlib import Path
 
 from . import common
@@ -24,7 +25,8 @@ DROP_CATEGORIES = {"fatal", "info"}
 def _run_pylint(files: list[Path]) -> list[dict]:
     if not files:
         return []
-    cmd = ["pylint", "--output-format=json", "--score=n", *map(str, files)]
+    cmd = [sys.executable, "-m", "pylint",
+           "--output-format=json", "--score=n", *map(str, files)]
     proc = subprocess.run(cmd, capture_output=True, text=True)
     if not proc.stdout.strip():
         # pylint prints nothing only when it crashed before analysis.

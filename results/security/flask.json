@@ -1,0 +1,121 @@
+{
+  "by_cwe": {
+    "CWE-259": 1,
+    "CWE-327": 1,
+    "CWE-617": 5,
+    "CWE-703": 1,
+    "CWE-78": 2,
+    "CWE-79": 1
+  },
+  "by_severity": {
+    "HIGH": 1,
+    "LOW": 7,
+    "MEDIUM": 3
+  },
+  "density_per_100_loc": 0.26,
+  "findings": [
+    {
+      "confidence": "MEDIUM",
+      "cwe": "CWE-259",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/app.py",
+      "line": 181,
+      "severity": "LOW",
+      "test_id": "B105",
+      "text": "Possible hardcoded password: 'None'"
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/app.py",
+      "line": 260,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-78",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/cli.py",
+      "line": 1005,
+      "severity": "MEDIUM",
+      "test_id": "B307",
+      "text": "Use of possibly insecure function - consider using safer ast.literal_eval."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-703",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/config.py",
+      "line": 163,
+      "severity": "LOW",
+      "test_id": "B110",
+      "text": "Try, Except, Pass detected."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-78",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/config.py",
+      "line": 212,
+      "severity": "MEDIUM",
+      "test_id": "B102",
+      "text": "Use of exec detected."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/debughelpers.py",
+      "line": 59,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-79",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/json/tag.py",
+      "line": 188,
+      "severity": "MEDIUM",
+      "test_id": "B704",
+      "text": "Potential XSS with ``markupsafe.Markup`` detected. Do not use ``Markup`` on untrusted data."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/sansio/scaffold.py",
+      "line": 705,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-327",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/sessions.py",
+      "line": 285,
+      "severity": "HIGH",
+      "test_id": "B324",
+      "text": "Use of weak SHA1 hash for security. Consider usedforsecurity=False"
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/testing.py",
+      "line": 58,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/views.py",
+      "line": 190,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    }
+  ],
+  "label": "Flask (H)",
+  "min_confidence": "MEDIUM",
+  "subject": "flask",
+  "total_findings": 11
+}

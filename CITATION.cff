@@ -1,0 +1,54 @@
+cff-version: 1.2.0
+message: "If you use this replication package, please cite the paper below."
+title: "Agentic vs. Human Benchmark - Replication Package"
+abstract: >-
+  Analysis harness for the paper "Structural Quality and Security in Agentic
+  Software Engineering: A Multi-Dimensional Empirical Evaluation". Runs one
+  deterministic pipeline (Radon, complexipy, Bandit, pylint, CPD) plus two
+  specification-derived oracle test suites over the study subjects and renders
+  the paper's tables as CSV.
+type: software
+authors:
+  - family-names: Mankotia
+    given-names: Sameer
+    affiliation: "University of Idaho"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: Rimal
+    given-names: "Bhaskar P."
+    affiliation: "University of Idaho"
+  - family-names: Pal
+    given-names: Arpan
+    affiliation: "University of Idaho"
+  - family-names: Summers
+    given-names: Nate
+    affiliation: "University of Idaho"
+license: MIT
+repository-code: "https://github.com/<org>/<repo>"
+version: "1.0.0"
+date-released: "2026-09-10"
+keywords:
+  - agentic code generation
+  - software quality
+  - benchmark study
+  - cyclomatic complexity
+  - cognitive complexity
+  - maintainability index
+  - security vulnerability density
+  - code duplication
+preferred-citation:
+  type: article
+  title: >-
+    Structural Quality and Security in Agentic Software Engineering:
+    A Multi-Dimensional Empirical Evaluation
+  authors:
+    - family-names: Mankotia
+      given-names: Sameer
+    - family-names: Rimal
+      given-names: "Bhaskar P."
+    - family-names: Pal
+      given-names: Arpan
+    - family-names: Summers
+      given-names: Nate
+  journal: "IEEE Access"
+  year: 2026
+  doi: "10.1109/ACCESS.2024.0429000"

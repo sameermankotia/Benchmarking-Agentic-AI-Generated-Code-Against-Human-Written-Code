@@ -15,6 +15,7 @@ from __future__ import annotations
 import argparse
 import os
 import subprocess
+import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -65,7 +66,7 @@ def _run_pytest(subject: common.Subject, junit_path: Path) -> subprocess.Complet
     env = dict(os.environ)
     env["PYTHONPATH"] = str(path_entry) + os.pathsep + env.get("PYTHONPATH", "")
     env["SUT_IMPORT"] = import_name
-    cmd = ["python", "-m", "pytest", str(oracle_dir), "-q",
+    cmd = [sys.executable, "-m", "pytest", str(oracle_dir), "-q",
            f"--junitxml={junit_path}", "-p", "no:cacheprovider"]
     return subprocess.run(cmd, capture_output=True, text=True, env=env)
 
@@ -134,6 +135,10 @@ def run(subject_ids: list[str] | None = None) -> None:
     for subject in common.load_subjects(subject_ids):
         if not subject.is_present():
             print(f"[correctness] SKIP {subject.id}: snapshot not present")
+            continue
+        if not subject.oracle:
+            print(f"[correctness] SKIP {subject.id}: structural reference only "
+                  f"(no oracle)")
             continue
         if not (ORACLE_ROOT / subject.oracle).exists():
             print(f"[correctness] SKIP {subject.id}: oracle '{subject.oracle}' not found")

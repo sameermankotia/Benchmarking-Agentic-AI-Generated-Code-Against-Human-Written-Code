@@ -1,0 +1,35 @@
+{
+  "categories": {
+    "Class-Based Views": {
+      "n": 10,
+      "pass_rate": 100.0,
+      "passed": 10
+    },
+    "Request Object": {
+      "n": 22,
+      "pass_rate": 100.0,
+      "passed": 22
+    },
+    "Response Handling": {
+      "n": 19,
+      "pass_rate": 100.0,
+      "passed": 19
+    },
+    "URL Resolution": {
+      "n": 24,
+      "pass_rate": 100.0,
+      "passed": 24
+    },
+    "View Dispatch": {
+      "n": 22,
+      "pass_rate": 100.0,
+      "passed": 22
+    }
+  },
+  "label": "Django mod. (H)",
+  "oracle": "django",
+  "pass_rate": 100.0,
+  "passed": 97,
+  "subject": "django",
+  "total": 97
+}

@@ -1,0 +1,5 @@
+
+=== repo_stats ===
+[repo_stats] flask: 4243 LOC, 362 fns, MI-inputs ready
+[repo_stats] django: 3520 LOC, 296 fns, MI-inputs ready
+[repo_stats] done in 0.2s

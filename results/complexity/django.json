@@ -1,0 +1,3692 @@
+{
+  "cc": {
+    "max": 24,
+    "mean": 2.8,
+    "median": 2.0,
+    "n": 330,
+    "pct_over_threshold": 3.0,
+    "records": [
+      {
+        "cc": 2,
+        "file": "urls/base.py",
+        "lineno": 21,
+        "name": "resolve"
+      },
+      {
+        "cc": 16,
+        "file": "urls/base.py",
+        "lineno": 27,
+        "name": "reverse"
+      },
+      {
+        "cc": 1,
+        "file": "urls/base.py",
+        "lineno": 94,
+        "name": "clear_url_caches"
+      },
+      {
+        "cc": 2,
+        "file": "urls/base.py",
+        "lineno": 100,
+        "name": "set_script_prefix"
+      },
+      {
+        "cc": 1,
+        "file": "urls/base.py",
+        "lineno": 109,
+        "name": "get_script_prefix"
+      },
+      {
+        "cc": 2,
+        "file": "urls/base.py",
+        "lineno": 118,
+        "name": "clear_script_prefix"
+      },
+      {
+        "cc": 3,
+        "file": "urls/base.py",
+        "lineno": 128,
+        "name": "set_urlconf"
+      },
+      {
+        "cc": 1,
+        "file": "urls/base.py",
+        "lineno": 140,
+        "name": "get_urlconf"
+      },
+      {
+        "cc": 2,
+        "file": "urls/base.py",
+        "lineno": 148,
+        "name": "is_valid_path"
+      },
+      {
+        "cc": 6,
+        "file": "urls/base.py",
+        "lineno": 160,
+        "name": "translate_url"
+      },
+      {
+        "cc": 11,
+        "file": "urls/conf.py",
+        "lineno": 17,
+        "name": "include"
+      },
+      {
+        "cc": 6,
+        "file": "urls/conf.py",
+        "lineno": 62,
+        "name": "_path"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 55,
+        "name": "register_converter"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 61,
+        "name": "get_converters"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 65,
+        "name": "get_converter"
+      },
+      {
+        "cc": 2,
+        "file": "urls/converters.py",
+        "lineno": 5,
+        "name": "IntConverter"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 8,
+        "name": "IntConverter.to_python"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 11,
+        "name": "IntConverter.to_url"
+      },
+      {
+        "cc": 2,
+        "file": "urls/converters.py",
+        "lineno": 15,
+        "name": "StringConverter"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 18,
+        "name": "StringConverter.to_python"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 21,
+        "name": "StringConverter.to_url"
+      },
+      {
+        "cc": 2,
+        "file": "urls/converters.py",
+        "lineno": 25,
+        "name": "UUIDConverter"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 28,
+        "name": "UUIDConverter.to_python"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 31,
+        "name": "UUIDConverter.to_url"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 35,
+        "name": "SlugConverter"
+      },
+      {
+        "cc": 1,
+        "file": "urls/converters.py",
+        "lineno": 39,
+        "name": "PathConverter"
+      },
+      {
+        "cc": 1,
+        "file": "urls/exceptions.py",
+        "lineno": 4,
+        "name": "Resolver404"
+      },
+      {
+        "cc": 1,
+        "file": "urls/exceptions.py",
+        "lineno": 8,
+        "name": "NoReverseMatch"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 108,
+        "name": "get_resolver"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 115,
+        "name": "_get_cached_resolver"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 120,
+        "name": "get_ns_resolver"
+      },
+      {
+        "cc": 8,
+        "file": "urls/resolvers.py",
+        "lineno": 253,
+        "name": "_route_to_regex"
+      },
+      {
+        "cc": 5,
+        "file": "urls/resolvers.py",
+        "lineno": 34,
+        "name": "ResolverMatch"
+      },
+      {
+        "cc": 10,
+        "file": "urls/resolvers.py",
+        "lineno": 35,
+        "name": "ResolverMatch.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 76,
+        "name": "ResolverMatch.__getitem__"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 79,
+        "name": "ResolverMatch.__repr__"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 104,
+        "name": "ResolverMatch.__reduce_ex__"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 130,
+        "name": "LocaleRegexDescriptor"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 131,
+        "name": "LocaleRegexDescriptor.__init__"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 134,
+        "name": "LocaleRegexDescriptor.__get__"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 153,
+        "name": "CheckURLMixin"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 154,
+        "name": "CheckURLMixin.describe"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 163,
+        "name": "CheckURLMixin._check_pattern_startswith_slash"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 188,
+        "name": "RegexPattern"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 191,
+        "name": "RegexPattern.__init__"
+      },
+      {
+        "cc": 7,
+        "file": "urls/resolvers.py",
+        "lineno": 198,
+        "name": "RegexPattern.match"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 214,
+        "name": "RegexPattern.check"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 221,
+        "name": "RegexPattern._check_include_trailing_dollar"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 235,
+        "name": "RegexPattern._compile"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 244,
+        "name": "RegexPattern.__str__"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 299,
+        "name": "RoutePattern"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 302,
+        "name": "RoutePattern.__init__"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 309,
+        "name": "RoutePattern.match"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 323,
+        "name": "RoutePattern.check"
+      },
+      {
+        "cc": 6,
+        "file": "urls/resolvers.py",
+        "lineno": 340,
+        "name": "RoutePattern._check_pattern_unmatched_angle_brackets"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 359,
+        "name": "RoutePattern._compile"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 362,
+        "name": "RoutePattern.__str__"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 366,
+        "name": "LocalePrefixPattern"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 367,
+        "name": "LocalePrefixPattern.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 372,
+        "name": "LocalePrefixPattern.regex"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 377,
+        "name": "LocalePrefixPattern.language_prefix"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 384,
+        "name": "LocalePrefixPattern.match"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 390,
+        "name": "LocalePrefixPattern.check"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 393,
+        "name": "LocalePrefixPattern.describe"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 396,
+        "name": "LocalePrefixPattern.__str__"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 400,
+        "name": "URLPattern"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 401,
+        "name": "URLPattern.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 407,
+        "name": "URLPattern.__repr__"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 410,
+        "name": "URLPattern.check"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 416,
+        "name": "URLPattern._check_pattern_name"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 430,
+        "name": "URLPattern._check_callback"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 449,
+        "name": "URLPattern.resolve"
+      },
+      {
+        "cc": 4,
+        "file": "urls/resolvers.py",
+        "lineno": 466,
+        "name": "URLPattern.lookup_str"
+      },
+      {
+        "cc": 5,
+        "file": "urls/resolvers.py",
+        "lineno": 481,
+        "name": "URLResolver"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 482,
+        "name": "URLResolver.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 503,
+        "name": "URLResolver.__repr__"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 517,
+        "name": "URLResolver.check"
+      },
+      {
+        "cc": 5,
+        "file": "urls/resolvers.py",
+        "lineno": 524,
+        "name": "URLResolver._check_custom_error_handlers"
+      },
+      {
+        "cc": 10,
+        "file": "urls/resolvers.py",
+        "lineno": 555,
+        "name": "URLResolver._populate"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 640,
+        "name": "URLResolver.reverse_dict"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 647,
+        "name": "URLResolver.namespace_dict"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 654,
+        "name": "URLResolver.app_dict"
+      },
+      {
+        "cc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 661,
+        "name": "URLResolver._extend_tried"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 668,
+        "name": "URLResolver._join_route"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 675,
+        "name": "URLResolver._is_callback"
+      },
+      {
+        "cc": 8,
+        "file": "urls/resolvers.py",
+        "lineno": 680,
+        "name": "URLResolver.resolve"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 729,
+        "name": "URLResolver.urlconf_module"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 736,
+        "name": "URLResolver.url_patterns"
+      },
+      {
+        "cc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 751,
+        "name": "URLResolver.resolve_error_handler"
+      },
+      {
+        "cc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 761,
+        "name": "URLResolver.reverse"
+      },
+      {
+        "cc": 24,
+        "file": "urls/resolvers.py",
+        "lineno": 764,
+        "name": "URLResolver._reverse_with_prefix"
+      },
+      {
+        "cc": 11,
+        "file": "urls/utils.py",
+        "lineno": 9,
+        "name": "get_callable"
+      },
+      {
+        "cc": 2,
+        "file": "urls/utils.py",
+        "lineno": 59,
+        "name": "get_mod_func"
+      },
+      {
+        "cc": 1,
+        "file": "views/csrf.py",
+        "lineno": 12,
+        "name": "builtin_template_path"
+      },
+      {
+        "cc": 3,
+        "file": "views/csrf.py",
+        "lineno": 22,
+        "name": "csrf_failure"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 33,
+        "name": "builtin_template_path"
+      },
+      {
+        "cc": 2,
+        "file": "views/debug.py",
+        "lineno": 62,
+        "name": "technical_500_response"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 79,
+        "name": "get_default_exception_reporter_filter"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 84,
+        "name": "get_exception_reporter_filter"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 89,
+        "name": "get_exception_reporter_class"
+      },
+      {
+        "cc": 4,
+        "file": "views/debug.py",
+        "lineno": 98,
+        "name": "get_caller"
+      },
+      {
+        "cc": 11,
+        "file": "views/debug.py",
+        "lineno": 608,
+        "name": "technical_404_response"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 655,
+        "name": "default_urlconf"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 43,
+        "name": "ExceptionCycleWarning"
+      },
+      {
+        "cc": 2,
+        "file": "views/debug.py",
+        "lineno": 47,
+        "name": "CallableSettingWrapper"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 55,
+        "name": "CallableSettingWrapper.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 58,
+        "name": "CallableSettingWrapper.__repr__"
+      },
+      {
+        "cc": 7,
+        "file": "views/debug.py",
+        "lineno": 108,
+        "name": "SafeExceptionReporterFilter"
+      },
+      {
+        "cc": 11,
+        "file": "views/debug.py",
+        "lineno": 119,
+        "name": "SafeExceptionReporterFilter.cleanse_setting"
+      },
+      {
+        "cc": 3,
+        "file": "views/debug.py",
+        "lineno": 148,
+        "name": "SafeExceptionReporterFilter.get_safe_settings"
+      },
+      {
+        "cc": 3,
+        "file": "views/debug.py",
+        "lineno": 159,
+        "name": "SafeExceptionReporterFilter.get_safe_request_meta"
+      },
+      {
+        "cc": 3,
+        "file": "views/debug.py",
+        "lineno": 167,
+        "name": "SafeExceptionReporterFilter.get_safe_cookies"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 175,
+        "name": "SafeExceptionReporterFilter.is_active"
+      },
+      {
+        "cc": 5,
+        "file": "views/debug.py",
+        "lineno": 184,
+        "name": "SafeExceptionReporterFilter.get_cleansed_multivaluedict"
+      },
+      {
+        "cc": 8,
+        "file": "views/debug.py",
+        "lineno": 198,
+        "name": "SafeExceptionReporterFilter.get_post_parameters"
+      },
+      {
+        "cc": 3,
+        "file": "views/debug.py",
+        "lineno": 225,
+        "name": "SafeExceptionReporterFilter.cleanse_special_types"
+      },
+      {
+        "cc": 16,
+        "file": "views/debug.py",
+        "lineno": 239,
+        "name": "SafeExceptionReporterFilter.get_traceback_frame_variables"
+      },
+      {
+        "cc": 5,
+        "file": "views/debug.py",
+        "lineno": 310,
+        "name": "ExceptionReporter"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 314,
+        "name": "ExceptionReporter.html_template_path"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 318,
+        "name": "ExceptionReporter.text_template_path"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 321,
+        "name": "ExceptionReporter.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 333,
+        "name": "ExceptionReporter._get_raw_insecure_uri"
+      },
+      {
+        "cc": 19,
+        "file": "views/debug.py",
+        "lineno": 344,
+        "name": "ExceptionReporter.get_traceback_data"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 424,
+        "name": "ExceptionReporter.get_traceback_html"
+      },
+      {
+        "cc": 1,
+        "file": "views/debug.py",
+        "lineno": 431,
+        "name": "ExceptionReporter.get_traceback_text"
+      },
+      {
+        "cc": 6,
+        "file": "views/debug.py",
+        "lineno": 438,
+        "name": "ExceptionReporter._get_source"
+      },
+      {
+        "cc": 7,
+        "file": "views/debug.py",
+        "lineno": 455,
+        "name": "ExceptionReporter._get_lines_from_file"
+      },
+      {
+        "cc": 3,
+        "file": "views/debug.py",
+        "lineno": 491,
+        "name": "ExceptionReporter._get_explicit_or_implicit_cause"
+      },
+      {
+        "cc": 7,
+        "file": "views/debug.py",
+        "lineno": 497,
+        "name": "ExceptionReporter.get_traceback_frames"
+      },
+      {
+        "cc": 10,
+        "file": "views/debug.py",
+        "lineno": 530,
+        "name": "ExceptionReporter.get_exception_traceback_frames"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/cache.py",
+        "lineno": 10,
+        "name": "cache_page"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/cache.py",
+        "lineno": 31,
+        "name": "_check_request"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/cache.py",
+        "lineno": 40,
+        "name": "cache_control"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/cache.py",
+        "lineno": 63,
+        "name": "never_cache"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/clickjacking.py",
+        "lineno": 6,
+        "name": "xframe_options_deny"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/clickjacking.py",
+        "lineno": 36,
+        "name": "xframe_options_sameorigin"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/clickjacking.py",
+        "lineno": 66,
+        "name": "xframe_options_exempt"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/common.py",
+        "lineno": 6,
+        "name": "no_append_slash"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/csrf.py",
+        "lineno": 51,
+        "name": "csrf_exempt"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/csrf.py",
+        "lineno": 17,
+        "name": "_EnsureCsrfToken"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/csrf.py",
+        "lineno": 19,
+        "name": "_EnsureCsrfToken._reject"
+      },
+      {
+        "cc": 2,
+        "file": "views/decorators/csrf.py",
+        "lineno": 32,
+        "name": "_EnsureCsrfCookie"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/csrf.py",
+        "lineno": 33,
+        "name": "_EnsureCsrfCookie._reject"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/csrf.py",
+        "lineno": 36,
+        "name": "_EnsureCsrfCookie.process_view"
+      },
+      {
+        "cc": 3,
+        "file": "views/decorators/debug.py",
+        "lineno": 11,
+        "name": "sensitive_variables"
+      },
+      {
+        "cc": 3,
+        "file": "views/decorators/debug.py",
+        "lineno": 82,
+        "name": "sensitive_post_parameters"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/http.py",
+        "lineno": 21,
+        "name": "require_http_methods"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/http.py",
+        "lineno": 83,
+        "name": "condition"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/http.py",
+        "lineno": 164,
+        "name": "etag"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/http.py",
+        "lineno": 168,
+        "name": "last_modified"
+      },
+      {
+        "cc": 1,
+        "file": "views/decorators/vary.py",
+        "lineno": 8,
+        "name": "vary_on_headers"
+      },
+      {
+        "cc": 6,
+        "file": "views/defaults.py",
+        "lineno": 35,
+        "name": "page_not_found"
+      },
+      {
+        "cc": 3,
+        "file": "views/defaults.py",
+        "lineno": 83,
+        "name": "server_error"
+      },
+      {
+        "cc": 3,
+        "file": "views/defaults.py",
+        "lineno": 103,
+        "name": "bad_request"
+      },
+      {
+        "cc": 3,
+        "file": "views/defaults.py",
+        "lineno": 125,
+        "name": "permission_denied"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/__init__.py",
+        "lineno": 36,
+        "name": "GenericViewError"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/base.py",
+        "lineno": 21,
+        "name": "ContextMixin"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 29,
+        "name": "ContextMixin.get_context_data"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/base.py",
+        "lineno": 36,
+        "name": "View"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 53,
+        "name": "View.__init__"
+      },
+      {
+        "cc": 7,
+        "file": "views/generic/base.py",
+        "lineno": 64,
+        "name": "View.view_is_async"
+      },
+      {
+        "cc": 5,
+        "file": "views/generic/base.py",
+        "lineno": 81,
+        "name": "View.as_view"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/base.py",
+        "lineno": 125,
+        "name": "View.setup"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 133,
+        "name": "View.dispatch"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 145,
+        "name": "View.http_method_not_allowed"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 163,
+        "name": "View.options"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/base.py",
+        "lineno": 178,
+        "name": "View._allowed_methods"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/base.py",
+        "lineno": 182,
+        "name": "TemplateResponseMixin"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 190,
+        "name": "TemplateResponseMixin.render_to_response"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 206,
+        "name": "TemplateResponseMixin.get_template_names"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 220,
+        "name": "TemplateView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 225,
+        "name": "TemplateView.get"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 230,
+        "name": "RedirectView"
+      },
+      {
+        "cc": 5,
+        "file": "views/generic/base.py",
+        "lineno": 238,
+        "name": "RedirectView.get_redirect_url"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/base.py",
+        "lineno": 256,
+        "name": "RedirectView.get"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 269,
+        "name": "RedirectView.head"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 272,
+        "name": "RedirectView.post"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 275,
+        "name": "RedirectView.options"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 278,
+        "name": "RedirectView.delete"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 281,
+        "name": "RedirectView.put"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 284,
+        "name": "RedirectView.patch"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 679,
+        "name": "_date_from_string"
+      },
+      {
+        "cc": 11,
+        "file": "views/generic/dates.py",
+        "lineno": 700,
+        "name": "_get_next_prev"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 790,
+        "name": "timezone_today"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 21,
+        "name": "YearMixin"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 27,
+        "name": "YearMixin.get_year_format"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 34,
+        "name": "YearMixin.get_year"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 47,
+        "name": "YearMixin.get_next_year"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 51,
+        "name": "YearMixin.get_previous_year"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 55,
+        "name": "YearMixin._get_next_year"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 66,
+        "name": "YearMixin._get_current_year"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 71,
+        "name": "MonthMixin"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 77,
+        "name": "MonthMixin.get_month_format"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 84,
+        "name": "MonthMixin.get_month"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 97,
+        "name": "MonthMixin.get_next_month"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 101,
+        "name": "MonthMixin.get_previous_month"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 105,
+        "name": "MonthMixin._get_next_month"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 119,
+        "name": "MonthMixin._get_current_month"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 124,
+        "name": "DayMixin"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 130,
+        "name": "DayMixin.get_day_format"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 137,
+        "name": "DayMixin.get_day"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 150,
+        "name": "DayMixin.get_next_day"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 154,
+        "name": "DayMixin.get_previous_day"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 158,
+        "name": "DayMixin._get_next_day"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 166,
+        "name": "DayMixin._get_current_day"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 171,
+        "name": "WeekMixin"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 177,
+        "name": "WeekMixin.get_week_format"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 184,
+        "name": "WeekMixin.get_week"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 197,
+        "name": "WeekMixin.get_next_week"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 201,
+        "name": "WeekMixin.get_previous_week"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 205,
+        "name": "WeekMixin._get_next_week"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 216,
+        "name": "WeekMixin._get_current_week"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 220,
+        "name": "WeekMixin._get_weekday"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 235,
+        "name": "DateMixin"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 241,
+        "name": "DateMixin.get_date_field"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 249,
+        "name": "DateMixin.get_allow_future"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 260,
+        "name": "DateMixin.uses_datetime_field"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 269,
+        "name": "DateMixin._make_date_lookup_arg"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 282,
+        "name": "DateMixin._make_single_date_lookup"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 302,
+        "name": "BaseDateListView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 308,
+        "name": "BaseDateListView.get"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 315,
+        "name": "BaseDateListView.get_dated_items"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 321,
+        "name": "BaseDateListView.get_ordering"
+      },
+      {
+        "cc": 6,
+        "file": "views/generic/dates.py",
+        "lineno": 328,
+        "name": "BaseDateListView.get_dated_queryset"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 357,
+        "name": "BaseDateListView.get_date_list_period"
+      },
+      {
+        "cc": 6,
+        "file": "views/generic/dates.py",
+        "lineno": 364,
+        "name": "BaseDateListView.get_date_list"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 389,
+        "name": "BaseArchiveIndexView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 396,
+        "name": "BaseArchiveIndexView.get_dated_items"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 407,
+        "name": "ArchiveIndexView"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 413,
+        "name": "BaseYearArchiveView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 419,
+        "name": "BaseYearArchiveView.get_dated_items"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 451,
+        "name": "BaseYearArchiveView.get_make_object_list"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 459,
+        "name": "YearArchiveView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 465,
+        "name": "BaseMonthArchiveView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 470,
+        "name": "BaseMonthArchiveView.get_dated_items"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 501,
+        "name": "MonthArchiveView"
+      },
+      {
+        "cc": 5,
+        "file": "views/generic/dates.py",
+        "lineno": 507,
+        "name": "BaseWeekArchiveView"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 510,
+        "name": "BaseWeekArchiveView.get_dated_items"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 559,
+        "name": "WeekArchiveView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 565,
+        "name": "BaseDayArchiveView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 568,
+        "name": "BaseDayArchiveView.get_dated_items"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 585,
+        "name": "BaseDayArchiveView._get_dated_items"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 606,
+        "name": "DayArchiveView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 612,
+        "name": "BaseTodayArchiveView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 615,
+        "name": "BaseTodayArchiveView.get_dated_items"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 620,
+        "name": "TodayArchiveView"
+      },
+      {
+        "cc": 5,
+        "file": "views/generic/dates.py",
+        "lineno": 626,
+        "name": "BaseDateDetailView"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 632,
+        "name": "BaseDateDetailView.get_object"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 670,
+        "name": "DateDetailView"
+      },
+      {
+        "cc": 5,
+        "file": "views/generic/detail.py",
+        "lineno": 8,
+        "name": "SingleObjectMixin"
+      },
+      {
+        "cc": 9,
+        "file": "views/generic/detail.py",
+        "lineno": 21,
+        "name": "SingleObjectMixin.get_object"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/detail.py",
+        "lineno": 61,
+        "name": "SingleObjectMixin.get_queryset"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/detail.py",
+        "lineno": 79,
+        "name": "SingleObjectMixin.get_slug_field"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/detail.py",
+        "lineno": 83,
+        "name": "SingleObjectMixin.get_context_object_name"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/detail.py",
+        "lineno": 92,
+        "name": "SingleObjectMixin.get_context_data"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/detail.py",
+        "lineno": 104,
+        "name": "BaseDetailView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/detail.py",
+        "lineno": 107,
+        "name": "BaseDetailView.get"
+      },
+      {
+        "cc": 10,
+        "file": "views/generic/detail.py",
+        "lineno": 113,
+        "name": "SingleObjectTemplateResponseMixin"
+      },
+      {
+        "cc": 9,
+        "file": "views/generic/detail.py",
+        "lineno": 117,
+        "name": "SingleObjectTemplateResponseMixin.get_template_names"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/detail.py",
+        "lineno": 174,
+        "name": "DetailView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 13,
+        "name": "FormMixin"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 21,
+        "name": "FormMixin.get_initial"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 25,
+        "name": "FormMixin.get_prefix"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 29,
+        "name": "FormMixin.get_form_class"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 33,
+        "name": "FormMixin.get_form"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 39,
+        "name": "FormMixin.get_form_kwargs"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 55,
+        "name": "FormMixin.get_success_url"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 61,
+        "name": "FormMixin.form_valid"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 65,
+        "name": "FormMixin.form_invalid"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 69,
+        "name": "FormMixin.get_context_data"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/edit.py",
+        "lineno": 76,
+        "name": "ModelFormMixin"
+      },
+      {
+        "cc": 7,
+        "file": "views/generic/edit.py",
+        "lineno": 81,
+        "name": "ModelFormMixin.get_form_class"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 110,
+        "name": "ModelFormMixin.get_form_kwargs"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/edit.py",
+        "lineno": 117,
+        "name": "ModelFormMixin.get_success_url"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 131,
+        "name": "ModelFormMixin.form_valid"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 137,
+        "name": "ProcessFormView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 140,
+        "name": "ProcessFormView.get"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 144,
+        "name": "ProcessFormView.post"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 157,
+        "name": "ProcessFormView.put"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 161,
+        "name": "BaseFormView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 165,
+        "name": "FormView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 169,
+        "name": "BaseCreateView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 176,
+        "name": "BaseCreateView.get"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 180,
+        "name": "BaseCreateView.post"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 185,
+        "name": "CreateView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 193,
+        "name": "BaseUpdateView"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 200,
+        "name": "BaseUpdateView.get"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 204,
+        "name": "BaseUpdateView.post"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 209,
+        "name": "UpdateView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 215,
+        "name": "DeletionMixin"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 220,
+        "name": "DeletionMixin.delete"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 231,
+        "name": "DeletionMixin.post"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 234,
+        "name": "DeletionMixin.get_success_url"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/edit.py",
+        "lineno": 241,
+        "name": "BaseDeleteView"
+      },
+      {
+        "cc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 250,
+        "name": "BaseDeleteView.post"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 262,
+        "name": "BaseDeleteView.form_valid"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 268,
+        "name": "DeleteView"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/list.py",
+        "lineno": 9,
+        "name": "MultipleObjectMixin"
+      },
+      {
+        "cc": 6,
+        "file": "views/generic/list.py",
+        "lineno": 22,
+        "name": "MultipleObjectMixin.get_queryset"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/list.py",
+        "lineno": 49,
+        "name": "MultipleObjectMixin.get_ordering"
+      },
+      {
+        "cc": 6,
+        "file": "views/generic/list.py",
+        "lineno": 53,
+        "name": "MultipleObjectMixin.paginate_queryset"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/list.py",
+        "lineno": 81,
+        "name": "MultipleObjectMixin.get_paginate_by"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/list.py",
+        "lineno": 87,
+        "name": "MultipleObjectMixin.get_paginator"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/list.py",
+        "lineno": 99,
+        "name": "MultipleObjectMixin.get_paginate_orphans"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/list.py",
+        "lineno": 106,
+        "name": "MultipleObjectMixin.get_allow_empty"
+      },
+      {
+        "cc": 3,
+        "file": "views/generic/list.py",
+        "lineno": 113,
+        "name": "MultipleObjectMixin.get_context_object_name"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/list.py",
+        "lineno": 122,
+        "name": "MultipleObjectMixin.get_context_data"
+      },
+      {
+        "cc": 6,
+        "file": "views/generic/list.py",
+        "lineno": 150,
+        "name": "BaseListView"
+      },
+      {
+        "cc": 5,
+        "file": "views/generic/list.py",
+        "lineno": 153,
+        "name": "BaseListView.get"
+      },
+      {
+        "cc": 5,
+        "file": "views/generic/list.py",
+        "lineno": 178,
+        "name": "MultipleObjectTemplateResponseMixin"
+      },
+      {
+        "cc": 4,
+        "file": "views/generic/list.py",
+        "lineno": 183,
+        "name": "MultipleObjectTemplateResponseMixin.get_template_names"
+      },
+      {
+        "cc": 1,
+        "file": "views/generic/list.py",
+        "lineno": 216,
+        "name": "ListView"
+      },
+      {
+        "cc": 1,
+        "file": "views/i18n.py",
+        "lineno": 20,
+        "name": "builtin_template_path"
+      },
+      {
+        "cc": 11,
+        "file": "views/i18n.py",
+        "lineno": 30,
+        "name": "set_language"
+      },
+      {
+        "cc": 2,
+        "file": "views/i18n.py",
+        "lineno": 77,
+        "name": "get_formats"
+      },
+      {
+        "cc": 5,
+        "file": "views/i18n.py",
+        "lineno": 98,
+        "name": "JavaScriptCatalog"
+      },
+      {
+        "cc": 3,
+        "file": "views/i18n.py",
+        "lineno": 114,
+        "name": "JavaScriptCatalog.get"
+      },
+      {
+        "cc": 8,
+        "file": "views/i18n.py",
+        "lineno": 126,
+        "name": "JavaScriptCatalog.get_paths"
+      },
+      {
+        "cc": 3,
+        "file": "views/i18n.py",
+        "lineno": 143,
+        "name": "JavaScriptCatalog._num_plurals"
+      },
+      {
+        "cc": 4,
+        "file": "views/i18n.py",
+        "lineno": 154,
+        "name": "JavaScriptCatalog._plural_string"
+      },
+      {
+        "cc": 4,
+        "file": "views/i18n.py",
+        "lineno": 165,
+        "name": "JavaScriptCatalog.get_plural"
+      },
+      {
+        "cc": 10,
+        "file": "views/i18n.py",
+        "lineno": 178,
+        "name": "JavaScriptCatalog.get_catalog"
+      },
+      {
+        "cc": 1,
+        "file": "views/i18n.py",
+        "lineno": 205,
+        "name": "JavaScriptCatalog.get_context_data"
+      },
+      {
+        "cc": 2,
+        "file": "views/i18n.py",
+        "lineno": 212,
+        "name": "JavaScriptCatalog.render_to_response"
+      },
+      {
+        "cc": 2,
+        "file": "views/i18n.py",
+        "lineno": 232,
+        "name": "JSONCatalog"
+      },
+      {
+        "cc": 1,
+        "file": "views/i18n.py",
+        "lineno": 250,
+        "name": "JSONCatalog.render_to_response"
+      },
+      {
+        "cc": 1,
+        "file": "views/static.py",
+        "lineno": 18,
+        "name": "builtin_template_path"
+      },
+      {
+        "cc": 7,
+        "file": "views/static.py",
+        "lineno": 28,
+        "name": "serve"
+      },
+      {
+        "cc": 6,
+        "file": "views/static.py",
+        "lineno": 71,
+        "name": "directory_index"
+      },
+      {
+        "cc": 4,
+        "file": "views/static.py",
+        "lineno": 103,
+        "name": "was_modified_since"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 48,
+    "mean": 2.7,
+    "median": 1,
+    "n": 261,
+    "pct_over_threshold": 3.4,
+    "records": [
+      {
+        "cogc": 0,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "clear_url_caches"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "get_script_prefix"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "get_urlconf"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "clear_script_prefix"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "is_valid_path"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "resolve"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "set_script_prefix"
+      },
+      {
+        "cogc": 2,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "set_urlconf"
+      },
+      {
+        "cogc": 3,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "translate_url"
+      },
+      {
+        "cogc": 23,
+        "file": "urls/base.py",
+        "lineno": 0,
+        "name": "reverse"
+      },
+      {
+        "cogc": 5,
+        "file": "urls/conf.py",
+        "lineno": 0,
+        "name": "_path"
+      },
+      {
+        "cogc": 16,
+        "file": "urls/conf.py",
+        "lineno": 0,
+        "name": "include"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "IntConverter::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "IntConverter::to_url"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "StringConverter::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "StringConverter::to_url"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "UUIDConverter::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "UUIDConverter::to_url"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "get_converter"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "get_converters"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/converters.py",
+        "lineno": 0,
+        "name": "register_converter"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocalePrefixPattern::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocalePrefixPattern::__str__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocalePrefixPattern::check"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocalePrefixPattern::describe"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocalePrefixPattern::regex"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocaleRegexDescriptor::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RegexPattern::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RegexPattern::__str__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "ResolverMatch::__getitem__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "ResolverMatch::__reduce_ex__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RoutePattern::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RoutePattern::__str__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RoutePattern::_compile"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLPattern::__repr__"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLPattern::check"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::reverse"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "_get_cached_resolver"
+      },
+      {
+        "cogc": 0,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "get_ns_resolver"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "CheckURLMixin::describe"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocalePrefixPattern::match"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RegexPattern::_compile"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RegexPattern::check"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "ResolverMatch::__repr__"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLPattern::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLPattern::resolve"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::_extend_tried"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::_is_callback"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::_join_route"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::app_dict"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::check"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::namespace_dict"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::resolve_error_handler"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::reverse_dict"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::url_patterns"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::urlconf_module"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "get_resolver"
+      },
+      {
+        "cogc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RegexPattern::_check_include_trailing_dollar"
+      },
+      {
+        "cogc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RoutePattern::check"
+      },
+      {
+        "cogc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLPattern::_check_callback"
+      },
+      {
+        "cogc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLPattern::_check_pattern_name"
+      },
+      {
+        "cogc": 2,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::__repr__"
+      },
+      {
+        "cogc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "CheckURLMixin::_check_pattern_startswith_slash"
+      },
+      {
+        "cogc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocalePrefixPattern::language_prefix"
+      },
+      {
+        "cogc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "LocaleRegexDescriptor::__get__"
+      },
+      {
+        "cogc": 3,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLPattern::lookup_str"
+      },
+      {
+        "cogc": 5,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RegexPattern::match"
+      },
+      {
+        "cogc": 5,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "ResolverMatch::__init__"
+      },
+      {
+        "cogc": 5,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::_check_custom_error_handlers"
+      },
+      {
+        "cogc": 6,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RoutePattern::match"
+      },
+      {
+        "cogc": 8,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "RoutePattern::_check_pattern_unmatched_angle_brackets"
+      },
+      {
+        "cogc": 11,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "_route_to_regex"
+      },
+      {
+        "cogc": 18,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::_populate"
+      },
+      {
+        "cogc": 20,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::resolve"
+      },
+      {
+        "cogc": 48,
+        "file": "urls/resolvers.py",
+        "lineno": 0,
+        "name": "URLResolver::_reverse_with_prefix"
+      },
+      {
+        "cogc": 1,
+        "file": "urls/utils.py",
+        "lineno": 0,
+        "name": "get_mod_func"
+      },
+      {
+        "cogc": 12,
+        "file": "urls/utils.py",
+        "lineno": 0,
+        "name": "get_callable"
+      },
+      {
+        "cogc": 0,
+        "file": "views/csrf.py",
+        "lineno": 0,
+        "name": "builtin_template_path"
+      },
+      {
+        "cogc": 3,
+        "file": "views/csrf.py",
+        "lineno": 0,
+        "name": "csrf_failure"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "CallableSettingWrapper::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "CallableSettingWrapper::__repr__"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::_get_explicit_or_implicit_cause"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::_get_raw_insecure_uri"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::get_traceback_html"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::get_traceback_text"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::html_template_path"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::text_template_path"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::is_active"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "builtin_template_path"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "default_urlconf"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "get_default_exception_reporter_filter"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "get_exception_reporter_class"
+      },
+      {
+        "cogc": 0,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "get_exception_reporter_filter"
+      },
+      {
+        "cogc": 1,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::get_safe_cookies"
+      },
+      {
+        "cogc": 1,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::get_safe_request_meta"
+      },
+      {
+        "cogc": 1,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "technical_500_response"
+      },
+      {
+        "cogc": 2,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::cleanse_special_types"
+      },
+      {
+        "cogc": 3,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::get_safe_settings"
+      },
+      {
+        "cogc": 3,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "get_caller"
+      },
+      {
+        "cogc": 7,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::cleanse_setting"
+      },
+      {
+        "cogc": 7,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::get_cleansed_multivaluedict"
+      },
+      {
+        "cogc": 8,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::_get_lines_from_file"
+      },
+      {
+        "cogc": 8,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::_get_source"
+      },
+      {
+        "cogc": 8,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::get_traceback_frames"
+      },
+      {
+        "cogc": 9,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "technical_404_response"
+      },
+      {
+        "cogc": 12,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::get_post_parameters"
+      },
+      {
+        "cogc": 13,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::get_exception_traceback_frames"
+      },
+      {
+        "cogc": 23,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "SafeExceptionReporterFilter::get_traceback_frame_variables"
+      },
+      {
+        "cogc": 26,
+        "file": "views/debug.py",
+        "lineno": 0,
+        "name": "ExceptionReporter::get_traceback_data"
+      },
+      {
+        "cogc": 0,
+        "file": "views/decorators/cache.py",
+        "lineno": 0,
+        "name": "cache_page"
+      },
+      {
+        "cogc": 1,
+        "file": "views/decorators/cache.py",
+        "lineno": 0,
+        "name": "_check_request"
+      },
+      {
+        "cogc": 1,
+        "file": "views/decorators/cache.py",
+        "lineno": 0,
+        "name": "cache_control"
+      },
+      {
+        "cogc": 1,
+        "file": "views/decorators/cache.py",
+        "lineno": 0,
+        "name": "never_cache"
+      },
+      {
+        "cogc": 1,
+        "file": "views/decorators/clickjacking.py",
+        "lineno": 0,
+        "name": "xframe_options_exempt"
+      },
+      {
+        "cogc": 4,
+        "file": "views/decorators/clickjacking.py",
+        "lineno": 0,
+        "name": "xframe_options_deny"
+      },
+      {
+        "cogc": 4,
+        "file": "views/decorators/clickjacking.py",
+        "lineno": 0,
+        "name": "xframe_options_sameorigin"
+      },
+      {
+        "cogc": 1,
+        "file": "views/decorators/common.py",
+        "lineno": 0,
+        "name": "no_append_slash"
+      },
+      {
+        "cogc": 0,
+        "file": "views/decorators/csrf.py",
+        "lineno": 0,
+        "name": "_EnsureCsrfCookie::_reject"
+      },
+      {
+        "cogc": 0,
+        "file": "views/decorators/csrf.py",
+        "lineno": 0,
+        "name": "_EnsureCsrfCookie::process_view"
+      },
+      {
+        "cogc": 0,
+        "file": "views/decorators/csrf.py",
+        "lineno": 0,
+        "name": "_EnsureCsrfToken::_reject"
+      },
+      {
+        "cogc": 1,
+        "file": "views/decorators/csrf.py",
+        "lineno": 0,
+        "name": "csrf_exempt"
+      },
+      {
+        "cogc": 13,
+        "file": "views/decorators/debug.py",
+        "lineno": 0,
+        "name": "sensitive_post_parameters"
+      },
+      {
+        "cogc": 14,
+        "file": "views/decorators/debug.py",
+        "lineno": 0,
+        "name": "sensitive_variables"
+      },
+      {
+        "cogc": 0,
+        "file": "views/decorators/http.py",
+        "lineno": 0,
+        "name": "etag"
+      },
+      {
+        "cogc": 0,
+        "file": "views/decorators/http.py",
+        "lineno": 0,
+        "name": "last_modified"
+      },
+      {
+        "cogc": 6,
+        "file": "views/decorators/http.py",
+        "lineno": 0,
+        "name": "require_http_methods"
+      },
+      {
+        "cogc": 36,
+        "file": "views/decorators/http.py",
+        "lineno": 0,
+        "name": "condition"
+      },
+      {
+        "cogc": 2,
+        "file": "views/decorators/vary.py",
+        "lineno": 0,
+        "name": "vary_on_headers"
+      },
+      {
+        "cogc": 3,
+        "file": "views/defaults.py",
+        "lineno": 0,
+        "name": "bad_request"
+      },
+      {
+        "cogc": 3,
+        "file": "views/defaults.py",
+        "lineno": 0,
+        "name": "permission_denied"
+      },
+      {
+        "cogc": 3,
+        "file": "views/defaults.py",
+        "lineno": 0,
+        "name": "server_error"
+      },
+      {
+        "cogc": 6,
+        "file": "views/defaults.py",
+        "lineno": 0,
+        "name": "page_not_found"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::delete"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::head"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::options"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::patch"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::post"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::put"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "TemplateResponseMixin::render_to_response"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "TemplateView::get"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::_allowed_methods"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "ContextMixin::get_context_data"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "TemplateResponseMixin::get_template_names"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::dispatch"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::http_method_not_allowed"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::options"
+      },
+      {
+        "cogc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::setup"
+      },
+      {
+        "cogc": 2,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::view_is_async"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::get"
+      },
+      {
+        "cogc": 4,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "RedirectView::get_redirect_url"
+      },
+      {
+        "cogc": 8,
+        "file": "views/generic/base.py",
+        "lineno": 0,
+        "name": "View::as_view"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDateListView::get"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDateListView::get_date_list_period"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDateListView::get_dated_items"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDateListView::get_ordering"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDayArchiveView::_get_dated_items"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDayArchiveView::get_dated_items"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseMonthArchiveView::get_dated_items"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseTodayArchiveView::get_dated_items"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseYearArchiveView::get_make_object_list"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DateMixin::get_allow_future"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DayMixin::_get_current_day"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DayMixin::_get_next_day"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DayMixin::get_day_format"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DayMixin::get_next_day"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DayMixin::get_previous_day"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "MonthMixin::_get_current_month"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "MonthMixin::get_month_format"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "MonthMixin::get_next_month"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "MonthMixin::get_previous_month"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "WeekMixin::_get_current_week"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "WeekMixin::get_next_week"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "WeekMixin::get_previous_week"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "WeekMixin::get_week_format"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "YearMixin::_get_current_year"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "YearMixin::get_next_year"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "YearMixin::get_previous_year"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "YearMixin::get_year_format"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseArchiveIndexView::get_dated_items"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseYearArchiveView::get_dated_items"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DateMixin::_make_single_date_lookup"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DateMixin::get_date_field"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DateMixin::uses_datetime_field"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "WeekMixin::_get_next_week"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "YearMixin::_get_next_year"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "_date_from_string"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "timezone_today"
+      },
+      {
+        "cogc": 2,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "WeekMixin::_get_weekday"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDateDetailView::get_object"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseWeekArchiveView::get_dated_items"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DateMixin::_make_date_lookup_arg"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "MonthMixin::_get_next_month"
+      },
+      {
+        "cogc": 4,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDateListView::get_date_list"
+      },
+      {
+        "cogc": 6,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "DayMixin::get_day"
+      },
+      {
+        "cogc": 6,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "MonthMixin::get_month"
+      },
+      {
+        "cogc": 6,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "WeekMixin::get_week"
+      },
+      {
+        "cogc": 6,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "YearMixin::get_year"
+      },
+      {
+        "cogc": 8,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "BaseDateListView::get_dated_queryset"
+      },
+      {
+        "cogc": 14,
+        "file": "views/generic/dates.py",
+        "lineno": 0,
+        "name": "_get_next_prev"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/detail.py",
+        "lineno": 0,
+        "name": "BaseDetailView::get"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/detail.py",
+        "lineno": 0,
+        "name": "SingleObjectMixin::get_slug_field"
+      },
+      {
+        "cogc": 2,
+        "file": "views/generic/detail.py",
+        "lineno": 0,
+        "name": "SingleObjectMixin::get_context_object_name"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/detail.py",
+        "lineno": 0,
+        "name": "SingleObjectMixin::get_context_data"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/detail.py",
+        "lineno": 0,
+        "name": "SingleObjectMixin::get_queryset"
+      },
+      {
+        "cogc": 8,
+        "file": "views/generic/detail.py",
+        "lineno": 0,
+        "name": "SingleObjectMixin::get_object"
+      },
+      {
+        "cogc": 13,
+        "file": "views/generic/detail.py",
+        "lineno": 0,
+        "name": "SingleObjectTemplateResponseMixin::get_template_names"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "BaseCreateView::get"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "BaseCreateView::post"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "BaseDeleteView::form_valid"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "BaseUpdateView::get"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "BaseUpdateView::post"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "DeletionMixin::delete"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "DeletionMixin::post"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::form_invalid"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::form_valid"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::get_form_class"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::get_initial"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::get_prefix"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "ModelFormMixin::form_valid"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "ProcessFormView::get"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "ProcessFormView::put"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "BaseDeleteView::post"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "DeletionMixin::get_success_url"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::get_context_data"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::get_form"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::get_form_kwargs"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "FormMixin::get_success_url"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "ModelFormMixin::get_form_kwargs"
+      },
+      {
+        "cogc": 1,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "ProcessFormView::post"
+      },
+      {
+        "cogc": 2,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "ModelFormMixin::get_success_url"
+      },
+      {
+        "cogc": 6,
+        "file": "views/generic/edit.py",
+        "lineno": 0,
+        "name": "ModelFormMixin::get_form_class"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_allow_empty"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_ordering"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_paginate_by"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_paginate_orphans"
+      },
+      {
+        "cogc": 0,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_paginator"
+      },
+      {
+        "cogc": 2,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_context_object_name"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_context_data"
+      },
+      {
+        "cogc": 3,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectTemplateResponseMixin::get_template_names"
+      },
+      {
+        "cogc": 5,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::paginate_queryset"
+      },
+      {
+        "cogc": 6,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "BaseListView::get"
+      },
+      {
+        "cogc": 7,
+        "file": "views/generic/list.py",
+        "lineno": 0,
+        "name": "MultipleObjectMixin::get_queryset"
+      },
+      {
+        "cogc": 0,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JSONCatalog::render_to_response"
+      },
+      {
+        "cogc": 0,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::get_context_data"
+      },
+      {
+        "cogc": 0,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "builtin_template_path"
+      },
+      {
+        "cogc": 0,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "get_formats"
+      },
+      {
+        "cogc": 1,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::get_paths"
+      },
+      {
+        "cogc": 1,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::get_plural"
+      },
+      {
+        "cogc": 1,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::render_to_response"
+      },
+      {
+        "cogc": 2,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::_num_plurals"
+      },
+      {
+        "cogc": 2,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::get"
+      },
+      {
+        "cogc": 6,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::_plural_string"
+      },
+      {
+        "cogc": 14,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "JavaScriptCatalog::get_catalog"
+      },
+      {
+        "cogc": 17,
+        "file": "views/i18n.py",
+        "lineno": 0,
+        "name": "set_language"
+      },
+      {
+        "cogc": 0,
+        "file": "views/static.py",
+        "lineno": 0,
+        "name": "builtin_template_path"
+      },
+      {
+        "cogc": 5,
+        "file": "views/static.py",
+        "lineno": 0,
+        "name": "was_modified_since"
+      },
+      {
+        "cogc": 7,
+        "file": "views/static.py",
+        "lineno": 0,
+        "name": "directory_index"
+      },
+      {
+        "cogc": 7,
+        "file": "views/static.py",
+        "lineno": 0,
+        "name": "serve"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "Django mod. (H)",
+  "mi": {
+    "files": [
+      {
+        "file": "urls/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "urls/base.py",
+        "mi": 63.15
+      },
+      {
+        "file": "urls/conf.py",
+        "mi": 62.84
+      },
+      {
+        "file": "urls/converters.py",
+        "mi": 100.0
+      },
+      {
+        "file": "urls/exceptions.py",
+        "mi": 100.0
+      },
+      {
+        "file": "urls/resolvers.py",
+        "mi": 13.27
+      },
+      {
+        "file": "urls/utils.py",
+        "mi": 72.73
+      },
+      {
+        "file": "views/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views/csrf.py",
+        "mi": 78.85
+      },
+      {
+        "file": "views/debug.py",
+        "mi": 27.57
+      },
+      {
+        "file": "views/decorators/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views/decorators/cache.py",
+        "mi": 89.01
+      },
+      {
+        "file": "views/decorators/clickjacking.py",
+        "mi": 82.17
+      },
+      {
+        "file": "views/decorators/common.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views/decorators/csrf.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views/decorators/debug.py",
+        "mi": 75.77
+      },
+      {
+        "file": "views/decorators/gzip.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views/decorators/http.py",
+        "mi": 71.44
+      },
+      {
+        "file": "views/decorators/vary.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views/defaults.py",
+        "mi": 73.76
+      },
+      {
+        "file": "views/generic/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "views/generic/base.py",
+        "mi": 52.64
+      },
+      {
+        "file": "views/generic/dates.py",
+        "mi": 33.5
+      },
+      {
+        "file": "views/generic/detail.py",
+        "mi": 63.87
+      },
+      {
+        "file": "views/generic/edit.py",
+        "mi": 56.86
+      },
+      {
+        "file": "views/generic/list.py",
+        "mi": 56.72
+      },
+      {
+        "file": "views/i18n.py",
+        "mi": 57.37
+      },
+      {
+        "file": "views/static.py",
+        "mi": 71.66
+      }
+    ],
+    "mean": 75.1,
+    "median": 74.8,
+    "min": 13.3,
+    "n": 28,
+    "pct_below_threshold": 35.7,
+    "threshold": 65
+  },
+  "subject": "django"
+}

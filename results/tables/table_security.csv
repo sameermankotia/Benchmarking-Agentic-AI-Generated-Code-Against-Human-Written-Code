@@ -1,0 +1,16 @@
+metric,Flask (H),Django mod. (H)
+Total findings (>= medium conf.),11,1
+Findings / 100 LOC,0.26,0.03
+High severity,1,0
+Fisher's exact p (High vs. human baseline),ref.,ref.
+Medium severity,3,0
+Fisher's exact p (Medium vs. human baseline),ref.,ref.
+Low severity,7,1
+Fisher's exact p (Low vs. human baseline),ref.,ref.
+  CWE-259,1,0
+  CWE-327,1,0
+  CWE-617,5,0
+  CWE-703,1,0
+  CWE-78,2,0
+  CWE-79,1,0
+  CWE-502,0,1

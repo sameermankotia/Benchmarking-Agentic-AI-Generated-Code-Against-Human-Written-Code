@@ -1,0 +1,11 @@
+
+=== aggregate ===
+[aggregate] wrote results/tables/table_repo_stats.csv
+[aggregate] wrote results/tables/table_correctness_flask.csv
+[aggregate] wrote results/tables/table_correctness_django.csv
+[aggregate] wrote results/tables/table_complexity.csv
+[aggregate] wrote results/tables/table_maintainability.csv
+[aggregate] wrote results/tables/table_security.csv
+[aggregate] wrote results/tables/table_cwe_flask.csv
+[aggregate] wrote results/tables/table_cwe_django.csv
+[aggregate] wrote results/tables/summary.csv

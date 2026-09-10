@@ -1,0 +1,13 @@
+metric,Flask (H),Django mod. (H)
+Mean CC,2.8,2.8
+Median CC,2.0,2.0
+Max CC (single function),23,24
+Functions with CC > 10 (%),2.4,3.0
+Mann-Whitney U p (CC vs. human baseline),ref.,ref.
+Rank-biserial r (CC),ref.,ref.
+Mean CogC,2.1,2.7
+Median CogC,0.5,1
+Max CogC (single function),28,48
+Functions with CogC > 15 (%),1.2,3.4
+Mann-Whitney U p (CogC vs. human baseline),ref.,ref.
+Rank-biserial r (CogC),ref.,ref.

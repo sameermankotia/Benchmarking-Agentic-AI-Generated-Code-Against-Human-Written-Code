@@ -1,0 +1,29 @@
+{
+  "by_category": {
+    "convention": 144,
+    "error": 27,
+    "refactor": 48,
+    "warning": 58
+  },
+  "label": "Flask (H)",
+  "per_100_loc": 6.53,
+  "subject": "flask",
+  "top_symbols": {
+    "abstract-method": 7,
+    "broad-exception-caught": 6,
+    "import-outside-toplevel": 22,
+    "invalid-name": 33,
+    "line-too-long": 8,
+    "missing-class-docstring": 8,
+    "missing-function-docstring": 8,
+    "missing-module-docstring": 23,
+    "no-else-return": 8,
+    "protected-access": 10,
+    "reimported": 7,
+    "relative-beyond-top-level": 23,
+    "too-many-arguments": 9,
+    "unused-argument": 8,
+    "useless-import-alias": 40
+  },
+  "total_findings": 277
+}

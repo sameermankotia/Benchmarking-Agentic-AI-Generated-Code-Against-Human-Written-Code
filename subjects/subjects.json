@@ -1,5 +1,5 @@
 {
-  "_comment": "Registry of the study subjects. `path` is the source root that the analysis pipeline walks (relative to the repo root). Frozen snapshots are mounted/checked out under subjects/<id>/. Set `available: false` for a subject whose snapshot is not present locally; the pipeline will skip it and note the omission in results.",
+  "_comment": "Registry of the study subjects: two mature human baselines, one human first-draft maturity control, and three agentic counterparts. `path` is the source root the analysis pipeline walks (relative to the repo root). Frozen snapshots are checked out under subjects/<id>/. Set `available: false` for a subject whose snapshot is not present locally; the pipeline skips it and notes the omission. A subject with an empty `oracle` is a structural reference point only (no RQ1 correctness score) -- see the maturity control.",
   "subjects": [
     {
       "id": "flask",
@@ -10,6 +10,17 @@
       "snapshot": "pallets/flask@3.0.3",
       "oracle": "flask",
       "available": true
+    },
+    {
+      "id": "flask_0_1",
+      "label": "Flask 0.1 (H, first draft)",
+      "kind": "human",
+      "pair": "flask",
+      "path": "subjects/flask-0.1/flask",
+      "snapshot": "pallets/flask@0.1",
+      "oracle": "",
+      "available": false,
+      "_note": "Maturity control (paper, Maturity Control subsection). Human-authored first release, matched to the agentic subjects on development maturity. Structural metrics only -- it predates Blueprints and other spec behaviours, so it is not oracle-evaluated. Drop the 0.1 snapshot under subjects/flask-0.1/ and flip available to true."
     },
     {
       "id": "swe_flask",

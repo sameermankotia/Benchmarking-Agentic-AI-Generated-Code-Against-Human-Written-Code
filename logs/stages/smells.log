@@ -1,0 +1,5 @@
+
+=== smells ===
+[smells] flask: 277 findings (6.53/100 LOC)
+[smells] django: 388 findings (11.02/100 LOC)
+[smells] done in 7.8s

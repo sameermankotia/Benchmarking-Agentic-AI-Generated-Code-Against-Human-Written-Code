@@ -1,0 +1,26 @@
+{
+  "by_cwe": {
+    "CWE-502": 1
+  },
+  "by_severity": {
+    "HIGH": 0,
+    "LOW": 1,
+    "MEDIUM": 0
+  },
+  "density_per_100_loc": 0.03,
+  "findings": [
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-502",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/django/django/urls/resolvers.py",
+      "line": 14,
+      "severity": "LOW",
+      "test_id": "B403",
+      "text": "Consider possible security implications associated with PicklingError module."
+    }
+  ],
+  "label": "Django mod. (H)",
+  "min_confidence": "MEDIUM",
+  "subject": "django",
+  "total_findings": 1
+}

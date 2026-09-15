@@ -1,0 +1,14 @@
+{
+  "avg_function_length": 13.9,
+  "classes": 5,
+  "comment_density_pct": 18.9,
+  "docstring_coverage_pct": 80.5,
+  "functions": 36,
+  "kind": "human",
+  "label": "Flask 0.1 (H, first draft)",
+  "language": "Python",
+  "loc": 249,
+  "source_files": 1,
+  "subject": "flask_0_1",
+  "test_files": 0
+}

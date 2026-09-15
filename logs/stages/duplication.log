@@ -1,5 +1,6 @@
 
 === duplication ===
 [duplication] SKIP flask: CPD unavailable or failed: cpd not found on PATH
+[duplication] SKIP flask_0_1: CPD unavailable or failed: cpd not found on PATH
 [duplication] SKIP django: CPD unavailable or failed: cpd not found on PATH
 [duplication] done in 0.0s

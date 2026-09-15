@@ -1,9 +1,10 @@
 Agentic-vs-Human benchmark harness - pipeline run log
-generated (UTC): 2026-09-10T22:46:22Z
-base commit:     5ef0731925589ea23d56fb1cd5e81484748b1b6b  (+ packaging changes staged in this commit)
+generated (UTC): 2026-09-15T23:48:29Z
+base commit:     133abe28e912f477bc9b973847474138a9ec7cc7  (+ packaging changes staged in this commit)
 python:          Python 3.11.15   (matches Dockerfile python:3.11-slim)
 platform:        Darwin 24.2.0 arm64
-subjects:        flask (pallets/flask@3.0.3), django (django/django@5.0.6, urls+views)
+subjects:        flask (pallets/flask@3.0.3), django (django/django@5.0.6, urls+views),
+                 flask_0_1 (pallets/flask@0.1, maturity control, structural only)
                  agentic snapshots are not part of this harness checkout
 
 analysis toolchain == requirements-analysis.txt, verbatim:

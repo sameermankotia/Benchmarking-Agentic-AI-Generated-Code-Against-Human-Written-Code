@@ -1,5 +1,6 @@
 
 === correctness ===
 [correctness] flask: 133/133 (100.0%)
+[correctness] SKIP flask_0_1: structural reference only (no oracle)
 [correctness] django: 97/97 (100.0%)
 [correctness] done in 0.4s

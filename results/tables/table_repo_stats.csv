@@ -1,10 +1,10 @@
-attribute,Flask (H),Django mod. (H)
-Language,Python,Python
-Lines of Code (LOC),4243,3520
-Source Files,24,28
-Functions / Methods,362,296
-Classes,47,69
-Avg. Function Length (lines),18.4,14.0
-Test Files,0,0
-Comment Density (%),12.7,5.8
-Docstring Coverage (%),60.6,53.4
+attribute,Flask (H),"Flask 0.1 (H, first draft)",Django mod. (H)
+Language,Python,Python,Python
+Lines of Code (LOC),4243,249,3520
+Source Files,24,1,28
+Functions / Methods,362,36,296
+Classes,47,5,69
+Avg. Function Length (lines),18.4,13.9,14.0
+Test Files,0,0,0
+Comment Density (%),12.7,18.9,5.8
+Docstring Coverage (%),60.6,80.5,53.4

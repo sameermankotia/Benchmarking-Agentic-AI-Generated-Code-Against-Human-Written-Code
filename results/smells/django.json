@@ -2,11 +2,11 @@
   "by_category": {
     "convention": 195,
     "error": 11,
-    "refactor": 76,
+    "refactor": 75,
     "warning": 106
   },
   "label": "Django mod. (H)",
-  "per_100_loc": 11.02,
+  "per_100_loc": 10.99,
   "subject": "django",
   "top_symbols": {
     "attribute-defined-outside-init": 14,
@@ -25,5 +25,5 @@
     "too-many-locals": 5,
     "unused-argument": 37
   },
-  "total_findings": 388
+  "total_findings": 387
 }

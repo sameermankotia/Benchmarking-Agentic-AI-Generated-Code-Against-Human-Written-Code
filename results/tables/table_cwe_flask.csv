@@ -1,6 +1,6 @@
-Bandit ID,CWE,Flask (H)
-B101,CWE-617,5
-B105,CWE-259,1
-B324,CWE-327,1
-Other,Various,4
-Total,,11
+Bandit ID,CWE,Flask (H),"Flask 0.1 (H, first draft)"
+B101,CWE-617,5,0
+B105,CWE-259,1,0
+B324,CWE-327,1,0
+Other,Various,4,1
+Total,,11,1

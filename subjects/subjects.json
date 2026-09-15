@@ -16,11 +16,12 @@
       "label": "Flask 0.1 (H, first draft)",
       "kind": "human",
       "pair": "flask",
-      "path": "subjects/flask-0.1/flask",
+      "path": "subjects/flask-0.1",
       "snapshot": "pallets/flask@0.1",
       "oracle": "",
-      "available": false,
-      "_note": "Maturity control (paper, Maturity Control subsection). Human-authored first release, matched to the agentic subjects on development maturity. Structural metrics only -- it predates Blueprints and other spec behaviours, so it is not oracle-evaluated. Drop the 0.1 snapshot under subjects/flask-0.1/ and flip available to true."
+      "available": true,
+      "include": ["flask.py"],
+      "_note": "Maturity control (paper §III-B3). Human-authored first release (a single flask.py module, pre-package layout), matched to the agentic subjects on development maturity. Structural metrics only (RQ2-RQ5) -- it predates Blueprints and other spec behaviours, so it is not oracle-evaluated."
     },
     {
       "id": "swe_flask",

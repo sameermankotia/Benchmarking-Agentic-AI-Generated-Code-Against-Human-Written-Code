@@ -1,0 +1,29 @@
+{
+  "by_category": {
+    "convention": 3,
+    "error": 13,
+    "refactor": 10,
+    "warning": 13
+  },
+  "label": "Flask 0.1 (H, first draft)",
+  "per_100_loc": 15.66,
+  "subject": "flask_0_1",
+  "top_symbols": {
+    "broad-exception-caught": 1,
+    "import-error": 1,
+    "import-outside-toplevel": 2,
+    "inconsistent-return-statements": 2,
+    "method-hidden": 1,
+    "no-name-in-module": 10,
+    "pointless-statement": 1,
+    "redefined-outer-name": 3,
+    "too-few-public-methods": 1,
+    "too-many-instance-attributes": 1,
+    "undefined-variable": 1,
+    "unused-import": 7,
+    "unused-variable": 1,
+    "use-dict-literal": 2,
+    "useless-object-inheritance": 3
+  },
+  "total_findings": 39
+}

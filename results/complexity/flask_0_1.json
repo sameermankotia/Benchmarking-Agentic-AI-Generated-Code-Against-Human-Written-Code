@@ -1,0 +1,476 @@
+{
+  "cc": {
+    "max": 6,
+    "mean": 1.7,
+    "median": 1,
+    "n": 39,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 97,
+        "name": "url_for"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 106,
+        "name": "flash"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 116,
+        "name": "get_flashed_messages"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 128,
+        "name": "render_template"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 140,
+        "name": "render_template_string"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 153,
+        "name": "_default_template_ctx_processor"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 165,
+        "name": "_get_package_path"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 40,
+        "name": "Request"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 49,
+        "name": "Request.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 55,
+        "name": "Response"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 67,
+        "name": "_RequestGlobals"
+      },
+      {
+        "cc": 3,
+        "file": "flask.py",
+        "lineno": 71,
+        "name": "_RequestContext"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 78,
+        "name": "_RequestContext.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 86,
+        "name": "_RequestContext.__enter__"
+      },
+      {
+        "cc": 3,
+        "file": "flask.py",
+        "lineno": 89,
+        "name": "_RequestContext.__exit__"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 173,
+        "name": "Flask"
+      },
+      {
+        "cc": 3,
+        "file": "flask.py",
+        "lineno": 220,
+        "name": "Flask.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 293,
+        "name": "Flask.create_jinja_loader"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 303,
+        "name": "Flask.update_template_context"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 314,
+        "name": "Flask.run"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 333,
+        "name": "Flask.test_client"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 340,
+        "name": "Flask.open_resource"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 366,
+        "name": "Flask.open_session"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 378,
+        "name": "Flask.save_session"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 390,
+        "name": "Flask.add_url_rule"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 418,
+        "name": "Flask.route"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 489,
+        "name": "Flask.errorhandler"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 512,
+        "name": "Flask.before_request"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 517,
+        "name": "Flask.after_request"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 522,
+        "name": "Flask.context_processor"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 527,
+        "name": "Flask.match_request"
+      },
+      {
+        "cc": 6,
+        "file": "flask.py",
+        "lineno": 536,
+        "name": "Flask.dispatch_request"
+      },
+      {
+        "cc": 4,
+        "file": "flask.py",
+        "lineno": 556,
+        "name": "Flask.make_response"
+      },
+      {
+        "cc": 3,
+        "file": "flask.py",
+        "lineno": 584,
+        "name": "Flask.preprocess_request"
+      },
+      {
+        "cc": 3,
+        "file": "flask.py",
+        "lineno": 596,
+        "name": "Flask.process_response"
+      },
+      {
+        "cc": 2,
+        "file": "flask.py",
+        "lineno": 612,
+        "name": "Flask.wsgi_app"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 631,
+        "name": "Flask.request_context"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 646,
+        "name": "Flask.test_request_context"
+      },
+      {
+        "cc": 1,
+        "file": "flask.py",
+        "lineno": 653,
+        "name": "Flask.__call__"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 7,
+    "mean": 0.8,
+    "median": 0.0,
+    "n": 34,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::__call__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::add_url_rule"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::after_request"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::before_request"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::context_processor"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::errorhandler"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::match_request"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::request_context"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::route"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::test_client"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::test_request_context"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::wsgi_app"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Request::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "_RequestContext::__enter__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "_RequestContext::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "_default_template_ctx_processor"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "flash"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "render_template"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "render_template_string"
+      },
+      {
+        "cogc": 0,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "url_for"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::create_jinja_loader"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::open_resource"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::open_session"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::run"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::save_session"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::update_template_context"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "_get_package_path"
+      },
+      {
+        "cogc": 1,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "get_flashed_messages"
+      },
+      {
+        "cogc": 2,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::process_response"
+      },
+      {
+        "cogc": 2,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "_RequestContext::__exit__"
+      },
+      {
+        "cogc": 3,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::__init__"
+      },
+      {
+        "cogc": 3,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::make_response"
+      },
+      {
+        "cogc": 3,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::preprocess_request"
+      },
+      {
+        "cogc": 7,
+        "file": "flask.py",
+        "lineno": 0,
+        "name": "Flask::dispatch_request"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "Flask 0.1 (H, first draft)",
+  "mi": {
+    "files": [
+      {
+        "file": "flask.py",
+        "mi": 40.6
+      }
+    ],
+    "mean": 40.6,
+    "median": 40.6,
+    "min": 40.6,
+    "n": 1,
+    "pct_below_threshold": 100.0,
+    "threshold": 65
+  },
+  "subject": "flask_0_1"
+}

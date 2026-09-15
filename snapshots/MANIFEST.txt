@@ -16,7 +16,16 @@ flask_0_1  github.com/pallets/flask       0.1      8605cc310d260c3b08160881b09da
 
   flask     : analysis scope is src/flask/  (the core package)
   django    : analysis scope is django/urls/ and django/views/  (see subjects.json "include")
-  flask_0_1 : maturity control, structural metrics only, no oracle evaluation
+  flask_0_1 : maturity control, structural metrics only, no oracle evaluation.
+              flask.py at this tag uses Python 2's `except X, e:` syntax (2
+              occurrences), a SyntaxError under Python 3 that blocks every
+              tool in this pipeline; both are mechanically rewritten to
+              `except X as e:` before analysis. See
+              snapshots/flask-0.1-patch.md for the exact diff.
+
+Wired in this checkout: flask, django, flask_0_1 (all `available: true`).
+swe_flask, openhands_flask, swe_django remain `available: false` -- their
+snapshots are not present (see "Agentic subjects" below).
 
 Clone commands
 --------------

@@ -62,14 +62,14 @@ make docker && make docker-run   # mounts subjects/ ro, results/ rw
 
 ## What is wired in this checkout
 
-The two **human baselines** are cloned at their pinned tags
-(`snapshots/MANIFEST.txt`) and marked `available` in the registry, and both
-oracle suites are complete, so the pipeline runs end-to-end today:
+The two **human baselines** and the **maturity control** are cloned at their
+pinned tags (`snapshots/MANIFEST.txt`) and marked `available` in the registry,
+and both oracle suites are complete, so the pipeline runs end-to-end today:
 
 ```bash
 pip install -r requirements-analysis.txt
 pip install -e subjects/flask -e subjects/django   # brings in transitive deps
-make all SUBJECTS="flask django"
+make all SUBJECTS="flask django flask_0_1"
 ```
 
 Each oracle passes **100%** against its own reference baseline (Flask 133/133,
@@ -81,10 +81,20 @@ case. Complexity, maintainability, security, and smells populate
 `results/tables/` from the same run; `logs/` holds that run's console output and
 `logs/environment.txt` records the exact interpreter and tool versions.
 
-> **Note on case counts.** The oracle *source* defines 119 Flask and 85 Django
-> test functions; `pytest` parametrisation expands these to 133 and 97 cases,
-> which is what `results/` and the tables report. Cite whichever the paper
-> uses consistently.
+> **⚠ Open discrepancy with the manuscript, not yet resolved.** The oracle
+> files under `oracle/flask/` and `oracle/django/` are explicitly documented,
+> in their own `README.md`, as a partial stand-in: "*the full case set ... is
+> distributed separately in the replication package.*" That fuller case set
+> has never been added to this repository. What ships here is 119 Flask / 85
+> Django test **functions** (133 / 97 after `pytest` parametrisation), and it
+> passes 100% against both human baselines. The manuscript reports 120 / 85
+> **cases** with the human baseline passing 90.8% / 92.4%, including specific
+> per-category failures (e.g. Flask App Context 19/22, Blueprints 13/20) that
+> this suite does not reproduce, because it is not the suite that produced
+> those numbers. Until the actual full oracle suite is added, `results/` and
+> every table in this package reflect the placeholder suite, not the
+> manuscript's Table 3/Table 1 (variance) figures — do not cite one for the
+> other.
 
 ### Agentic subjects
 
@@ -105,11 +115,21 @@ flip `available` to `true`, and it joins every table.
 
 ### Maturity control
 
-`flask_0_1` (registered `available: false`, no oracle) is the initial public
+`flask_0_1` (registered `available: true`, no oracle) is the initial public
 release of Flask — a human-authored first draft, matched to the agentic subjects
 on development maturity. It is a **structural reference point only** (RQ2–RQ5);
 it predates Blueprints and other specified behaviours, so it is not
-oracle-evaluated. Clone it per `snapshots/MANIFEST.txt` and set `available: true`.
+oracle-evaluated. Its `flask.py` uses two Python-2-only `except X, e:` clauses
+that don't parse under Python 3; both are mechanically rewritten to
+`except X as e:` before analysis (`snapshots/flask-0.1-patch.md`).
+
+> **⚠ Open discrepancy with the manuscript.** Measured against the pinned
+> toolchain, Flask 0.1's Maintainability Index (40.6) is *lower* than Flask
+> 3.0.3's (64.1) — the opposite of Table 11's claim that the first draft
+> "scores better than the mature release on every structural metric." Its LOC
+> (249 SLOC / 663 physical lines in the single `flask.py`) is also well under
+> the manuscript's reported 1,284. This package reports the real, reproduced
+> number; it does not match the manuscript's maturity-control table.
 
 ### Run variance
 

@@ -1,0 +1,26 @@
+{
+  "by_cwe": {
+    "CWE-94": 1
+  },
+  "by_severity": {
+    "HIGH": 1,
+    "LOW": 0,
+    "MEDIUM": 0
+  },
+  "density_per_100_loc": 0.4,
+  "findings": [
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-94",
+      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask-0.1/flask.py",
+      "line": 286,
+      "severity": "HIGH",
+      "test_id": "B701",
+      "text": "By default, jinja2 sets autoescape to False. Consider using autoescape=True or use the select_autoescape function to mitigate XSS vulnerabilities."
+    }
+  ],
+  "label": "Flask 0.1 (H, first draft)",
+  "min_confidence": "MEDIUM",
+  "subject": "flask_0_1",
+  "total_findings": 1
+}

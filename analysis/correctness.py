@@ -89,19 +89,27 @@ def _parse_junit(junit_path: Path) -> dict:
     suites = root.findall("testsuite") or [root]
 
     categories: dict[str, dict[str, int]] = {}
-    total = passed = 0
+    total = passed = skipped_n = 0
     for suite in suites:
         for case in suite.findall("testcase"):
             total += 1
             cat = _category_for(case)
-            bucket = categories.setdefault(cat, {"n": 0, "passed": 0})
+            bucket = categories.setdefault(cat, {"n": 0, "passed": 0, "skipped": 0})
             bucket["n"] += 1
             failed = case.find("failure") is not None or case.find("error") is not None
             skipped = case.find("skipped") is not None
-            if not failed and not skipped:
+            if skipped:
+                # A skip means "not evaluated" (typically the subject could not
+                # be imported), never "behaved incorrectly". Counting it as a
+                # failure would score an unimportable subject 0% instead of
+                # reporting that it was never exercised.
+                bucket["skipped"] += 1
+                skipped_n += 1
+            elif not failed:
                 bucket["passed"] += 1
                 passed += 1
-    return {"total": total, "passed": passed, "categories": categories}
+    return {"total": total, "passed": passed, "skipped": skipped_n,
+            "categories": categories}
 
 
 def analyze(subject: common.Subject) -> dict:
@@ -112,11 +120,22 @@ def analyze(subject: common.Subject) -> dict:
         raise RuntimeError(
             f"pytest produced no JUnit report for {subject.id}:\n{proc.stderr[-2000:]}")
     parsed = _parse_junit(junit_path)
+    executed = parsed["total"] - parsed["skipped"]
+    if parsed["total"] and not executed:
+        # Every case was skipped: the oracle never ran against this subject.
+        # Reporting 0% here would be indistinguishable from a subject that
+        # implemented nothing, so fail loudly instead.
+        raise RuntimeError(
+            f"oracle did not execute against {subject.id}: all "
+            f"{parsed['total']} cases were skipped (usually an import "
+            f"failure -- check that the subject's dependencies are "
+            f"installed).\n{proc.stdout[-2000:]}")
     cats = {
         label: {
             "n": c["n"],
             "passed": c["passed"],
-            "pass_rate": common.pct(c["passed"], c["n"]),
+            "skipped": c["skipped"],
+            "pass_rate": common.pct(c["passed"], c["n"] - c["skipped"]),
         }
         for label, c in sorted(parsed["categories"].items())
     }
@@ -126,7 +145,8 @@ def analyze(subject: common.Subject) -> dict:
         "oracle": subject.oracle,
         "total": parsed["total"],
         "passed": parsed["passed"],
-        "pass_rate": common.pct(parsed["passed"], parsed["total"]),
+        "skipped": parsed["skipped"],
+        "pass_rate": common.pct(parsed["passed"], executed),
         "categories": cats,
     }
 
@@ -149,8 +169,10 @@ def run(subject_ids: list[str] | None = None) -> None:
             print(f"[correctness] SKIP {subject.id}: {e}")
             continue
         common.write_result("correctness", subject.id, payload)
-        print(f"[correctness] {subject.id}: {payload['passed']}/{payload['total']} "
-              f"({payload['pass_rate']}%)")
+        note = f", {payload['skipped']} skipped" if payload["skipped"] else ""
+        executed = payload["total"] - payload["skipped"]
+        print(f"[correctness] {subject.id}: {payload['passed']}/{executed} "
+              f"({payload['pass_rate']}%{note})")
 
 
 if __name__ == "__main__":

@@ -2,5 +2,8 @@
 === security ===
 [security] flask: 11 findings (0.26/100 LOC)
 [security] flask_0_1: 1 findings (0.4/100 LOC)
+[security] SKIP swe_flask: snapshot not present
+[security] SKIP openhands_flask: snapshot not present
 [security] django: 1 findings (0.03/100 LOC)
-[security] done in 0.5s
+[security] SKIP swe_django: snapshot not present
+[security] done in 0.8s

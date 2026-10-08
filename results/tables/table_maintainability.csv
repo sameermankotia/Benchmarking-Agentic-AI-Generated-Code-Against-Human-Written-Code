@@ -5,9 +5,9 @@ Files with MI < 65 (%),66.7,100.0,35.7
 Min file MI,24.1,40.6,13.3
 Mann-Whitney U p (MI vs. human baseline),ref.,ref.,ref.
 Rank-biserial r (MI),ref.,ref.,ref.
-Total pylint findings,276,39,387
+Total pylint findings,270,39,384
 Convention violations (C),144,3,195
-Refactoring suggestions (R),47,10,75
+Refactoring suggestions (R),42,10,72
 Warnings (W),58,13,106
-Error-category findings (E),27,13,11
-Findings / 100 LOC,6.5,15.66,10.99
+Error-category findings (E),26,13,11
+Findings / 100 LOC,6.36,15.66,10.91

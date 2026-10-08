@@ -12,7 +12,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-502",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/django/django/urls/resolvers.py",
+      "file": "urls/resolvers.py",
       "line": 14,
       "severity": "LOW",
       "test_id": "B403",

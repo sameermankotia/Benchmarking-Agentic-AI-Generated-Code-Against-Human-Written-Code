@@ -17,7 +17,7 @@
     {
       "confidence": "MEDIUM",
       "cwe": "CWE-259",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/app.py",
+      "file": "app.py",
       "line": 181,
       "severity": "LOW",
       "test_id": "B105",
@@ -26,7 +26,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-617",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/app.py",
+      "file": "app.py",
       "line": 260,
       "severity": "LOW",
       "test_id": "B101",
@@ -35,7 +35,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-78",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/cli.py",
+      "file": "cli.py",
       "line": 1005,
       "severity": "MEDIUM",
       "test_id": "B307",
@@ -44,7 +44,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-703",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/config.py",
+      "file": "config.py",
       "line": 163,
       "severity": "LOW",
       "test_id": "B110",
@@ -53,7 +53,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-78",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/config.py",
+      "file": "config.py",
       "line": 212,
       "severity": "MEDIUM",
       "test_id": "B102",
@@ -62,7 +62,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-617",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/debughelpers.py",
+      "file": "debughelpers.py",
       "line": 59,
       "severity": "LOW",
       "test_id": "B101",
@@ -71,7 +71,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-79",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/json/tag.py",
+      "file": "json/tag.py",
       "line": 188,
       "severity": "MEDIUM",
       "test_id": "B704",
@@ -80,7 +80,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-617",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/sansio/scaffold.py",
+      "file": "sansio/scaffold.py",
       "line": 705,
       "severity": "LOW",
       "test_id": "B101",
@@ -89,7 +89,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-327",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/sessions.py",
+      "file": "sessions.py",
       "line": 285,
       "severity": "HIGH",
       "test_id": "B324",
@@ -98,7 +98,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-617",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/testing.py",
+      "file": "testing.py",
       "line": 58,
       "severity": "LOW",
       "test_id": "B101",
@@ -107,7 +107,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-617",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask/src/flask/views.py",
+      "file": "views.py",
       "line": 190,
       "severity": "LOW",
       "test_id": "B101",

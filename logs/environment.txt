@@ -1,8 +1,18 @@
 Agentic-vs-Human benchmark harness - pipeline run log
-generated (UTC): 2026-09-15T23:48:29Z
-base commit:     133abe28e912f477bc9b973847474138a9ec7cc7  (+ packaging changes staged in this commit)
-python:          Python 3.11.15   (matches Dockerfile python:3.11-slim)
-platform:        Darwin 24.2.0 arm64
+generated (UTC): 2026-10-08T22:13Z
+base commit:     688da6b788a60dae520eb31209f134ed89194dd2  (+ the changes in this commit)
+path:            hermetic Docker image (make docker && make docker-run) -- the
+                 whole of results/ now comes from this one path. The previously
+                 committed results/ came from a host virtualenv whose versions
+                 had drifted from requirements-analysis.txt (complexipy 6.0.1,
+                 pylint 4.0.6, pytest 9.1.1 instead of the pinned 0.4.0 / 3.1.0
+                 / 8.1.1), so the package's toolchain record did not describe
+                 the numbers it shipped. It does now.
+
+image:           agentic-benchmark (Dockerfile, PMD_VERSION=7.0.0)
+python:          Python 3.11.17   (python:3.11-slim)
+PMD / CPD:       PMD 7.0.0 (7979570d39909195e173de05450fb1acf8b3eec5, 2024-03-22)
+JRE:             openjdk 21.0.12.1 (Debian)
 subjects:        flask (pallets/flask@3.0.3), django (django/django@5.0.6, urls+views),
                  flask_0_1 (pallets/flask@0.1, maturity control, structural only)
                  agentic snapshots are not part of this harness checkout
@@ -15,6 +25,21 @@ analysis toolchain == requirements-analysis.txt, verbatim:
   radon==6.0.1
   scipy==1.16.2
 
+subject runtime deps == requirements-subjects.txt, verbatim:
+  Werkzeug==3.1.8    Jinja2==3.1.6       itsdangerous==2.2.0
+  click==8.4.2       blinker==1.9.0      MarkupSafe==3.0.3
+  asgiref==3.12.1    sqlparse==0.5.5
+  (installed so the subjects' imports resolve: without them pylint reports 63
+  spurious import-errors for Flask and the oracle cannot import any subject.)
+
+determinism:     two independent `make all` runs of this image over the same
+                 mounted snapshots produced byte-identical results/ -- every
+                 JSON and every CSV. The two JUnit XML reports differ only in
+                 their per-test `time`, `timestamp`, and container `hostname`
+                 attributes; with those stripped they hash identically.
+                 Verified 2026-10-08. Reproducing this requires excluding
+                 pylint's cyclic-import (R0401), which is order-dependent --
+                 see analysis/smells.py.
+
 not exercised here:
-  - duplication (RQ5): needs PMD 7.0.0 + a JRE; Docker path only (make docker-run)
   - significance:      needs >=1 available agentic subject per pair

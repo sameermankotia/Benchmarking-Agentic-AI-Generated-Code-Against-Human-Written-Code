@@ -61,6 +61,19 @@ def _run_bandit(targets: list[Path]) -> dict:
     return report
 
 
+def _rel(filename: str, subject: common.Subject) -> str:
+    """Path relative to the subject root, so results/ is machine-independent.
+
+    Bandit reports absolute paths, which would otherwise bake the checkout
+    location (and the Docker mount point) into the committed artifact and make
+    the host and container runs differ on paths alone.
+    """
+    try:
+        return str(Path(filename).resolve().relative_to(subject.root.resolve()))
+    except ValueError:
+        return filename
+
+
 def analyze(subject: common.Subject, total_loc: int) -> dict:
     report = _run_bandit(subject.target_paths())
     kept: list[dict] = []
@@ -77,7 +90,7 @@ def analyze(subject: common.Subject, total_loc: int) -> dict:
             "cwe": cwe,
             "severity": r["issue_severity"].upper(),
             "confidence": r["issue_confidence"].upper(),
-            "file": r["filename"],
+            "file": _rel(r["filename"], subject),
             "line": r["line_number"],
             "text": r["issue_text"],
         })

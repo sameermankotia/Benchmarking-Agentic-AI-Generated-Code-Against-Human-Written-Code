@@ -1,0 +1,22 @@
+# Runtime dependencies of the human-baseline snapshots.
+#
+# These are NOT analysis tools. They are installed so that the subjects'
+# imports resolve during analysis. Without them pylint cannot follow a
+# subject's imports and emits `import-error` (and `no-name-in-module`) for
+# every unresolved module -- 63 such findings for Flask 3.0.3, 10 for the
+# Django URL module, 9 for Flask 0.1 -- which measures the analysis
+# environment rather than the subject's code. The oracle suites also cannot
+# import a subject whose dependencies are absent, which previously made the
+# hermetic Docker path report 0/133 and 0/97 for the two human baselines.
+#
+# Versions are pinned to the resolved set behind the committed results/.
+# Declared by Flask 3.0.3 (pyproject.toml):
+Werkzeug==3.1.8
+Jinja2==3.1.6
+itsdangerous==2.2.0
+click==8.4.2
+blinker==1.9.0
+MarkupSafe==3.0.3
+# Declared by Django 5.0.6 (setup.cfg):
+asgiref==3.12.1
+sqlparse==0.5.5

@@ -23,8 +23,9 @@ RUN curl -fsSL -o /tmp/pmd.zip \
 
 WORKDIR /work
 
-COPY requirements-analysis.txt .
-RUN pip install --no-cache-dir -r requirements-analysis.txt
+COPY requirements-analysis.txt requirements-subjects.txt ./
+RUN pip install --no-cache-dir -r requirements-analysis.txt \
+    && pip install --no-cache-dir -r requirements-subjects.txt
 
 COPY . .
 

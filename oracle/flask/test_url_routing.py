@@ -1,7 +1,10 @@
-"""URL Routing — 25 oracle cases (paper §3.3.1).
+"""URL Routing — oracle cases for specification area (1).
 
-Spec area (1): URL routing with variable segments and HTTP method filtering.
-Behavioural assertions only; no implementation internals.
+"URL routing with variable segments and HTTP method filtering."
+
+Every assertion is made on the WSGI response (status line, headers, body).
+Rule strings are built through `api.rule`, because the specification requires
+variable segments but does not fix their syntax.
 """
 
 from __future__ import annotations
@@ -9,161 +12,161 @@ from __future__ import annotations
 import pytest
 
 
-def _register(app, rule, **kw):
-    @app.route(rule, **kw)
-    def _view(**kwargs):
-        return "|".join(f"{k}={v}" for k, v in sorted(kwargs.items())) or "ok"
-    return _view
+def _view(**params):
+    """Report the captured variable segments, or "ok" when there are none."""
+    return "|".join(f"{k}={v}" for k, v in sorted(params.items())) or "ok"
 
 
-# --- Basic: API surface ---------------------------------------------------- #
+# --- Basic: registration and dispatch -------------------------------------- #
 
-def test_route_decorator_accepts_rule_string(app):
-    _register(app, "/hello")
-    assert any(r.rule == "/hello" for r in app.url_map.iter_rules())
-
-
-def test_static_route_dispatch(client, app):
-    _register(app, "/ping")
-    assert client.get("/ping").data == b"ok"
+def test_route_accepts_rule_string(route, get):
+    route("/hello")(_view)
+    assert get("/hello").status_code == 200
 
 
-def test_root_route(client, app):
-    _register(app, "/")
-    assert client.get("/").status_code == 200
+def test_static_route_returns_view_body(route, get):
+    route("/ping")(_view)
+    assert b"ok" in get("/ping").body
 
 
-def test_unregistered_path_is_404(client, app):
-    _register(app, "/exists")
-    assert client.get("/missing").status_code == 404
+def test_root_route(route, get):
+    route("/")(_view)
+    assert get("/").status_code == 200
 
 
-def test_add_url_rule_api(client, app):
-    app.add_url_rule("/added", "added", lambda: "added")
-    assert client.get("/added").data == b"added"
+def test_unregistered_path_is_404(route, get):
+    route("/exists")(_view)
+    assert get("/missing").status_code == 404
+
+
+def test_two_routes_dispatch_independently(route, get):
+    def first(**_):
+        return "first"
+
+    def second(**_):
+        return "second"
+    route("/one")(first)
+    route("/two")(second)
+    assert b"first" in get("/one").body
+    assert b"second" in get("/two").body
+
+
+def test_response_is_200_with_a_body(route, get):
+    def body(**_):
+        return "content-here"
+    route("/body")(body)
+    result = get("/body")
+    assert result.status_code == 200
+    assert b"content-here" in result.body
 
 
 # --- Behavioural: variable segments ---------------------------------------- #
 
-@pytest.mark.parametrize("path,expected", [
-    ("/user/alice", b"name=alice"),
-    ("/user/bob", b"name=bob"),
-    ("/user/123", b"name=123"),
-])
-def test_string_variable_segment(client, app, path, expected):
-    _register(app, "/user/<name>")
-    assert client.get(path).data == expected
+@pytest.mark.parametrize("value", ["alice", "bob", "123", "a-b_c"])
+def test_variable_segment_value_reaches_view(api, route, get, value):
+    route(api.rule("user", ":name"))(_view)
+    assert f"name={value}".encode() in get(f"/user/{value}").body
 
 
-@pytest.mark.parametrize("path,code", [("/post/42", 200), ("/post/abc", 404)])
-def test_int_converter(client, app, path, code):
-    _register(app, "/post/<int:pid>")
-    assert client.get(path).status_code == code
+def test_variable_segment_matches_any_single_segment(api, route, get):
+    route(api.rule("item", ":id"))(_view)
+    assert get("/item/anything").status_code == 200
 
 
-def test_int_converter_value(client, app):
-    _register(app, "/post/<int:pid>")
-    assert client.get("/post/42").data == b"pid=42"
+def test_variable_segment_does_not_span_slash(api, route, get):
+    route(api.rule("user", ":name"))(_view)
+    assert get("/user/alice/extra").status_code == 404
 
 
-def test_path_converter_allows_slashes(client, app):
-    _register(app, "/files/<path:p>")
-    assert client.get("/files/a/b/c.txt").data == b"p=a/b/c.txt"
+def test_variable_segment_requires_a_value(api, route, get):
+    route(api.rule("user", ":name"))(_view)
+    assert get("/user/").status_code in (301, 308, 404)
 
 
 @pytest.mark.parametrize("path,expected", [
-    ("/mix/x/9", b"n=9|s=x"),
-    ("/mix/y/0", b"n=0|s=y"),
+    ("/mix/x/9", [b"s=x", b"n=9"]),
+    ("/mix/y/0", [b"s=y", b"n=0"]),
 ])
-def test_multiple_variable_segments(client, app, path, expected):
-    _register(app, "/mix/<s>/<int:n>")
-    assert client.get(path).data == expected
+def test_multiple_variable_segments(api, route, get, path, expected):
+    route(api.rule("mix", ":s", ":n"))(_view)
+    body = get(path).body
+    assert all(fragment in body for fragment in expected)
 
 
-def test_float_converter(client, app):
-    _register(app, "/rate/<float:r>")
-    assert client.get("/rate/3.5").data == b"r=3.5"
+def test_variable_and_literal_segments_combined(api, route, get):
+    route(api.rule("a", ":mid", "z"))(_view)
+    assert b"mid=middle" in get("/a/middle/z").body
+
+
+def test_static_route_takes_precedence_over_variable(api, route, get):
+    def literal(**_):
+        return "literal"
+    route("/u/me")(literal)
+    route(api.rule("u", ":name"))(_view)
+    assert b"literal" in get("/u/me").body
+    assert b"name=other" in get("/u/other").body
 
 
 # --- Behavioural: HTTP method filtering ------------------------------------ #
 
-def test_default_route_allows_get(client, app):
-    _register(app, "/g")
-    assert client.get("/g").status_code == 200
+def test_default_route_allows_get(route, get):
+    route("/g")(_view)
+    assert get("/g").status_code == 200
 
 
-def test_default_route_rejects_post(client, app):
-    _register(app, "/g")
-    assert client.post("/g").status_code == 405
+def test_method_restricted_route_accepts_its_method(route, request_):
+    route("/p", methods=["POST"])(_view)
+    assert request_("POST", "/p").status_code == 200
 
 
-def test_post_only_route(client, app):
-    _register(app, "/p", methods=["POST"])
-    assert client.post("/p").status_code == 200
-    assert client.get("/p").status_code == 405
+def test_method_restricted_route_rejects_other_method(route, get):
+    route("/p", methods=["POST"])(_view)
+    assert get("/p").status_code == 405
 
 
 @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE"])
-def test_multi_method_route(client, app, method):
-    _register(app, "/multi", methods=["GET", "POST", "PUT", "DELETE"])
-    assert client.open("/multi", method=method).status_code == 200
+def test_multi_method_route_accepts_each(route, request_, method):
+    route("/multi", methods=["GET", "POST", "PUT", "DELETE"])(_view)
+    assert request_(method, "/multi").status_code == 200
 
 
-def test_405_lists_allowed_methods(client, app):
-    _register(app, "/only", methods=["POST"])
-    resp = client.get("/only")
-    assert resp.status_code == 405
-    assert "POST" in resp.headers.get("Allow", "")
+def test_method_not_in_list_is_rejected(route, request_):
+    route("/limited", methods=["GET", "POST"])(_view)
+    assert request_("DELETE", "/limited").status_code == 405
 
 
-def test_head_implied_by_get(client, app):
-    _register(app, "/h")
-    assert client.head("/h").status_code == 200
+def test_405_advertises_an_allow_header(route, get):
+    route("/only", methods=["POST"])(_view)
+    result = get("/only")
+    assert result.status_code == 405
+    assert "POST" in result.header("Allow")
 
 
-def test_options_auto_provided(client, app):
-    _register(app, "/o")
-    assert client.options("/o").status_code == 200
+def test_method_filtering_is_per_route(route, get, request_):
+    def readonly(**_):
+        return "r"
+
+    def writeonly(**_):
+        return "w"
+    route("/readonly", methods=["GET"])(readonly)
+    route("/writeonly", methods=["POST"])(writeonly)
+    assert get("/readonly").status_code == 200
+    assert get("/writeonly").status_code == 405
+    assert request_("POST", "/writeonly").status_code == 200
 
 
 # --- Edge cases ------------------------------------------------------------ #
 
-def test_trailing_slash_redirect(client, app):
-    _register(app, "/dir/")
-    assert client.get("/dir").status_code in (301, 308)
+def test_path_matching_is_case_sensitive(route, get):
+    route("/CaseSensitive")(_view)
+    assert get("/casesensitive").status_code == 404
 
 
-def test_route_precedence_static_over_dynamic(client, app):
-    @app.route("/u/me")
-    def me():
-        return "me"
-    @app.route("/u/<name>")
-    def other(name):
-        return name
-    assert client.get("/u/me").data == b"me"
-    assert client.get("/u/xyz").data == b"xyz"
+def test_query_string_does_not_affect_matching(route, get):
+    route("/q")(_view)
+    assert get("/q", query={"x": "1", "y": "2"}).status_code == 200
 
 
-def test_two_rules_same_endpoint_name_conflict(app):
-    _register(app, "/dup")
-    with pytest.raises(Exception):
-        @app.route("/dup2", endpoint="_view")
-        def _dup():
-            return "x"
-
-
-def test_url_map_contains_all_registered(app):
-    for p in ("/a", "/b", "/c"):
-        app.add_url_rule(p, p, lambda: "x")
-    rules = {r.rule for r in app.url_map.iter_rules()}
-    assert {"/a", "/b", "/c"} <= rules
-
-
-def test_case_sensitive_path(client, app):
-    _register(app, "/CaseSensitive")
-    assert client.get("/casesensitive").status_code == 404
-
-
-def test_query_string_does_not_affect_matching(client, app):
-    _register(app, "/q")
-    assert client.get("/q?x=1&y=2").status_code == 200
+def test_unregistered_method_on_unregistered_path_is_404(route, request_):
+    route("/known")(_view)
+    assert request_("POST", "/unknown").status_code == 404

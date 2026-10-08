@@ -1,48 +1,103 @@
 % -------------------------------------------------------------------
-% Replacement for the \authortodo in Section III-D1
-% ("Binding One Suite to Different Implementations").
+% Replacement for Section III-D1 ("Binding One Suite to Different
+% Implementations") and for the \authortodo recording the Flask-fixture
+% blocker, which this design resolves.
 %
-% Describes the binding mechanism that exists in the replication
-% package (oracle/conftest.py, analysis/correctness.py,
-% oracle/django/conftest.py). It deliberately does NOT claim a
-% specification-level name adapter: no such adapter is implemented.
-% See docs/manuscript-audit.md, section 5, before the agentic
-% subjects are scored for RQ1.
+% Describes the oracle as rebuilt in the replication package:
+% oracle/wsgi.py (the driver), oracle/api.py (the declared role
+% surface), oracle/{flask,django}/ (the suites). Measured against the
+% human baselines: Flask 140/140, Django 104/104, no skips.
+% See docs/manuscript-audit.md Section 5.
 % -------------------------------------------------------------------
 
 \subsubsection{Binding One Suite to Different Implementations}
+\label{sec:oracle-binding}
 
 Because the specification fixes neither package names nor module
 layout, each subject exposes the specified behavior under a different
-import path. One suite is therefore bound to each subject at run time
-rather than being rewritten per subject. Every oracle test reaches the
-system under test through a single canonical handle, \texttt{sut}. The
-correctness runner resolves, for each subject, the pair (top-level
-package name, \texttt{sys.path} entry) from the source root recorded in
-the subject registry: if the root is itself a package, the import name
-is the root's own name and the path entry is its \emph{parent}, never
-the package directory, which would otherwise shadow standard library
-modules of the same name; if the root is a container directory, the
-import name is its single contained package and the path entry is the
-root. The runner then prepends the path entry to \texttt{PYTHONPATH},
-exports the import name in the environment, and invokes
-\texttt{pytest} once per subject in a separate process; a shared
-\texttt{conftest.py} imports that package and aliases it to
-\texttt{sut}. An import failure is reported as a skip with the
-underlying exception rather than as a behavioral failure, so a subject
-that cannot be imported is never silently scored as incorrect.
+import path, and a suite written against any one subject's API would be
+a conformance suite for that subject rather than an oracle for the
+specification. The suites are therefore built in two layers: a
+\emph{declared construction surface}, which is the minimum needed to
+instantiate a subject, and a \emph{behavioral driver}, which exercises
+it through the one interface the specification does fix.
 
-Results are read back from the JUnit XML report and bucketed into the
-behavioral categories of Section~\ref{sec:oracle} by test-file stem, so
-the per-category tables are produced by the same mechanism for every
-subject.
+\paragraph{Reaching the subject}
+Every oracle test reaches the system under test through a single
+canonical handle, \texttt{sut}. The correctness runner resolves, for
+each subject, the pair (top-level package name, \texttt{sys.path} entry)
+from the source root recorded in the subject registry: if the root is
+itself a package, the import name is the root's own name and the path
+entry is its \emph{parent}, never the package directory, which would
+otherwise shadow standard library modules of the same name; if the root
+is a container directory, the import name is its single contained
+package and the path entry is the root. The runner prepends the path
+entry to \texttt{PYTHONPATH}, exports the import name and the subject's
+declared role map in the environment, and invokes \texttt{pytest} once
+per subject in a separate process; a shared \texttt{conftest.py} imports
+that package and aliases it to \texttt{sut}. An import failure is
+reported as a skip carrying the underlying exception, and the pass rate
+is computed over executed cases only, so a subject that cannot be
+imported is never silently scored as incorrect.
 
-The Django URL module needs a configured settings module before most of
+\paragraph{Declared construction surface}
+The specification names four symbols outright---\texttt{request},
+\texttt{g}, \texttt{current\_app}, and \texttt{Blueprint}---and those
+are read directly off the subject. It does not name the application
+class, the route-registration method, the blueprint-registration
+method, the response class, or the template renderer, so each of these
+is treated as a \emph{role} and resolved in three steps: from an
+explicit per-subject mapping in the registry; failing that, from a list
+of conventional candidate names; failing that, by raising an error that
+names the unresolved role and lists what the subject does expose. The
+attributes of the request object are resolved the same way, because the
+specification names the concepts it must encapsulate---method, path,
+headers, query string, and body---but not the attribute names. The
+syntax of a variable URL segment is likewise declared rather than
+assumed. For the Django pair the roles are the URL-pattern constructor,
+the WSGI handler, the response class, and the class-based-view base.
+
+Keeping this surface small is the point: it is the irreducible set of
+names a test must know in order to build something, and nothing beyond
+it is ever named.
+
+\paragraph{Behavioral driver}
+Every behavioral assertion is made by calling the constructed subject
+as a WSGI application and inspecting the status line, the response
+headers, and the response body. This is possible because the
+specification requires that the implementation ``pass a WSGI compliance
+check,'' making WSGI the one interface it fixes for every subject, and
+it is what allows a single suite to run unchanged against
+implementations that share no API names. The driver also exercises the
+parts of PEP 3333 an application must support---the
+\texttt{start\_response} callback, an iterable response body, and
+\texttt{close()} on that iterable where one is provided---and rejects a
+response iterable that yields anything other than byte strings. No
+assertion in either suite uses a framework-specific test client,
+response wrapper, or routing table.
+
+\paragraph{Hosting the Django URL module}
+A Django-shaped subject needs a settings object populated before most of
 its symbols can be imported, so the Django oracle configures a minimal
-in-memory settings object once per test session, with templating
-enabled and no installed applications, database, or middleware, and
-then calls the subject's \texttt{setup()} entry point. Requests are
-constructed through the framework's own request-factory surface. This
-hosts the routing and view-dispatch subsystem in isolation, without a
-project skeleton on disk, so the analyzed scope and the tested scope
-are identical.
+in-memory configuration once per session---templating only, with no
+installed applications, database, or middleware---and then calls the
+subject's setup entry point. The template backend path is derived from
+the subject's own package name rather than written literally. Each
+request is served through a freshly named URL configuration, so a
+subject's resolver cache cannot carry state between cases, and URL
+resolution is asserted by observing which view a request reaches rather
+than by calling a resolver API. This hosts the routing and
+view-dispatch subsystem in isolation, without a project skeleton on
+disk, so the analyzed scope and the tested scope are identical.
+
+\paragraph{Scope}
+Restricting assertions to the specified surface excludes behavior that
+the specification does not mention, and the suites omit it rather than
+penalize a subject for not having guessed a particular framework's
+choices: request and response lifecycle hooks, error handlers, typed URL
+converters beyond plain variable segments, form parsing, cookie
+handling, URL building, and middleware, sessions, authentication, and
+URL reversing on the Django side. Results are read back from the JUnit
+XML report and bucketed into the behavioral categories of
+Section~\ref{sec:oracle} by test-file stem, so the per-category tables
+are produced by the same mechanism for every subject.

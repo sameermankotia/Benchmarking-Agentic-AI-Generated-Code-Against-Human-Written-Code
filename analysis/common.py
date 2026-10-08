@@ -31,6 +31,9 @@ class Subject:
     oracle: str = ""
     available: bool = True
     include: list[str] = field(default_factory=list)
+    #: Specification role -> this subject's name for it (see oracle/api.py).
+    #: Empty when the subject's names match the conventional candidates.
+    api_map: dict[str, str] = field(default_factory=dict)
 
     @property
     def root(self) -> Path:

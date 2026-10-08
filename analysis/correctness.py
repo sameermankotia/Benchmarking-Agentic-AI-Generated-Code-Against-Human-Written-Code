@@ -13,6 +13,7 @@ behavioural categories by the test file stem (e.g. ``test_app_context.py`` ->
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import subprocess
 import sys
@@ -66,6 +67,10 @@ def _run_pytest(subject: common.Subject, junit_path: Path) -> subprocess.Complet
     env = dict(os.environ)
     env["PYTHONPATH"] = str(path_entry) + os.pathsep + env.get("PYTHONPATH", "")
     env["SUT_IMPORT"] = import_name
+    # The subject's declared construction surface (oracle/api.py). Absent for
+    # a subject whose names match the conventional candidates.
+    api_map = getattr(subject, "api_map", None) or {}
+    env["ORACLE_API_MAP"] = json.dumps(api_map)
     cmd = [sys.executable, "-m", "pytest", str(oracle_dir), "-q",
            f"--junitxml={junit_path}", "-p", "no:cacheprovider"]
     return subprocess.run(cmd, capture_output=True, text=True, env=env)

@@ -132,81 +132,116 @@ reviewer to find.
   stand-in ("the full case set ... is distributed separately"); that fuller set
   was never added. What ships is 119 Flask / 85 Django test *functions*
   (133 / 97 after parametrisation) and it passes 100% against both baselines.
-  Category counts differ from the draft as well:
 
-  | Flask category | Draft | Shipped | Django category | Draft | Shipped |
-  |---|---|---|---|---|---|
-  | URL Routing | 25 | 31 | URL Resolution | 22 | 24 |
-  | Request Handling | 20 | 23 | Request Object | 18 | 22 |
-  | Response Rendering | 18 | 22 | Response Handling | 15 | 19 |
-  | Templating | 15 | 15 | View Dispatch | 20 | 22 |
-  | App Context | 22 | 22 | Class-Based Views | 10 | 10 |
-  | Blueprints | 20 | 20 | | | |
-  | **Total** | **120** | **133** | **Total** | **85** | **97** |
+  **Correction to an earlier version of this audit.** The draft's category
+  counts are *test-function* counts, and at that level they very nearly
+  matched the suite that shipped: Flask 25/20/18/15/22/20 against an actual
+  24/20/18/15/22/20 (only URL Routing was off, by one), and Django
+  22/18/20/15/10 against an actual 22/18/20/15/10 — exact. The 133 and 97
+  figures are post-parametrisation counts, which is what the correctness
+  stage reports. So the draft's Table 3 structure was sound; what was not
+  reproducible was the human baseline *failing* any of it (the draft's App
+  Context 19/22 and Blueprints 13/20), since the shipped suite passed 100%.
 
-  The draft's per-category human failures (e.g. App Context 19/22,
-  Blueprints 13/20) are not reproducible from anything in this repository.
+  Both suites have since been rebuilt (§5), which changes these counts
+  again — see the table there.
 
-## 5. Open blocker: the oracle is bound to Flask's API names
+## 5. The oracle was bound to its reference implementations — rebuilt
 
-This is not a number mismatch; it is a defect in the instrument, and it blocks
-RQ1 even once the agentic snapshots arrive.
+### 5.1 What was wrong
 
-`oracle/conftest.py` resolves the system-under-test generically: the correctness
-runner exports `SUT_IMPORT` and prepends the subject's source root to
-`PYTHONPATH` (`analysis/correctness.py:43-68`), and the shared conftest aliases
-that package to `sut`. That part is implementation-neutral and its docstring
-correctly advertises `sut.Application()` as the specification-level usage.
+Both suites were conformance suites for the implementation they were written
+against, not oracles for the specification.
 
-The Flask suite then ignores that neutrality. Of the 12 distinct symbols it
-reaches through the SUT handle, **8 are Flask API names that the specification
-never mentions**:
+**Flask.** Of 30 distinct symbols the suite reached through the subject, only
+four — `request`, `Blueprint`, `g`, `current_app` — were named in the
+specification. The other 26 were Flask API names it never mentions: `route`,
+`test_client`, `register_blueprint`, `config`, `url_map`, `add_url_rule`,
+`app_context`, `test_request_context`, `before_request`, `after_request`,
+`teardown_request`, `teardown_appcontext`, `errorhandler`, `abort`, `jsonify`,
+`redirect`, `make_response`, `render_template_string`, `Response`, `url_for`,
+`name`, and the HTTP verb methods of Flask's test client — plus the private
+`_get_current_object`. 94 of 119 test functions touched at least one, and all
+119 depended on the application class being called `Flask`, via the `app`
+fixture's `sut_module.Flask(__name__)`.
 
-| Symbol | Uses | In the specification? |
-|---|---|---|
-| `request` | 17 | yes |
-| `Blueprint` | 15 | yes |
-| `g` | 11 | yes |
-| `current_app` | 9 | yes |
-| `make_response` | 4 | **no** |
-| `url_for` | 3 | **no** |
-| `abort` | 2 | **no** |
-| `Response` | 2 | **no** |
-| `render_template_string` | 2 | **no** |
-| `jsonify` | 1 | **no** |
-| `redirect` | 1 | **no** |
-| `Flask` | 1 | **no** |
+**Django.** Worse: all five test files hard-imported by literal module path —
+`from django.urls import path, resolve, Resolver404`, `from django.http import
+HttpResponse`, `from django.views import View`, `django.views.decorators.*` —
+bypassing the `sut` handle entirely. No adapter could have made that suite run
+against anything but Django.
 
-The last one is fatal on its own: `oracle/flask/conftest.py` builds the
-application with `sut_module.Flask(__name__)`, and the `app` fixture feeds
-almost every test in the suite. An agent given the Section III-B4 specification
-has no reason to name its application class `Flask` — the specification names
-`current_app`, `g`, and `Blueprint`, but never the class, `url_for`, `abort`,
-`jsonify`, `redirect`, `make_response`, `render_template_string`, or
-`test_client`. Against any agentic subject that chose `Application` or `App`,
-the fixture raises `AttributeError` and the affected cases error out rather
-than reporting a behavioural failure.
+Consequently Stage 4's claim that the suites "interact only with the public
+surface named in the specification" was false for both, and RQ1 could not have
+been measured for any agentic subject.
 
-Consequences for the draft:
+### 5.2 What replaced it
 
-- The claim in Section III-D that one suite "runs unchanged" against Flask, the
-  SWE-agent framework, and the OpenHands framework is false for the suite in
-  this repository.
-- The `\authortodo` in Section III-D1 asks for a description of "a thin adapter
-  that maps specification-level names to each subject's import paths." No such
-  adapter exists. `docs/oracle-binding.tex` documents the binding mechanism
-  that *does* exist and deliberately does not claim an adapter.
-- Section III-D2's statement that a second reviewer rewrote fourteen cases "to
-  use more generic assertions" is not observable in this suite.
-- Any agentic pass rate measured with the suite as it stands would understate
-  correctness by an unknown amount and would not be a valid RQ1 result.
+Both suites are rebuilt on two layers:
 
-Required before RQ1 is measurable: a name-resolution layer (resolve the
-application class and each helper by trying specification-level candidates, or
-require each subject to ship a small declarative mapping), applied identically
-to the human baselines so the baseline numbers stay comparable. This changes the
-measurement instrument, so it should be done before, not after, the agentic
-snapshots are scored.
+- **`oracle/wsgi.py`** — a PEP 3333 driver. Every behavioural assertion is now
+  made by calling the subject as a WSGI application and reading the status
+  line, response headers, and response body. The specification requires that
+  an implementation "pass a WSGI compliance check," so WSGI is the one
+  interface it fixes for every subject; that is what lets one suite run
+  against implementations sharing no API names. The driver also exercises
+  `start_response`, an iterable body, and `close()`, and rejects a response
+  iterable yielding non-bytes.
+- **`oracle/api.py`** — the declared construction surface: the minimum set of
+  roles needed to *build* a subject. Each resolves from the subject's
+  `api_map` in `subjects/subjects.json`, then from conventional candidate
+  names, then raises `RoleUnresolved` naming the role and listing what the
+  subject exposes. Request attributes are resolved the same way, because the
+  specification names the concepts ("method, path, headers, query string, and
+  body") but not the attribute names. Variable-segment syntax is declared too.
+
+The four specification-named symbols are still read directly. Everything else
+goes through a role. `grep` the suites for `Flask`, `django`, `test_client`,
+`url_for`, `jsonify`, `render_template` or `HttpResponse`: no matches, in
+either pair.
+
+### 5.3 Measured result
+
+Both human baselines pass completely on the rebuilt suites, with no skips:
+
+| Pair | Functions | Cases | Baseline result |
+|---|---:|---:|---|
+| Flask | 117 | **140** | Flask 3.0.3 — 140/140 (100%) |
+| Django | 85 | **104** | Django 5.0.6 URL module — 104/104 (100%) |
+
+Per category:
+
+| Flask category | Cases | | Django category | Cases |
+|---|---:|---|---|---:|
+| URL Routing | 30 | | URL Resolution | 25 |
+| Request Handling | 28 | | Request Object | 26 |
+| Response Rendering | 24 | | View Dispatch | 22 |
+| Templating | 15 | | Response Handling | 21 |
+| App Context | 21 | | Class-Based Views | 10 |
+| Blueprints | 22 | | | |
+| **Total** | **140** | | **Total** | **104** |
+
+**These are the counts the paper should now report**, in place of 120 and 85.
+`docs/oracle-binding.tex` is the Section III-D1 text for the new design and
+also resolves the `\authortodo` that recorded the blocker.
+
+### 5.4 What this changes about scope
+
+Restricting assertions to the specified surface means behaviour the
+specification never mentions is now absent rather than required. Omitted from
+the Flask pair: lifecycle hooks, error handlers, typed URL converters, form
+parsing, cookie handling, URL building. Omitted from the Django pair:
+middleware, sessions, authentication, ORM access, URL reversing, and any
+assertion about what is served for an empty URL configuration (a framework may
+serve a landing page; the specification does not say). Two cases were dropped
+for the same reason during the rebuild — a raw assertion on a form-encoded
+body, since an implementation may legitimately parse it out of the stream, and
+the empty-urlconf case.
+
+This narrows RQ1's construct, and the paper should say so: the oracle now
+measures conformance to the written specification over WSGI, not parity with
+the reference implementation's API. That is the stronger claim for the study's
+purpose, but it is a different one.
 
 ## 6. Harness defects found and fixed
 
@@ -265,12 +300,12 @@ dependencies and the image installs them, and `analysis/correctness.py` now
 counts skips separately, computes the pass rate over *executed* cases, and
 raises rather than reporting a rate when nothing executed.
 
-This failure mode matters well beyond the Docker path. It is exactly what an
-agentic subject hits when its application class is not named `Flask` (§5): the
-suite would have reported a confident **0% agentic pass rate** that actually
-meant "never ran." Given the draft reports agentic pass rates in the 75–83%
-range, this is not the origin of those numbers — but it is a trap for the
-re-run.
+This failure mode mattered well beyond the Docker path. It was exactly what an
+agentic subject would have hit when its application class was not named
+`Flask`: the suite would have reported a confident **0% agentic pass rate**
+that actually meant "never ran." Both halves of that trap are now closed — the
+runner refuses to score an unexecuted suite (here), and the suites no longer
+depend on the class name at all (§5).
 
 ### 6.4 Absolute paths leaked into the committed artifact
 
@@ -319,6 +354,6 @@ those three attributes they hash identically.
 | RQ5 duplication, human columns | **measured as of 2026-10-08**; Flask 3.1→3.4, Django 2.9→1.0 |
 | All agentic columns, Sections IV–V | **no data in existence** |
 | All p-values / effect sizes | **not computed** |
-| Oracle pass rates | **not reproducible**; suite is a stand-in and is Flask-bound |
+| Oracle pass rates | **suites rebuilt over WSGI** (§5); baselines now 140/140 and 104/104, and the paper's 120/85 case counts become 140/104 |
 | Code-smell numbers | **measured, and now reproducible**; Flask 6.5 -> 6.36, Django 10.99 -> 10.91 per 100 LOC |
 | Package determinism claim | **was false, now verified** (see §6.1-6.2) |

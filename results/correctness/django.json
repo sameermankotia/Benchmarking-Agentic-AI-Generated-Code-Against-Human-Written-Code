@@ -7,21 +7,21 @@
       "skipped": 0
     },
     "Request Object": {
-      "n": 22,
+      "n": 26,
       "pass_rate": 100.0,
-      "passed": 22,
+      "passed": 26,
       "skipped": 0
     },
     "Response Handling": {
-      "n": 19,
+      "n": 21,
       "pass_rate": 100.0,
-      "passed": 19,
+      "passed": 21,
       "skipped": 0
     },
     "URL Resolution": {
-      "n": 24,
+      "n": 25,
       "pass_rate": 100.0,
-      "passed": 24,
+      "passed": 25,
       "skipped": 0
     },
     "View Dispatch": {
@@ -34,8 +34,8 @@
   "label": "Django mod. (H)",
   "oracle": "django",
   "pass_rate": 100.0,
-  "passed": 97,
+  "passed": 104,
   "skipped": 0,
   "subject": "django",
-  "total": 97
+  "total": 104
 }

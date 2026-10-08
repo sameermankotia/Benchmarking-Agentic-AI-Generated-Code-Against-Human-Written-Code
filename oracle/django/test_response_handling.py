@@ -1,97 +1,128 @@
-"""Response Handling — 15 oracle cases (paper §3.3.2).
+"""Response Handling — oracle cases for the Django-pair specification.
 
-HttpResponse status/headers/body, JsonResponse, redirects, streaming.
+Responses are built through the resolved response role and asserted on through
+the WSGI status line, headers, and body.
 """
 
 from __future__ import annotations
 
-import json
-
 import pytest
 
 
-def test_response_default_200(dj):
-    from django.http import HttpResponse
-    assert HttpResponse("x").status_code == 200
+# --- Basic ----------------------------------------------------------------- #
+
+def test_response_default_status_is_200(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("ok")
+    assert serve([pattern("r/", view)], "GET", "/r/").status_code == 200
 
 
-def test_response_body(dj):
-    from django.http import HttpResponse
-    assert HttpResponse("body").content == b"body"
+def test_response_body_is_returned(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("body-text")
+    assert b"body-text" in serve([pattern("r/", view)], "GET", "/r/").body
 
 
-@pytest.mark.parametrize("code", [200, 201, 400, 404, 500])
-def test_response_status_codes(dj, code):
-    from django.http import HttpResponse
-    assert HttpResponse("x", status=code).status_code == code
+def test_response_has_a_content_type(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("typed")
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert result.header("Content-Type") != ""
 
 
-def test_response_content_type(dj):
-    from django.http import HttpResponse
-    resp = HttpResponse("x", content_type="text/plain")
-    assert resp["Content-Type"] == "text/plain"
+def test_status_line_is_well_formed(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("ok")
+    status = serve([pattern("r/", view)], "GET", "/r/").status
+    assert status[:3].isdigit() and len(status) > 4
 
 
-def test_response_default_content_type_html(dj):
-    from django.http import HttpResponse
-    assert "text/html" in HttpResponse("x")["Content-Type"]
+def test_empty_body_is_allowed(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("")
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert result.status_code == 200 and result.body == b""
 
 
-def test_response_set_header(dj):
-    from django.http import HttpResponse
-    resp = HttpResponse("x")
-    resp["X-Custom"] = "v"
-    assert resp["X-Custom"] == "v"
+# --- Status codes ---------------------------------------------------------- #
+
+@pytest.mark.parametrize("code", [200, 201, 202, 400, 404, 418, 500])
+def test_response_status_code_is_honoured(serve, pattern, response_class, code):
+    def view(request, **_):
+        return response_class("x", status=code)
+    assert serve([pattern("r/", view)], "GET", "/r/").status_code == code
 
 
-def test_json_response(dj):
-    from django.http import JsonResponse
-    resp = JsonResponse({"a": 1})
-    assert json.loads(resp.content) == {"a": 1}
+def test_created_201_with_body(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("made", status=201)
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert result.status_code == 201 and b"made" in result.body
 
 
-def test_json_response_content_type(dj):
-    from django.http import JsonResponse
-    assert "application/json" in JsonResponse({})["Content-Type"]
+def test_error_status_with_body(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("nope", status=400)
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert result.status_code == 400 and b"nope" in result.body
 
 
-def test_json_response_list_safe_false(dj):
-    from django.http import JsonResponse
-    resp = JsonResponse([1, 2, 3], safe=False)
-    assert json.loads(resp.content) == [1, 2, 3]
+# --- Headers --------------------------------------------------------------- #
+
+def test_response_custom_header(serve, pattern, response_class):
+    def view(request, **_):
+        resp = response_class("h")
+        resp["X-Custom"] = "set"
+        return resp
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert result.header("X-Custom") == "set"
 
 
-def test_redirect_response(dj):
-    from django.http import HttpResponseRedirect
-    resp = HttpResponseRedirect("/target/")
-    assert resp.status_code == 302 and resp["Location"] == "/target/"
+def test_response_multiple_custom_headers(serve, pattern, response_class):
+    def view(request, **_):
+        resp = response_class("h")
+        resp["X-One"], resp["X-Two"] = "1", "2"
+        return resp
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert result.header("X-One") == "1" and result.header("X-Two") == "2"
 
 
-def test_permanent_redirect(dj):
-    from django.http import HttpResponsePermanentRedirect
-    assert HttpResponsePermanentRedirect("/t/").status_code == 301
+def test_response_explicit_content_type(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("{}", content_type="application/json")
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert "application/json" in result.header("Content-Type")
 
 
-def test_not_found_response(dj):
-    from django.http import HttpResponseNotFound
-    assert HttpResponseNotFound("nope").status_code == 404
+def test_response_header_and_status_together(serve, pattern, response_class):
+    def view(request, **_):
+        resp = response_class("both", status=503)
+        resp["X-Why"] = "test"
+        return resp
+    result = serve([pattern("r/", view)], "GET", "/r/")
+    assert result.status_code == 503 and result.header("X-Why") == "test"
 
 
-def test_response_set_cookie(dj):
-    from django.http import HttpResponse
-    resp = HttpResponse("x")
-    resp.set_cookie("sid", "abc")
-    assert resp.cookies["sid"].value == "abc"
+# --- Body ------------------------------------------------------------------ #
+
+def test_response_body_is_bytes_over_wsgi(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("bytes-check")
+    assert isinstance(serve([pattern("r/", view)], "GET", "/r/").body, bytes)
 
 
-def test_response_delete_cookie(dj):
-    from django.http import HttpResponse
-    resp = HttpResponse("x")
-    resp.delete_cookie("sid")
-    assert "sid" in resp.cookies
+def test_response_body_preserves_utf8(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("caffè-ü")
+    assert "caffè-ü" in serve([pattern("r/", view)], "GET", "/r/").text
 
 
-def test_streaming_response(dj):
-    from django.http import StreamingHttpResponse
-    resp = StreamingHttpResponse(iter(["a", "b", "c"]))
-    assert b"".join(resp.streaming_content) == b"abc"
+def test_response_is_regenerated_per_request(serve, pattern, response_class):
+    calls = {"n": 0}
+
+    def view(request, **_):
+        calls["n"] += 1
+        return response_class(str(calls["n"]))
+    patterns = [pattern("n/", view)]
+    assert serve(patterns, "GET", "/n/").body == b"1"
+    assert serve(patterns, "GET", "/n/").body == b"2"

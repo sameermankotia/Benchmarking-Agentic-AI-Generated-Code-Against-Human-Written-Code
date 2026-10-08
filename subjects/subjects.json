@@ -1,5 +1,5 @@
 {
-  "_comment": "Registry of the study subjects: two mature human baselines, one human first-draft maturity control, and three agentic counterparts. `path` is the source root the analysis pipeline walks (relative to the repo root). Frozen snapshots are checked out under subjects/<id>/. Set `available: false` for a subject whose snapshot is not present locally; the pipeline skips it and notes the omission. A subject with an empty `oracle` is a structural reference point only (no RQ1 correctness score) -- see the maturity control.",
+  "_comment": "Registry of the study subjects: two mature human baselines, one human first-draft maturity control, and three agentic counterparts. `path` is the source root the analysis pipeline walks (relative to the repo root). Frozen snapshots are checked out under subjects/<id>/. Set `available: false` for a subject whose snapshot is not present locally; the pipeline skips it and notes the omission. A subject with an empty `oracle` is a structural reference point only (no RQ1 correctness score) -- see the maturity control. `api_map` declares, per subject, the name that subject uses for each specification-level construction role (oracle/api.py); it is needed only where a subject's names differ from the conventional candidates, which is why the human baselines carry none.",
   "subjects": [
     {
       "id": "flask",

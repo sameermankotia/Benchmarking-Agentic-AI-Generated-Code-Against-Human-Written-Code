@@ -1,174 +1,167 @@
-"""Request Handling — 20 oracle cases (paper §3.3.1).
+"""Request Handling — oracle cases for specification area (2).
 
-Spec area (2): request object encapsulating method, path, headers, query
-string, and body.
+"request object encapsulating method, path, headers, query string, and body."
+
+Each test registers a view that reads one documented request attribute through
+the resolved accessor (`api.method`, `api.path`, `api.header`, `api.query_get`,
+`api.body_bytes`) and echoes it, then asserts on the WSGI response body. No
+assertion names an implementation's attribute directly.
 """
 
 from __future__ import annotations
 
+import json
+
 import pytest
+
+import wsgi
 
 
 @pytest.fixture
-def echo_app(app, fw):
-    req = fw.request
+def report(api, route, app):
+    """Register a view at `path` that echoes `fn(request)` as the body."""
+    counter = {"n": 0}
 
-    @app.route("/echo", methods=["GET", "POST", "PUT"])
-    def echo():
-        return {
-            "method": req.method,
-            "path": req.path,
-            "arg": req.args.get("x", ""),
-            "form": req.form.get("f", ""),
-            "header": req.headers.get("X-Test", ""),
-        }
-    return app
+    def _report(fn, path="/r", methods=None):
+        counter["n"] += 1
+        req = api.request
 
-
-def test_request_exposes_method(echo_app):
-    c = echo_app.test_client()
-    assert c.get("/echo").json["method"] == "GET"
+        def view(**_params):
+            return str(fn(req))
+        view.__name__ = f"view_{counter['n']}"
+        route(path, methods)(view)
+        return path
+    return _report
 
 
-def test_request_exposes_path(echo_app):
-    c = echo_app.test_client()
-    assert c.get("/echo").json["path"] == "/echo"
+# --- Method ---------------------------------------------------------------- #
+
+@pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
+def test_request_exposes_method(api, app, report, method):
+    path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+    assert method.encode() in wsgi.call(app, method, path).body
 
 
-def test_request_query_arg(echo_app):
-    c = echo_app.test_client()
-    assert c.get("/echo?x=hello").json["arg"] == "hello"
+def test_request_method_is_upper_case(api, app, report):
+    path = report(api.method)
+    assert wsgi.call(app, "GET", path).text.strip().isupper()
 
 
-def test_request_missing_query_arg_default(echo_app):
-    c = echo_app.test_client()
-    assert c.get("/echo").json["arg"] == ""
+# --- Path ------------------------------------------------------------------ #
+
+def test_request_exposes_path(api, app, report):
+    path = report(api.path, path="/where")
+    assert b"/where" in wsgi.call(app, "GET", path).body
 
 
-@pytest.mark.parametrize("val", ["a", "b b", "%20", "1+1"])
-def test_request_query_arg_values(echo_app, val):
-    c = echo_app.test_client()
-    assert c.get("/echo", query_string={"x": val}).json["arg"] == val
+def test_request_path_excludes_query_string(api, app, report):
+    path = report(api.path, path="/noquery")
+    body = wsgi.call(app, "GET", path, query={"x": "1"}).text
+    assert "/noquery" in body and "x=1" not in body
 
 
-def test_request_form_body(echo_app):
-    c = echo_app.test_client()
-    assert c.post("/echo", data={"f": "posted"}).json["form"] == "posted"
+def test_request_path_for_nested_route(api, app, report):
+    path = report(api.path, path="/a/b/c")
+    assert b"/a/b/c" in wsgi.call(app, "GET", path).body
 
 
-def test_request_custom_header(echo_app):
-    c = echo_app.test_client()
-    assert c.get("/echo", headers={"X-Test": "yes"}).json["header"] == "yes"
+# --- Query string ---------------------------------------------------------- #
+
+def test_request_query_parameter(api, app, report):
+    path = report(lambda r: api.query_get(r, "x"))
+    assert b"hello" in wsgi.call(app, "GET", path, query={"x": "hello"}).body
 
 
-def test_request_method_post(echo_app):
-    c = echo_app.test_client()
-    assert c.post("/echo").json["method"] == "POST"
+def test_request_missing_query_parameter_is_empty(api, app, report):
+    path = report(lambda r: api.query_get(r, "x", "MISSING"))
+    assert b"MISSING" in wsgi.call(app, "GET", path).body
 
 
-def test_request_method_put(echo_app):
-    c = echo_app.test_client()
-    assert c.put("/echo").json["method"] == "PUT"
+@pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
+def test_request_query_parameter_values(api, app, report, value):
+    path = report(lambda r: api.query_get(r, "x"))
+    assert value in wsgi.call(app, "GET", path, query={"x": value}).text
 
 
-def test_request_json_body(app, fw):
-    req = fw.request
-
-    @app.route("/j", methods=["POST"])
-    def j():
-        return {"got": req.get_json()["k"]}
-    assert app.test_client().post("/j", json={"k": "v"}).json["got"] == "v"
+def test_request_multiple_query_parameters(api, app, report):
+    path = report(lambda r: f"{api.query_get(r, 'a')},{api.query_get(r, 'b')}")
+    body = wsgi.call(app, "GET", path, query={"a": "1", "b": "2"}).text
+    assert "1,2" in body
 
 
-def test_request_args_multidict_getlist(app, fw):
-    req = fw.request
-
-    @app.route("/list")
-    def lst():
-        return {"vals": req.args.getlist("n")}
-    r = app.test_client().get("/list?n=1&n=2&n=3")
-    assert r.json["vals"] == ["1", "2", "3"]
+def test_request_query_parameter_empty_value(api, app, report):
+    path = report(lambda r: f"[{api.query_get(r, 'x')}]")
+    assert "[]" in wsgi.call(app, "GET", path, query="x=").text
 
 
-def test_request_content_type_available(app, fw):
-    req = fw.request
+# --- Headers --------------------------------------------------------------- #
 
-    @app.route("/ct", methods=["POST"])
-    def ct():
-        return {"ct": req.content_type or ""}
-    r = app.test_client().post("/ct", json={"a": 1})
-    assert "application/json" in r.json["ct"]
+def test_request_custom_header(api, app, report):
+    path = report(lambda r: api.header(r, "X-Test"))
+    result = wsgi.call(app, "GET", path, headers={"X-Test": "yes"})
+    assert b"yes" in result.body
 
 
-def test_request_cookies(app, fw):
-    req = fw.request
-
-    @app.route("/cook")
-    def cook():
-        return {"c": req.cookies.get("sid", "")}
-    c = app.test_client()
-    c.set_cookie("sid", "abc")
-    assert c.get("/cook").json["c"] == "abc"
+def test_request_header_read_case_insensitively(api, app, report):
+    path = report(lambda r: api.header(r, "x-test"))
+    result = wsgi.call(app, "GET", path, headers={"X-Test": "mixed"})
+    assert b"mixed" in result.body
 
 
-def test_request_view_args_populated(app, fw):
-    req = fw.request
-
-    @app.route("/va/<item>")
-    def va(item):
-        return {"va": req.view_args.get("item")}
-    assert app.test_client().get("/va/thing").json["va"] == "thing"
+def test_request_missing_header_default(api, app, report):
+    path = report(lambda r: api.header(r, "X-Absent", "NONE"))
+    assert b"NONE" in wsgi.call(app, "GET", path).body
 
 
-def test_request_full_path_includes_query(app, fw):
-    req = fw.request
-
-    @app.route("/fp")
-    def fp():
-        return {"fp": req.full_path}
-    assert "x=1" in app.test_client().get("/fp?x=1").json["fp"]
+def test_request_content_type_header(api, app, report):
+    path = report(lambda r: api.header(r, "Content-Type"), methods=["POST"])
+    body, ctype = wsgi.json_body({"a": 1})
+    result = wsgi.call(app, "POST", path, body=body, content_type=ctype)
+    assert b"application/json" in result.body
 
 
-def test_request_is_json_flag(app, fw):
-    req = fw.request
+# --- Body ------------------------------------------------------------------ #
 
-    @app.route("/isj", methods=["POST"])
-    def isj():
-        return {"isj": bool(req.is_json)}
-    assert app.test_client().post("/isj", json={}).json["isj"] is True
+def test_request_body_bytes(api, app, report):
+    path = report(lambda r: len(api.body_bytes(r)), methods=["POST"])
+    assert b"5" in wsgi.call(app, "POST", path, body=b"12345").body
 
 
-def test_request_raw_data(app, fw):
-    req = fw.request
-
-    @app.route("/raw", methods=["POST"])
-    def raw():
-        return {"len": len(req.get_data())}
-    assert app.test_client().post("/raw", data=b"12345").json["len"] == 5
+def test_request_body_content(api, app, report):
+    path = report(lambda r: api.body_bytes(r).decode(), methods=["POST"])
+    assert b"payload" in wsgi.call(app, "POST", path, body=b"payload").body
 
 
-def test_request_url_property(app, fw):
-    req = fw.request
-
-    @app.route("/url")
-    def url():
-        return {"url": req.url}
-    assert app.test_client().get("/url").json["url"].endswith("/url")
+def test_request_empty_body(api, app, report):
+    path = report(lambda r: len(api.body_bytes(r)), methods=["POST"])
+    assert b"0" in wsgi.call(app, "POST", path, body=b"").body
 
 
-def test_request_blueprint_none_at_app_level(app, fw):
-    req = fw.request
+def test_request_json_body_is_readable(api, app, report):
+    def read_json(r):
+        return json.loads(api.body_bytes(r).decode())["k"]
+    path = report(read_json, methods=["POST"])
+    body, ctype = wsgi.json_body({"k": "v"})
+    result = wsgi.call(app, "POST", path, body=body, content_type=ctype)
+    assert b"v" in result.body
 
-    @app.route("/nb")
-    def nb():
-        return {"bp": req.blueprint or "none"}
-    assert app.test_client().get("/nb").json["bp"] == "none"
+
+def test_request_body_with_explicit_content_type(api, app, report):
+    """A text body is delivered intact when its content type says so.
+
+    A form-encoded body is deliberately not asserted on here: the
+    specification names "body" but no form mapping, and an implementation is
+    free to parse a form body out of the raw stream (Werkzeug does), so a raw
+    assertion would test an unspecified choice.
+    """
+    path = report(lambda r: api.body_bytes(r).decode(), methods=["POST"])
+    result = wsgi.call(app, "POST", path, body=b"plain text body",
+                       content_type="text/plain")
+    assert b"plain text body" in result.body
 
 
-def test_request_scheme(app, fw):
-    req = fw.request
-
-    @app.route("/scheme")
-    def scheme():
-        return {"scheme": req.scheme}
-    assert app.test_client().get("/scheme").json["scheme"] in ("http", "https")
+def test_request_body_not_consumed_by_routing(api, app, report):
+    """The body is still readable inside the view after dispatch."""
+    path = report(lambda r: api.body_bytes(r).decode() or "EMPTY",
+                  methods=["POST"])
+    assert b"intact" in wsgi.call(app, "POST", path, body=b"intact").body

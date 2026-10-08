@@ -1,6 +1,7 @@
-"""View Dispatch — 20 oracle cases (paper §3.3.2).
+"""View Dispatch — oracle cases for the Django-pair specification.
 
-Function-view invocation, argument passing, decorators, and method handling.
+Dispatch is observed through the WSGI response: which view ran, what it
+received, and what the framework returns when no view accepts the request.
 """
 
 from __future__ import annotations
@@ -8,178 +9,179 @@ from __future__ import annotations
 import pytest
 
 
-def test_function_view_called(rf, dj):
-    from django.http import HttpResponse
+# --- Basic: the right view runs -------------------------------------------- #
 
-    def view(request):
-        return HttpResponse("hi")
-    assert view(rf.get("/")).content == b"hi"
+def test_view_is_called_for_its_pattern(serve, pattern, response_class):
+    calls = {"n": 0}
 
-
-def test_view_receives_url_kwargs(rf, dj):
-    from django.http import HttpResponse
-
-    def view(request, pk):
-        return HttpResponse(str(pk))
-    assert view(rf.get("/"), pk=5).content == b"5"
+    def view(request, **_):
+        calls["n"] += 1
+        return response_class("called")
+    serve([pattern("v/", view)], "GET", "/v/")
+    assert calls["n"] == 1
 
 
-def test_view_reads_get_param(rf, dj):
-    from django.http import HttpResponse
+def test_view_not_called_for_other_paths(serve, pattern, response_class):
+    calls = {"n": 0}
 
-    def view(request):
-        return HttpResponse(request.GET.get("q", ""))
-    assert view(rf.get("/", {"q": "term"})).content == b"term"
-
-
-def test_view_reads_post_data(rf, dj):
-    from django.http import HttpResponse
-
-    def view(request):
-        return HttpResponse(request.POST.get("f", ""))
-    assert view(rf.post("/", {"f": "posted"})).content == b"posted"
+    def view(request, **_):
+        calls["n"] += 1
+        return response_class("called")
+    serve([pattern("v/", view)], "GET", "/other/")
+    assert calls["n"] == 0
 
 
-@pytest.mark.parametrize("method,expected", [
-    ("get", b"GET"), ("post", b"POST"), ("put", b"PUT"),
-])
-def test_view_branches_on_method(rf, dj, method, expected):
-    from django.http import HttpResponse
+def test_correct_view_among_several(serve, pattern, response_class):
+    def first(request, **_):
+        return response_class("first")
 
-    def view(request):
-        return HttpResponse(request.method)
-    assert view(getattr(rf, method)("/")).content == expected
+    def second(request, **_):
+        return response_class("second")
 
-
-def test_require_http_methods_allows(rf, dj):
-    from django.http import HttpResponse
-    from django.views.decorators.http import require_http_methods
-
-    @require_http_methods(["GET"])
-    def view(request):
-        return HttpResponse("ok")
-    assert view(rf.get("/")).status_code == 200
+    def third(request, **_):
+        return response_class("third")
+    patterns = [pattern("a/", first), pattern("b/", second),
+                pattern("c/", third)]
+    assert b"second" in serve(patterns, "GET", "/b/").body
 
 
-def test_require_http_methods_rejects(rf, dj):
-    from django.http import HttpResponse
-    from django.views.decorators.http import require_http_methods
-
-    @require_http_methods(["GET"])
-    def view(request):
-        return HttpResponse("ok")
-    assert view(rf.post("/")).status_code == 405
+def test_view_receives_the_request(api, serve, pattern, response_class):
+    def view(request, **_):
+        return response_class(api.path(request))
+    assert b"/v/" in serve([pattern("v/", view)], "GET", "/v/").body
 
 
-def test_require_POST_decorator(rf, dj):
-    from django.http import HttpResponse
-    from django.views.decorators.http import require_POST
+def test_view_receives_captured_parameters(serve, pattern, response_class):
+    seen = {}
 
-    @require_POST
-    def view(request):
-        return HttpResponse("ok")
-    assert view(rf.post("/")).status_code == 200
-    assert view(rf.get("/")).status_code == 405
-
-
-def test_require_GET_decorator(rf, dj):
-    from django.http import HttpResponse
-    from django.views.decorators.http import require_GET
-
-    @require_GET
-    def view(request):
-        return HttpResponse("ok")
-    assert view(rf.get("/")).status_code == 200
-    assert view(rf.post("/")).status_code == 405
+    def view(request, **params):
+        seen.update(params)
+        return response_class("ok")
+    serve([pattern("u/<str:name>/<int:pk>/", view)], "GET", "/u/zoe/7/")
+    assert seen == {"name": "zoe", "pk": 7}
 
 
-def test_view_returns_404(rf, dj):
-    from django.http import Http404, HttpResponse
-
-    def view(request):
-        raise Http404("nope")
-    with pytest.raises(Http404):
-        view(rf.get("/"))
+def test_view_return_value_becomes_the_response(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("returned", status=201)
+    result = serve([pattern("v/", view)], "GET", "/v/")
+    assert result.status_code == 201 and b"returned" in result.body
 
 
-def test_get_object_or_404_helper_exists(dj):
-    from django.shortcuts import get_object_or_404
-    assert callable(get_object_or_404)
+# --- Behavioural: methods reach the same view ------------------------------ #
+
+@pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE"])
+def test_function_view_receives_any_method(api, serve, pattern,
+                                           response_class, method):
+    def view(request, **_):
+        return response_class(api.method(request))
+    assert method.encode() in serve([pattern("v/", view)], method, "/v/").body
 
 
-def test_view_multiple_kwargs(rf, dj):
-    from django.http import HttpResponse
-
-    def view(request, a, b):
-        return HttpResponse(f"{a}-{b}")
-    assert view(rf.get("/"), a="x", b="y").content == b"x-y"
-
-
-def test_decorator_preserves_kwargs(rf, dj):
-    from django.http import HttpResponse
-    from django.views.decorators.http import require_GET
-
-    @require_GET
-    def view(request, pk):
-        return HttpResponse(str(pk))
-    assert view(rf.get("/"), pk=9).content == b"9"
+def test_view_can_branch_on_method(api, serve, pattern, response_class):
+    def view(request, **_):
+        if api.method(request) == "POST":
+            return response_class("wrote", status=201)
+        return response_class("read")
+    patterns = [pattern("v/", view)]
+    assert b"read" in serve(patterns, "GET", "/v/").body
+    created = serve(patterns, "POST", "/v/")
+    assert created.status_code == 201 and b"wrote" in created.body
 
 
-def test_csrf_exempt_decorator(rf, dj):
-    from django.http import HttpResponse
-    from django.views.decorators.csrf import csrf_exempt
-
-    @csrf_exempt
-    def view(request):
-        return HttpResponse("ok")
-    assert getattr(view, "csrf_exempt", False) is True
-
-
-def test_view_default_400_on_bad(rf, dj):
-    from django.http import HttpResponseBadRequest
-
-    def view(request):
-        return HttpResponseBadRequest("bad")
-    assert view(rf.get("/")).status_code == 400
+def test_view_can_reject_a_method(api, serve, pattern, response_class):
+    def view(request, **_):
+        if api.method(request) != "GET":
+            return response_class("", status=405)
+        return response_class("ok")
+    patterns = [pattern("v/", view)]
+    assert serve(patterns, "GET", "/v/").status_code == 200
+    assert serve(patterns, "POST", "/v/").status_code == 405
 
 
-def test_view_sets_custom_header(rf, dj):
-    from django.http import HttpResponse
+# --- Behavioural: dispatch failures ---------------------------------------- #
 
-    def view(request):
-        resp = HttpResponse("x")
-        resp["X-Custom"] = "1"
-        return resp
-    assert view(rf.get("/"))["X-Custom"] == "1"
+def test_no_matching_pattern_is_404(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("ok")
+    assert serve([pattern("v/", view)], "GET", "/nope/").status_code == 404
 
 
-def test_view_conditional_get_post(rf, dj):
-    from django.http import HttpResponse
-
-    def view(request):
-        if request.method == "POST":
-            return HttpResponse("created", status=201)
-        return HttpResponse("listed")
-    assert view(rf.post("/")).status_code == 201
-    assert view(rf.get("/")).content == b"listed"
+def test_view_raising_is_not_a_200(serve, pattern, response_class):
+    def view(request, **_):
+        raise RuntimeError("boom")
+    result = serve([pattern("v/", view)], "GET", "/v/")
+    assert result.status_code != 200 or result.exc is not None
 
 
-def test_gzip_decorator_importable(dj):
-    from django.views.decorators.gzip import gzip_page
-    assert callable(gzip_page)
+def test_view_returning_an_error_status(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("bad", status=400)
+    assert serve([pattern("v/", view)], "GET", "/v/").status_code == 400
 
 
-def test_cache_decorator_importable(dj):
-    from django.views.decorators.cache import never_cache
-    assert callable(never_cache)
+# --- Behavioural: dispatch is per-request ---------------------------------- #
+
+def test_each_request_dispatches_once(serve, pattern, response_class):
+    calls = {"n": 0}
+
+    def view(request, **_):
+        calls["n"] += 1
+        return response_class("ok")
+    patterns = [pattern("v/", view)]
+    for _ in range(4):
+        serve(patterns, "GET", "/v/")
+    assert calls["n"] == 4
 
 
-def test_view_405_lists_allow_header(rf, dj):
-    from django.http import HttpResponse
-    from django.views.decorators.http import require_POST
+def test_views_do_not_share_state_implicitly(serve, pattern, response_class):
+    def view(request, **_):
+        local = []
+        local.append("x")
+        return response_class(str(len(local)))
+    patterns = [pattern("v/", view)]
+    assert serve(patterns, "GET", "/v/").body == b"1"
+    assert serve(patterns, "GET", "/v/").body == b"1"
 
-    @require_POST
-    def view(request):
-        return HttpResponse("ok")
-    resp = view(rf.get("/"))
-    assert "POST" in resp.get("Allow", "")
+
+def test_captured_parameters_are_per_request(serve, pattern, response_class):
+    def view(request, **params):
+        return response_class(params.get("name", ""))
+    patterns = [pattern("u/<str:name>/", view)]
+    assert b"one" in serve(patterns, "GET", "/u/one/").body
+    assert b"two" in serve(patterns, "GET", "/u/two/").body
+
+
+def test_dispatch_to_nested_path(serve, pattern, response_class):
+    def view(request, **_):
+        return response_class("deep")
+    assert b"deep" in serve([pattern("a/b/c/", view)], "GET", "/a/b/c/").body
+
+
+# --- Edge cases ------------------------------------------------------------ #
+
+def test_query_string_reaches_the_view_not_the_resolver(api, serve, pattern,
+                                                        response_class):
+    def view(request, **_):
+        return response_class(api.query_get(request, "x", "none"))
+    result = serve([pattern("v/", view)], "GET", "/v/", query={"x": "val"})
+    assert b"val" in result.body
+
+
+def test_two_patterns_to_the_same_view(serve, pattern, response_class):
+    calls = {"n": 0}
+
+    def view(request, **_):
+        calls["n"] += 1
+        return response_class("shared")
+    patterns = [pattern("one/", view), pattern("two/", view)]
+    serve(patterns, "GET", "/one/")
+    serve(patterns, "GET", "/two/")
+    assert calls["n"] == 2
+
+
+def test_dispatch_with_an_empty_body_post(api, serve, pattern, response_class):
+    def view(request, **_):
+        return response_class(f"{api.method(request)}:{len(api.body_bytes(request))}")
+    result = serve([pattern("v/", view)], "POST", "/v/", body=b"")
+    assert b"POST:0" in result.body

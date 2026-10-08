@@ -41,5 +41,10 @@ determinism:     two independent `make all` runs of this image over the same
                  pylint's cyclic-import (R0401), which is order-dependent --
                  see analysis/smells.py.
 
+oracle suites:   rebuilt on oracle/wsgi.py (PEP 3333 driver) + oracle/api.py
+                 (declared role surface). Flask 117 functions / 140 cases,
+                 Django 85 functions / 104 cases; both human baselines pass
+                 100% with no skips. No test body names a framework symbol.
+
 not exercised here:
   - significance:      needs >=1 available agentic subject per pair

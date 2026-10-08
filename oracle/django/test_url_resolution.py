@@ -1,6 +1,8 @@
-"""URL Resolution — 22 oracle cases (paper §3.3.2).
+"""URL Resolution — oracle cases for the Django-pair specification.
 
-URL pattern matching, converters, resolve()/reverse(), and include().
+A URL resolves if and only if a request to it reaches the intended view, so
+resolution is asserted through the WSGI response rather than through a
+resolver API.
 """
 
 from __future__ import annotations
@@ -8,235 +10,153 @@ from __future__ import annotations
 import pytest
 
 
-def _view(request, **kw):
-    from django.http import HttpResponse
-    return HttpResponse("ok")
+def _ok(response_class):
+    def view(request, **params):
+        body = "|".join(f"{k}={v}" for k, v in sorted(params.items())) or "ok"
+        return response_class(body)
+    return view
 
 
-@pytest.fixture
-def urls(dj):
-    from django.urls import path, re_path
-    return path, re_path
+# --- Basic: static patterns ------------------------------------------------ #
+
+def test_static_pattern_resolves(serve, pattern, response_class):
+    result = serve([pattern("hello/", _ok(response_class))], path="/hello/")
+    assert result.status_code == 200
 
 
-def test_path_basic_match(dj, urls):
-    from django.urls import resolve, set_urlconf
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc1")
-    mod.urlpatterns = [path("home/", _view, name="home")]
-    set_urlconf(None)
-    match = resolve("/home/", urlconf=mod)
-    assert match.url_name == "home"
+def test_static_pattern_returns_view_body(serve, pattern, response_class):
+    result = serve([pattern("ping/", _ok(response_class))], path="/ping/")
+    assert b"ok" in result.body
 
 
-def test_path_no_match_raises(dj, urls):
-    from django.urls import resolve, Resolver404
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc2")
-    mod.urlpatterns = [path("home/", _view, name="home")]
-    with pytest.raises(Resolver404):
-        resolve("/nope/", urlconf=mod)
+def test_root_pattern_resolves(serve, pattern, response_class):
+    result = serve([pattern("", _ok(response_class))], path="/")
+    assert result.status_code == 200
 
 
-@pytest.mark.parametrize("url,expected", [
-    ("/u/42/", 42),
-    ("/u/0/", 0),
-    ("/u/999/", 999),
-])
-def test_int_converter(dj, urls, url, expected):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc3")
-    mod.urlpatterns = [path("u/<int:pk>/", _view, name="u")]
-    match = resolve(url, urlconf=mod)
-    assert match.kwargs["pk"] == expected
+def test_unmatched_path_is_404(serve, pattern, response_class):
+    result = serve([pattern("exists/", _ok(response_class))], path="/missing/")
+    assert result.status_code == 404
 
 
-def test_int_converter_rejects_non_digit(dj, urls):
-    from django.urls import resolve, Resolver404
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc4")
-    mod.urlpatterns = [path("u/<int:pk>/", _view)]
-    with pytest.raises(Resolver404):
-        resolve("/u/abc/", urlconf=mod)
+def test_two_patterns_resolve_independently(serve, pattern, response_class):
+    def first(request, **_):
+        return response_class("first")
+
+    def second(request, **_):
+        return response_class("second")
+    patterns = [pattern("one/", first), pattern("two/", second)]
+    assert b"first" in serve(patterns, path="/one/").body
+    assert b"second" in serve(patterns, path="/two/").body
 
 
-def test_str_converter_excludes_slash(dj, urls):
-    from django.urls import resolve, Resolver404
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc5")
-    mod.urlpatterns = [path("s/<str:v>/", _view)]
-    with pytest.raises(Resolver404):
-        resolve("/s/a/b/", urlconf=mod)
+def test_nested_static_path_resolves(serve, pattern, response_class):
+    result = serve([pattern("a/b/c/", _ok(response_class))], path="/a/b/c/")
+    assert result.status_code == 200
 
 
-def test_slug_converter(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc6")
-    mod.urlpatterns = [path("post/<slug:s>/", _view)]
-    assert resolve("/post/hello-world/", urlconf=mod).kwargs["s"] == "hello-world"
+# --- Behavioural: variable segments and converters ------------------------- #
+
+@pytest.mark.parametrize("value", ["alice", "bob", "a-b_c"])
+def test_string_converter_captures_value(serve, pattern, response_class, value):
+    patterns = [pattern("user/<str:name>/", _ok(response_class))]
+    result = serve(patterns, path=f"/user/{value}/")
+    assert f"name={value}".encode() in result.body
 
 
-def test_path_converter_allows_slash(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc7")
-    mod.urlpatterns = [path("f/<path:p>/", _view)]
-    assert resolve("/f/a/b/c/", urlconf=mod).kwargs["p"] == "a/b/c"
+@pytest.mark.parametrize("value,code", [("42", 200), ("abc", 404)])
+def test_int_converter_matches_only_digits(serve, pattern, response_class,
+                                           value, code):
+    patterns = [pattern("post/<int:pk>/", _ok(response_class))]
+    assert serve(patterns, path=f"/post/{value}/").status_code == code
 
 
-def test_uuid_converter(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    import uuid
-    path, _ = urls
-    mod = ModuleType("uc8")
-    mod.urlpatterns = [path("x/<uuid:u>/", _view)]
-    u = uuid.uuid4()
-    assert resolve(f"/x/{u}/", urlconf=mod).kwargs["u"] == u
+def test_int_converter_captures_value(serve, pattern, response_class):
+    patterns = [pattern("post/<int:pk>/", _ok(response_class))]
+    assert b"pk=42" in serve(patterns, path="/post/42/").body
 
 
-def test_re_path_named_group(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    _, re_path = urls
-    mod = ModuleType("uc9")
-    mod.urlpatterns = [re_path(r"^y/(?P<year>[0-9]{4})/$", _view)]
-    assert resolve("/y/2024/", urlconf=mod).kwargs["year"] == "2024"
+def test_slug_converter(serve, pattern, response_class):
+    patterns = [pattern("entry/<slug:s>/", _ok(response_class))]
+    assert b"s=my-post-1" in serve(patterns, path="/entry/my-post-1/").body
 
 
-def test_reverse_simple(dj, urls):
-    from django.urls import reverse
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc10")
-    mod.urlpatterns = [path("home/", _view, name="home")]
-    assert reverse("home", urlconf=mod) == "/home/"
+def test_path_converter_spans_slashes(serve, pattern, response_class):
+    patterns = [pattern("files/<path:p>", _ok(response_class))]
+    assert b"p=a/b/c.txt" in serve(patterns, path="/files/a/b/c.txt").body
 
 
-def test_reverse_with_args(dj, urls):
-    from django.urls import reverse
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc11")
-    mod.urlpatterns = [path("u/<int:pk>/", _view, name="u")]
-    assert reverse("u", urlconf=mod, kwargs={"pk": 7}) == "/u/7/"
+def test_uuid_converter(serve, pattern, response_class):
+    import uuid as _uuid
+    value = str(_uuid.uuid4())
+    patterns = [pattern("obj/<uuid:u>/", _ok(response_class))]
+    assert value.encode() in serve(patterns, path=f"/obj/{value}/").body
 
 
-def test_include_prefixes_patterns(dj, urls):
-    from django.urls import resolve, include
-    from types import ModuleType
-    path, _ = urls
-    inner = ModuleType("inner")
-    inner.urlpatterns = [path("leaf/", _view, name="leaf")]
-    mod = ModuleType("uc12")
-    mod.urlpatterns = [path("api/", include(inner))]
-    assert resolve("/api/leaf/", urlconf=mod).url_name == "leaf"
+def test_multiple_variable_segments(serve, pattern, response_class):
+    patterns = [pattern("mix/<str:s>/<int:n>/", _ok(response_class))]
+    body = serve(patterns, path="/mix/x/9/").body
+    assert b"s=x" in body and b"n=9" in body
 
 
-def test_include_reverse(dj, urls):
-    from django.urls import reverse, include
-    from types import ModuleType
-    path, _ = urls
-    inner = ModuleType("inner2")
-    inner.urlpatterns = [path("leaf/", _view, name="leaf")]
-    mod = ModuleType("uc13")
-    mod.urlpatterns = [path("api/", include(inner))]
-    assert reverse("leaf", urlconf=mod) == "/api/leaf/"
+def test_variable_segment_does_not_span_slash(serve, pattern, response_class):
+    patterns = [pattern("user/<str:name>/", _ok(response_class))]
+    assert serve(patterns, path="/user/a/b/").status_code == 404
 
 
-def test_resolve_returns_func(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc14")
-    mod.urlpatterns = [path("z/", _view, name="z")]
-    assert resolve("/z/", urlconf=mod).func is _view
+def test_literal_and_variable_segments_combined(serve, pattern, response_class):
+    patterns = [pattern("a/<str:mid>/z/", _ok(response_class))]
+    assert b"mid=middle" in serve(patterns, path="/a/middle/z/").body
 
 
-def test_multiple_patterns_first_match(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    def other(r, **k):
-        return None
-    mod = ModuleType("uc15")
-    mod.urlpatterns = [path("a/", _view, name="a"), path("b/", other, name="b")]
-    assert resolve("/b/", urlconf=mod).url_name == "b"
+# --- Behavioural: regex patterns ------------------------------------------- #
+
+def test_regex_pattern_resolves(serve, re_pattern, response_class):
+    patterns = [re_pattern(r"^rx/(?P<code>[0-9]{3})/$", _ok(response_class))]
+    assert b"code=404" in serve(patterns, path="/rx/404/").body
 
 
-def test_empty_path_root(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc16")
-    mod.urlpatterns = [path("", _view, name="root")]
-    assert resolve("/", urlconf=mod).url_name == "root"
+def test_regex_pattern_rejects_non_matching(serve, re_pattern, response_class):
+    patterns = [re_pattern(r"^rx/(?P<code>[0-9]{3})/$", _ok(response_class))]
+    assert serve(patterns, path="/rx/abcd/").status_code == 404
 
 
-def test_kwargs_passed_through(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc17")
-    mod.urlpatterns = [path("k/", _view, {"extra": "v"}, name="k")]
-    assert resolve("/k/", urlconf=mod).kwargs["extra"] == "v"
+# --- Edge cases ------------------------------------------------------------ #
+
+def test_resolution_order_first_match_wins(serve, pattern, response_class):
+    def literal(request, **_):
+        return response_class("literal")
+
+    def variable(request, **params):
+        return response_class("variable")
+    patterns = [pattern("u/me/", literal), pattern("u/<str:name>/", variable)]
+    assert b"literal" in serve(patterns, path="/u/me/").body
+    assert b"variable" in serve(patterns, path="/u/other/").body
 
 
-def test_two_converters(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc18")
-    mod.urlpatterns = [path("p/<int:y>/<slug:s>/", _view)]
-    m = resolve("/p/2024/my-post/", urlconf=mod)
-    assert m.kwargs == {"y": 2024, "s": "my-post"}
+def test_resolution_is_case_sensitive(serve, pattern, response_class):
+    patterns = [pattern("CaseSensitive/", _ok(response_class))]
+    assert serve(patterns, path="/casesensitive/").status_code == 404
 
 
-def test_reverse_nonexistent_raises(dj, urls):
-    from django.urls import reverse, NoReverseMatch
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc19")
-    mod.urlpatterns = [path("home/", _view, name="home")]
-    with pytest.raises(NoReverseMatch):
-        reverse("missing", urlconf=mod)
+def test_query_string_does_not_affect_resolution(serve, pattern, response_class):
+    patterns = [pattern("q/", _ok(response_class))]
+    result = serve(patterns, path="/q/", query={"x": "1", "y": "2"})
+    assert result.status_code == 200
 
 
-def test_app_name_namespacing(dj, urls):
-    from django.urls import resolve, include
-    from types import ModuleType
-    path, _ = urls
-    inner = ModuleType("ns_inner")
-    inner.app_name = "myapp"
-    inner.urlpatterns = [path("x/", _view, name="x")]
-    mod = ModuleType("uc20")
-    mod.urlpatterns = [path("m/", include(inner))]
-    assert resolve("/m/x/", urlconf=mod).namespace == "myapp"
+def test_trailing_slash_is_part_of_the_pattern(serve, pattern, response_class):
+    """With no URL-rewriting middleware configured, the pattern matches exactly.
+
+    An empty pattern list is deliberately not asserted on: a framework is free
+    to serve a landing page when nothing is routed, which the specification
+    does not fix either way.
+    """
+    patterns = [pattern("exact/", _ok(response_class))]
+    assert serve(patterns, path="/exact/").status_code == 200
+    assert serve(patterns, path="/exact").status_code == 404
 
 
-def test_trailing_slash_significant(dj, urls):
-    from django.urls import resolve, Resolver404
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc21")
-    mod.urlpatterns = [path("t/", _view)]
-    with pytest.raises(Resolver404):
-        resolve("/t", urlconf=mod)
-
-
-def test_resolvermatch_route_attr(dj, urls):
-    from django.urls import resolve
-    from types import ModuleType
-    path, _ = urls
-    mod = ModuleType("uc22")
-    mod.urlpatterns = [path("u/<int:pk>/", _view, name="u")]
-    assert "pk" in resolve("/u/1/", urlconf=mod).route
+def test_unmatched_nested_path_is_404(serve, pattern, response_class):
+    patterns = [pattern("known/<int:pk>/", _ok(response_class))]
+    assert serve(patterns, path="/known/").status_code == 404

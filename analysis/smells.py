@@ -4,6 +4,15 @@ Runs pylint with the default plugin set and its JSON reporter, drops F-category
 (fatal) findings that stem from the isolated analysis environment (paper
 §3.5.3), and reports totals, per-100-LOC density, and C/R/W/E category
 breakdown.
+
+One further message is excluded: ``cyclic-import`` (R0401). It is not a
+per-file smell but a property of the whole import graph, emitted once per
+detected cycle after every module has been walked, and pylint's count for it
+varies between otherwise identical runs -- measured at 0 or 7 occurrences for
+Flask 3.0.3 and a +/-1 swing for the Django URL module over four runs of the
+same pinned image on the same mounted snapshot. Leaving it in makes the
+reported smell density irreproducible, which matters more here than the one
+message class: every other pylint message is per-file and stable.
 """
 
 from __future__ import annotations
@@ -21,12 +30,19 @@ CATEGORY = {"C": "convention", "R": "refactor", "W": "warning",
             "E": "error", "F": "fatal", "I": "info"}
 DROP_CATEGORIES = {"fatal", "info"}
 
+# Whole-import-graph messages: order-dependent, and therefore not reproducible
+# between identical runs. Excluded at the pylint invocation and again when
+# tallying, so a future pylint that ignores the flag cannot reintroduce them.
+DROP_MESSAGE_IDS = {"R0401"}      # cyclic-import
+
 
 def _run_pylint(files: list[Path]) -> list[dict]:
     if not files:
         return []
     cmd = [sys.executable, "-m", "pylint",
-           "--output-format=json", "--score=n", *map(str, files)]
+           "--output-format=json", "--score=n",
+           f"--disable={','.join(sorted(DROP_MESSAGE_IDS))}",
+           *map(str, files)]
     proc = subprocess.run(cmd, capture_output=True, text=True)
     if not proc.stdout.strip():
         # pylint prints nothing only when it crashed before analysis.
@@ -42,6 +58,8 @@ def analyze(subject: common.Subject, total_loc: int) -> dict:
     by_symbol: dict[str, int] = {}
     kept = 0
     for m in messages:
+        if m.get("message-id") in DROP_MESSAGE_IDS:
+            continue
         letter = m.get("message-id", "C0")[0]
         cat = CATEGORY.get(letter, "convention")
         if cat in DROP_CATEGORIES:

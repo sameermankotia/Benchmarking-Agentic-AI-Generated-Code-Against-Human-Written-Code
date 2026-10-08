@@ -1,0 +1,13 @@
+# Keep the build context to the harness itself. The baseline snapshots and the
+# results directory are bind-mounted by `make docker-run` (subjects/ read-only,
+# results/ read-write), so copying them into the image is wasted work and would
+# let a stale host copy shadow the mount. The host virtualenv must never enter
+# the image: the container installs its own from requirements-analysis.txt.
+.venv/
+.git/
+.pytest_cache/
+__pycache__/
+*.pyc
+subjects/*/
+!subjects/subjects.json
+results/

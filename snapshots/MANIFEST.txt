@@ -43,6 +43,12 @@ swe_django       SWE-agent 1.0.0  + claude-sonnet-4-20250514   django      5
 Analysis toolchain
 ------------------
 Pinned in requirements-analysis.txt (Radon, complexipy, Bandit, pylint, pytest).
-CPD ships with PMD 7.0.0, installed in the Dockerfile. The exact interpreter and
-resolved tool versions for the committed results/ are recorded in
-logs/environment.txt.
+The baseline snapshots' own runtime dependencies are pinned separately in
+requirements-subjects.txt and must be installed, or neither pylint nor the
+oracle can resolve a subject's imports. CPD ships with PMD 7.0.0, installed in
+the Dockerfile.
+
+All of results/ and logs/ is produced by the hermetic image
+(make docker && make docker-run); logs/environment.txt records the interpreter,
+the resolved tool versions, PMD/JRE versions, and the determinism check. Two
+independent runs give byte-identical JSON and CSV.

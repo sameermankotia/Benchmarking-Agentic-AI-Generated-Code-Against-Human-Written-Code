@@ -1,0 +1,223 @@
+{
+  "blocks": [
+    {
+      "lines": 11,
+      "occurrences": [
+        {
+          "line": 15,
+          "path": "views/decorators/common.py"
+        },
+        {
+          "line": 57,
+          "path": "views/decorators/csrf.py"
+        }
+      ],
+      "tokens": 58
+    },
+    {
+      "lines": 12,
+      "occurrences": [
+        {
+          "line": 37,
+          "path": "views/decorators/http.py"
+        },
+        {
+          "line": 53,
+          "path": "views/decorators/http.py"
+        }
+      ],
+      "tokens": 50
+    },
+    {
+      "lines": 12,
+      "occurrences": [
+        {
+          "line": 570,
+          "path": "views/generic/dates.py"
+        },
+        {
+          "line": 634,
+          "path": "views/generic/dates.py"
+        }
+      ],
+      "tokens": 50
+    }
+  ],
+  "duplicated_blocks": 3,
+  "duplicated_loc": 35,
+  "duplicated_pct": 1.0,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "urls/__init__.py",
+      "loc": 52
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "urls/base.py",
+      "loc": 120
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "urls/conf.py",
+      "loc": 80
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "urls/converters.py",
+      "loc": 40
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "urls/exceptions.py",
+      "loc": 5
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "urls/resolvers.py",
+      "loc": 696
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "urls/utils.py",
+      "loc": 50
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/__init__.py",
+      "loc": 2
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/csrf.py",
+      "loc": 63
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/debug.py",
+      "loc": 502
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/decorators/__init__.py",
+      "loc": 0
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/decorators/cache.py",
+      "loc": 49
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/decorators/clickjacking.py",
+      "loc": 45
+    },
+    {
+      "duplicated_loc": 11,
+      "duplicated_pct": 91.7,
+      "file": "views/decorators/common.py",
+      "loc": 12
+    },
+    {
+      "duplicated_loc": 11,
+      "duplicated_pct": 33.3,
+      "file": "views/decorators/csrf.py",
+      "loc": 33
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/decorators/debug.py",
+      "loc": 82
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/decorators/gzip.py",
+      "loc": 4
+    },
+    {
+      "duplicated_loc": 24,
+      "duplicated_pct": 23.3,
+      "file": "views/decorators/http.py",
+      "loc": 103
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/decorators/vary.py",
+      "loc": 23
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/defaults.py",
+      "loc": 82
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/generic/__init__.py",
+      "loc": 35
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/generic/base.py",
+      "loc": 202
+    },
+    {
+      "duplicated_loc": 24,
+      "duplicated_pct": 4.6,
+      "file": "views/generic/dates.py",
+      "loc": 524
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/generic/detail.py",
+      "loc": 116
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/generic/edit.py",
+      "loc": 180
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/generic/list.py",
+      "loc": 168
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/i18n.py",
+      "loc": 175
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views/static.py",
+      "loc": 77
+    }
+  ],
+  "label": "Django mod. (H)",
+  "max_block_tokens": 58,
+  "min_tokens": 50,
+  "subject": "django"
+}

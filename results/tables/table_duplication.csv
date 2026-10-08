@@ -1,0 +1,7 @@
+metric,Flask (H),"Flask 0.1 (H, first draft)",Django mod. (H)
+Duplicated blocks,7,0,3
+Duplicated LOC,146,0,35
+Duplicated LOC (% of total),3.4,0.0,1.0
+"Mann-Whitney U p (Duplicated % vs. human baseline, per-file)",ref.,ref.,ref.
+Rank-biserial r (Duplicated %),ref.,ref.,ref.
+Max block size (tokens),167,0,58

@@ -1,6 +1,7 @@
 ============================= test session starts ==============================
-platform darwin -- Python 3.11.15, pytest-8.1.1, pluggy-1.6.0 -- /private/tmp/claude-501/-Users-sameermankotia-Desktop-Agentic/c73bdfbe-da6c-4a27-9960-70363fe601f0/scratchpad/pinned/bin/python
-rootdir: /Users/sameermankotia/Desktop/Agentic
+platform linux -- Python 3.11.17, pytest-8.1.1, pluggy-1.6.0 -- /usr/local/bin/python
+rootdir: /work
+plugins: platformdirs-4.12.4
 collecting ... collected 97 items
 
 oracle/django/test_class_based_views.py::test_view_as_view_get PASSED    [  1%]
@@ -101,4 +102,4 @@ oracle/django/test_view_dispatch.py::test_gzip_decorator_importable PASSED [ 97%
 oracle/django/test_view_dispatch.py::test_cache_decorator_importable PASSED [ 98%]
 oracle/django/test_view_dispatch.py::test_view_405_lists_allow_header PASSED [100%]
 
-============================== 97 passed in 0.09s ==============================
+============================== 97 passed in 0.32s ==============================

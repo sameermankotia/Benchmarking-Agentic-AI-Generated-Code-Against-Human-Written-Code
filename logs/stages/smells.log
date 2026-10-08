@@ -1,6 +1,9 @@
 
 === smells ===
-[smells] flask: 276 findings (6.5/100 LOC)
+[smells] flask: 270 findings (6.36/100 LOC)
 [smells] flask_0_1: 39 findings (15.66/100 LOC)
-[smells] django: 387 findings (10.99/100 LOC)
-[smells] done in 9.0s
+[smells] SKIP swe_flask: snapshot not present
+[smells] SKIP openhands_flask: snapshot not present
+[smells] django: 384 findings (10.91/100 LOC)
+[smells] SKIP swe_django: snapshot not present
+[smells] done in 11.9s

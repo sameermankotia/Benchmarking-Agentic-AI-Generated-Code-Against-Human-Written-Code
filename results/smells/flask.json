@@ -1,12 +1,12 @@
 {
   "by_category": {
     "convention": 144,
-    "error": 27,
-    "refactor": 47,
+    "error": 26,
+    "refactor": 42,
     "warning": 58
   },
   "label": "Flask (H)",
-  "per_100_loc": 6.5,
+  "per_100_loc": 6.36,
   "subject": "flask",
   "top_symbols": {
     "abstract-method": 7,
@@ -25,5 +25,5 @@
     "unused-argument": 8,
     "useless-import-alias": 40
   },
-  "total_findings": 276
+  "total_findings": 270
 }

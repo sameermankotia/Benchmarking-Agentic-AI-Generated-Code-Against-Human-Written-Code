@@ -12,7 +12,7 @@
     {
       "confidence": "HIGH",
       "cwe": "CWE-94",
-      "file": "/Users/sameermankotia/Desktop/Agentic/subjects/flask-0.1/flask.py",
+      "file": "flask.py",
       "line": 286,
       "severity": "HIGH",
       "test_id": "B701",

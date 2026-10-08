@@ -6,6 +6,8 @@ Engineering: A Multi-Dimensional Empirical Evaluation.*
 It runs one deterministic pipeline over every study subject and produces the
 paper's tables as CSV. Five quality dimensions, five research questions:
 
+
+
 | RQ  | Dimension               | Tool(s)                         | Module                     |
 |-----|-------------------------|---------------------------------|----------------------------|
 | RQ1 | Functional correctness  | pytest (oracle suites)          | `analysis/correctness.py`  |
@@ -31,8 +33,13 @@ analysis/                     one module per stage + significance + aggregator
 run_all.py                    orchestrator (`make all` calls this)
 results/<dimension>/          per-subject result JSON        (committed)
 results/significance/         Mann-Whitney U / Fisher's exact per agentic subject
+                              (not in this checkout: needs a registered agentic subject)
 results/tables/               aggregated CSV tables          (committed)
 logs/                         frozen pipeline run transcripts (committed)
+docs/manuscript-audit.md      manuscript claims vs. measured values
+docs/oracle-binding.tex       Section III-D1 text (resolves its authortodo)
+requirements-analysis.txt     pinned analysis toolchain
+requirements-subjects.txt     pinned runtime deps of the baseline snapshots
 Dockerfile, Makefile          hermetic execution
 LICENSE, CITATION.cff         MIT license; how to cite
 ```
@@ -64,13 +71,20 @@ make docker && make docker-run   # mounts subjects/ ro, results/ rw
 
 The two **human baselines** and the **maturity control** are cloned at their
 pinned tags (`snapshots/MANIFEST.txt`) and marked `available` in the registry,
-and both oracle suites are complete, so the pipeline runs end-to-end today:
+and both oracle suites execute end-to-end today -- but see the discrepancy
+note below: the committed oracle files are a partial stand-in for the suite
+that produced the manuscript's numbers:
 
 ```bash
 pip install -r requirements-analysis.txt
-pip install -e subjects/flask -e subjects/django   # brings in transitive deps
+pip install -r requirements-subjects.txt           # the subjects' own runtime deps
 make all SUBJECTS="flask django flask_0_1"
 ```
+
+`requirements-subjects.txt` is not optional. Without the subjects' runtime
+dependencies on the path, pylint cannot resolve their imports and reports 63
+spurious `import-error` findings for Flask alone, and the oracle cannot import
+any subject at all. The Docker image installs it too.
 
 Each oracle passes **100%** against its own reference baseline (Flask 133/133,
 Django 97/97 parametrised cases): the suite is derived from the written
@@ -95,6 +109,16 @@ case. Complexity, maintainability, security, and smells populate
 > every table in this package reflect the placeholder suite, not the
 > manuscript's Table 3/Table 1 (variance) figures — do not cite one for the
 > other.
+>
+> **It is also not portable.** `oracle/flask/conftest.py` builds the
+> application with `sut_module.Flask(__name__)`, and 8 of the 12 symbols the
+> Flask suite reaches through the SUT handle (`Flask`, `url_for`, `abort`,
+> `jsonify`, `redirect`, `make_response`, `render_template_string`, `Response`)
+> are Flask API names the specification never mentions. Against an agentic
+> subject that named its application class anything else, those cases error
+> instead of reporting a behavioural result, so the suite cannot produce a
+> valid RQ1 number for the agentic subjects until a name-resolution layer is
+> added. See `docs/manuscript-audit.md` §5.
 
 ### Agentic subjects
 
@@ -162,15 +186,25 @@ note — the pipeline always emits whatever tables the present data supports.
   (`table_cwe_<pair>.csv`) independently of the collapsed per-CWE counts in
   `table_security.csv`.
 - **Smells** — pylint JSON reporter; F/I categories dropped (see the paper's
-  code-smell subsection); reported as totals, per-100-LOC density, and C/R/W/E
-  breakdown.
+  code-smell subsection), and `cyclic-import` (R0401) excluded as an
+  order-dependent whole-import-graph message rather than a per-file smell (see
+  "Determinism"); reported as totals, per-100-LOC density, and C/R/W/E
+  breakdown. The subjects' runtime dependencies must be installed, or pylint
+  reports an `import-error` per unresolved module and the density measures the
+  analysis environment instead of the code.
 - **Duplication** — CPD with a 50-token minimum; duplicated blocks, duplicated
   LOC, duplicated fraction, largest block in tokens, and a per-file duplicated
   LOC / duplicated-% breakdown (feeds the file-level significance test below).
-  Requires PMD + a JRE, so it is produced only in the Docker path.
+  Requires PMD + a JRE, so it is produced only in the Docker path; the
+  committed `results/duplication/` came from that path (PMD 7.0.0, see
+  `logs/environment.txt`).
 - **Correctness** — each oracle suite runs against a subject through the
   canonical `sut` import (see `oracle/conftest.py`); JUnit XML is bucketed into
-  the paper's behavioural categories by test-file stem.
+  the paper's behavioural categories by test-file stem. Skipped cases count as
+  *not evaluated*, never as failures: the pass rate is computed over executed
+  cases, and a subject whose cases all skipped (typically an import failure)
+  raises instead of being scored 0%, which would otherwise be
+  indistinguishable from a subject that implemented nothing.
 
 ### Statistical testing
 
@@ -215,7 +249,26 @@ pass rate, MI points for MI, relative % otherwise) — the same format used to
 argue that quality gaps are consistent in direction and magnitude across
 both repository pairs and both agentic systems.
 
-Determinism: identical inputs + pinned tools (`requirements-analysis.txt`,
-pinned PMD in the Dockerfile) yield numerically identical `results/`. The
-interpreter and resolved tool versions behind the committed `results/` are in
-`logs/environment.txt`.
+## Determinism
+
+Verified, not just asserted: two independent `make all` runs of the pinned
+image over the same mounted snapshots produce **byte-identical** `results/` --
+every JSON and every CSV. The two JUnit XML reports differ only in their
+per-test `time`, `timestamp`, and container `hostname` attributes; stripped of
+those three they hash identically.
+
+Reaching that required excluding pylint's `cyclic-import` (R0401), which is a
+whole-import-graph message rather than a per-file smell and whose count varies
+between identical runs (measured: Flask 276/277/276/276, Django 387/387/388/388
+over four runs). It is excluded at the invocation and again when tallying; see
+`analysis/smells.py`. **The paper's code-smell subsection needs a sentence
+recording this exclusion.**
+
+All of `results/` and `logs/` now comes from one path, `make docker &&
+make docker-run`. Earlier committed results came from a host virtualenv whose
+versions had drifted from the pins (complexipy 6.0.1, pylint 4.0.6, pytest
+9.1.1 rather than 0.4.0 / 3.1.0 / 8.1.1); `logs/environment.txt` records this
+and the exact resolved versions. CC, CogC, MI, security, repo-stats and
+duplication are identical under both complexipy majors -- only the
+pylint-derived smell counts moved (Flask 6.5 -> 6.36, Django 10.99 -> 10.91 per
+100 LOC). See `docs/manuscript-audit.md` §6.

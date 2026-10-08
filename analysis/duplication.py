@@ -83,9 +83,25 @@ def _parse(xml_text: str) -> dict:
     }
 
 
+def _rel(path: str, subject: common.Subject) -> str:
+    """Path relative to the subject root, so results/ is machine-independent.
+
+    CPD reports absolute paths, which would otherwise bake the Docker mount
+    point into the committed artifact.
+    """
+    try:
+        return str(Path(path).resolve().relative_to(subject.root.resolve()))
+    except ValueError:
+        return path
+
+
 def analyze(subject: common.Subject, total_loc: int) -> dict:
     parsed = _parse(_run_cpd(subject.target_paths()))
     loc = total_loc or 1
+
+    for block in parsed["blocks"]:
+        for occ in block["occurrences"]:
+            occ["path"] = _rel(occ["path"], subject)
 
     files_info = []
     for f in subject.python_files():

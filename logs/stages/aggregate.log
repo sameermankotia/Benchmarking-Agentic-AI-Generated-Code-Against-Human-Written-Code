@@ -8,4 +8,5 @@
 [aggregate] wrote results/tables/table_security.csv
 [aggregate] wrote results/tables/table_cwe_flask.csv
 [aggregate] wrote results/tables/table_cwe_django.csv
+[aggregate] wrote results/tables/table_duplication.csv
 [aggregate] wrote results/tables/summary.csv

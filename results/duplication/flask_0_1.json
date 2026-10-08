@@ -1,0 +1,18 @@
+{
+  "blocks": [],
+  "duplicated_blocks": 0,
+  "duplicated_loc": 0,
+  "duplicated_pct": 0.0,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask.py",
+      "loc": 249
+    }
+  ],
+  "label": "Flask 0.1 (H, first draft)",
+  "max_block_tokens": 0,
+  "min_tokens": 50,
+  "subject": "flask_0_1"
+}

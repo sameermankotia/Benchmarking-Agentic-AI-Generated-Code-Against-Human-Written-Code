@@ -1,0 +1,48 @@
+% -------------------------------------------------------------------
+% Replacement for the \authortodo in Section III-D1
+% ("Binding One Suite to Different Implementations").
+%
+% Describes the binding mechanism that exists in the replication
+% package (oracle/conftest.py, analysis/correctness.py,
+% oracle/django/conftest.py). It deliberately does NOT claim a
+% specification-level name adapter: no such adapter is implemented.
+% See docs/manuscript-audit.md, section 5, before the agentic
+% subjects are scored for RQ1.
+% -------------------------------------------------------------------
+
+\subsubsection{Binding One Suite to Different Implementations}
+
+Because the specification fixes neither package names nor module
+layout, each subject exposes the specified behavior under a different
+import path. One suite is therefore bound to each subject at run time
+rather than being rewritten per subject. Every oracle test reaches the
+system under test through a single canonical handle, \texttt{sut}. The
+correctness runner resolves, for each subject, the pair (top-level
+package name, \texttt{sys.path} entry) from the source root recorded in
+the subject registry: if the root is itself a package, the import name
+is the root's own name and the path entry is its \emph{parent}, never
+the package directory, which would otherwise shadow standard library
+modules of the same name; if the root is a container directory, the
+import name is its single contained package and the path entry is the
+root. The runner then prepends the path entry to \texttt{PYTHONPATH},
+exports the import name in the environment, and invokes
+\texttt{pytest} once per subject in a separate process; a shared
+\texttt{conftest.py} imports that package and aliases it to
+\texttt{sut}. An import failure is reported as a skip with the
+underlying exception rather than as a behavioral failure, so a subject
+that cannot be imported is never silently scored as incorrect.
+
+Results are read back from the JUnit XML report and bucketed into the
+behavioral categories of Section~\ref{sec:oracle} by test-file stem, so
+the per-category tables are produced by the same mechanism for every
+subject.
+
+The Django URL module needs a configured settings module before most of
+its symbols can be imported, so the Django oracle configures a minimal
+in-memory settings object once per test session, with templating
+enabled and no installed applications, database, or middleware, and
+then calls the subject's \texttt{setup()} entry point. Requests are
+constructed through the framework's own request-factory surface. This
+hosts the routing and view-dispatch subsystem in isolation, without a
+project skeleton on disk, so the analyzed scope and the tested scope
+are identical.

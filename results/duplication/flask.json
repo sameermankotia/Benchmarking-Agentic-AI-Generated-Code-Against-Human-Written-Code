@@ -1,0 +1,255 @@
+{
+  "blocks": [
+    {
+      "lines": 75,
+      "occurrences": [
+        {
+          "line": 273,
+          "path": "app.py"
+        },
+        {
+          "line": 55,
+          "path": "blueprints.py"
+        }
+      ],
+      "tokens": 167
+    },
+    {
+      "lines": 17,
+      "occurrences": [
+        {
+          "line": 63,
+          "path": "app.py"
+        },
+        {
+          "line": 43,
+          "path": "sansio/app.py"
+        }
+      ],
+      "tokens": 109
+    },
+    {
+      "lines": 15,
+      "occurrences": [
+        {
+          "line": 218,
+          "path": "app.py"
+        },
+        {
+          "line": 282,
+          "path": "sansio/app.py"
+        }
+      ],
+      "tokens": 101
+    },
+    {
+      "lines": 13,
+      "occurrences": [
+        {
+          "line": 19,
+          "path": "blueprints.py"
+        },
+        {
+          "line": 174,
+          "path": "sansio/blueprints.py"
+        }
+      ],
+      "tokens": 99
+    },
+    {
+      "lines": 7,
+      "occurrences": [
+        {
+          "line": 18,
+          "path": "sansio/blueprints.py"
+        },
+        {
+          "line": 28,
+          "path": "sansio/scaffold.py"
+        }
+      ],
+      "tokens": 75
+    },
+    {
+      "lines": 8,
+      "occurrences": [
+        {
+          "line": 969,
+          "path": "app.py"
+        },
+        {
+          "line": 177,
+          "path": "helpers.py"
+        }
+      ],
+      "tokens": 50
+    },
+    {
+      "lines": 11,
+      "occurrences": [
+        {
+          "line": 602,
+          "path": "sansio/app.py"
+        },
+        {
+          "line": 410,
+          "path": "sansio/blueprints.py"
+        }
+      ],
+      "tokens": 50
+    }
+  ],
+  "duplicated_blocks": 7,
+  "duplicated_loc": 146,
+  "duplicated_pct": 3.4,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "__init__.py",
+      "loc": 54
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "__main__.py",
+      "loc": 2
+    },
+    {
+      "duplicated_loc": 115,
+      "duplicated_pct": 18.4,
+      "file": "app.py",
+      "loc": 624
+    },
+    {
+      "duplicated_loc": 88,
+      "duplicated_pct": 144.3,
+      "file": "blueprints.py",
+      "loc": 61
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "cli.py",
+      "loc": 700
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "config.py",
+      "loc": 151
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "ctx.py",
+      "loc": 214
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "debughelpers.py",
+      "loc": 134
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "globals.py",
+      "loc": 33
+    },
+    {
+      "duplicated_loc": 8,
+      "duplicated_pct": 3.9,
+      "file": "helpers.py",
+      "loc": 203
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "json/__init__.py",
+      "loc": 33
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "json/provider.py",
+      "loc": 84
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "json/tag.py",
+      "loc": 169
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "logging.py",
+      "loc": 37
+    },
+    {
+      "duplicated_loc": 43,
+      "duplicated_pct": 12.4,
+      "file": "sansio/app.py",
+      "loc": 348
+    },
+    {
+      "duplicated_loc": 31,
+      "duplicated_pct": 8.4,
+      "file": "sansio/blueprints.py",
+      "loc": 367
+    },
+    {
+      "duplicated_loc": 7,
+      "duplicated_pct": 2.2,
+      "file": "sansio/scaffold.py",
+      "loc": 319
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "sessions.py",
+      "loc": 175
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "signals.py",
+      "loc": 13
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "templating.py",
+      "loc": 144
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "testing.py",
+      "loc": 176
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "typing.py",
+      "loc": 65
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "views.py",
+      "loc": 65
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "wrappers.py",
+      "loc": 72
+    }
+  ],
+  "label": "Flask (H)",
+  "max_block_tokens": 167,
+  "min_tokens": 50,
+  "subject": "flask"
+}

@@ -1,39 +1,58 @@
+python run_all.py 
 
 === repo_stats ===
 [repo_stats] flask: 4243 LOC, 362 fns, MI-inputs ready
 [repo_stats] flask_0_1: 249 LOC, 36 fns, MI-inputs ready
+[repo_stats] SKIP swe_flask: snapshot not present
+[repo_stats] SKIP openhands_flask: snapshot not present
 [repo_stats] django: 3520 LOC, 296 fns, MI-inputs ready
-[repo_stats] done in 0.2s
+[repo_stats] SKIP swe_django: snapshot not present
+[repo_stats] done in 0.9s
 
 === correctness ===
 [correctness] flask: 133/133 (100.0%)
 [correctness] SKIP flask_0_1: structural reference only (no oracle)
+[correctness] SKIP swe_flask: snapshot not present
+[correctness] SKIP openhands_flask: snapshot not present
 [correctness] django: 97/97 (100.0%)
-[correctness] done in 0.4s
+[correctness] SKIP swe_django: snapshot not present
+[correctness] done in 0.8s
 
 === complexity ===
 [complexity] flask: mean CC=2.8 mean CogC=2.1 mean MI=64.1
 [complexity] flask_0_1: mean CC=1.7 mean CogC=0.8 mean MI=40.6
+[complexity] SKIP swe_flask: snapshot not present
+[complexity] SKIP openhands_flask: snapshot not present
 [complexity] django: mean CC=2.8 mean CogC=2.7 mean MI=75.1
-[complexity] done in 0.4s
+[complexity] SKIP swe_django: snapshot not present
+[complexity] done in 0.8s
 
 === smells ===
-[smells] flask: 278 findings (6.55/100 LOC)
+[smells] flask: 270 findings (6.36/100 LOC)
 [smells] flask_0_1: 39 findings (15.66/100 LOC)
-[smells] django: 388 findings (11.02/100 LOC)
-[smells] done in 8.9s
+[smells] SKIP swe_flask: snapshot not present
+[smells] SKIP openhands_flask: snapshot not present
+[smells] django: 384 findings (10.91/100 LOC)
+[smells] SKIP swe_django: snapshot not present
+[smells] done in 11.9s
 
 === security ===
 [security] flask: 11 findings (0.26/100 LOC)
 [security] flask_0_1: 1 findings (0.4/100 LOC)
+[security] SKIP swe_flask: snapshot not present
+[security] SKIP openhands_flask: snapshot not present
 [security] django: 1 findings (0.03/100 LOC)
-[security] done in 0.5s
+[security] SKIP swe_django: snapshot not present
+[security] done in 0.8s
 
 === duplication ===
-[duplication] SKIP flask: CPD unavailable or failed: cpd not found on PATH
-[duplication] SKIP flask_0_1: CPD unavailable or failed: cpd not found on PATH
-[duplication] SKIP django: CPD unavailable or failed: cpd not found on PATH
-[duplication] done in 0.0s
+[duplication] flask: 7 blocks, 3.4% duplicated
+[duplication] flask_0_1: 0 blocks, 0.0% duplicated
+[duplication] SKIP swe_flask: snapshot not present
+[duplication] SKIP openhands_flask: snapshot not present
+[duplication] django: 3 blocks, 1.0% duplicated
+[duplication] SKIP swe_django: snapshot not present
+[duplication] done in 1.6s
 
 === significance ===
 [significance] SKIP: no agentic/human pair had results for any dimension
@@ -48,4 +67,5 @@
 [aggregate] wrote results/tables/table_security.csv
 [aggregate] wrote results/tables/table_cwe_flask.csv
 [aggregate] wrote results/tables/table_cwe_django.csv
+[aggregate] wrote results/tables/table_duplication.csv
 [aggregate] wrote results/tables/summary.csv

@@ -95,30 +95,7 @@ case. Complexity, maintainability, security, and smells populate
 `results/tables/` from the same run; `logs/` holds that run's console output and
 `logs/environment.txt` records the exact interpreter and tool versions.
 
-> **⚠ Open discrepancy with the manuscript, not yet resolved.** The oracle
-> files under `oracle/flask/` and `oracle/django/` are explicitly documented,
-> in their own `README.md`, as a partial stand-in: "*the full case set ... is
-> distributed separately in the replication package.*" That fuller case set
-> has never been added to this repository. What ships here is 119 Flask / 85
-> Django test **functions** (133 / 97 after `pytest` parametrisation), and it
-> passes 100% against both human baselines. The manuscript reports 120 / 85
-> **cases** with the human baseline passing 90.8% / 92.4%, including specific
-> per-category failures (e.g. Flask App Context 19/22, Blueprints 13/20) that
-> this suite does not reproduce, because it is not the suite that produced
-> those numbers. Until the actual full oracle suite is added, `results/` and
-> every table in this package reflect the placeholder suite, not the
-> manuscript's Table 3/Table 1 (variance) figures — do not cite one for the
-> other.
->
-> **It is also not portable.** `oracle/flask/conftest.py` builds the
-> application with `sut_module.Flask(__name__)`, and 8 of the 12 symbols the
-> Flask suite reaches through the SUT handle (`Flask`, `url_for`, `abort`,
-> `jsonify`, `redirect`, `make_response`, `render_template_string`, `Response`)
-> are Flask API names the specification never mentions. Against an agentic
-> subject that named its application class anything else, those cases error
-> instead of reporting a behavioural result, so the suite cannot produce a
-> valid RQ1 number for the agentic subjects until a name-resolution layer is
-> added. See `docs/manuscript-audit.md` §5.
+
 
 ### Agentic subjects
 

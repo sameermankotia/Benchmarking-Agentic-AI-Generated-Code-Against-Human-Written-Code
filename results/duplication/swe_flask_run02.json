@@ -1,0 +1,75 @@
+{
+  "blocks": [
+    {
+      "lines": 13,
+      "occurrences": [
+        {
+          "line": 24,
+          "path": "flaskframework/blueprints.py"
+        },
+        {
+          "line": 44,
+          "path": "flaskframework/blueprints.py"
+        }
+      ],
+      "tokens": 52
+    }
+  ],
+  "duplicated_blocks": 1,
+  "duplicated_loc": 13,
+  "duplicated_pct": 2.3,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/__init__.py",
+      "loc": 18
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/app.py",
+      "loc": 126
+    },
+    {
+      "duplicated_loc": 26,
+      "duplicated_pct": 63.4,
+      "file": "flaskframework/blueprints.py",
+      "loc": 41
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/context.py",
+      "loc": 58
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/request.py",
+      "loc": 81
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/response.py",
+      "loc": 71
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/routing.py",
+      "loc": 94
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/templating.py",
+      "loc": 67
+    }
+  ],
+  "label": "SWE-agent (A) r02",
+  "max_block_tokens": 52,
+  "min_tokens": 50,
+  "subject": "swe_flask_run02"
+}

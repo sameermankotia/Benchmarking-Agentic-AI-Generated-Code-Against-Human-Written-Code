@@ -1,0 +1,14 @@
+{
+  "by_cwe": {},
+  "by_severity": {
+    "HIGH": 0,
+    "LOW": 0,
+    "MEDIUM": 0
+  },
+  "density_per_100_loc": 0.0,
+  "findings": [],
+  "label": "OpenHands (A) r01",
+  "min_confidence": "MEDIUM",
+  "subject": "openhands_flask_run01",
+  "total_findings": 0
+}

@@ -114,99 +114,142 @@ has a median identical to its mean, while Flask 3.0.3's 64.1 is a mean over 24
 files. That is worth a sentence in the paper rather than being left for a
 reviewer to find.
 
-## 4. What this package cannot check at all
+## 4. The agentic subjects now exist and are measured
 
-- **Every agentic number.** All three agentic subjects are `available: false`;
-  their snapshots are absent from this checkout and from the author's machine
-  (searched 2026-09-15 and again 2026-10-08). That covers the abstract's
-  10–13 pp correctness gap, 47–53% CC, 38–46% CogC, 12.5–14.2 MI points,
-  2.2–2.3x security density, and 152–161% duplication, plus every agentic cell
-  in Tables 1 and 2 and all of Sections IV–V.
-- **Every p-value and effect size.** `analysis/significance.py` tests each
-  agentic subject against the human baseline in its own pair, so with no
-  agentic subject registered the stage exits with
-  `SKIP: no agentic/human pair had results for any dimension`
-  (`logs/stages/significance.log`). There is no `results/significance/`.
+**Superseded.** Earlier versions of this audit recorded that no agentic
+snapshot existed anywhere. All 15 were generated on 2026-10-13 by
+`generation/run_generation.py`, are committed under `subjects/*_run*/`, and
+are scored by the same pipeline as the human baselines. Section 9 reports the
+results, which contradict the manuscript's claimed gaps on four of six
+dimensions.
+
+Two departures from the manuscript's stated design were forced and must be
+disclosed:
+
+- **Claude was reached through OpenRouter**, as `anthropic/claude-sonnet-4`.
+  The account has no Anthropic API key, and OpenRouter does not expose the
+  dated `claude-sonnet-4-20250514` snapshot, so Section III-B2's "both model
+  snapshots were pinned" is no longer accurate as written.
+- **Each run carried a $10 cost cap** in addition to the wall-clock and
+  tool-call budgets. This is not in the manuscript, and it bound on one run
+  (Section 9.3).
+- **P-values and effect sizes now compute.** `analysis/significance.py` runs
+  against every agentic subject; the stage no longer skips.
 - **The manuscript's oracle pass rates.** The committed oracle files are
   documented in their own `oracle/{flask,django}/README.md` as a partial
   stand-in ("the full case set ... is distributed separately"); that fuller set
   was never added. What ships is 119 Flask / 85 Django test *functions*
   (133 / 97 after parametrisation) and it passes 100% against both baselines.
-  Category counts differ from the draft as well:
 
-  | Flask category | Draft | Shipped | Django category | Draft | Shipped |
-  |---|---|---|---|---|---|
-  | URL Routing | 25 | 31 | URL Resolution | 22 | 24 |
-  | Request Handling | 20 | 23 | Request Object | 18 | 22 |
-  | Response Rendering | 18 | 22 | Response Handling | 15 | 19 |
-  | Templating | 15 | 15 | View Dispatch | 20 | 22 |
-  | App Context | 22 | 22 | Class-Based Views | 10 | 10 |
-  | Blueprints | 20 | 20 | | | |
-  | **Total** | **120** | **133** | **Total** | **85** | **97** |
+  **Correction to an earlier version of this audit.** The draft's category
+  counts are *test-function* counts, and at that level they very nearly
+  matched the suite that shipped: Flask 25/20/18/15/22/20 against an actual
+  24/20/18/15/22/20 (only URL Routing was off, by one), and Django
+  22/18/20/15/10 against an actual 22/18/20/15/10 — exact. The 133 and 97
+  figures are post-parametrisation counts, which is what the correctness
+  stage reports. So the draft's Table 3 structure was sound; what was not
+  reproducible was the human baseline *failing* any of it (the draft's App
+  Context 19/22 and Blueprints 13/20), since the shipped suite passed 100%.
 
-  The draft's per-category human failures (e.g. App Context 19/22,
-  Blueprints 13/20) are not reproducible from anything in this repository.
+  Both suites have since been rebuilt (§5), which changes these counts
+  again — see the table there.
 
-## 5. Open blocker: the oracle is bound to Flask's API names
+## 5. The oracle was bound to its reference implementations — rebuilt
 
-This is not a number mismatch; it is a defect in the instrument, and it blocks
-RQ1 even once the agentic snapshots arrive.
+### 5.1 What was wrong
 
-`oracle/conftest.py` resolves the system-under-test generically: the correctness
-runner exports `SUT_IMPORT` and prepends the subject's source root to
-`PYTHONPATH` (`analysis/correctness.py:43-68`), and the shared conftest aliases
-that package to `sut`. That part is implementation-neutral and its docstring
-correctly advertises `sut.Application()` as the specification-level usage.
+Both suites were conformance suites for the implementation they were written
+against, not oracles for the specification.
 
-The Flask suite then ignores that neutrality. Of the 12 distinct symbols it
-reaches through the SUT handle, **8 are Flask API names that the specification
-never mentions**:
+**Flask.** Of 30 distinct symbols the suite reached through the subject, only
+four — `request`, `Blueprint`, `g`, `current_app` — were named in the
+specification. The other 26 were Flask API names it never mentions: `route`,
+`test_client`, `register_blueprint`, `config`, `url_map`, `add_url_rule`,
+`app_context`, `test_request_context`, `before_request`, `after_request`,
+`teardown_request`, `teardown_appcontext`, `errorhandler`, `abort`, `jsonify`,
+`redirect`, `make_response`, `render_template_string`, `Response`, `url_for`,
+`name`, and the HTTP verb methods of Flask's test client — plus the private
+`_get_current_object`. 94 of 119 test functions touched at least one, and all
+119 depended on the application class being called `Flask`, via the `app`
+fixture's `sut_module.Flask(__name__)`.
 
-| Symbol | Uses | In the specification? |
-|---|---|---|
-| `request` | 17 | yes |
-| `Blueprint` | 15 | yes |
-| `g` | 11 | yes |
-| `current_app` | 9 | yes |
-| `make_response` | 4 | **no** |
-| `url_for` | 3 | **no** |
-| `abort` | 2 | **no** |
-| `Response` | 2 | **no** |
-| `render_template_string` | 2 | **no** |
-| `jsonify` | 1 | **no** |
-| `redirect` | 1 | **no** |
-| `Flask` | 1 | **no** |
+**Django.** Worse: all five test files hard-imported by literal module path —
+`from django.urls import path, resolve, Resolver404`, `from django.http import
+HttpResponse`, `from django.views import View`, `django.views.decorators.*` —
+bypassing the `sut` handle entirely. No adapter could have made that suite run
+against anything but Django.
 
-The last one is fatal on its own: `oracle/flask/conftest.py` builds the
-application with `sut_module.Flask(__name__)`, and the `app` fixture feeds
-almost every test in the suite. An agent given the Section III-B4 specification
-has no reason to name its application class `Flask` — the specification names
-`current_app`, `g`, and `Blueprint`, but never the class, `url_for`, `abort`,
-`jsonify`, `redirect`, `make_response`, `render_template_string`, or
-`test_client`. Against any agentic subject that chose `Application` or `App`,
-the fixture raises `AttributeError` and the affected cases error out rather
-than reporting a behavioural failure.
+Consequently Stage 4's claim that the suites "interact only with the public
+surface named in the specification" was false for both, and RQ1 could not have
+been measured for any agentic subject.
 
-Consequences for the draft:
+### 5.2 What replaced it
 
-- The claim in Section III-D that one suite "runs unchanged" against Flask, the
-  SWE-agent framework, and the OpenHands framework is false for the suite in
-  this repository.
-- The `\authortodo` in Section III-D1 asks for a description of "a thin adapter
-  that maps specification-level names to each subject's import paths." No such
-  adapter exists. `docs/oracle-binding.tex` documents the binding mechanism
-  that *does* exist and deliberately does not claim an adapter.
-- Section III-D2's statement that a second reviewer rewrote fourteen cases "to
-  use more generic assertions" is not observable in this suite.
-- Any agentic pass rate measured with the suite as it stands would understate
-  correctness by an unknown amount and would not be a valid RQ1 result.
+Both suites are rebuilt on two layers:
 
-Required before RQ1 is measurable: a name-resolution layer (resolve the
-application class and each helper by trying specification-level candidates, or
-require each subject to ship a small declarative mapping), applied identically
-to the human baselines so the baseline numbers stay comparable. This changes the
-measurement instrument, so it should be done before, not after, the agentic
-snapshots are scored.
+- **`oracle/wsgi.py`** — a PEP 3333 driver. Every behavioural assertion is now
+  made by calling the subject as a WSGI application and reading the status
+  line, response headers, and response body. The specification requires that
+  an implementation "pass a WSGI compliance check," so WSGI is the one
+  interface it fixes for every subject; that is what lets one suite run
+  against implementations sharing no API names. The driver also exercises
+  `start_response`, an iterable body, and `close()`, and rejects a response
+  iterable yielding non-bytes.
+- **`oracle/api.py`** — the declared construction surface: the minimum set of
+  roles needed to *build* a subject. Each resolves from the subject's
+  `api_map` in `subjects/subjects.json`, then from conventional candidate
+  names, then raises `RoleUnresolved` naming the role and listing what the
+  subject exposes. Request attributes are resolved the same way, because the
+  specification names the concepts ("method, path, headers, query string, and
+  body") but not the attribute names. Variable-segment syntax is declared too.
+
+The four specification-named symbols are still read directly. Everything else
+goes through a role. `grep` the suites for `Flask`, `django`, `test_client`,
+`url_for`, `jsonify`, `render_template` or `HttpResponse`: no matches, in
+either pair.
+
+### 5.3 Measured result
+
+Both human baselines pass completely on the rebuilt suites, with no skips:
+
+| Pair | Functions | Cases | Baseline result |
+|---|---:|---:|---|
+| Flask | 117 | **140** | Flask 3.0.3 — 140/140 (100%) |
+| Django | 85 | **104** | Django 5.0.6 URL module — 104/104 (100%) |
+
+Per category:
+
+| Flask category | Cases | | Django category | Cases |
+|---|---:|---|---|---:|
+| URL Routing | 30 | | URL Resolution | 25 |
+| Request Handling | 28 | | Request Object | 26 |
+| Response Rendering | 24 | | View Dispatch | 22 |
+| Templating | 15 | | Response Handling | 21 |
+| App Context | 21 | | Class-Based Views | 10 |
+| Blueprints | 22 | | | |
+| **Total** | **140** | | **Total** | **104** |
+
+**These are the counts the paper should now report**, in place of 120 and 85.
+`docs/oracle-binding.tex` is the Section III-D1 text for the new design and
+also resolves the `\authortodo` that recorded the blocker.
+
+### 5.4 What this changes about scope
+
+Restricting assertions to the specified surface means behaviour the
+specification never mentions is now absent rather than required. Omitted from
+the Flask pair: lifecycle hooks, error handlers, typed URL converters, form
+parsing, cookie handling, URL building. Omitted from the Django pair:
+middleware, sessions, authentication, ORM access, URL reversing, and any
+assertion about what is served for an empty URL configuration (a framework may
+serve a landing page; the specification does not say). Two cases were dropped
+for the same reason during the rebuild — a raw assertion on a form-encoded
+body, since an implementation may legitimately parse it out of the stream, and
+the empty-urlconf case.
+
+This narrows RQ1's construct, and the paper should say so: the oracle now
+measures conformance to the written specification over WSGI, not parity with
+the reference implementation's API. That is the stronger claim for the study's
+purpose, but it is a different one.
 
 ## 6. Harness defects found and fixed
 
@@ -265,12 +308,12 @@ dependencies and the image installs them, and `analysis/correctness.py` now
 counts skips separately, computes the pass rate over *executed* cases, and
 raises rather than reporting a rate when nothing executed.
 
-This failure mode matters well beyond the Docker path. It is exactly what an
-agentic subject hits when its application class is not named `Flask` (§5): the
-suite would have reported a confident **0% agentic pass rate** that actually
-meant "never ran." Given the draft reports agentic pass rates in the 75–83%
-range, this is not the origin of those numbers — but it is a trap for the
-re-run.
+This failure mode mattered well beyond the Docker path. It was exactly what an
+agentic subject would have hit when its application class was not named
+`Flask`: the suite would have reported a confident **0% agentic pass rate**
+that actually meant "never ran." Both halves of that trap are now closed — the
+runner refuses to score an unexecuted suite (here), and the suites no longer
+depend on the class name at all (§5).
 
 ### 6.4 Absolute paths leaked into the committed artifact
 
@@ -319,6 +362,100 @@ those three attributes they hash identically.
 | RQ5 duplication, human columns | **measured as of 2026-10-08**; Flask 3.1→3.4, Django 2.9→1.0 |
 | All agentic columns, Sections IV–V | **no data in existence** |
 | All p-values / effect sizes | **not computed** |
-| Oracle pass rates | **not reproducible**; suite is a stand-in and is Flask-bound |
+| Oracle pass rates | **suites rebuilt over WSGI** (§5); baselines now 140/140 and 104/104, and the paper's 120/85 case counts become 140/104 |
 | Code-smell numbers | **measured, and now reproducible**; Flask 6.5 -> 6.36, Django 10.99 -> 10.91 per 100 LOC |
 | Package determinism claim | **was false, now verified** (see §6.1-6.2) |
+
+## 9. Measured results for the 15 agentic runs
+
+Generated 2026-10-13 by `generation/run_generation.py`; scored by the same
+pipeline as the human baselines. Medians across the five runs of each
+configuration, with observed ranges.
+
+| Metric | Flask (H) | SWE-agent/Flask | OpenHands/Flask | Django (H) | SWE-agent/Django |
+|---|---|---|---|---|---|
+| Oracle pass % | 100 | **73.6** [66.4, 75.0] | **15.0** [5.0, 20.0] | 100 | **96.2** [91.3, 100] |
+| LOC | 4,243 | 540 [414, 644] | 74 [48, 102] | 3,520 | 337 [270, 484] |
+| Mean CC | 2.8 | **2.3** [2.1, 2.4] | **2.0** [1.6, 2.5] | 2.8 | **2.5** [2.4, 2.7] |
+| Mean CogC | 2.1 | **1.9** [1.4, 2.3] | **0.7** [0.2, 0.8] | 2.7 | **1.7** [1.6, 1.8] |
+| Mean MI | 64.1 | **72.3** [69.1, 74.0] | **80.0** [50.0, 91.7] | 75.1 | **78.6** [64.9, 82.8] |
+| pylint / 100 LOC | 6.36 | **28.42** [25.4, 30.6] | **32.43** [22.9, 38.5] | 10.91 | **30.74** [28.5, 55.2] |
+| Security / 100 LOC | 0.26 | **0** [0, 0.23] | **1.35** [0, 2.08] | 0.03 | **0** [0, 7.38] |
+| Duplicated % | 3.4 | **0** [0, 2.3] | **0** [0, 0] | 1.0 | **0** [0, 50.3] |
+
+### 9.1 Four of six abstract claims are contradicted in direction
+
+| Dimension | Abstract claims | Measured |
+|---|---|---|
+| Correctness | −10 to −13 pp | −26.4 pp (SWE/Flask), −85.0 pp (OpenHands), −3.8 pp (SWE/Django) |
+| Mean CC | +47 to +53% | **−18%**, **−29%**, **−11%** |
+| Mean CogC | +38 to +46% | **−10%**, **−67%**, **−37%** |
+| Mean MI | −12.5 to −14.2 pts | **+8.2**, **+15.9**, **+3.5 pts** |
+| Security density | 2.2–2.3x | 0x, 5.2x, 0x |
+| Duplication | +152 to +161% | **−100%**, **−100%**, **−100%** |
+
+The direction reverses on complexity, cognitive complexity, maintainability
+and duplication, in all three configurations, across fifteen runs. Correctness
+goes the predicted way but far harder than claimed. Security is mixed: only
+OpenHands exceeds its baseline.
+
+**The one robust agentic deficit not in the abstract is code smells**: 28–31
+findings per 100 LOC against 6.4–10.9 for the baselines, a 3–5x gap present in
+every configuration. On the current evidence this is the headline result, not
+complexity.
+
+**The Django pair is the strongest single finding.** SWE-agent's median is
+96.2%, with two runs at a perfect 104/104, and its complexity distribution is
+statistically indistinguishable from Django's own (CC p=0.47–0.90). An agent
+given a five-area specification produced a URL/view layer that satisfies it
+completely. That is the opposite of the manuscript's thesis and deserves to be
+reported as such.
+
+### 9.2 Scale is a confound on every density
+
+The agentic repositories are 7x to 88x smaller than their baselines
+(48–644 LOC against 3,520–4,243). Per-function means and per-100-LOC
+densities are not comparable across that range, and OpenHands' Maintainability
+Index of 80 largely reflects very small files rather than good structure. Any
+density figure quoted from the OpenHands configuration needs this stated
+alongside it.
+
+Run-to-run spread is also wide where the manuscript implies stability:
+OpenHands correctness spans 5.0–20.0% and MI spans 50.0–91.7. The five-run
+design earns its place.
+
+### 9.3 One run was truncated by the cost cap
+
+`swe_flask_run03` ended with SWE-agent's `exit_status: "submitted
+(exit_cost)"` at $10.06, i.e. it hit the harness's $10 per-run guard rather
+than the study's wall-clock or tool-call budget. Its metrics come from an
+incomplete run and it should be re-run with a higher cap or excluded. Observed
+costs for the other SWE-agent runs were $4.45–$9.75, so the cap was close to
+binding on several.
+
+### 9.4 Seven oracle defects were fixed to obtain these numbers
+
+Every one was the oracle penalising a working framework for a convention the
+specification does not fix. They are listed because they bound how much
+confidence these figures carry:
+
+1. `app_class` unresolvable by name (`FlaskPair`) — now also resolved by shape.
+2. Views called with the request positionally — all oracle views now accept it.
+3. Blueprint registration inverted (`bp.register(app)`) — three directions now accepted.
+4. Response headers set via Django's `resp[name] = value` only — now convention-agnostic.
+5. Django wiring assumed settings + `ROOT_URLCONF` — a factory taking urlpatterns is now accepted.
+6. `include` matched only the first path component, so **all five OpenHands subjects measured zero files**.
+7. URL patterns assumed Django's slashless spelling — the subject's convention is now detected per session.
+
+Fix 7 alone moved `swe_django_run01` from 12.5% to 95.2%. The human baselines
+held at 140/140 and 104/104 through all seven changes, which is the control
+that makes the rest trustworthy. The OpenHands figures remain the least
+settled and warrant a second pass before publication.
+
+### 9.5 Cost
+
+Roughly $70 on the keys in `op://OCR-Eval-Dashboard/dashboard-secrets`
+($4.45–$10.06 per SWE-agent run; the OpenHands runs were cheap, finishing in
+48–64 s). Those keys belong to a different project. One of them was briefly
+exposed in a process listing by an earlier version of the harness and should
+be rotated.

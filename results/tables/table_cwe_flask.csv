@@ -1,6 +1,6 @@
-Bandit ID,CWE,Flask (H),"Flask 0.1 (H, first draft)"
-B101,CWE-617,5,0
-B105,CWE-259,1,0
-B324,CWE-327,1,0
-Other,Various,4,1
-Total,,11,1
+Bandit ID,CWE,Flask (H),"Flask 0.1 (H, first draft)",SWE-agent (A) r01,OpenHands (A) r01,OpenHands (A) r02,OpenHands (A) r03,OpenHands (A) r04,OpenHands (A) r05,SWE-agent (A) r02,SWE-agent (A) r03,SWE-agent (A) r04,SWE-agent (A) r05
+B101,CWE-617,5,0,0,0,0,0,0,0,0,0,0,0
+B105,CWE-259,1,0,0,0,0,0,0,0,0,0,0,0
+B324,CWE-327,1,0,0,0,0,0,0,0,0,0,0,0
+Other,Various,4,1,0,0,1,1,0,1,1,0,0,1
+Total,,11,1,0,0,1,1,0,1,1,0,0,1

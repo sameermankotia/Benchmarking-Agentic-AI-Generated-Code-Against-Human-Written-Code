@@ -1,0 +1,48 @@
+{
+  "blocks": [],
+  "duplicated_blocks": 0,
+  "duplicated_loc": 0,
+  "duplicated_pct": 0.0,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask_pair/flask_pair/__init__.py",
+      "loc": 25
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask_pair/flask_pair/blueprints.py",
+      "loc": 13
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask_pair/flask_pair/context.py",
+      "loc": 12
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask_pair/flask_pair/request.py",
+      "loc": 8
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask_pair/flask_pair/response.py",
+      "loc": 10
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask_pair/flask_pair/routing.py",
+      "loc": 10
+    }
+  ],
+  "label": "OpenHands (A) r01",
+  "max_block_tokens": 0,
+  "min_tokens": 50,
+  "subject": "openhands_flask_run01"
+}

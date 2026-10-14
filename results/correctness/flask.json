@@ -1,27 +1,27 @@
 {
   "categories": {
     "App Context": {
-      "n": 22,
+      "n": 21,
       "pass_rate": 100.0,
-      "passed": 22,
+      "passed": 21,
       "skipped": 0
     },
     "Blueprints": {
-      "n": 20,
-      "pass_rate": 100.0,
-      "passed": 20,
-      "skipped": 0
-    },
-    "Request Handling": {
-      "n": 23,
-      "pass_rate": 100.0,
-      "passed": 23,
-      "skipped": 0
-    },
-    "Response Rendering": {
       "n": 22,
       "pass_rate": 100.0,
       "passed": 22,
+      "skipped": 0
+    },
+    "Request Handling": {
+      "n": 28,
+      "pass_rate": 100.0,
+      "passed": 28,
+      "skipped": 0
+    },
+    "Response Rendering": {
+      "n": 24,
+      "pass_rate": 100.0,
+      "passed": 24,
       "skipped": 0
     },
     "Templating": {
@@ -31,17 +31,17 @@
       "skipped": 0
     },
     "URL Routing": {
-      "n": 31,
+      "n": 30,
       "pass_rate": 100.0,
-      "passed": 31,
+      "passed": 30,
       "skipped": 0
     }
   },
   "label": "Flask (H)",
   "oracle": "flask",
   "pass_rate": 100.0,
-  "passed": 133,
+  "passed": 140,
   "skipped": 0,
   "subject": "flask",
-  "total": 133
+  "total": 140
 }

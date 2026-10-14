@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "djangoframework"
+version = "0.1.0"
+description = "A WSGI-compatible URL routing and view dispatching framework inspired by Django"
+requires-python = ">=3.11"
+dependencies = []
+authors = [
+    {name = "Django Framework", email = "info@djangoframework.com"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet :: WWW/HTTP :: WSGI",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov", "black", "flake8"]
+
+[tool.setuptools.packages.find]
+include = ["djangoframework*"]

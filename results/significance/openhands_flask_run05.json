@@ -1,0 +1,214 @@
+{
+  "agentic": "openhands_flask_run05",
+  "agentic_label": "OpenHands (A) r05",
+  "alpha": 0.05,
+  "complexity": {
+    "cc": {
+      "n_agentic": 16,
+      "n_human": 380,
+      "p": 0.7545391509908672,
+      "rank_biserial": 0.044,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 2905.5
+    },
+    "cogc": {
+      "n_agentic": 12,
+      "n_human": 334,
+      "p": 0.4088443344075403,
+      "rank_biserial": 0.131,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 1741.5
+    }
+  },
+  "correctness": {
+    "App Context": {
+      "odds_ratio": 0.0,
+      "p": 9.400698513262609e-10,
+      "significant": true,
+      "table": [
+        [
+          2,
+          19
+        ],
+        [
+          21,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Blueprints": {
+      "odds_ratio": 0.0,
+      "p": 2.623450747887239e-10,
+      "significant": true,
+      "table": [
+        [
+          2,
+          20
+        ],
+        [
+          22,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Request Handling": {
+      "odds_ratio": 0.0,
+      "p": 2.6148266473233444e-16,
+      "significant": true,
+      "table": [
+        [
+          0,
+          28
+        ],
+        [
+          28,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Response Rendering": {
+      "odds_ratio": 0.0,
+      "p": 0.003898094399053837,
+      "significant": true,
+      "table": [
+        [
+          16,
+          8
+        ],
+        [
+          24,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Templating": {
+      "odds_ratio": 0.0,
+      "p": 1.7535092103071267e-06,
+      "significant": true,
+      "table": [
+        [
+          2,
+          13
+        ],
+        [
+          15,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Total": {
+      "odds_ratio": 0.0,
+      "p": 2.2166760730001058e-52,
+      "significant": true,
+      "table": [
+        [
+          27,
+          113
+        ],
+        [
+          140,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "URL Routing": {
+      "odds_ratio": 0.0,
+      "p": 5.489927680874732e-12,
+      "significant": true,
+      "table": [
+        [
+          5,
+          25
+        ],
+        [
+          30,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    }
+  },
+  "duplication": {
+    "duplicated_pct": {
+      "n_agentic": 5,
+      "n_human": 24,
+      "p": 0.23713655745297368,
+      "rank_biserial": 0.25,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 45.0
+    }
+  },
+  "human": "flask",
+  "human_label": "Flask (H)",
+  "maintainability": {
+    "mi": {
+      "n_agentic": 5,
+      "n_human": 24,
+      "p": 0.13820654716737235,
+      "rank_biserial": -0.433,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 86.0
+    }
+  },
+  "pair": "flask",
+  "security": {
+    "HIGH": {
+      "odds_ratio": null,
+      "p": 0.16666666666666666,
+      "significant": false,
+      "table": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "LOW": {
+      "odds_ratio": 0.0,
+      "p": 0.41666666666666674,
+      "significant": false,
+      "table": [
+        [
+          0,
+          1
+        ],
+        [
+          7,
+          4
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "MEDIUM": {
+      "odds_ratio": 0.0,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          0,
+          1
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "test": "fisher_exact"
+    }
+  }
+}

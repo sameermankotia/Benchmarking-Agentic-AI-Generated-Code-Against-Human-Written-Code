@@ -1,0 +1,214 @@
+{
+  "agentic": "swe_flask_run01",
+  "agentic_label": "SWE-agent (A) r01",
+  "alpha": 0.05,
+  "complexity": {
+    "cc": {
+      "n_agentic": 84,
+      "n_human": 380,
+      "p": 0.30066576267253253,
+      "rank_biserial": 0.069,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 14863.5
+    },
+    "cogc": {
+      "n_agentic": 70,
+      "n_human": 334,
+      "p": 0.7743290417113639,
+      "rank_biserial": 0.02,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 11453.0
+    }
+  },
+  "correctness": {
+    "App Context": {
+      "odds_ratio": 0.0,
+      "p": 0.23170731707317072,
+      "significant": false,
+      "table": [
+        [
+          18,
+          3
+        ],
+        [
+          21,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Blueprints": {
+      "odds_ratio": 0.0,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          21,
+          1
+        ],
+        [
+          22,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Request Handling": {
+      "odds_ratio": 0.0,
+      "p": 1.137449591585655e-13,
+      "significant": true,
+      "table": [
+        [
+          2,
+          26
+        ],
+        [
+          28,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Response Rendering": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          24,
+          0
+        ],
+        [
+          24,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Templating": {
+      "odds_ratio": 0.0,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          14,
+          1
+        ],
+        [
+          15,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Total": {
+      "odds_ratio": 0.0,
+      "p": 5.115948600571711e-12,
+      "significant": true,
+      "table": [
+        [
+          105,
+          35
+        ],
+        [
+          140,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "URL Routing": {
+      "odds_ratio": 0.0,
+      "p": 0.11239964317573597,
+      "significant": false,
+      "table": [
+        [
+          26,
+          4
+        ],
+        [
+          30,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    }
+  },
+  "duplication": {
+    "duplicated_pct": {
+      "n_agentic": 9,
+      "n_human": 24,
+      "p": 0.11130353739982894,
+      "rank_biserial": 0.25,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 81.0
+    }
+  },
+  "human": "flask",
+  "human_label": "Flask (H)",
+  "maintainability": {
+    "mi": {
+      "n_agentic": 9,
+      "n_human": 24,
+      "p": 0.35110359408969694,
+      "rank_biserial": -0.218,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 131.5
+    }
+  },
+  "pair": "flask",
+  "security": {
+    "HIGH": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "LOW": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          0,
+          0
+        ],
+        [
+          7,
+          4
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "MEDIUM": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          8
+        ]
+      ],
+      "test": "fisher_exact"
+    }
+  }
+}

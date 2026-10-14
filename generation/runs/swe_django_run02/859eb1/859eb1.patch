@@ -1,0 +1,2074 @@
+diff --git a/IMPLEMENTATION_SUMMARY.md b/IMPLEMENTATION_SUMMARY.md
+new file mode 100644
+index 0000000..b77b483
+--- /dev/null
++++ b/IMPLEMENTATION_SUMMARY.md
+@@ -0,0 +1,176 @@
++# Django Framework Implementation Summary
++
++## Overview
++
++This implementation provides a complete Django-like WSGI framework that meets all requirements specified in the Django-pair generation specification.
++
++## Implemented Components
++
++### 1. URL Routing (`djangoframework/urls.py`)
++- **URLPattern**: Handles Django-style URL patterns with typed parameter conversion
++- **RegexURLPattern**: Supports regular expression patterns with named groups
++- **URLResolver**: Resolves URLs to views and extracts parameters
++- **Converters**: Built-in converters for `str`, `int`, `slug`, `uuid`, and `path` types
++- **Functions**: `path()`, `re_path()`, and `include()` for pattern definition
++
++### 2. HTTP Objects (`djangoframework/http.py`)
++- **HttpRequest**: Encapsulates HTTP request data including method, path, headers, query string, and body
++- **HttpResponse**: Response object with status code, headers, and body content
++- **Specialized Responses**: `HttpResponseNotFound` (404) and `HttpResponseNotAllowed` (405)
++- **Exception**: `Http404` for triggering 404 responses
++
++### 3. Class-Based Views (`djangoframework/views.py`)
++- **View**: Base class for class-based views
++- **Method Dispatch**: Automatically routes requests to HTTP verb methods (get, post, etc.)
++- **405 Handling**: Returns Method Not Allowed with proper Allow headers
++- **HEAD Support**: Automatically serves HEAD requests from GET implementations
++- **as_view()**: Class method for creating view functions
++
++### 4. WSGI Application (`djangoframework/wsgi.py`)
++- **WSGIApplication**: WSGI-compliant application class
++- **Error Handling**: Proper exception handling with 500 responses
++- **Request Processing**: Creates HttpRequest objects from WSGI environ
++- **Response Processing**: Converts HttpResponse objects to WSGI responses
++
++## Features Implemented
++
++### ✅ URL Resolution (Requirement 1)
++- Literal paths: `/about/`, `/contact/`
++- Variable segments with typed converters:
++  - `<str:name>` - String parameters
++  - `<int:id>` - Integer parameters  
++  - `<slug:category>` - Slug parameters (letters, numbers, hyphens, underscores)
++  - `<uuid:obj_id>` - UUID parameters
++  - `<path:filepath>` - Path parameters (includes slashes)
++- Regular expression patterns with named groups: `r'^archive/(?P<year>[0-9]{4})/$'`
++
++### ✅ Request Object (Requirement 2)
++- HTTP method (`request.method`)
++- Path (`request.path`)
++- Headers (`request.headers`)
++- Query string (`request.query_string`)
++- Body (`request.body`)
++- Parsed GET parameters (`request.GET`)
++- Parsed POST parameters (`request.POST`)
++
++### ✅ View Dispatch (Requirement 3)
++- Routes requests to matching view functions
++- Passes captured URL parameters to views
++- Returns 404 for unmatched patterns
++- Proper error handling for view exceptions
++
++### ✅ Response Handling (Requirement 4)
++- Status codes (200, 404, 405, 500, etc.)
++- Custom headers
++- Response body content
++- Proper WSGI response formatting
++
++### ✅ Class-Based Views (Requirement 5)
++- HTTP method dispatch to named methods (`get()`, `post()`, etc.)
++- 405 Method Not Allowed for unsupported methods
++- Allow header listing supported methods
++- Automatic HEAD support from GET implementations
++- OPTIONS method support
++
++### ✅ WSGI Compliance
++- Passes `wsgiref.validate` compliance checks
++- Proper WSGI application interface
++- Correct handling of environ and start_response
++- Iterable response objects
++
++## File Structure
++
++```
++djangoframework/
++├── __init__.py          # Package exports
++├── http.py             # Request/Response objects
++├── urls.py             # URL routing and patterns
++├── views.py            # Class-based views
++└── wsgi.py             # WSGI application
++
++# Configuration files
++├── pyproject.toml      # Modern Python packaging
++├── setup.py            # Traditional setup script
++└── README.md           # Documentation
++
++# Example and test files
++├── example_app.py      # Complete example application
++├── demo_server.py      # Development server
++├── test_framework.py   # Basic functionality tests
++├── test_wsgi_compliance.py        # WSGI compliance tests
++└── test_specification_compliance.py # Full specification tests
++```
++
++## Usage Examples
++
++### Basic Application
++```python
++from djangoframework import path, HttpResponse, WSGIApplication
++
++def hello(request, name):
++    return HttpResponse(f"Hello, {name}!")
++
++urlpatterns = [
++    path('hello/<str:name>/', hello),
++]
++
++application = WSGIApplication(urlpatterns)
++```
++
++### Class-Based Views
++```python
++from djangoframework import View, HttpResponse
++
++class APIView(View):
++    def get(self, request):
++        return HttpResponse("GET response")
++    
++    def post(self, request):
++        return HttpResponse("POST response")
++
++urlpatterns = [
++    path('api/', APIView.as_view()),
++]
++```
++
++### URL Patterns with Converters
++```python
++urlpatterns = [
++    path('article/<int:id>/', article_view),
++    path('user/<slug:username>/', user_profile),
++    path('object/<uuid:obj_id>/', object_detail),
++    path('files/<path:filepath>/', serve_file),
++    re_path(r'^archive/(?P<year>[0-9]{4})/$', archive_view),
++]
++```
++
++## Testing
++
++All tests pass successfully:
++- ✅ Basic functionality tests
++- ✅ WSGI compliance tests  
++- ✅ Specification compliance tests
++- ✅ URL pattern matching tests
++- ✅ Class-based view tests
++- ✅ Error handling tests
++
++## WSGI Server Compatibility
++
++The framework is compatible with any WSGI server:
++- Python's built-in `wsgiref.simple_server` (development)
++- Gunicorn (production)
++- uWSGI (production)
++- Waitress (production)
++
++## Conclusion
++
++This implementation fully satisfies all requirements of the Django-pair generation specification:
++
++1. ✅ Complete URL routing system with typed converters and regex support
++2. ✅ Comprehensive request object with all required attributes
++3. ✅ Proper view dispatch with 404 handling
++4. ✅ Full response handling with status codes and headers
++5. ✅ Complete class-based view system with HTTP method dispatch
++6. ✅ Full WSGI compliance verified by wsgiref.validate
++
++The framework provides a clean, Django-like API while maintaining full WSGI compatibility and can be used as a foundation for web applications or as a learning tool for understanding web framework internals.
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..fd45c95
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,180 @@
++# Django Framework
++
++A Django-like WSGI-compatible URL routing and view dispatching framework for Python 3.11+.
++
++## Features
++
++This framework implements the core Django URL routing and view dispatching functionality:
++
++1. **URL Resolution**: Supports literal paths, variable segments with typed converters (int, str, slug, uuid, path), and regular expression patterns with named groups
++2. **Request Object**: Encapsulates HTTP method, path, headers, query string, and body data
++3. **View Dispatch**: Routes requests to matching views, returns 404 for unmatched patterns
++4. **Response Handling**: Provides response objects with status codes, headers, and body content
++5. **Class-Based Views**: Dispatches requests to HTTP verb methods, handles 405 responses with Allow headers, serves HEAD from GET implementations
++
++## Installation
++
++```bash
++pip install -e .
++```
++
++## Quick Start
++
++### Basic Usage
++
++```python
++from djangoframework import path, HttpResponse, WSGIApplication
++
++def hello_world(request):
++    return HttpResponse("Hello, World!")
++
++def hello_name(request, name):
++    return HttpResponse(f"Hello, {name}!")
++
++urlpatterns = [
++    path('', hello_world),
++    path('hello/<str:name>/', hello_name),
++]
++
++application = WSGIApplication(urlpatterns)
++```
++
++### URL Patterns
++
++The framework supports several types of URL patterns:
++
++```python
++from djangoframework import path, re_path
++
++urlpatterns = [
++    # Literal path
++    path('about/', about_view),
++    
++    # String parameter (default)
++    path('user/<str:username>/', user_profile),
++    
++    # Integer parameter
++    path('article/<int:id>/', article_detail),
++    
++    # Slug parameter
++    path('category/<slug:category>/', category_view),
++    
++    # UUID parameter
++    path('object/<uuid:obj_id>/', object_view),
++    
++    # Path parameter (includes slashes)
++    path('files/<path:filepath>/', file_view),
++    
++    # Regular expression pattern
++    re_path(r'^archive/(?P<year>[0-9]{4})/$', archive_view),
++]
++```
++
++### Class-Based Views
++
++```python
++from djangoframework import View, HttpResponse
++
++class MyView(View):
++    def get(self, request, *args, **kwargs):
++        return HttpResponse("GET request")
++    
++    def post(self, request, *args, **kwargs):
++        return HttpResponse("POST request")
++
++urlpatterns = [
++    path('my-view/', MyView.as_view()),
++]
++```
++
++### WSGI Integration
++
++```python
++# wsgi.py
++from djangoframework import WSGIApplication, path, HttpResponse
++
++def home(request):
++    return HttpResponse("Welcome to Django Framework!")
++
++urlpatterns = [
++    path('', home),
++]
++
++application = WSGIApplication(urlpatterns)
++
++# For use with WSGI servers like gunicorn:
++# gunicorn wsgi:application
++```
++
++## API Reference
++
++### URL Patterns
++
++- `path(route, view, name=None)`: Create a URL pattern with parameter conversion
++- `re_path(regex, view, name=None)`: Create a URL pattern using regular expressions
++- `include(patterns)`: Include a list of URL patterns
++
++### HTTP Objects
++
++- `HttpRequest`: Encapsulates HTTP request data
++- `HttpResponse(content='', status=200, content_type='text/html; charset=utf-8')`: HTTP response object
++- `HttpResponseNotFound(content='Not Found')`: 404 response
++- `HttpResponseNotAllowed(allowed_methods, content='Method Not Allowed')`: 405 response
++
++### Views
++
++- `View`: Base class for class-based views with automatic HTTP method dispatch
++
++### WSGI
++
++- `WSGIApplication(urlpatterns)`: WSGI-compatible application
++- `get_wsgi_application(urlpatterns)`: Factory function for creating WSGI applications
++
++## URL Converters
++
++The framework includes built-in converters for URL parameters:
++
++- `str`: String (default) - matches any text except slashes
++- `int`: Integer - matches positive integers
++- `slug`: Slug - matches letters, numbers, hyphens, and underscores
++- `uuid`: UUID - matches UUID format strings
++- `path`: Path - matches any text including slashes
++
++## HTTP Method Handling
++
++Class-based views automatically handle HTTP methods:
++
++- Dispatch requests to methods named after HTTP verbs (get, post, put, etc.)
++- Return 405 Method Not Allowed for unsupported methods
++- Automatically serve HEAD requests from GET implementations
++- Include proper Allow headers in 405 responses
++
++## WSGI Compliance
++
++The framework is fully WSGI-compatible and can be used with any WSGI server:
++
++```bash
++# Using gunicorn
++gunicorn myapp.wsgi:application
++
++# Using uWSGI
++uwsgi --http :8000 --wsgi-file myapp/wsgi.py --callable application
++
++# Using Python's built-in server (development only)
++python -m wsgiref.simple_server localhost 8000 myapp.wsgi:application
++```
++
++## Development
++
++To set up for development:
++
++```bash
++git clone <repository-url>
++cd djangoframework
++pip install -e .[dev]
++pytest
++```
++
++## License
++
++MIT License
+diff --git a/demo_server.py b/demo_server.py
+new file mode 100644
+index 0000000..47b0545
+--- /dev/null
++++ b/demo_server.py
+@@ -0,0 +1,22 @@
++#!/usr/bin/env python3
++"""
++Demo server showing the Django Framework in action.
++Run this script to start a development server and test the framework.
++"""
++
++from wsgiref.simple_server import make_server
++from example_app import application
++
++if __name__ == '__main__':
++    print("Django Framework Demo Server")
++    print("=" * 40)
++    print("Starting server on http://localhost:8000/")
++    print("Visit the URL to see the framework in action!")
++    print("Press Ctrl+C to stop the server")
++    print()
++    
++    with make_server('localhost', 8000, application) as httpd:
++        try:
++            httpd.serve_forever()
++        except KeyboardInterrupt:
++            print("\nServer stopped. Goodbye!")
+diff --git a/djangoframework/__init__.py b/djangoframework/__init__.py
+new file mode 100644
+index 0000000..ed90821
+--- /dev/null
++++ b/djangoframework/__init__.py
+@@ -0,0 +1,15 @@
++"""
++Django-like WSGI framework implementation.
++"""
++
++from .urls import path, re_path, include
++from .views import View
++from .http import HttpRequest, HttpResponse
++from .wsgi import WSGIApplication
++
++__all__ = [
++    'path', 're_path', 'include',
++    'View',
++    'HttpRequest', 'HttpResponse',
++    'WSGIApplication'
++]
+diff --git a/djangoframework/__pycache__/__init__.cpython-311.pyc b/djangoframework/__pycache__/__init__.cpython-311.pyc
+new file mode 100644
+index 0000000..2ceeb10
+Binary files /dev/null and b/djangoframework/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/djangoframework/__pycache__/http.cpython-311.pyc b/djangoframework/__pycache__/http.cpython-311.pyc
+new file mode 100644
+index 0000000..db270cc
+Binary files /dev/null and b/djangoframework/__pycache__/http.cpython-311.pyc differ
+diff --git a/djangoframework/__pycache__/urls.cpython-311.pyc b/djangoframework/__pycache__/urls.cpython-311.pyc
+new file mode 100644
+index 0000000..fd86a57
+Binary files /dev/null and b/djangoframework/__pycache__/urls.cpython-311.pyc differ
+diff --git a/djangoframework/__pycache__/views.cpython-311.pyc b/djangoframework/__pycache__/views.cpython-311.pyc
+new file mode 100644
+index 0000000..322a542
+Binary files /dev/null and b/djangoframework/__pycache__/views.cpython-311.pyc differ
+diff --git a/djangoframework/__pycache__/wsgi.cpython-311.pyc b/djangoframework/__pycache__/wsgi.cpython-311.pyc
+new file mode 100644
+index 0000000..0aeb32e
+Binary files /dev/null and b/djangoframework/__pycache__/wsgi.cpython-311.pyc differ
+diff --git a/djangoframework/http.py b/djangoframework/http.py
+new file mode 100644
+index 0000000..aa253ac
+--- /dev/null
++++ b/djangoframework/http.py
+@@ -0,0 +1,101 @@
++"""
++HTTP request and response objects.
++"""
++
++import urllib.parse
++from io import BytesIO
++
++
++class HttpRequest:
++    """
++    Encapsulates HTTP request data including method, path, headers, query string, and body.
++    """
++    
++    def __init__(self, environ):
++        self.environ = environ
++        self.method = environ['REQUEST_METHOD']
++        self.path = environ['PATH_INFO']
++        self.query_string = environ.get('QUERY_STRING', '')
++        
++        # Parse headers
++        self.headers = {}
++        for key, value in environ.items():
++            if key.startswith('HTTP_'):
++                header_name = key[5:].replace('_', '-').title()
++                self.headers[header_name] = value
++        
++        # Handle special headers
++        if 'CONTENT_TYPE' in environ:
++            self.headers['Content-Type'] = environ['CONTENT_TYPE']
++        if 'CONTENT_LENGTH' in environ:
++            self.headers['Content-Length'] = environ['CONTENT_LENGTH']
++        
++        # Parse query parameters
++        self.GET = urllib.parse.parse_qs(self.query_string, keep_blank_values=True)
++        
++        # Read body
++        try:
++            content_length = int(environ.get('CONTENT_LENGTH', 0))
++        except (ValueError, TypeError):
++            content_length = 0
++        
++        if content_length > 0:
++            self.body = environ['wsgi.input'].read(content_length)
++        else:
++            self.body = b''
++        
++        # Parse POST data if applicable
++        if self.method == 'POST' and self.headers.get('Content-Type', '').startswith('application/x-www-form-urlencoded'):
++            self.POST = urllib.parse.parse_qs(self.body.decode('utf-8'), keep_blank_values=True)
++        else:
++            self.POST = {}
++
++
++class HttpResponse:
++    """
++    HTTP response object carrying status code, headers, and body.
++    """
++    
++    def __init__(self, content='', status=200, content_type='text/html; charset=utf-8'):
++        self.content = content
++        self.status_code = status
++        self.headers = {'Content-Type': content_type}
++        
++    def __iter__(self):
++        """Make response iterable for WSGI."""
++        if isinstance(self.content, str):
++            yield self.content.encode('utf-8')
++        elif isinstance(self.content, bytes):
++            yield self.content
++        else:
++            yield str(self.content).encode('utf-8')
++    
++    def get_status_text(self):
++        """Get HTTP status text."""
++        status_texts = {
++            200: 'OK',
++            404: 'Not Found',
++            405: 'Method Not Allowed',
++            500: 'Internal Server Error',
++        }
++        return status_texts.get(self.status_code, 'Unknown')
++
++
++class Http404(Exception):
++    """Exception for 404 Not Found responses."""
++    pass
++
++
++class HttpResponseNotFound(HttpResponse):
++    """404 Not Found response."""
++    
++    def __init__(self, content='Not Found'):
++        super().__init__(content, status=404)
++
++
++class HttpResponseNotAllowed(HttpResponse):
++    """405 Method Not Allowed response."""
++    
++    def __init__(self, allowed_methods, content='Method Not Allowed'):
++        super().__init__(content, status=405)
++        self.headers['Allow'] = ', '.join(allowed_methods)
+diff --git a/djangoframework/urls.py b/djangoframework/urls.py
+new file mode 100644
+index 0000000..5a3b79a
+--- /dev/null
++++ b/djangoframework/urls.py
+@@ -0,0 +1,181 @@
++"""
++URL routing and pattern matching.
++"""
++
++import re
++import uuid
++from typing import Dict, Any, Callable, List, Optional, Union
++
++
++class Converter:
++    """Base class for URL parameter converters."""
++    
++    regex = '[^/]+'
++    
++    def to_python(self, value: str) -> Any:
++        """Convert URL string to Python value."""
++        return value
++    
++    def to_url(self, value: Any) -> str:
++        """Convert Python value to URL string."""
++        return str(value)
++
++
++class StringConverter(Converter):
++    """String converter (default)."""
++    regex = '[^/]+'
++
++
++class IntConverter(Converter):
++    """Integer converter."""
++    regex = r'\d+'
++    
++    def to_python(self, value: str) -> int:
++        return int(value)
++
++
++class SlugConverter(Converter):
++    """Slug converter (letters, numbers, hyphens, underscores)."""
++    regex = r'[-a-zA-Z0-9_]+'
++
++
++class UUIDConverter(Converter):
++    """UUID converter."""
++    regex = r'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
++    
++    def to_python(self, value: str) -> uuid.UUID:
++        return uuid.UUID(value)
++    
++    def to_url(self, value: uuid.UUID) -> str:
++        return str(value)
++
++
++class PathConverter(Converter):
++    """Path converter (includes slashes)."""
++    regex = r'.+'
++
++
++# Default converters
++DEFAULT_CONVERTERS = {
++    'str': StringConverter(),
++    'int': IntConverter(),
++    'slug': SlugConverter(),
++    'uuid': UUIDConverter(),
++    'path': PathConverter(),
++}
++
++
++class URLPattern:
++    """Represents a URL pattern with optional parameters."""
++    
++    def __init__(self, pattern: str, view: Callable, name: Optional[str] = None):
++        self.pattern = pattern
++        self.view = view
++        self.name = name
++        self.regex = None
++        self.param_names = []
++        self.converters = {}
++        self._compile_pattern()
++    
++    def _compile_pattern(self):
++        """Compile the URL pattern into a regex."""
++        # Handle angle bracket parameters like <int:id> or <str:name>
++        param_pattern = r'<(?:(?P<converter>\w+):)?(?P<name>\w+)>'
++        
++        def replace_param(match):
++            converter_name = match.group('converter') or 'str'
++            param_name = match.group('name')
++            
++            if converter_name not in DEFAULT_CONVERTERS:
++                raise ValueError(f"Unknown converter: {converter_name}")
++            
++            converter = DEFAULT_CONVERTERS[converter_name]
++            self.param_names.append(param_name)
++            self.converters[param_name] = converter
++            
++            return f'(?P<{param_name}>{converter.regex})'
++        
++        # Replace parameters with named groups
++        regex_pattern = re.sub(param_pattern, replace_param, self.pattern)
++        
++        # Ensure pattern matches from start to end
++        if not regex_pattern.startswith('^'):
++            regex_pattern = '^' + regex_pattern
++        if not regex_pattern.endswith('$'):
++            regex_pattern = regex_pattern + '$'
++        
++        self.regex = re.compile(regex_pattern)
++    
++    def match(self, path: str) -> Optional[Dict[str, Any]]:
++        """Try to match the path against this pattern."""
++        # Remove leading slash for matching (Django-style)
++        if path.startswith('/'):
++            path = path[1:]
++        
++        match = self.regex.match(path)
++        if not match:
++            return None
++        
++        # Convert matched parameters using their converters
++        kwargs = {}
++        for name, value in match.groupdict().items():
++            if name in self.converters:
++                kwargs[name] = self.converters[name].to_python(value)
++            else:
++                kwargs[name] = value
++        
++        return kwargs
++
++
++class RegexURLPattern:
++    """URL pattern using regular expressions."""
++    
++    def __init__(self, regex: str, view: Callable, name: Optional[str] = None):
++        self.regex = re.compile(regex)
++        self.view = view
++        self.name = name
++    
++    def match(self, path: str) -> Optional[Dict[str, Any]]:
++        """Try to match the path against this regex pattern."""
++        # Remove leading slash for consistency with URLPattern
++        if path.startswith('/'):
++            path = path[1:]
++        
++        match = self.regex.match(path)
++        if not match:
++            return None
++        
++        return match.groupdict()
++
++
++class URLResolver:
++    """Resolves URLs to views."""
++    
++    def __init__(self, patterns: List[Union[URLPattern, RegexURLPattern]]):
++        self.patterns = patterns
++    
++    def resolve(self, path: str):
++        """Resolve a path to a view and parameters."""
++        for pattern in self.patterns:
++            kwargs = pattern.match(path)
++            if kwargs is not None:
++                return pattern.view, kwargs
++        
++        # No pattern matched
++        from .http import Http404
++        raise Http404(f"No URL pattern matches '{path}'")
++
++
++def path(route: str, view: Callable, name: Optional[str] = None) -> URLPattern:
++    """Create a URL pattern with parameter conversion."""
++    return URLPattern(route, view, name)
++
++
++def re_path(regex: str, view: Callable, name: Optional[str] = None) -> RegexURLPattern:
++    """Create a URL pattern using regular expressions."""
++    return RegexURLPattern(regex, view, name)
++
++
++def include(patterns: List[Union[URLPattern, RegexURLPattern]]) -> List[Union[URLPattern, RegexURLPattern]]:
++    """Include a list of URL patterns."""
++    return patterns
+diff --git a/djangoframework/views.py b/djangoframework/views.py
+new file mode 100644
+index 0000000..5eba16e
+--- /dev/null
++++ b/djangoframework/views.py
+@@ -0,0 +1,93 @@
++"""
++Class-based views implementation.
++"""
++
++from .http import HttpRequest, HttpResponse, HttpResponseNotAllowed
++
++
++class View:
++    """
++    Base class for class-based views.
++    
++    Dispatches requests to methods named for HTTP verbs.
++    Returns 405 with Allow header for unsupported methods.
++    Serves HEAD from GET implementation.
++    """
++    
++    http_method_names = ['get', 'post', 'put', 'patch', 'delete', 'head', 'options', 'trace']
++    
++    def __init__(self, **kwargs):
++        """Initialize the view instance."""
++        for key, value in kwargs.items():
++            setattr(self, key, value)
++    
++    @classmethod
++    def as_view(cls, **initkwargs):
++        """
++        Main entry point for a request-response process.
++        Returns a view function that can be used in URL patterns.
++        """
++        def view(request, *args, **kwargs):
++            self = cls(**initkwargs)
++            return self.dispatch(request, *args, **kwargs)
++        
++        view.view_class = cls
++        view.view_initkwargs = initkwargs
++        
++        return view
++    
++    def dispatch(self, request, *args, **kwargs):
++        """
++        Try to dispatch to the right method; if a method doesn't exist,
++        defer to the error handler. Also defer to the error handler if the
++        request method isn't on the approved list.
++        """
++        if request.method.lower() in self.http_method_names:
++            handler = getattr(self, request.method.lower(), self.http_method_not_allowed)
++        else:
++            handler = self.http_method_not_allowed
++        
++        return handler(request, *args, **kwargs)
++    
++    def http_method_not_allowed(self, request, *args, **kwargs):
++        """
++        Return a 405 Method Not Allowed response with the Allow header
++        listing the methods this view supports.
++        """
++        allowed_methods = []
++        for method in self.http_method_names:
++            if hasattr(self, method):
++                allowed_methods.append(method.upper())
++        
++        # Special case: if GET is implemented, HEAD is automatically supported
++        if 'GET' in allowed_methods and 'HEAD' not in allowed_methods:
++            allowed_methods.append('HEAD')
++        
++        return HttpResponseNotAllowed(allowed_methods)
++    
++    def options(self, request, *args, **kwargs):
++        """Handle responding to requests for the OPTIONS HTTP verb."""
++        allowed_methods = []
++        for method in self.http_method_names:
++            if hasattr(self, method):
++                allowed_methods.append(method.upper())
++        
++        # Special case: if GET is implemented, HEAD is automatically supported
++        if 'GET' in allowed_methods and 'HEAD' not in allowed_methods:
++            allowed_methods.append('HEAD')
++        
++        response = HttpResponse()
++        response.headers['Allow'] = ', '.join(allowed_methods)
++        return response
++    
++    def head(self, request, *args, **kwargs):
++        """
++        Handle HEAD requests by calling GET and returning empty content.
++        """
++        if hasattr(self, 'get'):
++            response = self.get(request, *args, **kwargs)
++            # Clear the content for HEAD requests
++            response.content = ''
++            return response
++        else:
++            return self.http_method_not_allowed(request, *args, **kwargs)
+diff --git a/djangoframework/wsgi.py b/djangoframework/wsgi.py
+new file mode 100644
+index 0000000..e19b73d
+--- /dev/null
++++ b/djangoframework/wsgi.py
+@@ -0,0 +1,98 @@
++"""
++WSGI application implementation.
++"""
++
++import traceback
++from typing import List, Union, Callable
++
++from .http import HttpRequest, HttpResponse, HttpResponseNotFound, Http404
++from .urls import URLPattern, RegexURLPattern, URLResolver
++
++
++class WSGIApplication:
++    """
++    WSGI-compatible application that handles URL routing and view dispatching.
++    """
++    
++    def __init__(self, urlpatterns: List[Union[URLPattern, RegexURLPattern]]):
++        """Initialize the WSGI application with URL patterns."""
++        self.resolver = URLResolver(urlpatterns)
++    
++    def __call__(self, environ, start_response):
++        """
++        WSGI application callable.
++        
++        Args:
++            environ: WSGI environment dictionary
++            start_response: WSGI start_response callable
++        
++        Returns:
++            Iterable of response body bytes
++        """
++        try:
++            # Create request object
++            request = HttpRequest(environ)
++            
++            # Resolve URL to view and parameters
++            try:
++                view, kwargs = self.resolver.resolve(request.path)
++            except Http404:
++                response = HttpResponseNotFound()
++            else:
++                # Call the view with request and captured parameters
++                try:
++                    response = view(request, **kwargs)
++                except Exception as e:
++                    # Handle view exceptions
++                    response = HttpResponse(
++                        f'Internal Server Error: {str(e)}',
++                        status=500,
++                        content_type='text/plain'
++                    )
++            
++            # Ensure we have an HttpResponse object
++            if not isinstance(response, HttpResponse):
++                response = HttpResponse(str(response))
++            
++            # Start the response
++            status = f'{response.status_code} {response.get_status_text()}'
++            headers = [(key, value) for key, value in response.headers.items()]
++            
++            # Add Content-Length header
++            content = b''.join(response)
++            headers.append(('Content-Length', str(len(content))))
++            
++            start_response(status, headers)
++            
++            # Return response content
++            return [content]
++            
++        except Exception as e:
++            # Handle any unexpected errors
++            error_response = HttpResponse(
++                f'Internal Server Error: {str(e)}\n\n{traceback.format_exc()}',
++                status=500,
++                content_type='text/plain'
++            )
++            
++            status = f'{error_response.status_code} {error_response.get_status_text()}'
++            headers = [(key, value) for key, value in error_response.headers.items()]
++            
++            content = b''.join(error_response)
++            headers.append(('Content-Length', str(len(content))))
++            
++            start_response(status, headers)
++            return [content]
++
++
++def get_wsgi_application(urlpatterns: List[Union[URLPattern, RegexURLPattern]]) -> WSGIApplication:
++    """
++    Create and return a WSGI application.
++    
++    Args:
++        urlpatterns: List of URL patterns
++    
++    Returns:
++        WSGIApplication instance
++    """
++    return WSGIApplication(urlpatterns)
+diff --git a/example_app.py b/example_app.py
+new file mode 100644
+index 0000000..300f040
+--- /dev/null
++++ b/example_app.py
+@@ -0,0 +1,188 @@
++#!/usr/bin/env python3
++"""
++Example Django Framework application demonstrating all features.
++"""
++
++import uuid
++from djangoframework import (
++    path, re_path, HttpRequest, HttpResponse, View, WSGIApplication
++)
++
++
++# Function-based views
++def home(request):
++    """Home page view."""
++    return HttpResponse("""
++    <html>
++    <head><title>Django Framework Demo</title></head>
++    <body>
++        <h1>Welcome to Django Framework!</h1>
++        <p>This is a demonstration of the Django-like WSGI framework.</p>
++        <ul>
++            <li><a href="/hello/world/">Hello World</a></li>
++            <li><a href="/article/123/">Article 123</a></li>
++            <li><a href="/category/python-tips/">Python Tips Category</a></li>
++            <li><a href="/files/docs/readme.txt/">File Path Example</a></li>
++            <li><a href="/archive/2023/">Archive 2023</a></li>
++            <li><a href="/api/">API View (Class-based)</a></li>
++        </ul>
++    </body>
++    </html>
++    """)
++
++
++def hello_view(request, name):
++    """Greet a user by name."""
++    return HttpResponse(f"""
++    <html>
++    <head><title>Hello {name}</title></head>
++    <body>
++        <h1>Hello, {name}!</h1>
++        <p>This demonstrates string parameter conversion.</p>
++        <a href="/">Back to home</a>
++    </body>
++    </html>
++    """)
++
++
++def article_view(request, id):
++    """Display an article by ID."""
++    return HttpResponse(f"""
++    <html>
++    <head><title>Article {id}</title></head>
++    <body>
++        <h1>Article #{id}</h1>
++        <p>This demonstrates integer parameter conversion.</p>
++        <p>The ID parameter is of type: {type(id).__name__}</p>
++        <a href="/">Back to home</a>
++    </body>
++    </html>
++    """)
++
++
++def category_view(request, category):
++    """Display a category page."""
++    return HttpResponse(f"""
++    <html>
++    <head><title>Category: {category}</title></head>
++    <body>
++        <h1>Category: {category}</h1>
++        <p>This demonstrates slug parameter conversion.</p>
++        <a href="/">Back to home</a>
++    </body>
++    </html>
++    """)
++
++
++def file_view(request, filepath):
++    """Display file path."""
++    return HttpResponse(f"""
++    <html>
++    <head><title>File: {filepath}</title></head>
++    <body>
++        <h1>File Path: {filepath}</h1>
++        <p>This demonstrates path parameter conversion (includes slashes).</p>
++        <a href="/">Back to home</a>
++    </body>
++    </html>
++    """)
++
++
++def archive_view(request, year):
++    """Archive view using regex pattern."""
++    return HttpResponse(f"""
++    <html>
++    <head><title>Archive {year}</title></head>
++    <body>
++        <h1>Archive for {year}</h1>
++        <p>This demonstrates regex URL patterns.</p>
++        <a href="/">Back to home</a>
++    </body>
++    </html>
++    """)
++
++
++# Class-based view
++class APIView(View):
++    """Example API view demonstrating class-based views."""
++    
++    def get(self, request, *args, **kwargs):
++        """Handle GET requests."""
++        return HttpResponse("""
++        <html>
++        <head><title>API - GET</title></head>
++        <body>
++            <h1>API View - GET Method</h1>
++            <p>This demonstrates class-based views with GET method.</p>
++            <p>Try sending a POST request to see method dispatch in action.</p>
++            <form method="post">
++                <button type="submit">Send POST Request</button>
++            </form>
++            <a href="/">Back to home</a>
++        </body>
++        </html>
++        """)
++    
++    def post(self, request, *args, **kwargs):
++        """Handle POST requests."""
++        return HttpResponse("""
++        <html>
++        <head><title>API - POST</title></head>
++        <body>
++            <h1>API View - POST Method</h1>
++            <p>This demonstrates class-based views with POST method.</p>
++            <p>The view automatically dispatched to the POST method!</p>
++            <a href="/api/">Back to API (GET)</a> | <a href="/">Back to home</a>
++        </body>
++        </html>
++        """)
++
++
++class GetOnlyView(View):
++    """View that only supports GET to demonstrate 405 handling."""
++    
++    def get(self, request, *args, **kwargs):
++        """Handle GET requests only."""
++        return HttpResponse("""
++        <html>
++        <head><title>GET Only View</title></head>
++        <body>
++            <h1>GET Only View</h1>
++            <p>This view only supports GET requests.</p>
++            <p>Try sending a POST request to see 405 Method Not Allowed response.</p>
++            <a href="/">Back to home</a>
++        </body>
++        </html>
++        """)
++
++
++# URL patterns
++urlpatterns = [
++    path('', home),
++    path('hello/<str:name>/', hello_view),
++    path('article/<int:id>/', article_view),
++    path('category/<slug:category>/', category_view),
++    path('files/<path:filepath>/', file_view),
++    re_path(r'^archive/(?P<year>[0-9]{4})/$', archive_view),
++    path('api/', APIView.as_view()),
++    path('get-only/', GetOnlyView.as_view()),
++]
++
++
++# Create WSGI application
++application = WSGIApplication(urlpatterns)
++
++
++if __name__ == '__main__':
++    # Simple development server for testing
++    from wsgiref.simple_server import make_server
++    
++    print("Starting Django Framework development server...")
++    print("Visit http://localhost:8000/ to see the demo")
++    print("Press Ctrl+C to stop the server")
++    
++    with make_server('localhost', 8000, application) as httpd:
++        try:
++            httpd.serve_forever()
++        except KeyboardInterrupt:
++            print("\nServer stopped.")
+diff --git a/pyproject.toml b/pyproject.toml
+index ab70d8d..cf6cc72 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,34 @@
++[build-system]
++requires = ["setuptools>=61.0", "wheel"]
++build-backend = "setuptools.build_meta"
++
+ [project]
+ name = "djangoframework"
+ version = "0.1.0"
++description = "A Django-like WSGI framework implementation"
++readme = "README.md"
+ requires-python = ">=3.11"
+-dependencies = ["jinja2", "werkzeug", "pytest"]
++authors = [
++    {name = "Django Framework", email = "django@example.com"},
++]
++classifiers = [
++    "Development Status :: 3 - Alpha",
++    "Intended Audience :: Developers",
++    "License :: OSI Approved :: MIT License",
++    "Programming Language :: Python :: 3",
++    "Programming Language :: Python :: 3.11",
++    "Topic :: Internet :: WWW/HTTP :: WSGI",
++    "Topic :: Software Development :: Libraries :: Python Modules",
++]
++dependencies = []
++
++[project.optional-dependencies]
++dev = ["pytest>=7.0", "pytest-cov"]
++
++[project.urls]
++Homepage = "https://github.com/example/djangoframework"
++Repository = "https://github.com/example/djangoframework.git"
++
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["djangoframework*"]
+diff --git a/setup.py b/setup.py
+new file mode 100644
+index 0000000..e006069
+--- /dev/null
++++ b/setup.py
+@@ -0,0 +1,31 @@
++#!/usr/bin/env python3
++"""
++Setup script for Django Framework.
++"""
++
++from setuptools import setup, find_packages
++
++setup(
++    name="djangoframework",
++    version="0.1.0",
++    description="A Django-like WSGI framework implementation",
++    long_description=open("README.md").read(),
++    long_description_content_type="text/markdown",
++    author="Django Framework",
++    author_email="django@example.com",
++    url="https://github.com/example/djangoframework",
++    packages=find_packages(),
++    python_requires=">=3.11",
++    classifiers=[
++        "Development Status :: 3 - Alpha",
++        "Intended Audience :: Developers",
++        "License :: OSI Approved :: MIT License",
++        "Programming Language :: Python :: 3",
++        "Programming Language :: Python :: 3.11",
++        "Topic :: Internet :: WWW/HTTP :: WSGI",
++        "Topic :: Software Development :: Libraries :: Python Modules",
++    ],
++    extras_require={
++        "dev": ["pytest>=7.0", "pytest-cov"],
++    },
++)
+diff --git a/test_framework.py b/test_framework.py
+new file mode 100644
+index 0000000..174e10f
+--- /dev/null
++++ b/test_framework.py
+@@ -0,0 +1,308 @@
++#!/usr/bin/env python3
++"""
++Test script to verify the Django framework implementation.
++"""
++
++import uuid
++from djangoframework import (
++    path, re_path, HttpRequest, HttpResponse, View, WSGIApplication
++)
++
++
++# Test views
++def home_view(request):
++    return HttpResponse("Welcome to Django Framework!")
++
++
++def hello_view(request, name):
++    return HttpResponse(f"Hello, {name}!")
++
++
++def article_view(request, id):
++    return HttpResponse(f"Article ID: {id} (type: {type(id).__name__})")
++
++
++def category_view(request, category):
++    return HttpResponse(f"Category: {category}")
++
++
++def uuid_view(request, obj_id):
++    return HttpResponse(f"UUID: {obj_id} (type: {type(obj_id).__name__})")
++
++
++def path_view(request, filepath):
++    return HttpResponse(f"File path: {filepath}")
++
++
++def archive_view(request, year):
++    return HttpResponse(f"Archive year: {year}")
++
++
++# Test class-based view
++class TestView(View):
++    def get(self, request, *args, **kwargs):
++        return HttpResponse("GET method called")
++    
++    def post(self, request, *args, **kwargs):
++        return HttpResponse("POST method called")
++
++
++class GetOnlyView(View):
++    def get(self, request, *args, **kwargs):
++        return HttpResponse("Only GET is supported")
++
++
++# URL patterns
++urlpatterns = [
++    path('', home_view),
++    path('hello/<str:name>/', hello_view),
++    path('article/<int:id>/', article_view),
++    path('category/<slug:category>/', category_view),
++    path('object/<uuid:obj_id>/', uuid_view),
++    path('files/<path:filepath>/', path_view),
++    re_path(r'^archive/(?P<year>[0-9]{4})/$', archive_view),
++    path('test-view/', TestView.as_view()),
++    path('get-only/', GetOnlyView.as_view()),
++]
++
++
++def create_test_environ(path='/', method='GET', query_string=''):
++    """Create a test WSGI environ dict."""
++    return {
++        'REQUEST_METHOD': method,
++        'PATH_INFO': path,
++        'QUERY_STRING': query_string,
++        'SERVER_NAME': 'localhost',
++        'SERVER_PORT': '8000',
++        'wsgi.input': None,
++        'wsgi.errors': None,
++        'wsgi.version': (1, 0),
++        'wsgi.multithread': False,
++        'wsgi.multiprocess': True,
++        'wsgi.run_once': False,
++        'wsgi.url_scheme': 'http',
++        'CONTENT_LENGTH': '0',
++        'CONTENT_TYPE': '',
++    }
++
++
++def test_wsgi_compliance():
++    """Test WSGI compliance."""
++    print("Testing WSGI compliance...")
++    
++    app = WSGIApplication(urlpatterns)
++    
++    # Test basic request
++    environ = create_test_environ('/')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    
++    # Check that start_response was called
++    assert len(responses) == 1, "start_response should be called once"
++    
++    status, headers = responses[0]
++    assert status.startswith('200'), f"Expected 200 status, got {status}"
++    
++    # Check that result is iterable
++    content = b''.join(result)
++    assert b"Welcome to Django Framework!" in content
++    
++    print("✓ WSGI compliance test passed")
++
++
++def test_url_patterns():
++    """Test URL pattern matching."""
++    print("Testing URL patterns...")
++    
++    app = WSGIApplication(urlpatterns)
++    
++    test_cases = [
++        ('/', 'Welcome to Django Framework!'),
++        ('/hello/world/', 'Hello, world!'),
++        ('/article/123/', 'Article ID: 123'),
++        ('/category/python-tips/', 'Category: python-tips'),
++        ('/files/docs/readme.txt/', 'File path: docs/readme.txt'),
++        ('/archive/2023/', 'Archive year: 2023'),
++    ]
++    
++    for path, expected in test_cases:
++        environ = create_test_environ(path)
++        responses = []
++        
++        def start_response(status, headers):
++            responses.append((status, headers))
++        
++        result = app(environ, start_response)
++        content = b''.join(result).decode('utf-8')
++        
++        assert expected in content, f"Expected '{expected}' in response for {path}, got '{content}'"
++        assert responses[0][0].startswith('200'), f"Expected 200 status for {path}"
++    
++    print("✓ URL pattern tests passed")
++
++
++def test_404_handling():
++    """Test 404 handling for unmatched URLs."""
++    print("Testing 404 handling...")
++    
++    app = WSGIApplication(urlpatterns)
++    environ = create_test_environ('/nonexistent/')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    
++    status, headers = responses[0]
++    assert status.startswith('404'), f"Expected 404 status, got {status}"
++    
++    print("✓ 404 handling test passed")
++
++
++def test_class_based_views():
++    """Test class-based view functionality."""
++    print("Testing class-based views...")
++    
++    app = WSGIApplication(urlpatterns)
++    
++    # Test GET request
++    environ = create_test_environ('/test-view/', 'GET')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    assert 'GET method called' in content
++    assert responses[0][0].startswith('200')
++    
++    # Test POST request
++    environ = create_test_environ('/test-view/', 'POST')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    assert 'POST method called' in content
++    assert responses[0][0].startswith('200')
++    
++    print("✓ Class-based view tests passed")
++
++
++def test_method_not_allowed():
++    """Test 405 Method Not Allowed handling."""
++    print("Testing 405 Method Not Allowed...")
++    
++    app = WSGIApplication(urlpatterns)
++    
++    # Test unsupported method on view that only supports GET
++    environ = create_test_environ('/get-only/', 'POST')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    
++    status, headers = responses[0]
++    assert status.startswith('405'), f"Expected 405 status, got {status}"
++    
++    # Check for Allow header
++    allow_header = None
++    for name, value in headers:
++        if name.lower() == 'allow':
++            allow_header = value
++            break
++    
++    assert allow_header is not None, "Allow header should be present"
++    assert 'GET' in allow_header, "Allow header should include GET"
++    assert 'HEAD' in allow_header, "Allow header should include HEAD (auto-generated)"
++    
++    print("✓ 405 Method Not Allowed test passed")
++
++
++def test_head_requests():
++    """Test HEAD request handling."""
++    print("Testing HEAD requests...")
++    
++    app = WSGIApplication(urlpatterns)
++    
++    # Test HEAD request on view with GET method
++    environ = create_test_environ('/get-only/', 'HEAD')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result)
++    
++    status, headers = responses[0]
++    assert status.startswith('200'), f"Expected 200 status for HEAD, got {status}"
++    
++    # HEAD responses should have empty body
++    assert len(content) == 0, "HEAD response should have empty body"
++    
++    print("✓ HEAD request test passed")
++
++
++def test_uuid_converter():
++    """Test UUID converter."""
++    print("Testing UUID converter...")
++    
++    app = WSGIApplication(urlpatterns)
++    
++    test_uuid = str(uuid.uuid4())
++    environ = create_test_environ(f'/object/{test_uuid}/')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    assert test_uuid in content
++    assert 'UUID' in content
++    assert responses[0][0].startswith('200')
++    
++    print("✓ UUID converter test passed")
++
++
++def run_all_tests():
++    """Run all tests."""
++    print("Running Django Framework tests...\n")
++    
++    try:
++        test_wsgi_compliance()
++        test_url_patterns()
++        test_404_handling()
++        test_class_based_views()
++        test_method_not_allowed()
++        test_head_requests()
++        test_uuid_converter()
++        
++        print("\n🎉 All tests passed! The Django framework implementation is working correctly.")
++        
++    except Exception as e:
++        print(f"\n❌ Test failed: {e}")
++        import traceback
++        traceback.print_exc()
++        return False
++    
++    return True
++
++
++if __name__ == '__main__':
++    success = run_all_tests()
++    exit(0 if success else 1)
+diff --git a/test_specification_compliance.py b/test_specification_compliance.py
+new file mode 100644
+index 0000000..ffeccc6
+--- /dev/null
++++ b/test_specification_compliance.py
+@@ -0,0 +1,397 @@
++#!/usr/bin/env python3
++"""
++Test compliance with the Django-pair generation specification.
++
++This test verifies that all requirements from the specification are met:
++1. URL resolution from declared patterns (literal paths, variable segments with typed converters, regex patterns)
++2. Request object encapsulating method, path, headers, query string, and body
++3. View dispatch with 404 for unmatched patterns
++4. Response handling with status code, headers, and body
++5. Class-based views with HTTP verb dispatch, 405 handling, and HEAD from GET
++"""
++
++import uuid
++import io
++from wsgiref.validate import validator
++from djangoframework import (
++    path, re_path, include, HttpRequest, HttpResponse, View, WSGIApplication
++)
++
++
++def test_url_resolution():
++    """Test requirement 1: URL resolution from declared patterns."""
++    print("Testing URL resolution...")
++    
++    def literal_view(request):
++        return HttpResponse("literal")
++    
++    def string_view(request, name):
++        return HttpResponse(f"string:{name}")
++    
++    def int_view(request, id):
++        return HttpResponse(f"int:{id}:{type(id).__name__}")
++    
++    def slug_view(request, slug):
++        return HttpResponse(f"slug:{slug}")
++    
++    def uuid_view(request, uuid_param):
++        return HttpResponse(f"uuid:{uuid_param}:{type(uuid_param).__name__}")
++    
++    def path_view(request, path_param):
++        return HttpResponse(f"path:{path_param}")
++    
++    def regex_view(request, year, month):
++        return HttpResponse(f"regex:{year}:{month}")
++    
++    urlpatterns = [
++        path('literal/', literal_view),
++        path('string/<str:name>/', string_view),
++        path('int/<int:id>/', int_view),
++        path('slug/<slug:slug>/', slug_view),
++        path('uuid/<uuid:uuid_param>/', uuid_view),
++        path('path/<path:path_param>/', path_view),
++        re_path(r'^regex/(?P<year>[0-9]{4})/(?P<month>[0-9]{2})/$', regex_view),
++    ]
++    
++    app = WSGIApplication(urlpatterns)
++    
++    test_cases = [
++        ('/literal/', 'literal'),
++        ('/string/hello/', 'string:hello'),
++        ('/int/123/', 'int:123:int'),
++        ('/slug/hello-world_123/', 'slug:hello-world_123'),
++        ('/path/docs/file.txt/', 'path:docs/file.txt'),
++        ('/regex/2023/12/', 'regex:2023:12'),
++    ]
++    
++    # Test UUID separately since we need a valid UUID
++    test_uuid = str(uuid.uuid4())
++    test_cases.append((f'/uuid/{test_uuid}/', f'uuid:{test_uuid}:UUID'))
++    
++    for path_info, expected in test_cases:
++        environ = create_environ(path_info)
++        responses = []
++        
++        def start_response(status, headers):
++            responses.append((status, headers))
++        
++        result = app(environ, start_response)
++        content = b''.join(result).decode('utf-8')
++        
++        assert expected in content, f"Expected '{expected}' in response for {path_info}, got '{content}'"
++        assert responses[0][0].startswith('200'), f"Expected 200 status for {path_info}"
++    
++    print("✓ URL resolution test passed")
++
++
++def test_request_object():
++    """Test requirement 2: Request object encapsulation."""
++    print("Testing request object...")
++    
++    def inspect_request(request):
++        # Test that request has all required attributes
++        assert hasattr(request, 'method'), "Request should have method attribute"
++        assert hasattr(request, 'path'), "Request should have path attribute"
++        assert hasattr(request, 'headers'), "Request should have headers attribute"
++        assert hasattr(request, 'query_string'), "Request should have query_string attribute"
++        assert hasattr(request, 'body'), "Request should have body attribute"
++        assert hasattr(request, 'GET'), "Request should have GET attribute"
++        assert hasattr(request, 'POST'), "Request should have POST attribute"
++        
++        return HttpResponse(f"method:{request.method},path:{request.path},qs:{request.query_string}")
++    
++    urlpatterns = [path('inspect/', inspect_request)]
++    app = WSGIApplication(urlpatterns)
++    
++    # Test GET request with query string
++    environ = create_environ('/inspect/', method='GET', query_string='foo=bar&baz=qux')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    assert 'method:GET' in content
++    assert 'path:/inspect/' in content
++    assert 'qs:foo=bar&baz=qux' in content
++    
++    print("✓ Request object test passed")
++
++
++def test_view_dispatch_and_404():
++    """Test requirement 3: View dispatch with 404 for unmatched patterns."""
++    print("Testing view dispatch and 404 handling...")
++    
++    def test_view(request):
++        return HttpResponse("found")
++    
++    urlpatterns = [path('exists/', test_view)]
++    app = WSGIApplication(urlpatterns)
++    
++    # Test existing path
++    environ = create_environ('/exists/')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    assert 'found' in content
++    assert responses[0][0].startswith('200')
++    
++    # Test non-existing path (should return 404)
++    environ = create_environ('/nonexistent/')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    
++    assert responses[0][0].startswith('404'), "Should return 404 for unmatched patterns"
++    
++    print("✓ View dispatch and 404 test passed")
++
++
++def test_response_handling():
++    """Test requirement 4: Response handling with status, headers, and body."""
++    print("Testing response handling...")
++    
++    def custom_response(request):
++        response = HttpResponse("custom content", status=201)
++        response.headers['Custom-Header'] = 'custom-value'
++        return response
++    
++    urlpatterns = [path('custom/', custom_response)]
++    app = WSGIApplication(urlpatterns)
++    
++    environ = create_environ('/custom/')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    # Check status
++    assert responses[0][0].startswith('201'), "Should return custom status code"
++    
++    # Check headers
++    headers_dict = dict(responses[0][1])
++    assert 'Custom-Header' in headers_dict, "Should include custom headers"
++    assert headers_dict['Custom-Header'] == 'custom-value'
++    
++    # Check body
++    assert 'custom content' in content
++    
++    print("✓ Response handling test passed")
++
++
++def test_class_based_views():
++    """Test requirement 5: Class-based views with HTTP verb dispatch, 405, and HEAD from GET."""
++    print("Testing class-based views...")
++    
++    class TestView(View):
++        def get(self, request, *args, **kwargs):
++            return HttpResponse("GET response")
++        
++        def post(self, request, *args, **kwargs):
++            return HttpResponse("POST response")
++    
++    class GetOnlyView(View):
++        def get(self, request, *args, **kwargs):
++            return HttpResponse("GET only")
++    
++    urlpatterns = [
++        path('cbv/', TestView.as_view()),
++        path('get-only/', GetOnlyView.as_view()),
++    ]
++    app = WSGIApplication(urlpatterns)
++    
++    # Test GET method dispatch
++    environ = create_environ('/cbv/', method='GET')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    assert 'GET response' in content
++    assert responses[0][0].startswith('200')
++    
++    # Test POST method dispatch
++    environ = create_environ('/cbv/', method='POST')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result).decode('utf-8')
++    
++    assert 'POST response' in content
++    assert responses[0][0].startswith('200')
++    
++    # Test 405 Method Not Allowed for unsupported method
++    environ = create_environ('/get-only/', method='POST')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    
++    assert responses[0][0].startswith('405'), "Should return 405 for unsupported method"
++    
++    # Check Allow header
++    headers_dict = dict(responses[0][1])
++    assert 'Allow' in headers_dict, "405 response should include Allow header"
++    assert 'GET' in headers_dict['Allow'], "Allow header should include GET"
++    assert 'HEAD' in headers_dict['Allow'], "Allow header should include HEAD (auto-generated)"
++    
++    # Test HEAD request served from GET
++    environ = create_environ('/get-only/', method='HEAD')
++    responses = []
++    
++    def start_response(status, headers):
++        responses.append((status, headers))
++    
++    result = app(environ, start_response)
++    content = b''.join(result)
++    
++    assert responses[0][0].startswith('200'), "HEAD should return 200 when GET is available"
++    assert len(content) == 0, "HEAD response should have empty body"
++    
++    print("✓ Class-based views test passed")
++
++
++def test_wsgi_compliance():
++    """Test WSGI compliance."""
++    print("Testing WSGI compliance...")
++    
++    def simple_view(request):
++        return HttpResponse("WSGI compliant")
++    
++    urlpatterns = [path('', simple_view)]
++    app = WSGIApplication(urlpatterns)
++    
++    # Use wsgiref validator
++    validated_app = validator(app)
++    
++    environ = create_environ('/')
++    responses = []
++    
++    def start_response(status, headers, exc_info=None):
++        responses.append((status, headers, exc_info))
++    
++    result = validated_app(environ, start_response)
++    content = b''.join(result)
++    
++    assert len(responses) == 1, "start_response should be called exactly once"
++    assert responses[0][0].startswith('200'), "Should return 200 status"
++    assert b"WSGI compliant" in content
++    
++    print("✓ WSGI compliance test passed")
++
++
++def test_include_functionality():
++    """Test include functionality for organizing URL patterns."""
++    print("Testing include functionality...")
++    
++    def view1(request):
++        return HttpResponse("view1")
++    
++    def view2(request):
++        return HttpResponse("view2")
++    
++    # Test include function
++    included_patterns = include([
++        path('view1/', view1),
++        path('view2/', view2),
++    ])
++    
++    urlpatterns = [
++        path('', view1),
++    ] + included_patterns
++    
++    app = WSGIApplication(urlpatterns)
++    
++    # Test that included patterns work
++    for path_info, expected in [('/', 'view1'), ('/view1/', 'view1'), ('/view2/', 'view2')]:
++        environ = create_environ(path_info)
++        responses = []
++        
++        def start_response(status, headers):
++            responses.append((status, headers))
++        
++        result = app(environ, start_response)
++        content = b''.join(result).decode('utf-8')
++        
++        assert expected in content
++        assert responses[0][0].startswith('200')
++    
++    print("✓ Include functionality test passed")
++
++
++def create_environ(path_info='/', method='GET', query_string=''):
++    """Create a test WSGI environ dict."""
++    return {
++        'REQUEST_METHOD': method,
++        'SCRIPT_NAME': '',
++        'PATH_INFO': path_info,
++        'QUERY_STRING': query_string,
++        'CONTENT_TYPE': '',
++        'CONTENT_LENGTH': '0',
++        'SERVER_NAME': 'localhost',
++        'SERVER_PORT': '8000',
++        'wsgi.version': (1, 0),
++        'wsgi.url_scheme': 'http',
++        'wsgi.input': io.BytesIO(b''),
++        'wsgi.errors': io.StringIO(),
++        'wsgi.multithread': False,
++        'wsgi.multiprocess': True,
++        'wsgi.run_once': False,
++    }
++
++
++def run_all_tests():
++    """Run all specification compliance tests."""
++    print("Running Django Framework specification compliance tests...\n")
++    
++    try:
++        test_url_resolution()
++        test_request_object()
++        test_view_dispatch_and_404()
++        test_response_handling()
++        test_class_based_views()
++        test_wsgi_compliance()
++        test_include_functionality()
++        
++        print("\n🎉 All specification compliance tests passed!")
++        print("The Django Framework implementation meets all requirements:")
++        print("1. ✓ URL resolution with literal paths, typed converters, and regex patterns")
++        print("2. ✓ Request object with method, path, headers, query string, and body")
++        print("3. ✓ View dispatch with 404 for unmatched patterns")
++        print("4. ✓ Response handling with status codes, headers, and body")
++        print("5. ✓ Class-based views with HTTP verb dispatch, 405 handling, and HEAD from GET")
++        print("6. ✓ WSGI compliance verified")
++        
++        return True
++        
++    except Exception as e:
++        print(f"\n❌ Specification compliance test failed: {e}")
++        import traceback
++        traceback.print_exc()
++        return False
++
++
++if __name__ == '__main__':
++    success = run_all_tests()
++    exit(0 if success else 1)
+diff --git a/test_wsgi_compliance.py b/test_wsgi_compliance.py
+new file mode 100644
+index 0000000..6e2d0f8
+--- /dev/null
++++ b/test_wsgi_compliance.py
+@@ -0,0 +1,146 @@
++#!/usr/bin/env python3
++"""
++WSGI compliance test for Django Framework.
++"""
++
++import io
++from wsgiref.validate import validator
++from djangoframework import path, HttpResponse, WSGIApplication
++
++
++def simple_view(request):
++    """Simple test view."""
++    return HttpResponse("Hello, WSGI!")
++
++
++def test_wsgi_compliance():
++    """Test WSGI compliance using wsgiref.validate."""
++    print("Testing WSGI compliance with wsgiref.validate...")
++    
++    # Create application
++    urlpatterns = [
++        path('', simple_view),
++        path('test/', simple_view),
++    ]
++    
++    app = WSGIApplication(urlpatterns)
++    
++    # Wrap with validator
++    validated_app = validator(app)
++    
++    # Create test environ
++    environ = {
++        'REQUEST_METHOD': 'GET',
++        'SCRIPT_NAME': '',
++        'PATH_INFO': '/',
++        'QUERY_STRING': '',
++        'CONTENT_TYPE': '',
++        'CONTENT_LENGTH': '0',
++        'SERVER_NAME': 'localhost',
++        'SERVER_PORT': '8000',
++        'wsgi.version': (1, 0),
++        'wsgi.url_scheme': 'http',
++        'wsgi.input': io.BytesIO(b''),
++        'wsgi.errors': io.StringIO(),
++        'wsgi.multithread': False,
++        'wsgi.multiprocess': True,
++        'wsgi.run_once': False,
++    }
++    
++    # Test the application
++    responses = []
++    
++    def start_response(status, headers, exc_info=None):
++        responses.append((status, headers, exc_info))
++    
++    try:
++        result = validated_app(environ, start_response)
++        
++        # Consume the result
++        content = b''.join(result)
++        
++        # Check response
++        assert len(responses) == 1, "start_response should be called exactly once"
++        status, headers, exc_info = responses[0]
++        
++        assert status.startswith('200'), f"Expected 200 status, got {status}"
++        assert b"Hello, WSGI!" in content, f"Expected content not found: {content}"
++        
++        print("✓ WSGI compliance test passed!")
++        return True
++        
++    except Exception as e:
++        print(f"❌ WSGI compliance test failed: {e}")
++        import traceback
++        traceback.print_exc()
++        return False
++
++
++def test_wsgi_error_handling():
++    """Test WSGI error handling."""
++    print("Testing WSGI error handling...")
++    
++    def error_view(request):
++        raise ValueError("Test error")
++    
++    urlpatterns = [
++        path('error/', error_view),
++    ]
++    
++    app = WSGIApplication(urlpatterns)
++    validated_app = validator(app)
++    
++    environ = {
++        'REQUEST_METHOD': 'GET',
++        'SCRIPT_NAME': '',
++        'PATH_INFO': '/error/',
++        'QUERY_STRING': '',
++        'CONTENT_TYPE': '',
++        'CONTENT_LENGTH': '0',
++        'SERVER_NAME': 'localhost',
++        'SERVER_PORT': '8000',
++        'wsgi.version': (1, 0),
++        'wsgi.url_scheme': 'http',
++        'wsgi.input': io.BytesIO(b''),
++        'wsgi.errors': io.StringIO(),
++        'wsgi.multithread': False,
++        'wsgi.multiprocess': True,
++        'wsgi.run_once': False,
++    }
++    
++    responses = []
++    
++    def start_response(status, headers, exc_info=None):
++        responses.append((status, headers, exc_info))
++    
++    try:
++        result = validated_app(environ, start_response)
++        content = b''.join(result)
++        
++        assert len(responses) == 1
++        status, headers, exc_info = responses[0]
++        
++        assert status.startswith('500'), f"Expected 500 status for error, got {status}"
++        
++        print("✓ WSGI error handling test passed!")
++        return True
++        
++    except Exception as e:
++        print(f"❌ WSGI error handling test failed: {e}")
++        import traceback
++        traceback.print_exc()
++        return False
++
++
++if __name__ == '__main__':
++    print("Running WSGI compliance tests...\n")
++    
++    success1 = test_wsgi_compliance()
++    success2 = test_wsgi_error_handling()
++    
++    if success1 and success2:
++        print("\n🎉 All WSGI compliance tests passed!")
++        exit(0)
++    else:
++        print("\n❌ Some WSGI compliance tests failed!")
++        exit(1)

@@ -31,6 +31,9 @@ class Subject:
     oracle: str = ""
     available: bool = True
     include: list[str] = field(default_factory=list)
+    #: Specification role -> this subject's name for it (see oracle/api.py).
+    #: Empty when the subject's names match the conventional candidates.
+    api_map: dict[str, str] = field(default_factory=dict)
 
     @property
     def root(self) -> Path:
@@ -65,8 +68,15 @@ class Subject:
             if any(part in skip_dirs for part in path.parts):
                 continue
             if self.include:
-                rel = path.relative_to(self.root)
-                if not any(rel.parts and rel.parts[0] == inc for inc in self.include):
+                # Match on a path prefix, not just the first component: an
+                # agent-generated subject's package is not always a direct
+                # child of the root (observed: "flask_pair/flask_pair" and
+                # "flask_pair_framework/src/flask_pair_framework"), and a
+                # first-component-only test silently measured nothing for
+                # every such subject.
+                rel = path.relative_to(self.root).as_posix()
+                if not any(rel == inc or rel.startswith(inc.rstrip("/") + "/")
+                           for inc in self.include):
                     continue
             files.append(path)
         return files

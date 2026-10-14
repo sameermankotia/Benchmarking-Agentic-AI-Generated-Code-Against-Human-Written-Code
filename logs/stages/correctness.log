@@ -1,9 +1,9 @@
 
 === correctness ===
-[correctness] flask: 133/133 (100.0%)
+[correctness] flask: 140/140 (100.0%)
 [correctness] SKIP flask_0_1: structural reference only (no oracle)
 [correctness] SKIP swe_flask: snapshot not present
 [correctness] SKIP openhands_flask: snapshot not present
-[correctness] django: 97/97 (100.0%)
+[correctness] django: 104/104 (100.0%)
 [correctness] SKIP swe_django: snapshot not present
-[correctness] done in 0.8s
+[correctness] done in 0.9s

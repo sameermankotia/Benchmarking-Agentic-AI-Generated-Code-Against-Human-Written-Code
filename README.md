@@ -28,6 +28,8 @@ the pass/fail and severity counts (RQ1, RQ4) — by `analysis/significance.py`
 subjects/subjects.json        subject registry (paths, kind, oracle, availability)
 subjects/<id>/                frozen snapshots (cloned locally; git-ignored)
 snapshots/MANIFEST.txt        upstream tags + commit SHAs for every snapshot
+oracle/wsgi.py                PEP 3333 driver (all behavioural assertions)
+oracle/api.py                 declared construction surface (role resolution)
 oracle/flask, oracle/django   specification-derived oracle suites + conftest
 analysis/                     one module per stage + significance + aggregator
 run_all.py                    orchestrator (`make all` calls this)
@@ -86,8 +88,8 @@ dependencies on the path, pylint cannot resolve their imports and reports 63
 spurious `import-error` findings for Flask alone, and the oracle cannot import
 any subject at all. The Docker image installs it too.
 
-Each oracle passes **100%** against its own reference baseline (Flask 133/133,
-Django 97/97 parametrised cases): the suite is derived from the written
+Each oracle passes **100%** against its own reference baseline (Flask 140/140,
+Django 104/104 parametrised cases, no skips): the suite is derived from the written
 specification, and the reference implementation is the one that specification
 describes, so a passing score is the expected sanity result. The committed
 `logs/oracle-flask-verbose.log` and `logs/oracle-django-verbose.log` list every
@@ -95,11 +97,60 @@ case. Complexity, maintainability, security, and smells populate
 `results/tables/` from the same run; `logs/` holds that run's console output and
 `logs/environment.txt` records the exact interpreter and tool versions.
 
+> **⚠ Open discrepancy with the manuscript.** The suites here are **117 Flask
+> / 85 Django test functions (140 / 104 parametrised cases)** and both human
+> baselines pass 100% of them. The manuscript reports **120 / 85 cases** with
+> the human baseline passing **90.8% / 92.4%**, including specific
+> per-category failures (Flask App Context 19/22, Blueprints 13/20). No suite
+> in this repository reproduces a failing human baseline, and the earlier
+> oracle READMEs described themselves as a partial stand-in for a "full case
+> set" that was never added. The case counts to report are now 140 and 104;
+> the manuscript's per-category human failure figures have no source in this
+> package. See `docs/manuscript-audit.md` §4 and §5.
 
+### The oracle suites are portable
+
+Both suites were rebuilt (`docs/manuscript-audit.md` §5). They had been
+conformance suites for their reference implementation: the Flask suite reached
+30 distinct symbols of which only four are named in the specification, and
+every case depended on the application class being called `Flask`; the Django
+suite hard-imported `django.urls`, `django.http` and `django.views` by literal
+module path in all five files.
+
+They now stand on two layers:
+
+- `oracle/wsgi.py` drives each subject over its **WSGI interface**, which the
+  specification does fix ("must pass a WSGI compliance check"), so every
+  behavioural assertion reads a status line, a response header, or a response
+  body.
+- `oracle/api.py` resolves the small **declared construction surface** — the
+  application class, route registration, blueprint class and registration,
+  response class, template renderer, the request attributes, and
+  variable-segment syntax — from a subject's `api_map` in the registry, then
+  from conventional candidates, then by raising an error naming the
+  unresolved role.
+
+`grep` the suites for `Flask`, `django`, `test_client`, `url_for`, `jsonify`
+or `HttpResponse`: no matches. An agentic subject that names things
+differently declares them once in `subjects.json`; no test body changes.
 
 ### Agentic subjects
 
-Three agentic subjects are registered `available: false`:
+**All 15 are now generated, committed and scored** (2026-10-13). See
+`generation/` for the harness that produced them and
+`docs/manuscript-audit.md` §9 for the results, which contradict the
+manuscript's claimed gaps on four of six dimensions. The snapshots live under
+`subjects/*_run*/` and are committed rather than ignored: they are the output
+of stochastic runs against pinned models and cannot be regenerated
+identically, so they are the one part of this package that is irreplaceable
+rather than reproducible.
+
+Two forced departures from the manuscript's design: Claude was reached through
+OpenRouter as `anthropic/claude-sonnet-4` (no Anthropic key on this account,
+and OpenRouter does not expose the dated snapshot), and each run carried a $10
+cost cap, which bound on `swe_flask_run03`.
+
+The three configurations:
 
 | id                | agent + model                          | spec pair |
 |-------------------|----------------------------------------|-----------|

@@ -1,0 +1,198 @@
+{
+  "agentic": "swe_django_run05",
+  "agentic_label": "SWE-agent/Dj. (A) r05",
+  "alpha": 0.05,
+  "complexity": {
+    "cc": {
+      "n_agentic": 65,
+      "n_human": 330,
+      "p": 0.5705619724219526,
+      "rank_biserial": 0.043,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 10268.5
+    },
+    "cogc": {
+      "n_agentic": 47,
+      "n_human": 261,
+      "p": 0.011918850178181622,
+      "rank_biserial": 0.216,
+      "significant": true,
+      "test": "mannwhitney",
+      "u": 4806.0
+    }
+  },
+  "correctness": {
+    "Class-Based Views": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          10,
+          0
+        ],
+        [
+          10,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Request Object": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          26,
+          0
+        ],
+        [
+          26,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Response Handling": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          21,
+          0
+        ],
+        [
+          21,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "Total": {
+      "odds_ratio": 0.0,
+      "p": 0.0032611288094576666,
+      "significant": true,
+      "table": [
+        [
+          95,
+          9
+        ],
+        [
+          104,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "URL Resolution": {
+      "odds_ratio": 0.0,
+      "p": 0.004029122782215311,
+      "significant": true,
+      "table": [
+        [
+          17,
+          8
+        ],
+        [
+          25,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "View Dispatch": {
+      "odds_ratio": 0.0,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          21,
+          1
+        ],
+        [
+          22,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    }
+  },
+  "duplication": {
+    "duplicated_pct": {
+      "n_agentic": 6,
+      "n_human": 27,
+      "p": 0.8810775198386724,
+      "rank_biserial": -0.031,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 83.5
+    }
+  },
+  "human": "django",
+  "human_label": "Django mod. (H)",
+  "maintainability": {
+    "mi": {
+      "n_agentic": 7,
+      "n_human": 28,
+      "p": 0.436167077191023,
+      "rank_biserial": 0.194,
+      "significant": false,
+      "test": "mannwhitney",
+      "u": 79.0
+    }
+  },
+  "pair": "django",
+  "security": {
+    "HIGH": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          0,
+          27
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "LOW": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          27,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "test": "fisher_exact"
+    },
+    "MEDIUM": {
+      "odds_ratio": null,
+      "p": 1.0,
+      "significant": false,
+      "table": [
+        [
+          0,
+          27
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "test": "fisher_exact"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "avg_function_length": 9.2,
+  "classes": 15,
+  "comment_density_pct": 7.5,
+  "docstring_coverage_pct": 72.5,
+  "functions": 76,
+  "kind": "agentic",
+  "label": "SWE-agent (A) r01",
+  "language": "Python",
+  "loc": 644,
+  "source_files": 9,
+  "subject": "swe_flask_run01",
+  "test_files": 0
+}

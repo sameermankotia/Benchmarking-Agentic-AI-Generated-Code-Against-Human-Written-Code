@@ -1,0 +1,54 @@
+{
+  "blocks": [],
+  "duplicated_blocks": 0,
+  "duplicated_loc": 0,
+  "duplicated_pct": 0.0,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/__init__.py",
+      "loc": 17
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/app.py",
+      "loc": 158
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/blueprints.py",
+      "loc": 41
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/context.py",
+      "loc": 61
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/request.py",
+      "loc": 72
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/response.py",
+      "loc": 49
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flaskframework/templating.py",
+      "loc": 38
+    }
+  ],
+  "label": "SWE-agent (A) r05",
+  "max_block_tokens": 0,
+  "min_tokens": 50,
+  "subject": "swe_flask_run05"
+}

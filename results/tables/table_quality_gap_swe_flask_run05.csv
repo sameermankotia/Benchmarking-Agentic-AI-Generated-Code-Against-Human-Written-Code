@@ -1,0 +1,7 @@
+Dimension,Flask (H),SWE-agent (A) r05,Delta
+Oracle pass rate (%),100.0,66.4,-33.6 pp
+Mean CC,2.8,2.2,-21%
+Mean CogC,2.1,1.4,-33%
+Mean MI,64.1,72.4,+8.3 pts
+Security findings / 100 LOC,0.26,0.23,-12%
+Duplicated LOC (%),3.4,0.0,-100%

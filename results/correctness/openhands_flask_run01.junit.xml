@@ -1,0 +1,2055 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="119" skipped="0" tests="140" time="0.486" timestamp="2026-10-14T04:47:10.756080" hostname="7313fbe3e4e6"><testcase classname="oracle.flask.test_app_context" name="test_current_app_accessible_in_a_view" time="0.001"><failure message="assert b'yes' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5cdd50&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e5cdd50&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e7302c0&gt;
+
+    def test_current_app_accessible_in_a_view(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            return "yes" if api.current_app is not None else "no"
+        path = ctx_route(view)
+&gt;       assert b"yes" in wsgi.call(marked_app, "GET", path).body
+E       assert b'yes' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5cdd50&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:49: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_is_the_handling_application" time="0.000"><failure message="assert b'marker-value' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8eb323d0&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8eb323d0&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e730860&gt;
+
+    def test_current_app_is_the_handling_application(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            return getattr(api.current_app, "oracle_marker", "absent")
+        path = ctx_route(view)
+&gt;       assert b"marker-value" in wsgi.call(marked_app, "GET", path).body
+E       assert b'marker-value' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8eb323d0&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:56: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_accessible_from_a_nested_call" time="0.000"><failure message="assert b'marker-value' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e945150&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e945150&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e730ea0&gt;
+
+    def test_current_app_accessible_from_a_nested_call(api, marked_app, ctx_route):
+        def helper():
+            return getattr(api.current_app, "oracle_marker", "absent")
+    
+        def view(*_req, **_):
+            return helper()
+        path = ctx_route(view)
+&gt;       assert b"marker-value" in wsgi.call(marked_app, "GET", path).body
+E       assert b'marker-value' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e945150&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:66: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_distinguishes_two_applications" time="0.000"><failure message="assert b'first' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e86c590&gt;, 'GET', '/who')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+
+    def test_current_app_distinguishes_two_applications(api):
+        first, second = api.app(), api.app()
+        first.oracle_marker, second.oracle_marker = "first", "second"
+    
+        def make(app, name):
+            def view(*_req, **_):
+                return getattr(api.current_app, "oracle_marker", "absent")
+            view.__name__ = name
+            api.route(app, "/who")(view)
+        make(first, "who_first")
+        make(second, "who_second")
+&gt;       assert b"first" in wsgi.call(first, "GET", "/who").body
+E       assert b'first' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e86c590&gt;, 'GET', '/who')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:80: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_unavailable_outside_a_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_is_writable_in_a_view" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'value'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'value'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5e6c50&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e5e6c50&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e731b20&gt;
+
+    def test_g_is_writable_in_a_view(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            api.g.value = "stored"
+            return "written"
+        path = ctx_route(view)
+&gt;       assert wsgi.call(marked_app, "GET", path).status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'value'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'value'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5e6c50&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:97: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_value_readable_back_in_the_same_request" time="0.000"><failure message="assert b'roundtrip' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'value'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'value'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e57fe50&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e57fe50&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e732160&gt;
+
+    def test_g_value_readable_back_in_the_same_request(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            api.g.value = "roundtrip"
+            return api.g.value
+        path = ctx_route(view)
+&gt;       assert b"roundtrip" in wsgi.call(marked_app, "GET", path).body
+E       assert b'roundtrip' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'value'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'value'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e57fe50&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:105: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_shared_between_view_and_helper" time="0.000"><failure message="assert b'via-helper' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'value'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'value'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e8ce390&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e8ce390&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e731b20&gt;
+
+    def test_g_shared_between_view_and_helper(api, marked_app, ctx_route):
+        def helper():
+            return api.g.value
+    
+        def view(*_req, **_):
+            api.g.value = "via-helper"
+            return helper()
+        path = ctx_route(view)
+&gt;       assert b"via-helper" in wsgi.call(marked_app, "GET", path).body
+E       assert b'via-helper' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'value'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'value'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e8ce390&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:116: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_is_empty_at_the_start_of_each_request" time="0.000"><failure message="assert b'clean' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'leaked'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'leaked'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e614b10&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e614b10&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e731580&gt;
+
+    def test_g_is_empty_at_the_start_of_each_request(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            seen = getattr(api.g, "leaked", "clean")
+            api.g.leaked = "dirty"
+            return seen
+        path = ctx_route(view)
+&gt;       assert b"clean" in wsgi.call(marked_app, "GET", path).body
+E       assert b'clean' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'leaked'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'leaked'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e614b10&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:125: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_does_not_leak_between_sequential_requests" time="0.000"><failure message="AssertionError: assert b'' == b'none'&#10;  &#10;  Use -v to get more diff">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e5741d0&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e732a20&gt;
+
+    def test_g_does_not_leak_between_sequential_requests(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            previous = getattr(api.g, "n", "none")
+            api.g.n = "set"
+            return str(previous)
+        path = ctx_route(view)
+        first = wsgi.call(marked_app, "GET", path).body
+        second = wsgi.call(marked_app, "GET", path).body
+&gt;       assert first == second == b"none"
+E       AssertionError: assert b'' == b'none'
+E         
+E         Use -v to get more diff
+
+oracle/flask/test_app_context.py:137: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_missing_attribute_raises" time="0.000"><failure message="assert b'raised' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e77f410&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e77f410&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e731580&gt;
+
+    def test_g_missing_attribute_raises(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            try:
+                _ = api.g.never_set
+            except AttributeError:
+                return "raised"
+            return "did-not-raise"
+        path = ctx_route(view)
+&gt;       assert b"raised" in wsgi.call(marked_app, "GET", path).body
+E       assert b'raised' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e77f410&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:148: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_getattr_default_works" time="0.000"><failure message="assert b'defaulted' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e759450&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e759450&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e730e00&gt;
+
+    def test_g_getattr_default_works(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            return getattr(api.g, "never_set", "defaulted")
+        path = ctx_route(view)
+&gt;       assert b"defaulted" in wsgi.call(marked_app, "GET", path).body
+E       assert b'defaulted' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e759450&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:155: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_holds_non_string_values" time="0.000"><failure message="assert b'3' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'payload'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'payload'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e561190&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e561190&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e7331a0&gt;
+
+    def test_g_holds_non_string_values(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            api.g.payload = {"k": [1, 2, 3]}
+            return str(api.g.payload["k"][2])
+        path = ctx_route(view)
+&gt;       assert b"3" in wsgi.call(marked_app, "GET", path).body
+E       assert b'3' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'payload'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'payload'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e561190&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:163: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_unavailable_outside_a_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_request_accessible_in_the_same_context" time="0.000"><failure message="assert b'/both' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5ff050&gt;, 'GET', '/both')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e5ff050&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e732f20&gt;
+
+    def test_request_accessible_in_the_same_context(api, marked_app, ctx_route):
+        def view(*view_args, **_):
+            return api.path(api.current_request(view_args))
+        path = ctx_route(view, path="/both")
+&gt;       assert b"/both" in wsgi.call(marked_app, "GET", path).body
+E       assert b'/both' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5ff050&gt;, 'GET', '/both')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:177: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_request_and_g_coexist" time="0.000"><failure message="assert b'/coexist' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'seen'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'seen'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5a7b10&gt;, 'GET', '/coexist')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e5a7b10&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e733ba0&gt;
+
+    def test_request_and_g_coexist(api, marked_app, ctx_route):
+        def view(*view_args, **_):
+            api.g.seen = api.path(api.current_request(view_args))
+            return api.g.seen
+        path = ctx_route(view, path="/coexist")
+&gt;       assert b"/coexist" in wsgi.call(marked_app, "GET", path).body
+E       assert b'/coexist' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'seen'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'seen'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5a7b10&gt;, 'GET', '/coexist')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:185: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_and_g_coexist" time="0.000"><failure message="assert b'marker-value' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'marker'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'marker'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8ebed950&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8ebed950&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e5b4400&gt;
+
+    def test_current_app_and_g_coexist(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            api.g.marker = getattr(api.current_app, "oracle_marker", "absent")
+            return api.g.marker
+        path = ctx_route(view)
+&gt;       assert b"marker-value" in wsgi.call(marked_app, "GET", path).body
+E       assert b'marker-value' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'marker'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'marker'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8ebed950&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:193: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_g_is_isolated_between_concurrent_threads" time="0.001"><failure message="AssertionError: assert b'' == b'aaa'&#10;  &#10;  Use -v to get more diff">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e86ff50&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e733f60&gt;
+
+    def test_g_is_isolated_between_concurrent_threads(api, marked_app, ctx_route):
+        """Two in-flight requests must not see each other's `g`.
+    
+        The barrier forces both views to be inside their request at the same
+        time, which is what makes this a test of thread-local storage rather than
+        of sequential cleanup.
+        """
+        barrier = threading.Barrier(2, timeout=5)
+    
+        def view(*view_args, **_):
+            own = api.query_get(api.current_request(view_args), "tag")
+            api.g.tag = own
+            try:
+                barrier.wait()
+            except threading.BrokenBarrierError:
+                pass
+            return api.g.tag
+        path = ctx_route(view)
+    
+        results: dict[str, bytes] = {}
+    
+        def run(tag):
+            results[tag] = wsgi.call(
+                marked_app, "GET", path, query={"tag": tag}).body
+    
+        threads = [threading.Thread(target=run, args=(t,)) for t in ("aaa", "bbb")]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join(timeout=10)
+    
+&gt;       assert results.get("aaa") == b"aaa"
+E       AssertionError: assert b'' == b'aaa'
+E         
+E         Use -v to get more diff
+
+oracle/flask/test_app_context.py:229: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_is_correct_in_concurrent_threads" time="0.001"><failure message="AssertionError: assert b'' == b'A'&#10;  &#10;  Use -v to get more diff">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+
+    def test_current_app_is_correct_in_concurrent_threads(api):
+        first, second = api.app(), api.app()
+        first.oracle_marker, second.oracle_marker = "A", "B"
+        barrier = threading.Barrier(2, timeout=5)
+    
+        def make(app, name):
+            def view(*_req, **_):
+                marker = getattr(api.current_app, "oracle_marker", "absent")
+                try:
+                    barrier.wait()
+                except threading.BrokenBarrierError:
+                    pass
+                return marker
+            view.__name__ = name
+            api.route(app, "/c")(view)
+        make(first, "c_first")
+        make(second, "c_second")
+    
+        out: dict[str, bytes] = {}
+    
+        def run(key, app):
+            out[key] = wsgi.call(app, "GET", "/c").body
+    
+        threads = [threading.Thread(target=run, args=kv)
+                   for kv in (("a", first), ("b", second))]
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join(timeout=10)
+    
+&gt;       assert out.get("a") == b"A"
+E       AssertionError: assert b'' == b'A'
+E         
+E         Use -v to get more diff
+
+oracle/flask/test_app_context.py:263: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_context_is_released_after_the_request" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'inside'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'dict' object has no attribute 'inside'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e762950&gt;, 'GET', '/ctx1')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e762950&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e5b4e00&gt;
+
+    def test_context_is_released_after_the_request(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            api.g.inside = "yes"
+            return "done"
+        path = ctx_route(view)
+&gt;       assert wsgi.call(marked_app, "GET", path).status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'inside'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'dict' object has no attribute 'inside'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e762950&gt;, 'GET', '/ctx1')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_app_context.py:272: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_many_sequential_requests_keep_context_clean" time="0.000"><failure message="AssertionError: assert {b''} == {b'0'}&#10;  &#10;  Extra items in the left set:&#10;  b''&#10;  Extra items in the right set:&#10;  b'0'&#10;  Use -v to get more diff">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+marked_app = &lt;flask_pair.FlaskPair object at 0xffff8e759250&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffff8e733b00&gt;
+
+    def test_many_sequential_requests_keep_context_clean(api, marked_app, ctx_route):
+        def view(*_req, **_):
+            seen = getattr(api.g, "count", 0)
+            api.g.count = seen + 1
+            return str(seen)
+        path = ctx_route(view)
+        bodies = {wsgi.call(marked_app, "GET", path).body for _ in range(10)}
+&gt;       assert bodies == {b"0"}
+E       AssertionError: assert {b''} == {b'0'}
+E         
+E         Extra items in the left set:
+E         b''
+E         Extra items in the right set:
+E         b'0'
+E         Use -v to get more diff
+
+oracle/flask/test_app_context.py:284: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_can_be_constructed" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_route_is_reachable_after_registration" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4040&gt;('/inside')">mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b4900&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4040&gt;
+
+    def test_blueprint_route_is_reachable_after_registration(mount, get):
+        mount([("/inside", None, _view)])
+&gt;       assert get("/inside").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4040&gt;('/inside')
+
+oracle/flask/test_blueprints.py:45: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_route_returns_its_body" time="0.000"><failure message="assert b'from-blueprint' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b5440&gt;('/body')">mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b5300&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b5440&gt;
+
+    def test_blueprint_route_returns_its_body(mount, get):
+        def view(*_req, **_):
+            return "from-blueprint"
+        mount([("/body", None, view)])
+&gt;       assert b"from-blueprint" in get("/body").body
+E       assert b'from-blueprint' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b5440&gt;('/body')
+
+oracle/flask/test_blueprints.py:52: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_unregistered_blueprint_route_is_not_reachable" time="0.000"><failure message="assert 500 == 404&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b59e0&gt;('/orphaned')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e614f90&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b59e0&gt;
+
+    def test_unregistered_blueprint_route_is_not_reachable(api, app, get):
+        bp = api.blueprint("orphan")
+        api.route(bp, "/orphaned")(_view)
+        # Deliberately not registered.
+&gt;       assert get("/orphaned").status_code == 404
+E       assert 500 == 404
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b59e0&gt;('/orphaned')
+
+oracle/flask/test_blueprints.py:59: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_with_several_routes" time="0.000"><failure message="assert b'one' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e733600&gt;('/one')">mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e8f5d00&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e733600&gt;
+
+    def test_blueprint_with_several_routes(mount, get):
+        def one(*_req, **_):
+            return "one"
+    
+        def two(*_req, **_):
+            return "two"
+        mount([("/one", None, one), ("/two", None, two)])
+&gt;       assert b"one" in get("/one").body
+E       assert b'one' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e733600&gt;('/one')
+
+oracle/flask/test_blueprints.py:69: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_url_prefix_is_applied" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5a5850&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e785690&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e733060&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e733100&gt;
+
+    def test_url_prefix_is_applied(mount, get):
+&gt;       mount([("/item", None, _view)], url_prefix="/api")
+
+oracle/flask/test_blueprints.py:76: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5a5850&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e785690&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_route_not_reachable_without_the_prefix" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5f24d0&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5f1490&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e733600&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e730cc0&gt;
+
+    def test_route_not_reachable_without_the_prefix(mount, get):
+&gt;       mount([("/item", None, _view)], url_prefix="/api")
+
+oracle/flask/test_blueprints.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5f24d0&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5f1490&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_all_blueprint_routes_inherit_the_prefix" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e862190&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5b0d90&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e7323e0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e732020&gt;
+
+    def test_all_blueprint_routes_inherit_the_prefix(mount, get):
+        def a(*_req, **_):
+            return "a"
+    
+        def b(*_req, **_):
+            return "b"
+&gt;       mount([("/a", None, a), ("/b", None, b)], url_prefix="/v1")
+
+oracle/flask/test_blueprints.py:91: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e862190&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5b0d90&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_prefix_with_multiple_segments" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e90da90&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e90e350&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e730cc0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e733600&gt;
+
+    def test_prefix_with_multiple_segments(mount, get):
+&gt;       mount([("/deep", None, _view)], url_prefix="/a/b")
+
+oracle/flask/test_blueprints.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e90da90&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e90e350&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_root_route_under_prefix" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e8da250&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e8da110&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e7307c0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e7304a0&gt;
+
+    def test_blueprint_root_route_under_prefix(mount, get):
+&gt;       mount([("/", None, _view)], url_prefix="/root")
+
+oracle/flask/test_blueprints.py:102: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e8da250&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e8da110&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_two_blueprints_with_different_prefixes" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5e6c10&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e758350&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e731c60&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e731b20&gt;
+
+    def test_two_blueprints_with_different_prefixes(mount, get):
+        def first(*_req, **_):
+            return "first"
+    
+        def second(*_req, **_):
+            return "second"
+&gt;       mount([("/x", None, first)], url_prefix="/one", name="bp_one")
+
+oracle/flask/test_blueprints.py:112: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5e6c10&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e758350&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_without_prefix_mounts_at_root" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e7302c0&gt;('/bare')">mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e7307c0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e7302c0&gt;
+
+    def test_blueprint_without_prefix_mounts_at_root(mount, get):
+        mount([("/bare", None, _view)])
+&gt;       assert get("/bare").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e7302c0&gt;('/bare')
+
+oracle/flask/test_blueprints.py:120: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_inside_a_blueprint" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e777550&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e775350&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b4540&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4680&gt;
+
+    def test_variable_segment_inside_a_blueprint(api, mount, get):
+&gt;       mount([(api.rule("user", ":name"), None, _view)], url_prefix="/api")
+
+oracle/flask/test_blueprints.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e777550&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e775350&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[one]" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e761990&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e7630d0&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e730720&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b5940&gt;, value = 'one'
+
+    @pytest.mark.parametrize("value", ["one", "2", "three-3"])
+    def test_variable_segment_values_inside_a_blueprint(api, mount, get, value):
+&gt;       mount([(api.rule("v", ":val"), None, _view)], url_prefix="/p")
+
+oracle/flask/test_blueprints.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e761990&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e7630d0&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[2]" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e736ad0&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5903d0&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b5440&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b56c0&gt;, value = '2'
+
+    @pytest.mark.parametrize("value", ["one", "2", "three-3"])
+    def test_variable_segment_values_inside_a_blueprint(api, mount, get, value):
+&gt;       mount([(api.rule("v", ":val"), None, _view)], url_prefix="/p")
+
+oracle/flask/test_blueprints.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e736ad0&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5903d0&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[three-3]" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e775310&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e774c10&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b5620&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4e00&gt;, value = 'three-3'
+
+    @pytest.mark.parametrize("value", ["one", "2", "three-3"])
+    def test_variable_segment_values_inside_a_blueprint(api, mount, get, value):
+&gt;       mount([(api.rule("v", ":val"), None, _view)], url_prefix="/p")
+
+oracle/flask/test_blueprints.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e775310&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e774c10&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_method_filtering_inside_a_blueprint" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e562690&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e561090&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b4ea0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4860&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8e5b5260&gt;
+
+    def test_method_filtering_inside_a_blueprint(mount, get, request_):
+&gt;       mount([("/post-only", ["POST"], _view)], url_prefix="/api")
+
+oracle/flask/test_blueprints.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e562690&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e561090&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_multi_method_route_inside_a_blueprint" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5b8c50&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5ba990&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b62a0&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8e5b6340&gt;
+
+    def test_multi_method_route_inside_a_blueprint(mount, request_):
+&gt;       mount([("/multi", ["GET", "PUT"], _view)], url_prefix="/api")
+
+oracle/flask/test_blueprints.py:143: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5b8c50&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5ba990&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_and_app_routes_coexist" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8d46d150&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8d46eb50&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8d46eb50&gt;
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b60c0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b6020&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b5260&gt;
+
+    def test_blueprint_and_app_routes_coexist(api, app, mount, route, get):
+        def app_view(*_req, **_):
+            return "app-level"
+        route("/app-route")(app_view)
+    
+        def bp_view(*_req, **_):
+            return "bp-level"
+&gt;       mount([("/bp-route", None, bp_view)], url_prefix="/mod")
+
+oracle/flask/test_blueprints.py:155: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8d46d150&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8d46eb50&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_prefix_does_not_leak_to_app_routes" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e598a50&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5f3d50&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b6b60&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b6c00&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6ca0&gt;
+
+    def test_prefix_does_not_leak_to_app_routes(mount, route, get):
+&gt;       mount([("/inside", None, _view)], url_prefix="/pre")
+
+oracle/flask/test_blueprints.py:164: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e598a50&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5f3d50&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_three_blueprints_mounted_together" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5b9310&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5b8650&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b7240&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b72e0&gt;
+
+    def test_three_blueprints_mounted_together(mount, get):
+        def a(*_req, **_):
+            return "alpha"
+    
+        def b(*_req, **_):
+            return "beta"
+    
+        def c(*_req, **_):
+            return "gamma"
+&gt;       mount([("/x", None, a)], url_prefix="/a", name="bp_a")
+
+oracle/flask/test_blueprints.py:182: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5b9310&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5b8650&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_unknown_path_under_a_prefix_is_404" time="0.000"><failure message="TypeError: Blueprint.register() takes 2 positional arguments but 3 were given">fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5cfb90&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5cc6d0&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+&gt;           return fn(*base, url_prefix=prefix)
+E           TypeError: Blueprint.register() got an unexpected keyword argument 'url_prefix'
+
+oracle/api.py:314: TypeError
+
+During handling of the above exception, another exception occurred:
+
+mount = &lt;function mount.&lt;locals&gt;._mount at 0xffff8e5b79c0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7a60&gt;
+
+    def test_unknown_path_under_a_prefix_is_404(mount, get):
+&gt;       mount([("/known", None, _view)], url_prefix="/api")
+
+oracle/flask/test_blueprints.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+oracle/flask/test_blueprints.py:32: in _mount
+    api.register(app, bp, url_prefix=url_prefix)
+oracle/api.py:333: in register
+    return attempt(fn, (app,))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+fn = &lt;bound method Blueprint.register of &lt;flask_pair.blueprints.Blueprint object at 0xffff8e5cfb90&gt;&gt;
+base = (&lt;flask_pair.FlaskPair object at 0xffff8e5cc6d0&gt;,)
+
+    def attempt(fn, base):
+        if prefix is None:
+            return fn(*base)
+        try:
+            return fn(*base, url_prefix=prefix)
+        except TypeError:
+&gt;           return fn(*base, prefix)
+E           TypeError: Blueprint.register() takes 2 positional arguments but 3 were given
+
+oracle/api.py:316: TypeError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[GET]" time="0.000"><failure message="assert b'GET' in b''&#10; +  where b'GET' = &lt;built-in method encode of str object at 0xffff8e86daf0&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e86daf0&gt; = 'GET'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8d4b9550&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8d4b9550&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e732980&gt;, method = 'GET'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
+    def test_request_exposes_method(api, app, report, method):
+        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+&gt;       assert method.encode() in wsgi.call(app, method, path).body
+E       assert b'GET' in b''
+E        +  where b'GET' = &lt;built-in method encode of str object at 0xffff8e86daf0&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e86daf0&gt; = 'GET'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8d4b9550&gt;, 'GET', '/r')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[POST]" time="0.000"><failure message="assert b'POST' in b''&#10; +  where b'POST' = &lt;built-in method encode of str object at 0xffff8e5d9230&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e5d9230&gt; = 'POST'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5983d0&gt;, 'POST', '/r')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5983d0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e731120&gt;, method = 'POST'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
+    def test_request_exposes_method(api, app, report, method):
+        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+&gt;       assert method.encode() in wsgi.call(app, method, path).body
+E       assert b'POST' in b''
+E        +  where b'POST' = &lt;built-in method encode of str object at 0xffff8e5d9230&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e5d9230&gt; = 'POST'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5983d0&gt;, 'POST', '/r')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[PUT]" time="0.000"><failure message="assert b'PUT' in b''&#10; +  where b'PUT' = &lt;built-in method encode of str object at 0xffff8e5d8370&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e5d8370&gt; = 'PUT'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5f47d0&gt;, 'PUT', '/r')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5f47d0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e733100&gt;, method = 'PUT'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
+    def test_request_exposes_method(api, app, report, method):
+        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+&gt;       assert method.encode() in wsgi.call(app, method, path).body
+E       assert b'PUT' in b''
+E        +  where b'PUT' = &lt;built-in method encode of str object at 0xffff8e5d8370&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e5d8370&gt; = 'PUT'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5f47d0&gt;, 'PUT', '/r')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[DELETE]" time="0.000"><failure message="assert b'DELETE' in b''&#10; +  where b'DELETE' = &lt;built-in method encode of str object at 0xffff8e5a08f0&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e5a08f0&gt; = 'DELETE'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5a7d50&gt;, 'DELETE', '/r')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5a7d50&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e730540&gt;, method = 'DELETE'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
+    def test_request_exposes_method(api, app, report, method):
+        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+&gt;       assert method.encode() in wsgi.call(app, method, path).body
+E       assert b'DELETE' in b''
+E        +  where b'DELETE' = &lt;built-in method encode of str object at 0xffff8e5a08f0&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e5a08f0&gt; = 'DELETE'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5a7d50&gt;, 'DELETE', '/r')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[PATCH]" time="0.000"><failure message="assert b'PATCH' in b''&#10; +  where b'PATCH' = &lt;built-in method encode of str object at 0xffff8e5a0770&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e5a0770&gt; = 'PATCH'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e60afd0&gt;, 'PATCH', '/r')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e60afd0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e732c00&gt;, method = 'PATCH'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
+    def test_request_exposes_method(api, app, report, method):
+        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
+&gt;       assert method.encode() in wsgi.call(app, method, path).body
+E       assert b'PATCH' in b''
+E        +  where b'PATCH' = &lt;built-in method encode of str object at 0xffff8e5a0770&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e5a0770&gt; = 'PATCH'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e60afd0&gt;, 'PATCH', '/r')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_method_is_upper_case" time="0.000"><failure message="assert False&#10; +  where False = &lt;built-in method isupper of str object at 0xffff90240c08&gt;()&#10; +    where &lt;built-in method isupper of str object at 0xffff90240c08&gt; = ''.isupper&#10; +      where '' = &lt;built-in method strip of str object at 0xffff90240c08&gt;()&#10; +        where &lt;built-in method strip of str object at 0xffff90240c08&gt; = ''.strip&#10; +          where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).text&#10; +            where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5c3210&gt;, 'GET', '/r')&#10; +              where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5c3210&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b6e80&gt;
+
+    def test_request_method_is_upper_case(api, app, report):
+        path = report(api.method)
+&gt;       assert wsgi.call(app, "GET", path).text.strip().isupper()
+E       assert False
+E        +  where False = &lt;built-in method isupper of str object at 0xffff90240c08&gt;()
+E        +    where &lt;built-in method isupper of str object at 0xffff90240c08&gt; = ''.isupper
+E        +      where '' = &lt;built-in method strip of str object at 0xffff90240c08&gt;()
+E        +        where &lt;built-in method strip of str object at 0xffff90240c08&gt; = ''.strip
+E        +          where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).text
+E        +            where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5c3210&gt;, 'GET', '/r')
+E        +              where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:46: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_path" time="0.000"><failure message="assert b'/where' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e8ccb50&gt;, 'GET', '/where')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e8ccb50&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b67a0&gt;
+
+    def test_request_exposes_path(api, app, report):
+        path = report(api.path, path="/where")
+&gt;       assert b"/where" in wsgi.call(app, "GET", path).body
+E       assert b'/where' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e8ccb50&gt;, 'GET', '/where')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:53: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_path_excludes_query_string" time="0.000"><failure message="AssertionError: assert ('/noquery' in '')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e6f1950&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e730540&gt;
+
+    def test_request_path_excludes_query_string(api, app, report):
+        path = report(api.path, path="/noquery")
+        body = wsgi.call(app, "GET", path, query={"x": "1"}).text
+&gt;       assert "/noquery" in body and "x=1" not in body
+E       AssertionError: assert ('/noquery' in '')
+
+oracle/flask/test_request_handling.py:59: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_path_for_nested_route" time="0.000"><failure message="assert b'/a/b/c' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5b9bd0&gt;, 'GET', '/a/b/c')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5b9bd0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b6e80&gt;
+
+    def test_request_path_for_nested_route(api, app, report):
+        path = report(api.path, path="/a/b/c")
+&gt;       assert b"/a/b/c" in wsgi.call(app, "GET", path).body
+E       assert b'/a/b/c' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5b9bd0&gt;, 'GET', '/a/b/c')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:64: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter" time="0.000"><failure message="assert b'hello' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8d4b8e10&gt;, 'GET', '/r', query={'x': 'hello'})&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8d4b8e10&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b5580&gt;
+
+    def test_request_query_parameter(api, app, report):
+        path = report(lambda r: api.query_get(r, "x"))
+&gt;       assert b"hello" in wsgi.call(app, "GET", path, query={"x": "hello"}).body
+E       assert b'hello' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8d4b8e10&gt;, 'GET', '/r', query={'x': 'hello'})
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:71: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_missing_query_parameter_is_empty" time="0.000"><failure message="assert b'MISSING' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8d4659d0&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8d4659d0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b4ae0&gt;
+
+    def test_request_missing_query_parameter_is_empty(api, app, report):
+        path = report(lambda r: api.query_get(r, "x", "MISSING"))
+&gt;       assert b"MISSING" in wsgi.call(app, "GET", path).body
+E       assert b'MISSING' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8d4659d0&gt;, 'GET', '/r')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:76: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[a]" time="0.000"><failure message="assert 'a' in ''&#10; +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e7361d0&gt;, 'GET', '/r', query={'x': 'a'})&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e7361d0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e732160&gt;, value = 'a'
+
+    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
+    def test_request_query_parameter_values(api, app, report, value):
+        path = report(lambda r: api.query_get(r, "x"))
+&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
+E       assert 'a' in ''
+E        +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).text
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e7361d0&gt;, 'GET', '/r', query={'x': 'a'})
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[b b]" time="0.000"><failure message="assert 'b b' in ''&#10; +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e580250&gt;, 'GET', '/r', query={'x': 'b b'})&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e580250&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b6ca0&gt;, value = 'b b'
+
+    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
+    def test_request_query_parameter_values(api, app, report, value):
+        path = report(lambda r: api.query_get(r, "x"))
+&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
+E       assert 'b b' in ''
+E        +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).text
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e580250&gt;, 'GET', '/r', query={'x': 'b b'})
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[1+1]" time="0.000"><failure message="assert '1+1' in ''&#10; +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e60a690&gt;, 'GET', '/r', query={'x': '1+1'})&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e60a690&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b47c0&gt;, value = '1+1'
+
+    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
+    def test_request_query_parameter_values(api, app, report, value):
+        path = report(lambda r: api.query_get(r, "x"))
+&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
+E       assert '1+1' in ''
+E        +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).text
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e60a690&gt;, 'GET', '/r', query={'x': '1+1'})
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[sp ace]" time="0.000"><failure message="assert 'sp ace' in ''&#10; +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e759a10&gt;, 'GET', '/r', query={'x': 'sp ace'})&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e759a10&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b7740&gt;, value = 'sp ace'
+
+    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
+    def test_request_query_parameter_values(api, app, report, value):
+        path = report(lambda r: api.query_get(r, "x"))
+&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
+E       assert 'sp ace' in ''
+E        +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).text
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e759a10&gt;, 'GET', '/r', query={'x': 'sp ace'})
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[\xfc]" time="0.000"><failure message="assert 'ü' in ''&#10; +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e762350&gt;, 'GET', '/r', query={'x': 'ü'})&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e762350&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b47c0&gt;, value = 'ü'
+
+    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
+    def test_request_query_parameter_values(api, app, report, value):
+        path = report(lambda r: api.query_get(r, "x"))
+&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
+E       assert 'ü' in ''
+E        +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).text
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e762350&gt;, 'GET', '/r', query={'x': 'ü'})
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_multiple_query_parameters" time="0.000"><failure message="AssertionError: assert '1,2' in ''">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8d464bd0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b45e0&gt;
+
+    def test_request_multiple_query_parameters(api, app, report):
+        path = report(lambda r: f"{api.query_get(r, 'a')},{api.query_get(r, 'b')}")
+        body = wsgi.call(app, "GET", path, query={"a": "1", "b": "2"}).text
+&gt;       assert "1,2" in body
+E       AssertionError: assert '1,2' in ''
+
+oracle/flask/test_request_handling.py:88: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_empty_value" time="0.000"><failure message="assert '[]' in ''&#10; +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5b9090&gt;, 'GET', '/r', query='x=')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5b9090&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b72e0&gt;
+
+    def test_request_query_parameter_empty_value(api, app, report):
+        path = report(lambda r: f"[{api.query_get(r, 'x')}]")
+&gt;       assert "[]" in wsgi.call(app, "GET", path, query="x=").text
+E       assert '[]' in ''
+E        +  where '' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).text
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e5b9090&gt;, 'GET', '/r', query='x=')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:93: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_custom_header" time="0.000"><failure message="assert b'yes' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e8e1590&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8d4bc400&gt;
+
+    def test_request_custom_header(api, app, report):
+        path = report(lambda r: api.header(r, "X-Test"))
+        result = wsgi.call(app, "GET", path, headers={"X-Test": "yes"})
+&gt;       assert b"yes" in result.body
+E       assert b'yes' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+
+oracle/flask/test_request_handling.py:101: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_header_read_case_insensitively" time="0.000"><failure message="assert b'mixed' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5a6010&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b68e0&gt;
+
+    def test_request_header_read_case_insensitively(api, app, report):
+        path = report(lambda r: api.header(r, "x-test"))
+        result = wsgi.call(app, "GET", path, headers={"X-Test": "mixed"})
+&gt;       assert b"mixed" in result.body
+E       assert b'mixed' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+
+oracle/flask/test_request_handling.py:107: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_missing_header_default" time="0.000"><failure message="assert b'NONE' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e577410&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e577410&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b6520&gt;
+
+    def test_request_missing_header_default(api, app, report):
+        path = report(lambda r: api.header(r, "X-Absent", "NONE"))
+&gt;       assert b"NONE" in wsgi.call(app, "GET", path).body
+E       assert b'NONE' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e577410&gt;, 'GET', '/r')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:112: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_content_type_header" time="0.000"><failure message="assert b'application/json' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e5f6050&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8d4bc2c0&gt;
+
+    def test_request_content_type_header(api, app, report):
+        path = report(lambda r: api.header(r, "Content-Type"), methods=["POST"])
+        body, ctype = wsgi.json_body({"a": 1})
+        result = wsgi.call(app, "POST", path, body=body, content_type=ctype)
+&gt;       assert b"application/json" in result.body
+E       assert b'application/json' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+
+oracle/flask/test_request_handling.py:119: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_bytes" time="0.000"><failure message="assert b'5' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e729ad0&gt;, 'POST', '/r', body=b'12345')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e729ad0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8d4bcf40&gt;
+
+    def test_request_body_bytes(api, app, report):
+        path = report(lambda r: len(api.body_bytes(r)), methods=["POST"])
+&gt;       assert b"5" in wsgi.call(app, "POST", path, body=b"12345").body
+E       assert b'5' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e729ad0&gt;, 'POST', '/r', body=b'12345')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:126: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_content" time="0.000"><failure message="assert b'payload' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e79b110&gt;, 'POST', '/r', body=b'payload')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e79b110&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b5620&gt;
+
+    def test_request_body_content(api, app, report):
+        path = report(lambda r: api.body_bytes(r).decode(), methods=["POST"])
+&gt;       assert b"payload" in wsgi.call(app, "POST", path, body=b"payload").body
+E       assert b'payload' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e79b110&gt;, 'POST', '/r', body=b'payload')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:131: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_empty_body" time="0.000"><failure message="assert b'0' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e72a250&gt;, 'POST', '/r', body=b'')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e72a250&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8d4bd440&gt;
+
+    def test_request_empty_body(api, app, report):
+        path = report(lambda r: len(api.body_bytes(r)), methods=["POST"])
+&gt;       assert b"0" in wsgi.call(app, "POST", path, body=b"").body
+E       assert b'0' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e72a250&gt;, 'POST', '/r', body=b'')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:136: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_json_body_is_readable" time="0.000"><failure message="assert b'v' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8d467690&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8d4bce00&gt;
+
+    def test_request_json_body_is_readable(api, app, report):
+        def read_json(r):
+            return json.loads(api.body_bytes(r).decode())["k"]
+        path = report(read_json, methods=["POST"])
+        body, ctype = wsgi.json_body({"k": "v"})
+        result = wsgi.call(app, "POST", path, body=body, content_type=ctype)
+&gt;       assert b"v" in result.body
+E       assert b'v' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+
+oracle/flask/test_request_handling.py:145: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_with_explicit_content_type" time="0.000"><failure message="assert b'plain text body' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8d442550&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8d4bd9e0&gt;
+
+    def test_request_body_with_explicit_content_type(api, app, report):
+        """A text body is delivered intact when its content type says so.
+    
+        A form-encoded body is deliberately not asserted on here: the
+        specification names "body" but no form mapping, and an implementation is
+        free to parse a form body out of the raw stream (Werkzeug does), so a raw
+        assertion would test an unspecified choice.
+        """
+        path = report(lambda r: api.body_bytes(r).decode(), methods=["POST"])
+        result = wsgi.call(app, "POST", path, body=b"plain text body",
+                           content_type="text/plain")
+&gt;       assert b"plain text body" in result.body
+E       assert b'plain text body' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+
+oracle/flask/test_request_handling.py:159: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_not_consumed_by_routing" time="0.000"><failure message="assert b'intact' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e561990&gt;, 'POST', '/r', body=b'intact')&#10; +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+app = &lt;flask_pair.FlaskPair object at 0xffff8e561990&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffff8e5b4e00&gt;
+
+    def test_request_body_not_consumed_by_routing(api, app, report):
+        """The body is still readable inside the view after dispatch."""
+        path = report(lambda r: api.body_bytes(r).decode() or "EMPTY",
+                      methods=["POST"])
+&gt;       assert b"intact" in wsgi.call(app, "POST", path, body=b"intact").body
+E       assert b'intact' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function call at 0xffff8e89af20&gt;(&lt;flask_pair.FlaskPair object at 0xffff8e561990&gt;, 'POST', '/r', body=b'intact')
+E        +      where &lt;function call at 0xffff8e89af20&gt; = wsgi.call
+
+oracle/flask/test_request_handling.py:166: AssertionError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_string_return_is_200" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bd620&gt;('/s')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bd760&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bd620&gt;
+
+    def test_string_return_is_200(route, get):
+        def view(*_req, **_):
+            return "hello"
+        route("/s")(view)
+&gt;       assert get("/s").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bd620&gt;('/s')
+
+oracle/flask/test_response_rendering.py:21: AssertionError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_string_return_becomes_the_body" time="0.000"><failure message="assert b'body-text' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bc2c0&gt;('/s')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bc0e0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bc2c0&gt;
+
+    def test_string_return_becomes_the_body(route, get):
+        def view(*_req, **_):
+            return "body-text"
+        route("/s")(view)
+&gt;       assert b"body-text" in get("/s").body
+E       assert b'body-text' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bc2c0&gt;('/s')
+
+oracle/flask/test_response_rendering.py:28: AssertionError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_response_has_a_content_type" time="0.000"><failure message="assert '' != ''&#10; +  where '' = &lt;bound method WsgiResult.header of WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;))&gt;('Content-Type')&#10; +    where &lt;bound method WsgiResult.header of WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;))&gt; = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).header&#10; +      where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4be340&gt;('/t')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4be2a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4be340&gt;
+
+    def test_response_has_a_content_type(route, get):
+        def view(*_req, **_):
+            return "typed"
+        route("/t")(view)
+&gt;       assert get("/t").header("Content-Type") != ""
+E       assert '' != ''
+E        +  where '' = &lt;bound method WsgiResult.header of WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'"))&gt;('Content-Type')
+E        +    where &lt;bound method WsgiResult.header of WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'"))&gt; = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).header
+E        +      where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4be340&gt;('/t')
+
+oracle/flask/test_response_rendering.py:35: AssertionError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_status_line_is_well_formed" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_empty_body_is_allowed" time="0.000"><failure message="assert (500 == 200)&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bede0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bee80&gt;
+
+    def test_empty_body_is_allowed(route, get):
+        def view(*_req, **_):
+            return ""
+        route("/e")(view)
+        result = get("/e")
+&gt;       assert result.status_code == 200 and result.body == b""
+E       assert (500 == 200)
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+
+oracle/flask/test_response_rendering.py:51: AssertionError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[200]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[201]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[202]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[400]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[404]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[418]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[500]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_created_201_with_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_error_status_with_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_custom_header" time="0.000"><failure message="ValueError: too many values to unpack (expected 2)">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bd580&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4be660&gt;
+
+    def test_response_custom_header(api, route, get):
+        def view(*_req, **_):
+            return api.response("h", headers={"X-Custom": "set"})
+        route("/h")(view)
+&gt;       assert get("/h").header("X-Custom") == "set"
+
+oracle/flask/test_response_rendering.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = WsgiResult(status='200 OK', headers=['X-Custom'], body=b'h', exc=None)
+name = 'X-Custom', default = ''
+
+    def header(self, name: str, default: str = "") -&gt; str:
+        """First header matching `name`, case-insensitively."""
+        lowered = name.lower()
+&gt;       for key, value in self.headers:
+E       ValueError: too many values to unpack (expected 2)
+
+oracle/wsgi.py:44: ValueError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_response_multiple_custom_headers" time="0.000"><failure message="ValueError: too many values to unpack (expected 2)">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bc9a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bd080&gt;
+
+    def test_response_multiple_custom_headers(api, route, get):
+        def view(*_req, **_):
+            return api.response("h", headers={"X-One": "1", "X-Two": "2"})
+        route("/hh")(view)
+        result = get("/hh")
+&gt;       assert result.header("X-One") == "1" and result.header("X-Two") == "2"
+
+oracle/flask/test_response_rendering.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = WsgiResult(status='200 OK', headers=['X-One', 'X-Two'], body=b'h', exc=None)
+name = 'X-One', default = ''
+
+    def header(self, name: str, default: str = "") -&gt; str:
+        """First header matching `name`, case-insensitively."""
+        lowered = name.lower()
+&gt;       for key, value in self.headers:
+E       ValueError: too many values to unpack (expected 2)
+
+oracle/wsgi.py:44: ValueError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_response_explicit_content_type" time="0.000"><failure message="ValueError: too many values to unpack (expected 2)">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4be7a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bea20&gt;
+
+    def test_response_explicit_content_type(api, route, get):
+        def view(*_req, **_):
+            return api.response("{}", headers={"Content-Type": "application/json"})
+        route("/j")(view)
+&gt;       assert "application/json" in get("/j").header("Content-Type")
+
+oracle/flask/test_response_rendering.py:101: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = WsgiResult(status='200 OK', headers=['Content-Type'], body=b'{}', exc=None)
+name = 'Content-Type', default = ''
+
+    def header(self, name: str, default: str = "") -&gt; str:
+        """First header matching `name`, case-insensitively."""
+        lowered = name.lower()
+&gt;       for key, value in self.headers:
+E       ValueError: too many values to unpack (expected 2)
+
+oracle/wsgi.py:44: ValueError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_response_header_and_status_together" time="0.000"><failure message="ValueError: too many values to unpack (expected 2)">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bc9a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bd6c0&gt;
+
+    def test_response_header_and_status_together(api, route, get):
+        def view(*_req, **_):
+            return api.response("both", status=503, headers={"X-Why": "test"})
+        route("/bo")(view)
+        result = get("/bo")
+&gt;       assert result.status_code == 503 and result.header("X-Why") == "test"
+
+oracle/flask/test_response_rendering.py:109: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = WsgiResult(status='503 Unknown Status', headers=['X-Why'], body=b'both', exc=None)
+name = 'X-Why', default = ''
+
+    def header(self, name: str, default: str = "") -&gt; str:
+        """First header matching `name`, case-insensitively."""
+        lowered = name.lower()
+&gt;       for key, value in self.headers:
+E       ValueError: too many values to unpack (expected 2)
+
+oracle/wsgi.py:44: ValueError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_response_object_carries_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_body_is_bytes_over_wsgi" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_body_preserves_utf8" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_content_length_matches_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_distinct_routes_get_distinct_responses" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_is_regenerated_per_request" time="0.000" /><testcase classname="oracle.flask.test_templating" name="test_renders_literal_text" time="0.000"><failure message="AssertionError: assert 'plain text' in ''&#10; +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4bf4c0&gt;('plain text')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4bf4c0&gt;
+
+    def test_renders_literal_text(rendered):
+&gt;       assert "plain text" in rendered("plain text")
+E       AssertionError: assert 'plain text' in ''
+E        +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4bf4c0&gt;('plain text')
+
+oracle/flask/test_templating.py:36: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_variable" time="0.000"><failure message="AssertionError: assert 'world' in ''&#10; +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450ea0&gt;('hello {{ name }}', name='world')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450ea0&gt;
+
+    def test_renders_a_variable(rendered):
+&gt;       assert "world" in rendered("hello {{ name }}", name="world")
+E       AssertionError: assert 'world' in ''
+E        +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450ea0&gt;('hello {{ name }}', name='world')
+
+oracle/flask/test_templating.py:40: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_multiple_variables" time="0.000"><failure message="AssertionError: assert 'x-y' in ''">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450b80&gt;
+
+    def test_renders_multiple_variables(rendered):
+        out = rendered("{{ a }}-{{ b }}", a="x", b="y")
+&gt;       assert "x-y" in out
+E       AssertionError: assert 'x-y' in ''
+
+oracle/flask/test_templating.py:45: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_variable_not_left_in_output" time="0.000" /><testcase classname="oracle.flask.test_templating" name="test_renders_a_for_loop" time="0.000"><failure message="AssertionError: assert '1,2,3,' in ''">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d451800&gt;
+
+    def test_renders_a_for_loop(rendered):
+        out = rendered("{% for i in items %}{{ i }},{% endfor %}",
+                       items=[1, 2, 3])
+&gt;       assert "1,2,3," in out
+E       AssertionError: assert '1,2,3,' in ''
+
+oracle/flask/test_templating.py:57: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_conditional_true_branch" time="0.000"><failure message="AssertionError: assert ('yes' in '')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450040&gt;
+
+    def test_renders_a_conditional_true_branch(rendered):
+        out = rendered("{% if flag %}yes{% else %}no{% endif %}", flag=True)
+&gt;       assert "yes" in out and "no" not in out
+E       AssertionError: assert ('yes' in '')
+
+oracle/flask/test_templating.py:62: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_conditional_false_branch" time="0.000"><failure message="AssertionError: assert 'no' in ''">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4bf920&gt;
+
+    def test_renders_a_conditional_false_branch(rendered):
+        out = rendered("{% if flag %}yes{% else %}no{% endif %}", flag=False)
+&gt;       assert "no" in out
+E       AssertionError: assert 'no' in ''
+
+oracle/flask/test_templating.py:67: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_filter" time="0.000"><failure message="AssertionError: assert 'SHOUT' in ''&#10; +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d451da0&gt;('{{ word|upper }}', word='shout')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d451da0&gt;
+
+    def test_renders_a_filter(rendered):
+&gt;       assert "SHOUT" in rendered("{{ word|upper }}", word="shout")
+E       AssertionError: assert 'SHOUT' in ''
+E        +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d451da0&gt;('{{ word|upper }}', word='shout')
+
+oracle/flask/test_templating.py:71: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_dict_access" time="0.000"><failure message="assert 'inner' in ''&#10; +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4516c0&gt;(&quot;{{ d['k'] }}&quot;, d={'k': 'inner'})">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4516c0&gt;
+
+    def test_renders_dict_access(rendered):
+&gt;       assert "inner" in rendered("{{ d['k'] }}", d={"k": "inner"})
+E       assert 'inner' in ''
+E        +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4516c0&gt;("{{ d['k'] }}", d={'k': 'inner'})
+
+oracle/flask/test_templating.py:75: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_attribute_access" time="0.000"><failure message="AssertionError: assert 'got-attr' in ''&#10; +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450540&gt;('{{ o.attr }}', o=&lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffff8f893850&gt;)&#10; +    where &lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffff8f893850&gt; = &lt;class 'test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj'&gt;()">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450540&gt;
+
+    def test_renders_attribute_access(rendered):
+        class Obj:
+            attr = "got-attr"
+&gt;       assert "got-attr" in rendered("{{ o.attr }}", o=Obj())
+E       AssertionError: assert 'got-attr' in ''
+E        +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d450540&gt;('{{ o.attr }}', o=&lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffff8f893850&gt;)
+E        +    where &lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffff8f893850&gt; = &lt;class 'test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj'&gt;()
+
+oracle/flask/test_templating.py:81: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_nested_loop_and_conditional" time="0.000"><failure message="AssertionError: assert '23' in ''">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d451f80&gt;
+
+    def test_renders_nested_loop_and_conditional(rendered):
+        out = rendered(
+            "{% for i in items %}{% if i &gt; 1 %}{{ i }}{% endif %}{% endfor %}",
+            items=[1, 2, 3])
+&gt;       assert "23" in out
+E       AssertionError: assert '23' in ''
+
+oracle/flask/test_templating.py:88: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_arithmetic_expression" time="0.000"><failure message="AssertionError: assert '7' in ''&#10; +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4525c0&gt;('{{ 3 + 4 }}')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4525c0&gt;
+
+    def test_renders_arithmetic_expression(rendered):
+&gt;       assert "7" in rendered("{{ 3 + 4 }}")
+E       AssertionError: assert '7' in ''
+E        +  where '' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffff8d4525c0&gt;('{{ 3 + 4 }}')
+
+oracle/flask/test_templating.py:92: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_rendered_output_becomes_the_response_body" time="0.000"><failure message="AssertionError: assert (500 == 200)&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=RoleUnresolved('cannot resolve the specificat...xt, Blueprint, FlaskPair, Request, Response, Router, blueprints, context, current_app, g, request, response, routing')).status_code">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d452b60&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d452c00&gt;
+
+    def test_rendered_output_becomes_the_response_body(api, route, get):
+        def view(*_req, **_):
+            return api.render("in-response")
+        route("/ir")(view)
+        result = get("/ir")
+&gt;       assert result.status_code == 200 and b"in-response" in result.body
+E       AssertionError: assert (500 == 200)
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=RoleUnresolved('cannot resolve the specificat...xt, Blueprint, FlaskPair, Request, Response, Router, blueprints, context, current_app, g, request, response, routing')).status_code
+
+oracle/flask/test_templating.py:102: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_inside_a_request_with_request_data" time="0.000"><failure message="AssertionError: assert b'path=/withreq' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=RoleUnresolved('cannot resolve the specificat...xt, Blueprint, FlaskPair, Request, Response, Router, blueprints, context, current_app, g, request, response, routing')).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=RoleUnresolved('cannot resolve the specificat...xt, Blueprint, FlaskPair, Request, Response, Router, blueprints, context, current_app, g, request, response, routing')) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453240&gt;('/withreq')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4531a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d453240&gt;
+
+    def test_renders_inside_a_request_with_request_data(api, route, get):
+        def view(*view_args, **_):
+            return api.render("path={{ p }}",
+                              p=api.path(api.current_request(view_args)))
+        route("/withreq")(view)
+&gt;       assert b"path=/withreq" in get("/withreq").body
+E       AssertionError: assert b'path=/withreq' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=RoleUnresolved('cannot resolve the specificat...xt, Blueprint, FlaskPair, Request, Response, Router, blueprints, context, current_app, g, request, response, routing')).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=RoleUnresolved('cannot resolve the specificat...xt, Blueprint, FlaskPair, Request, Response, Router, blueprints, context, current_app, g, request, response, routing')) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453240&gt;('/withreq')
+
+oracle/flask/test_templating.py:110: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_autoescapes_html_in_a_variable" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_route_accepts_rule_string" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453e20&gt;('/hello')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d453d80&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d453e20&gt;
+
+    def test_route_accepts_rule_string(route, get):
+        route("/hello")(_view)
+&gt;       assert get("/hello").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453e20&gt;('/hello')
+
+oracle/flask/test_url_routing.py:24: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_static_route_returns_view_body" time="0.000"><failure message="assert b'ok' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453920&gt;('/ping')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d453740&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d453920&gt;
+
+    def test_static_route_returns_view_body(route, get):
+        route("/ping")(_view)
+&gt;       assert b"ok" in get("/ping").body
+E       assert b'ok' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453920&gt;('/ping')
+
+oracle/flask/test_url_routing.py:29: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_root_route" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7240&gt;('/')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b7880&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7240&gt;
+
+    def test_root_route(route, get):
+        route("/")(_view)
+&gt;       assert get("/").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7240&gt;('/')
+
+oracle/flask/test_url_routing.py:34: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_unregistered_path_is_404" time="0.000"><failure message="assert 500 == 404&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b56c0&gt;('/missing')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b7600&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b56c0&gt;
+
+    def test_unregistered_path_is_404(route, get):
+        route("/exists")(_view)
+&gt;       assert get("/missing").status_code == 404
+E       assert 500 == 404
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b56c0&gt;('/missing')
+
+oracle/flask/test_url_routing.py:39: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_two_routes_dispatch_independently" time="0.000"><failure message="assert b'first' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6480&gt;('/one')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b5440&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6480&gt;
+
+    def test_two_routes_dispatch_independently(route, get):
+        def first(*_req, **_):
+            return "first"
+    
+        def second(*_req, **_):
+            return "second"
+        route("/one")(first)
+        route("/two")(second)
+&gt;       assert b"first" in get("/one").body
+E       assert b'first' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6480&gt;('/one')
+
+oracle/flask/test_url_routing.py:50: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_response_is_200_with_a_body" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code">route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b7e20&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6de0&gt;
+
+    def test_response_is_200_with_a_body(route, get):
+        def body(*_req, **_):
+            return "content-here"
+        route("/body")(body)
+        result = get("/body")
+&gt;       assert result.status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+
+oracle/flask/test_url_routing.py:59: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[alice]" time="0.000"><failure message="assert b'name=alice' in b''&#10; +  where b'name=alice' = &lt;built-in method encode of str object at 0xffff8e5cff70&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e5cff70&gt; = 'name=alice'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450040&gt;('/user/alice')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4513a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d450040&gt;, value = 'alice'
+
+    @pytest.mark.parametrize("value", ["alice", "bob", "123", "a-b_c"])
+    def test_variable_segment_value_reaches_view(api, route, get, value):
+        route(api.rule("user", ":name"))(_view)
+&gt;       assert f"name={value}".encode() in get(f"/user/{value}").body
+E       assert b'name=alice' in b''
+E        +  where b'name=alice' = &lt;built-in method encode of str object at 0xffff8e5cff70&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e5cff70&gt; = 'name=alice'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450040&gt;('/user/alice')
+
+oracle/flask/test_url_routing.py:68: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[bob]" time="0.000"><failure message="assert b'name=bob' in b''&#10; +  where b'name=bob' = &lt;built-in method encode of str object at 0xffff8d4a5f30&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8d4a5f30&gt; = 'name=bob'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453d80&gt;('/user/bob')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d453e20&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d453d80&gt;, value = 'bob'
+
+    @pytest.mark.parametrize("value", ["alice", "bob", "123", "a-b_c"])
+    def test_variable_segment_value_reaches_view(api, route, get, value):
+        route(api.rule("user", ":name"))(_view)
+&gt;       assert f"name={value}".encode() in get(f"/user/{value}").body
+E       assert b'name=bob' in b''
+E        +  where b'name=bob' = &lt;built-in method encode of str object at 0xffff8d4a5f30&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8d4a5f30&gt; = 'name=bob'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d453d80&gt;('/user/bob')
+
+oracle/flask/test_url_routing.py:68: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[123]" time="0.000"><failure message="assert b'name=123' in b''&#10; +  where b'name=123' = &lt;built-in method encode of str object at 0xffff8e8e13b0&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e8e13b0&gt; = 'name=123'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6f20&gt;('/user/123')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b7c40&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6f20&gt;, value = '123'
+
+    @pytest.mark.parametrize("value", ["alice", "bob", "123", "a-b_c"])
+    def test_variable_segment_value_reaches_view(api, route, get, value):
+        route(api.rule("user", ":name"))(_view)
+&gt;       assert f"name={value}".encode() in get(f"/user/{value}").body
+E       assert b'name=123' in b''
+E        +  where b'name=123' = &lt;built-in method encode of str object at 0xffff8e8e13b0&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e8e13b0&gt; = 'name=123'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b6f20&gt;('/user/123')
+
+oracle/flask/test_url_routing.py:68: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[a-b_c]" time="0.000"><failure message="assert b'name=a-b_c' in b''&#10; +  where b'name=a-b_c' = &lt;built-in method encode of str object at 0xffff8e60bbf0&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffff8e60bbf0&gt; = 'name=a-b_c'.encode&#10; +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4ae0&gt;('/user/a-b_c')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b4b80&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4ae0&gt;, value = 'a-b_c'
+
+    @pytest.mark.parametrize("value", ["alice", "bob", "123", "a-b_c"])
+    def test_variable_segment_value_reaches_view(api, route, get, value):
+        route(api.rule("user", ":name"))(_view)
+&gt;       assert f"name={value}".encode() in get(f"/user/{value}").body
+E       assert b'name=a-b_c' in b''
+E        +  where b'name=a-b_c' = &lt;built-in method encode of str object at 0xffff8e60bbf0&gt;()
+E        +    where &lt;built-in method encode of str object at 0xffff8e60bbf0&gt; = 'name=a-b_c'.encode
+E        +  and   b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4ae0&gt;('/user/a-b_c')
+
+oracle/flask/test_url_routing.py:68: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_matches_any_single_segment" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7880&gt;('/item/anything')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b6980&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7880&gt;
+
+    def test_variable_segment_matches_any_single_segment(api, route, get):
+        route(api.rule("item", ":id"))(_view)
+&gt;       assert get("/item/anything").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7880&gt;('/item/anything')
+
+oracle/flask/test_url_routing.py:73: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_does_not_span_slash" time="0.000"><failure message="assert 500 == 404&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4539c0&gt;('/user/alice/extra')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4513a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4539c0&gt;
+
+    def test_variable_segment_does_not_span_slash(api, route, get):
+        route(api.rule("user", ":name"))(_view)
+&gt;       assert get("/user/alice/extra").status_code == 404
+E       assert 500 == 404
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d4539c0&gt;('/user/alice/extra')
+
+oracle/flask/test_url_routing.py:78: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_requires_a_value" time="0.000"><failure message="assert 500 in (301, 308, 404)&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d452d40&gt;('/user/')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4523e0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d452d40&gt;
+
+    def test_variable_segment_requires_a_value(api, route, get):
+        route(api.rule("user", ":name"))(_view)
+&gt;       assert get("/user/").status_code in (301, 308, 404)
+E       assert 500 in (301, 308, 404)
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d452d40&gt;('/user/')
+
+oracle/flask/test_url_routing.py:83: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multiple_variable_segments[/mix/x/9-expected0]" time="0.000"><failure message="assert False&#10; +  where False = all(&lt;generator object test_multiple_variable_segments.&lt;locals&gt;.&lt;genexpr&gt; at 0xffff8e597680&gt;)">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d452700&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d452980&gt;, path = '/mix/x/9'
+expected = [b's=x', b'n=9']
+
+    @pytest.mark.parametrize("path,expected", [
+        ("/mix/x/9", [b"s=x", b"n=9"]),
+        ("/mix/y/0", [b"s=y", b"n=0"]),
+    ])
+    def test_multiple_variable_segments(api, route, get, path, expected):
+        route(api.rule("mix", ":s", ":n"))(_view)
+        body = get(path).body
+&gt;       assert all(fragment in body for fragment in expected)
+E       assert False
+E        +  where False = all(&lt;generator object test_multiple_variable_segments.&lt;locals&gt;.&lt;genexpr&gt; at 0xffff8e597680&gt;)
+
+oracle/flask/test_url_routing.py:93: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multiple_variable_segments[/mix/y/0-expected1]" time="0.000"><failure message="assert False&#10; +  where False = all(&lt;generator object test_multiple_variable_segments.&lt;locals&gt;.&lt;genexpr&gt; at 0xffff8e7de260&gt;)">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b4360&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b4ae0&gt;, path = '/mix/y/0'
+expected = [b's=y', b'n=0']
+
+    @pytest.mark.parametrize("path,expected", [
+        ("/mix/x/9", [b"s=x", b"n=9"]),
+        ("/mix/y/0", [b"s=y", b"n=0"]),
+    ])
+    def test_multiple_variable_segments(api, route, get, path, expected):
+        route(api.rule("mix", ":s", ":n"))(_view)
+        body = get(path).body
+&gt;       assert all(fragment in body for fragment in expected)
+E       assert False
+E        +  where False = all(&lt;generator object test_multiple_variable_segments.&lt;locals&gt;.&lt;genexpr&gt; at 0xffff8e7de260&gt;)
+
+oracle/flask/test_url_routing.py:93: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_variable_and_literal_segments_combined" time="0.000"><failure message="assert b'mid=middle' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7c40&gt;('/a/middle/z')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b5f80&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7c40&gt;
+
+    def test_variable_and_literal_segments_combined(api, route, get):
+        route(api.rule("a", ":mid", "z"))(_view)
+&gt;       assert b"mid=middle" in get("/a/middle/z").body
+E       assert b'mid=middle' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8e5b7c40&gt;('/a/middle/z')
+
+oracle/flask/test_url_routing.py:98: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_static_route_takes_precedence_over_variable" time="0.000"><failure message="assert b'literal' in b''&#10; +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d452fc0&gt;('/u/me')">api = &lt;api.Api object at 0xffff8e5cd7d0&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4523e0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d452fc0&gt;
+
+    def test_static_route_takes_precedence_over_variable(api, route, get):
+        def literal(*_req, **_):
+            return "literal"
+        route("/u/me")(literal)
+        route(api.rule("u", ":name"))(_view)
+&gt;       assert b"literal" in get("/u/me").body
+E       assert b'literal' in b''
+E        +  where b'' = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).body
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d452fc0&gt;('/u/me')
+
+oracle/flask/test_url_routing.py:106: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_default_route_allows_get" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450c20&gt;('/g')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d450040&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d450c20&gt;
+
+    def test_default_route_allows_get(route, get):
+        route("/g")(_view)
+&gt;       assert get("/g").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450c20&gt;('/g')
+
+oracle/flask/test_url_routing.py:114: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_method_restricted_route_accepts_its_method" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451f80&gt;('POST', '/p')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d452200&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451f80&gt;
+
+    def test_method_restricted_route_accepts_its_method(route, request_):
+        route("/p", methods=["POST"])(_view)
+&gt;       assert request_("POST", "/p").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451f80&gt;('POST', '/p')
+
+oracle/flask/test_url_routing.py:119: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_method_restricted_route_rejects_other_method" time="0.000"><failure message="assert 500 == 405&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450a40&gt;('/p')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d450540&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d450a40&gt;
+
+    def test_method_restricted_route_rejects_other_method(route, get):
+        route("/p", methods=["POST"])(_view)
+&gt;       assert get("/p").status_code == 405
+E       assert 500 == 405
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450a40&gt;('/p')
+
+oracle/flask/test_url_routing.py:124: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[GET]" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function request_.&lt;locals&gt;._call at 0xffff8e5b49a0&gt;('GET', '/multi')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b4b80&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8e5b49a0&gt;, method = 'GET'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE"])
+    def test_multi_method_route_accepts_each(route, request_, method):
+        route("/multi", methods=["GET", "POST", "PUT", "DELETE"])(_view)
+&gt;       assert request_(method, "/multi").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function request_.&lt;locals&gt;._call at 0xffff8e5b49a0&gt;('GET', '/multi')
+
+oracle/flask/test_url_routing.py:130: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[POST]" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451580&gt;('POST', '/multi')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d451f80&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451580&gt;, method = 'POST'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE"])
+    def test_multi_method_route_accepts_each(route, request_, method):
+        route("/multi", methods=["GET", "POST", "PUT", "DELETE"])(_view)
+&gt;       assert request_(method, "/multi").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451580&gt;('POST', '/multi')
+
+oracle/flask/test_url_routing.py:130: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[PUT]" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4527a0&gt;('PUT', '/multi')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d450040&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4527a0&gt;, method = 'PUT'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE"])
+    def test_multi_method_route_accepts_each(route, request_, method):
+        route("/multi", methods=["GET", "POST", "PUT", "DELETE"])(_view)
+&gt;       assert request_(method, "/multi").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4527a0&gt;('PUT', '/multi')
+
+oracle/flask/test_url_routing.py:130: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[DELETE]" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4520c0&gt;('DELETE', '/multi')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4513a0&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4520c0&gt;
+method = 'DELETE'
+
+    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE"])
+    def test_multi_method_route_accepts_each(route, request_, method):
+        route("/multi", methods=["GET", "POST", "PUT", "DELETE"])(_view)
+&gt;       assert request_(method, "/multi").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4520c0&gt;('DELETE', '/multi')
+
+oracle/flask/test_url_routing.py:130: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_method_not_in_list_is_rejected" time="0.000"><failure message="assert 500 == 405&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451800&gt;('DELETE', '/limited')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d451760&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451800&gt;
+
+    def test_method_not_in_list_is_rejected(route, request_):
+        route("/limited", methods=["GET", "POST"])(_view)
+&gt;       assert request_("DELETE", "/limited").status_code == 405
+E       assert 500 == 405
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451800&gt;('DELETE', '/limited')
+
+oracle/flask/test_url_routing.py:135: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_405_advertises_an_allow_header" time="0.000"><failure message="assert 500 == 405&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bfd80&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d4bf880&gt;
+
+    def test_405_advertises_an_allow_header(route, get):
+        route("/only", methods=["POST"])(_view)
+        result = get("/only")
+&gt;       assert result.status_code == 405
+E       assert 500 == 405
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+
+oracle/flask/test_url_routing.py:141: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_method_filtering_is_per_route" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450360&gt;('/readonly')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8e5b5f80&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d450360&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8d451800&gt;
+
+    def test_method_filtering_is_per_route(route, get, request_):
+        def readonly(*_req, **_):
+            return "r"
+    
+        def writeonly(*_req, **_):
+            return "w"
+        route("/readonly", methods=["GET"])(readonly)
+        route("/writeonly", methods=["POST"])(writeonly)
+&gt;       assert get("/readonly").status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450360&gt;('/readonly')
+
+oracle/flask/test_url_routing.py:153: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_path_matching_is_case_sensitive" time="0.000"><failure message="assert 500 == 404&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450c20&gt;('/casesensitive')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d450ea0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d450c20&gt;
+
+    def test_path_matching_is_case_sensitive(route, get):
+        route("/CaseSensitive")(_view)
+&gt;       assert get("/casesensitive").status_code == 404
+E       assert 500 == 404
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d450c20&gt;('/casesensitive')
+
+oracle/flask/test_url_routing.py:162: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_query_string_does_not_affect_matching" time="0.000"><failure message="assert 500 == 200&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError(&quot;'str' object has no attribute 'status'&quot;)) = &lt;function get.&lt;locals&gt;._get at 0xffff8d451580&gt;('/q', query={'x': '1', 'y': '2'})">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4509a0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffff8d451580&gt;
+
+    def test_query_string_does_not_affect_matching(route, get):
+        route("/q")(_view)
+&gt;       assert get("/q", query={"x": "1", "y": "2"}).status_code == 200
+E       assert 500 == 200
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=AttributeError("'str' object has no attribute 'status'")) = &lt;function get.&lt;locals&gt;._get at 0xffff8d451580&gt;('/q', query={'x': '1', 'y': '2'})
+
+oracle/flask/test_url_routing.py:167: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_unregistered_method_on_unregistered_path_is_404" time="0.003"><failure message="assert 500 == 404&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)).status_code&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError(&quot;name 'Response' is not defined&quot;)) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4bf740&gt;('POST', '/unknown')">route = &lt;function route.&lt;locals&gt;._route at 0xffff8d4bf6a0&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4bf740&gt;
+
+    def test_unregistered_method_on_unregistered_path_is_404(route, request_):
+        route("/known")(_view)
+&gt;       assert request_("POST", "/unknown").status_code == 404
+E       assert 500 == 404
+E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")).status_code
+E        +    where WsgiResult(status='500 Internal Server Error', headers=[], body=b'', exc=NameError("name 'Response' is not defined")) = &lt;function request_.&lt;locals&gt;._call at 0xffff8d4bf740&gt;('POST', '/unknown')
+
+oracle/flask/test_url_routing.py:172: AssertionError</failure></testcase></testsuite></testsuites>

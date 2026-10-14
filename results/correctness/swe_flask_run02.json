@@ -1,0 +1,47 @@
+{
+  "categories": {
+    "App Context": {
+      "n": 21,
+      "pass_rate": 85.7,
+      "passed": 18,
+      "skipped": 0
+    },
+    "Blueprints": {
+      "n": 22,
+      "pass_rate": 90.9,
+      "passed": 20,
+      "skipped": 0
+    },
+    "Request Handling": {
+      "n": 28,
+      "pass_rate": 7.1,
+      "passed": 2,
+      "skipped": 0
+    },
+    "Response Rendering": {
+      "n": 24,
+      "pass_rate": 100.0,
+      "passed": 24,
+      "skipped": 0
+    },
+    "Templating": {
+      "n": 15,
+      "pass_rate": 86.7,
+      "passed": 13,
+      "skipped": 0
+    },
+    "URL Routing": {
+      "n": 30,
+      "pass_rate": 86.7,
+      "passed": 26,
+      "skipped": 0
+    }
+  },
+  "label": "SWE-agent (A) r02",
+  "oracle": "flask",
+  "pass_rate": 73.6,
+  "passed": 103,
+  "skipped": 0,
+  "subject": "swe_flask_run02",
+  "total": 140
+}

@@ -1,0 +1,720 @@
+{
+  "cc": {
+    "max": 8,
+    "mean": 2.4,
+    "median": 2,
+    "n": 63,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cc": 3,
+        "file": "flaskframework/app.py",
+        "lineno": 16,
+        "name": "Flask"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 19,
+        "name": "Flask.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 29,
+        "name": "Flask.route"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 36,
+        "name": "Flask.add_url_rule"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 40,
+        "name": "Flask.register_blueprint"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 45,
+        "name": "Flask.errorhandler"
+      },
+      {
+        "cc": 6,
+        "file": "flaskframework/app.py",
+        "lineno": 52,
+        "name": "Flask.handle_exception"
+      },
+      {
+        "cc": 8,
+        "file": "flaskframework/app.py",
+        "lineno": 62,
+        "name": "Flask.wsgi_app"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 110,
+        "name": "Flask.__call__"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/app.py",
+        "lineno": 114,
+        "name": "Flask.run"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/app.py",
+        "lineno": 128,
+        "name": "HTTPException"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/app.py",
+        "lineno": 130,
+        "name": "HTTPException.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 135,
+        "name": "NotFound"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 140,
+        "name": "BadRequest"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 145,
+        "name": "MethodNotAllowed"
+      },
+      {
+        "cc": 4,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 7,
+        "name": "Blueprint"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 10,
+        "name": "Blueprint.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 16,
+        "name": "Blueprint.route"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 23,
+        "name": "Blueprint.add_url_rule"
+      },
+      {
+        "cc": 7,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 38,
+        "name": "Blueprint.register"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 8,
+        "name": "LocalProxy"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 11,
+        "name": "LocalProxy.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 15,
+        "name": "LocalProxy._get_current_object"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 22,
+        "name": "LocalProxy.__getattr__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 25,
+        "name": "LocalProxy.__setattr__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 28,
+        "name": "LocalProxy.__delattr__"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 32,
+        "name": "AppContext"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 35,
+        "name": "AppContext.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 40,
+        "name": "G"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/context.py",
+        "lineno": 45,
+        "name": "LocalStack"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 48,
+        "name": "LocalStack.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 51,
+        "name": "LocalStack.push"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/context.py",
+        "lineno": 57,
+        "name": "LocalStack.pop"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/context.py",
+        "lineno": 64,
+        "name": "LocalStack.top"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/context.py",
+        "lineno": 75,
+        "name": "_AppProxy"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 76,
+        "name": "_AppProxy._get_current_object"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/context.py",
+        "lineno": 82,
+        "name": "_GProxy"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 83,
+        "name": "_GProxy._get_current_object"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/request.py",
+        "lineno": 8,
+        "name": "Request"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/request.py",
+        "lineno": 11,
+        "name": "Request.__init__"
+      },
+      {
+        "cc": 4,
+        "file": "flaskframework/request.py",
+        "lineno": 19,
+        "name": "Request._get_headers"
+      },
+      {
+        "cc": 4,
+        "file": "flaskframework/request.py",
+        "lineno": 34,
+        "name": "Request.body"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/request.py",
+        "lineno": 49,
+        "name": "Request.args"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/request.py",
+        "lineno": 56,
+        "name": "Request.json"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/response.py",
+        "lineno": 6,
+        "name": "Response"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/response.py",
+        "lineno": 9,
+        "name": "Response.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/response.py",
+        "lineno": 19,
+        "name": "Response.status"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/response.py",
+        "lineno": 34,
+        "name": "Response.get_wsgi_headers"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/response.py",
+        "lineno": 38,
+        "name": "Response.get_body_bytes"
+      },
+      {
+        "cc": 4,
+        "file": "flaskframework/routing.py",
+        "lineno": 8,
+        "name": "Rule"
+      },
+      {
+        "cc": 2,
+        "file": "flaskframework/routing.py",
+        "lineno": 11,
+        "name": "Rule.__init__"
+      },
+      {
+        "cc": 7,
+        "file": "flaskframework/routing.py",
+        "lineno": 18,
+        "name": "Rule._calculate_priority"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/routing.py",
+        "lineno": 34,
+        "name": "Rule._compile_pattern"
+      },
+      {
+        "cc": 4,
+        "file": "flaskframework/routing.py",
+        "lineno": 68,
+        "name": "Rule.match"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/routing.py",
+        "lineno": 85,
+        "name": "Router"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/routing.py",
+        "lineno": 88,
+        "name": "Router.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/routing.py",
+        "lineno": 92,
+        "name": "Router.add_rule"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/routing.py",
+        "lineno": 98,
+        "name": "Router.match"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/templating.py",
+        "lineno": 50,
+        "name": "render_template"
+      },
+      {
+        "cc": 4,
+        "file": "flaskframework/templating.py",
+        "lineno": 8,
+        "name": "TemplateEngine"
+      },
+      {
+        "cc": 1,
+        "file": "flaskframework/templating.py",
+        "lineno": 11,
+        "name": "TemplateEngine.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "flaskframework/templating.py",
+        "lineno": 16,
+        "name": "TemplateEngine.jinja_env"
+      },
+      {
+        "cc": 4,
+        "file": "flaskframework/templating.py",
+        "lineno": 28,
+        "name": "TemplateEngine.render_template"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 13,
+    "mean": 1.8,
+    "median": 1.0,
+    "n": 46,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cogc": 0,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::__call__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::add_url_rule"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::errorhandler"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::register_blueprint"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::route"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "HTTPException::__init__"
+      },
+      {
+        "cogc": 2,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::run"
+      },
+      {
+        "cogc": 5,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::handle_exception"
+      },
+      {
+        "cogc": 13,
+        "file": "flaskframework/app.py",
+        "lineno": 0,
+        "name": "Flask::wsgi_app"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::route"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::add_url_rule"
+      },
+      {
+        "cogc": 10,
+        "file": "flaskframework/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::register"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "AppContext::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalProxy::__delattr__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalProxy::__getattr__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalProxy::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalProxy::__setattr__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalStack::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalProxy::_get_current_object"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalStack::push"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "_AppProxy::_get_current_object"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "_GProxy::_get_current_object"
+      },
+      {
+        "cogc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalStack::pop"
+      },
+      {
+        "cogc": 2,
+        "file": "flaskframework/context.py",
+        "lineno": 0,
+        "name": "LocalStack::top"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/request.py",
+        "lineno": 0,
+        "name": "Request::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/request.py",
+        "lineno": 0,
+        "name": "Request::args"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/request.py",
+        "lineno": 0,
+        "name": "Request::json"
+      },
+      {
+        "cogc": 4,
+        "file": "flaskframework/request.py",
+        "lineno": 0,
+        "name": "Request::_get_headers"
+      },
+      {
+        "cogc": 5,
+        "file": "flaskframework/request.py",
+        "lineno": 0,
+        "name": "Request::body"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/response.py",
+        "lineno": 0,
+        "name": "Response::get_wsgi_headers"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/response.py",
+        "lineno": 0,
+        "name": "Response::status"
+      },
+      {
+        "cogc": 2,
+        "file": "flaskframework/response.py",
+        "lineno": 0,
+        "name": "Response::__init__"
+      },
+      {
+        "cogc": 2,
+        "file": "flaskframework/response.py",
+        "lineno": 0,
+        "name": "Response::get_body_bytes"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/routing.py",
+        "lineno": 0,
+        "name": "Router::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/routing.py",
+        "lineno": 0,
+        "name": "Router::add_rule"
+      },
+      {
+        "cogc": 1,
+        "file": "flaskframework/routing.py",
+        "lineno": 0,
+        "name": "Rule::__init__"
+      },
+      {
+        "cogc": 3,
+        "file": "flaskframework/routing.py",
+        "lineno": 0,
+        "name": "Router::match"
+      },
+      {
+        "cogc": 3,
+        "file": "flaskframework/routing.py",
+        "lineno": 0,
+        "name": "Rule::match"
+      },
+      {
+        "cogc": 7,
+        "file": "flaskframework/routing.py",
+        "lineno": 0,
+        "name": "Rule::_calculate_priority"
+      },
+      {
+        "cogc": 7,
+        "file": "flaskframework/routing.py",
+        "lineno": 0,
+        "name": "Rule::_compile_pattern"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/templating.py",
+        "lineno": 0,
+        "name": "TemplateEngine::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flaskframework/templating.py",
+        "lineno": 0,
+        "name": "render_template"
+      },
+      {
+        "cogc": 3,
+        "file": "flaskframework/templating.py",
+        "lineno": 0,
+        "name": "TemplateEngine::jinja_env"
+      },
+      {
+        "cogc": 4,
+        "file": "flaskframework/templating.py",
+        "lineno": 0,
+        "name": "TemplateEngine::render_template"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "SWE-agent (A) r03",
+  "mi": {
+    "files": [
+      {
+        "file": "flaskframework/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "flaskframework/app.py",
+        "mi": 61.22
+      },
+      {
+        "file": "flaskframework/blueprints.py",
+        "mi": 73.83
+      },
+      {
+        "file": "flaskframework/context.py",
+        "mi": 62.67
+      },
+      {
+        "file": "flaskframework/request.py",
+        "mi": 68.97
+      },
+      {
+        "file": "flaskframework/response.py",
+        "mi": 79.63
+      },
+      {
+        "file": "flaskframework/routing.py",
+        "mi": 62.07
+      },
+      {
+        "file": "flaskframework/templating.py",
+        "mi": 83.44
+      }
+    ],
+    "mean": 74.0,
+    "median": 71.4,
+    "min": 61.2,
+    "n": 8,
+    "pct_below_threshold": 37.5,
+    "threshold": 65
+  },
+  "subject": "swe_flask_run03"
+}

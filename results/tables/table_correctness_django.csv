@@ -1,7 +1,7 @@
-category,N,Django mod. (H)
-Class-Based Views,10,10 (100.0%)
-Request Object,22,22 (100.0%)
-Response Handling,19,19 (100.0%)
-URL Resolution,24,24 (100.0%)
-View Dispatch,22,22 (100.0%)
-Total,97,97 (100.0%)
+category,N,Django mod. (H),SWE-agent/Dj. (A) r01,SWE-agent/Dj. (A) r02,SWE-agent/Dj. (A) r03,SWE-agent/Dj. (A) r04,SWE-agent/Dj. (A) r05,Fisher's exact p (SWE-agent/Dj. (A) r01 vs. Django mod. (H)),Fisher's exact p (SWE-agent/Dj. (A) r02 vs. Django mod. (H)),Fisher's exact p (SWE-agent/Dj. (A) r03 vs. Django mod. (H)),Fisher's exact p (SWE-agent/Dj. (A) r04 vs. Django mod. (H)),Fisher's exact p (SWE-agent/Dj. (A) r05 vs. Django mod. (H))
+Class-Based Views,10,10 (100.0%),10 (100.0%),10 (100.0%),10 (100.0%),10 (100.0%),10 (100.0%),1.0000,1.0000,1.0000,1.0000,1.0000
+Request Object,26,26 (100.0%),22 (84.6%),26 (100.0%),22 (84.6%),26 (100.0%),26 (100.0%),0.1104,1.0000,0.1104,1.0000,1.0000
+Response Handling,21,21 (100.0%),21 (100.0%),21 (100.0%),21 (100.0%),21 (100.0%),21 (100.0%),1.0000,1.0000,1.0000,1.0000,1.0000
+URL Resolution,25,25 (100.0%),24 (96.0%),25 (100.0%),25 (100.0%),25 (100.0%),17 (68.0%),1.0000,1.0000,1.0000,1.0000,0.0040
+View Dispatch,22,22 (100.0%),22 (100.0%),22 (100.0%),22 (100.0%),22 (100.0%),21 (95.5%),1.0000,1.0000,1.0000,1.0000,1.0000
+Total,104,104 (100.0%),99 (95.2%),104 (100.0%),100 (96.2%),104 (100.0%),95 (91.3%),0.0595,1.0000,0.1214,1.0000,0.0033

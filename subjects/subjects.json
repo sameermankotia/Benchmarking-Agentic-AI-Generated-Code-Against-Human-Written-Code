@@ -1,5 +1,5 @@
 {
-  "_comment": "Registry of the study subjects: two mature human baselines, one human first-draft maturity control, and three agentic counterparts. `path` is the source root the analysis pipeline walks (relative to the repo root). Frozen snapshots are checked out under subjects/<id>/. Set `available: false` for a subject whose snapshot is not present locally; the pipeline skips it and notes the omission. A subject with an empty `oracle` is a structural reference point only (no RQ1 correctness score) -- see the maturity control.",
+  "_comment": "Registry of the study subjects: two mature human baselines, one human first-draft maturity control, and three agentic counterparts. `path` is the source root the analysis pipeline walks (relative to the repo root). Frozen snapshots are checked out under subjects/<id>/. Set `available: false` for a subject whose snapshot is not present locally; the pipeline skips it and notes the omission. A subject with an empty `oracle` is a structural reference point only (no RQ1 correctness score) -- see the maturity control. `api_map` declares, per subject, the name that subject uses for each specification-level construction role (oracle/api.py); it is needed only where a subject's names differ from the conventional candidates, which is why the human baselines carry none.",
   "subjects": [
     {
       "id": "flask",
@@ -20,8 +20,10 @@
       "snapshot": "pallets/flask@0.1",
       "oracle": "",
       "available": true,
-      "include": ["flask.py"],
-      "_note": "Maturity control (paper §III-B3). Human-authored first release (a single flask.py module, pre-package layout), matched to the agentic subjects on development maturity. Structural metrics only (RQ2-RQ5) -- it predates Blueprints and other spec behaviours, so it is not oracle-evaluated."
+      "include": [
+        "flask.py"
+      ],
+      "_note": "Maturity control (paper \u00a7III-B3). Human-authored first release (a single flask.py module, pre-package layout), matched to the agentic subjects on development maturity. Structural metrics only (RQ2-RQ5) -- it predates Blueprints and other spec behaviours, so it is not oracle-evaluated."
     },
     {
       "id": "swe_flask",
@@ -52,7 +54,10 @@
       "snapshot": "django/django@5.0.6 (urls/ + views/)",
       "oracle": "django",
       "available": true,
-      "include": ["urls", "views"]
+      "include": [
+        "urls",
+        "views"
+      ]
     },
     {
       "id": "swe_django",
@@ -63,6 +68,202 @@
       "snapshot": "swe-agent-1.0.0 + claude-sonnet-4",
       "oracle": "django",
       "available": false
+    },
+    {
+      "id": "swe_flask_run01",
+      "label": "SWE-agent (A) r01",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/swe_flask_run01",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ a73357ac3561",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flaskframework"
+      ]
+    },
+    {
+      "id": "openhands_flask_run01",
+      "label": "OpenHands (A) r01",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/openhands_flask_run01",
+      "snapshot": "openhands + gpt-4o-2024-11-20 @ 7677254295b0",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flask_pair/flask_pair"
+      ]
+    },
+    {
+      "id": "openhands_flask_run02",
+      "label": "OpenHands (A) r02",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/openhands_flask_run02",
+      "snapshot": "openhands + gpt-4o-2024-11-20 @ 6c0f51f34eff",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flask_pair/flask_pair"
+      ]
+    },
+    {
+      "id": "openhands_flask_run03",
+      "label": "OpenHands (A) r03",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/openhands_flask_run03",
+      "snapshot": "openhands + gpt-4o-2024-11-20 @ 5406b0db74a1",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flask_pair/flask_pair"
+      ]
+    },
+    {
+      "id": "openhands_flask_run04",
+      "label": "OpenHands (A) r04",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/openhands_flask_run04",
+      "snapshot": "openhands + gpt-4o-2024-11-20 @ 7f3341904022",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flask_pair/flask_pair"
+      ]
+    },
+    {
+      "id": "openhands_flask_run05",
+      "label": "OpenHands (A) r05",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/openhands_flask_run05",
+      "snapshot": "openhands + gpt-4o-2024-11-20 @ e795c662daab",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flask_pair_framework/src/flask_pair_framework"
+      ]
+    },
+    {
+      "id": "swe_flask_run02",
+      "label": "SWE-agent (A) r02",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/swe_flask_run02",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ d2db45063fb3",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flaskframework"
+      ]
+    },
+    {
+      "id": "swe_flask_run03",
+      "label": "SWE-agent (A) r03",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/swe_flask_run03",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ e1965ade4013",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flaskframework"
+      ]
+    },
+    {
+      "id": "swe_flask_run04",
+      "label": "SWE-agent (A) r04",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/swe_flask_run04",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ e2d22e647f4c",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flaskframework"
+      ]
+    },
+    {
+      "id": "swe_flask_run05",
+      "label": "SWE-agent (A) r05",
+      "kind": "agentic",
+      "pair": "flask",
+      "path": "subjects/swe_flask_run05",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ e34289d89e8c",
+      "oracle": "flask",
+      "available": true,
+      "include": [
+        "flaskframework"
+      ]
+    },
+    {
+      "id": "swe_django_run01",
+      "label": "SWE-agent/Dj. (A) r01",
+      "kind": "agentic",
+      "pair": "django",
+      "path": "subjects/swe_django_run01",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ da859093348b",
+      "oracle": "django",
+      "available": true,
+      "include": [
+        "djangoframework"
+      ]
+    },
+    {
+      "id": "swe_django_run02",
+      "label": "SWE-agent/Dj. (A) r02",
+      "kind": "agentic",
+      "pair": "django",
+      "path": "subjects/swe_django_run02",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ 81e1ec52df50",
+      "oracle": "django",
+      "available": true,
+      "include": [
+        "djangoframework"
+      ]
+    },
+    {
+      "id": "swe_django_run03",
+      "label": "SWE-agent/Dj. (A) r03",
+      "kind": "agentic",
+      "pair": "django",
+      "path": "subjects/swe_django_run03",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ 550f51781260",
+      "oracle": "django",
+      "available": true,
+      "include": [
+        "djangoframework"
+      ]
+    },
+    {
+      "id": "swe_django_run04",
+      "label": "SWE-agent/Dj. (A) r04",
+      "kind": "agentic",
+      "pair": "django",
+      "path": "subjects/swe_django_run04",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ b37a39f2df1b",
+      "oracle": "django",
+      "available": true,
+      "include": [
+        "djangoframework"
+      ]
+    },
+    {
+      "id": "swe_django_run05",
+      "label": "SWE-agent/Dj. (A) r05",
+      "kind": "agentic",
+      "pair": "django",
+      "path": "subjects/swe_django_run05",
+      "snapshot": "swe-agent + openrouter/anthropic/claude-sonnet-4 @ 54f14b824198",
+      "oracle": "django",
+      "available": true,
+      "include": [
+        "djangoframework",
+        "tests"
+      ]
     }
   ]
 }

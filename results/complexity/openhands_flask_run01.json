@@ -1,0 +1,298 @@
+{
+  "cc": {
+    "max": 5,
+    "mean": 1.8,
+    "median": 1,
+    "n": 23,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cc": 2,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 8,
+        "name": "FlaskPair"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 9,
+        "name": "FlaskPair.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 13,
+        "name": "FlaskPair.route"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 19,
+        "name": "FlaskPair.wsgi_app"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 26,
+        "name": "FlaskPair.__call__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 29,
+        "name": "FlaskPair.run"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "lineno": 2,
+        "name": "Blueprint"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "lineno": 3,
+        "name": "Blueprint.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "lineno": 8,
+        "name": "Blueprint.route"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "lineno": 14,
+        "name": "Blueprint.register"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair/flask_pair/context.py",
+        "lineno": 4,
+        "name": "AppContext"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/context.py",
+        "lineno": 5,
+        "name": "AppContext.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/context.py",
+        "lineno": 8,
+        "name": "AppContext.__enter__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/context.py",
+        "lineno": 12,
+        "name": "AppContext.__exit__"
+      },
+      {
+        "cc": 4,
+        "file": "flask_pair/flask_pair/request.py",
+        "lineno": 4,
+        "name": "Request"
+      },
+      {
+        "cc": 3,
+        "file": "flask_pair/flask_pair/request.py",
+        "lineno": 5,
+        "name": "Request.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "flask_pair/flask_pair/response.py",
+        "lineno": 2,
+        "name": "Response"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair/flask_pair/response.py",
+        "lineno": 3,
+        "name": "Response.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/response.py",
+        "lineno": 8,
+        "name": "Response._status_text"
+      },
+      {
+        "cc": 3,
+        "file": "flask_pair/flask_pair/routing.py",
+        "lineno": 2,
+        "name": "Router"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/routing.py",
+        "lineno": 3,
+        "name": "Router.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/routing.py",
+        "lineno": 6,
+        "name": "Router.add_route"
+      },
+      {
+        "cc": 5,
+        "file": "flask_pair/flask_pair/routing.py",
+        "lineno": 9,
+        "name": "Router.dispatch"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 5,
+    "mean": 0.4,
+    "median": 0,
+    "n": 17,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::__call__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::route"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::run"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::wsgi_app"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::route"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "lineno": 0,
+        "name": "Blueprint::register"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/context.py",
+        "lineno": 0,
+        "name": "AppContext::__enter__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/context.py",
+        "lineno": 0,
+        "name": "AppContext::__exit__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/context.py",
+        "lineno": 0,
+        "name": "AppContext::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/request.py",
+        "lineno": 0,
+        "name": "Request::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/response.py",
+        "lineno": 0,
+        "name": "Response::_status_text"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair/flask_pair/response.py",
+        "lineno": 0,
+        "name": "Response::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/routing.py",
+        "lineno": 0,
+        "name": "Router::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/routing.py",
+        "lineno": 0,
+        "name": "Router::add_route"
+      },
+      {
+        "cogc": 5,
+        "file": "flask_pair/flask_pair/routing.py",
+        "lineno": 0,
+        "name": "Router::dispatch"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "OpenHands (A) r01",
+  "mi": {
+    "files": [
+      {
+        "file": "flask_pair/flask_pair/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "flask_pair/flask_pair/blueprints.py",
+        "mi": 70.29
+      },
+      {
+        "file": "flask_pair/flask_pair/context.py",
+        "mi": 100.0
+      },
+      {
+        "file": "flask_pair/flask_pair/request.py",
+        "mi": 100.0
+      },
+      {
+        "file": "flask_pair/flask_pair/response.py",
+        "mi": 75.02
+      },
+      {
+        "file": "flask_pair/flask_pair/routing.py",
+        "mi": 64.9
+      }
+    ],
+    "mean": 85.0,
+    "median": 87.5,
+    "min": 64.9,
+    "n": 6,
+    "pct_below_threshold": 16.7,
+    "threshold": 65
+  },
+  "subject": "openhands_flask_run01"
+}

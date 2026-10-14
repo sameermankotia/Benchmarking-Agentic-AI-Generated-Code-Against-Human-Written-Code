@@ -1,0 +1,1506 @@
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..69bac89
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,270 @@
++# Flask Framework
++
++A WSGI-compatible micro web framework built in Python 3.11 that provides essential web development features including URL routing, request/response handling, template rendering, application context management, and modular blueprints.
++
++## Features
++
++1. **URL Routing with Variable Segments and HTTP Method Filtering**
++   - Support for dynamic URL segments like `/user/<int:id>`
++   - HTTP method filtering (GET, POST, PUT, DELETE, etc.)
++   - Flexible route patterns with type converters
++
++2. **Request Object**
++   - Encapsulates HTTP method, path, headers, query string, and body
++   - Easy access to request data and parameters
++   - JSON parsing support
++
++3. **Response Object**
++   - Configurable status codes, headers, and body content
++   - WSGI-compatible response formatting
++   - Support for different content types
++
++4. **Jinja2 Template Rendering**
++   - Integrated template engine with application context
++   - Automatic template loading from templates directory
++   - Fallback to simple string replacement if Jinja2 unavailable
++
++5. **Application Context Management**
++   - Thread-local storage for `current_app` and `g` objects
++   - Safe concurrent request handling
++   - Context-aware template rendering
++
++6. **Blueprint-based Modular Applications**
++   - Organize routes into reusable blueprints
++   - URL prefix inheritance and customization
++   - Modular application architecture
++
++## Installation
++
++```bash
++pip install -e .
++```
++
++## Quick Start
++
++### Basic Application
++
++```python
++from flaskframework import Flask, render_template
++
++app = Flask(__name__)
++
++@app.route('/')
++def hello():
++    return 'Hello, World!'
++
++@app.route('/user/<name>')
++def user_profile(name):
++    return f'Hello, {name}!'
++
++@app.route('/user/<int:user_id>')
++def user_by_id(user_id):
++    return f'User ID: {user_id}'
++
++if __name__ == '__main__':
++    app.run(debug=True)
++```
++
++### Using Templates
++
++Create a `templates/index.html` file:
++```html
++<!DOCTYPE html>
++<html>
++<head>
++    <title>{{ title }}</title>
++</head>
++<body>
++    <h1>{{ heading }}</h1>
++    <p>Welcome, {{ name }}!</p>
++</body>
++</html>
++```
++
++```python
++from flaskframework import Flask, render_template
++
++app = Flask(__name__)
++
++@app.route('/welcome/<name>')
++def welcome(name):
++    return render_template('index.html', 
++                         title='Welcome Page',
++                         heading='Welcome!',
++                         name=name)
++
++if __name__ == '__main__':
++    app.run()
++```
++
++### Using Blueprints
++
++```python
++from flaskframework import Flask, Blueprint
++
++# Create a blueprint
++api = Blueprint('api', __name__, url_prefix='/api')
++
++@api.route('/users')
++def list_users():
++    return 'List of users'
++
++@api.route('/users/<int:user_id>')
++def get_user(user_id):
++    return f'User {user_id}'
++
++# Create main app and register blueprint
++app = Flask(__name__)
++app.register_blueprint(api)
++
++@app.route('/')
++def index():
++    return 'Main page'
++
++if __name__ == '__main__':
++    app.run()
++```
++
++### Application Context
++
++```python
++from flaskframework import Flask, current_app, g
++
++app = Flask(__name__)
++
++@app.route('/info')
++def app_info():
++    # Access current app
++    app_name = current_app.import_name
++    
++    # Store data in g for request duration
++    g.request_count = getattr(g, 'request_count', 0) + 1
++    
++    return f'App: {app_name}, Request count: {g.request_count}'
++
++if __name__ == '__main__':
++    app.run()
++```
++
++### HTTP Methods and Error Handling
++
++```python
++from flaskframework import Flask, Response
++
++app = Flask(__name__)
++
++@app.route('/data', methods=['GET', 'POST'])
++def handle_data():
++    from flaskframework.context import current_app
++    # Access request through WSGI environ (simplified example)
++    return 'Data endpoint'
++
++@app.errorhandler(404)
++def not_found(error):
++    return Response('Page not found', status=404)
++
++@app.errorhandler(500)
++def internal_error(error):
++    return Response('Internal server error', status=500)
++
++if __name__ == '__main__':
++    app.run()
++```
++
++## API Reference
++
++### Flask Class
++
++- `Flask(import_name, template_folder='templates')` - Create a new Flask application
++- `route(rule, methods=None)` - Decorator to register a route
++- `add_url_rule(rule, endpoint, view_func, methods=None)` - Add a URL rule
++- `register_blueprint(blueprint, **options)` - Register a blueprint
++- `errorhandler(code_or_exception)` - Register an error handler
++- `run(host='127.0.0.1', port=5000, debug=False)` - Run development server
++
++### Blueprint Class
++
++- `Blueprint(name, import_name, url_prefix=None)` - Create a new blueprint
++- `route(rule, methods=None)` - Decorator to register a route with the blueprint
++- `add_url_rule(rule, endpoint, view_func, methods=None)` - Add a URL rule to the blueprint
++
++### Request Object
++
++- `method` - HTTP method (GET, POST, etc.)
++- `path` - Request path
++- `headers` - Request headers dictionary
++- `query_string` - Raw query string
++- `args` - Parsed query parameters
++- `body` - Request body as bytes
++- `json` - Parsed JSON data (if Content-Type is application/json)
++
++### Response Object
++
++- `Response(body='', status=200, headers=None, content_type='text/html')` - Create a response
++- `status_code` - HTTP status code
++- `headers` - Response headers dictionary
++- `body` - Response body
++
++### Context Objects
++
++- `current_app` - Proxy to the current Flask application
++- `g` - Application context global object for storing data during a request
++
++### Template Functions
++
++- `render_template(template_name, **context)` - Render a Jinja2 template
++
++## WSGI Compliance
++
++This framework is fully WSGI-compatible and can be deployed with any WSGI server:
++
++```python
++# For production deployment
++from flaskframework import Flask
++
++app = Flask(__name__)
++
++@app.route('/')
++def hello():
++    return 'Hello, Production!'
++
++# WSGI application callable
++application = app
++```
++
++Deploy with Gunicorn:
++```bash
++gunicorn app:application
++```
++
++## Development
++
++### Running Tests
++
++```bash
++pip install -e ".[dev]"
++pytest
++```
++
++### Project Structure
++
++```
++flaskframework/
++├── __init__.py          # Main package exports
++├── app.py              # Flask application class
++├── blueprints.py       # Blueprint implementation
++├── context.py          # Application context and thread-local storage
++├── request.py          # Request object implementation
++├── response.py         # Response object implementation
++├── routing.py          # URL routing and pattern matching
++└── templating.py       # Template rendering with Jinja2
++```
++
++## Requirements
++
++- Python 3.11+
++- Jinja2 (optional, for template rendering)
++
++## License
++
++MIT License
+diff --git a/debug_routing.py b/debug_routing.py
+new file mode 100644
+index 0000000..690c148
+--- /dev/null
++++ b/debug_routing.py
+@@ -0,0 +1,46 @@
++from flaskframework import Flask
++from io import StringIO
++import sys
++
++app = Flask(__name__)
++
++@app.route('/user/<name>')
++def user_profile(name):
++    return f'User: {name}'
++
++@app.route('/user/<int:user_id>')
++def user_by_id(user_id):
++    return f'User ID: {user_id}'
++
++# Test routing
++environ = {
++    'REQUEST_METHOD': 'GET',
++    'PATH_INFO': '/user/123',
++    'QUERY_STRING': '',
++    'CONTENT_TYPE': '',
++    'CONTENT_LENGTH': '0',
++    'wsgi.input': StringIO(),
++    'wsgi.version': (1, 0),
++    'wsgi.url_scheme': 'http',
++    'wsgi.errors': sys.stderr,
++    'wsgi.multithread': False,
++    'wsgi.multiprocess': True,
++    'wsgi.run_once': False
++}
++
++def start_response(status, headers):
++    print(f"Status: {status}")
++    print(f"Headers: {headers}")
++
++result = app(environ, start_response)
++response_body = b''.join(result)
++print(f"Response: {response_body}")
++
++# Debug the router
++print("\nRouter rules:")
++for i, rule in enumerate(app.router.rules):
++    print(f"Rule {i}: {rule.pattern} -> {rule.endpoint}")
++    print(f"  Regex: {rule.regex.pattern}")
++    print(f"  Variables: {rule.variables}")
++    match_result = rule.match('/user/123', 'GET')
++    print(f"  Match result: {match_result}")
+diff --git a/flaskframework/__init__.py b/flaskframework/__init__.py
+new file mode 100644
+index 0000000..e166cc8
+--- /dev/null
++++ b/flaskframework/__init__.py
+@@ -0,0 +1,13 @@
++"""
++A WSGI-compatible micro web framework.
++"""
++
++from .app import Flask
++from .blueprints import Blueprint
++from .context import current_app, g
++from .request import Request
++from .response import Response
++from .templating import render_template
++
++__version__ = "0.1.0"
++__all__ = ["Flask", "Blueprint", "current_app", "g", "Request", "Response", "render_template"]
+diff --git a/flaskframework/__pycache__/__init__.cpython-311.pyc b/flaskframework/__pycache__/__init__.cpython-311.pyc
+new file mode 100644
+index 0000000..135d6f6
+Binary files /dev/null and b/flaskframework/__pycache__/__init__.cpython-311.pyc differ
+diff --git a/flaskframework/__pycache__/app.cpython-311.pyc b/flaskframework/__pycache__/app.cpython-311.pyc
+new file mode 100644
+index 0000000..a268c41
+Binary files /dev/null and b/flaskframework/__pycache__/app.cpython-311.pyc differ
+diff --git a/flaskframework/__pycache__/blueprints.cpython-311.pyc b/flaskframework/__pycache__/blueprints.cpython-311.pyc
+new file mode 100644
+index 0000000..433d85a
+Binary files /dev/null and b/flaskframework/__pycache__/blueprints.cpython-311.pyc differ
+diff --git a/flaskframework/__pycache__/context.cpython-311.pyc b/flaskframework/__pycache__/context.cpython-311.pyc
+new file mode 100644
+index 0000000..2c23492
+Binary files /dev/null and b/flaskframework/__pycache__/context.cpython-311.pyc differ
+diff --git a/flaskframework/__pycache__/request.cpython-311.pyc b/flaskframework/__pycache__/request.cpython-311.pyc
+new file mode 100644
+index 0000000..55dd8e0
+Binary files /dev/null and b/flaskframework/__pycache__/request.cpython-311.pyc differ
+diff --git a/flaskframework/__pycache__/response.cpython-311.pyc b/flaskframework/__pycache__/response.cpython-311.pyc
+new file mode 100644
+index 0000000..55541f2
+Binary files /dev/null and b/flaskframework/__pycache__/response.cpython-311.pyc differ
+diff --git a/flaskframework/__pycache__/routing.cpython-311.pyc b/flaskframework/__pycache__/routing.cpython-311.pyc
+new file mode 100644
+index 0000000..4b86773
+Binary files /dev/null and b/flaskframework/__pycache__/routing.cpython-311.pyc differ
+diff --git a/flaskframework/__pycache__/templating.cpython-311.pyc b/flaskframework/__pycache__/templating.cpython-311.pyc
+new file mode 100644
+index 0000000..41cc138
+Binary files /dev/null and b/flaskframework/__pycache__/templating.cpython-311.pyc differ
+diff --git a/flaskframework/app.py b/flaskframework/app.py
+new file mode 100644
+index 0000000..c27de88
+--- /dev/null
++++ b/flaskframework/app.py
+@@ -0,0 +1,147 @@
++"""
++Main Flask application class.
++"""
++import os
++import sys
++from typing import List, Callable, Dict, Any, Optional
++from wsgiref.simple_server import make_server
++
++from .request import Request
++from .response import Response
++from .routing import Router
++from .context import AppContext, _app_ctx_stack
++from .templating import TemplateEngine
++
++
++class Flask:
++    """A WSGI-compatible micro web framework."""
++    
++    def __init__(self, import_name: str, template_folder: str = 'templates'):
++        self.import_name = import_name
++        self.router = Router()
++        self.template_engine = TemplateEngine(template_folder)
++        self.config = {}
++        self.blueprints = {}
++        
++        # Error handlers
++        self.error_handlers = {}
++    
++    def route(self, rule: str, methods: List[str] = None):
++        """Decorator to register a route."""
++        def decorator(func: Callable):
++            self.add_url_rule(rule, func.__name__, func, methods)
++            return func
++        return decorator
++    
++    def add_url_rule(self, rule: str, endpoint: str, view_func: Callable, methods: List[str] = None):
++        """Add a URL rule to the router."""
++        self.router.add_rule(rule, endpoint, view_func, methods)
++    
++    def register_blueprint(self, blueprint, **options):
++        """Register a blueprint with the application."""
++        self.blueprints[blueprint.name] = blueprint
++        blueprint.register(self, options)
++    
++    def errorhandler(self, code_or_exception):
++        """Decorator to register an error handler."""
++        def decorator(func):
++            self.error_handlers[code_or_exception] = func
++            return func
++        return decorator
++    
++    def handle_exception(self, e):
++        """Handle an exception and return appropriate response."""
++        # Look for specific error handler
++        for exc_class, handler in self.error_handlers.items():
++            if isinstance(e, exc_class) or (isinstance(exc_class, int) and hasattr(e, 'code') and e.code == exc_class):
++                return handler(e)
++        
++        # Default 500 error
++        return Response('Internal Server Error', status=500)
++    
++    def wsgi_app(self, environ, start_response):
++        """WSGI application callable."""
++        # Create application context
++        ctx = AppContext(self)
++        _app_ctx_stack.push(ctx)
++        
++        try:
++            # Create request object
++            request = Request(environ)
++            
++            # Find matching route
++            view_func, variables = self.router.match(request.path, request.method)
++            
++            if view_func is None:
++                # No route found - 404
++                response = Response('Not Found', status=404)
++            else:
++                try:
++                    # Call view function with variables
++                    result = view_func(**variables)
++                    
++                    # Convert result to Response object
++                    if isinstance(result, Response):
++                        response = result
++                    elif isinstance(result, str):
++                        response = Response(result)
++                    elif isinstance(result, tuple):
++                        # Handle (body, status) or (body, status, headers)
++                        if len(result) == 2:
++                            response = Response(result[0], status=result[1])
++                        elif len(result) == 3:
++                            response = Response(result[0], status=result[1], headers=result[2])
++                        else:
++                            response = Response(str(result))
++                    else:
++                        response = Response(str(result))
++                        
++                except Exception as e:
++                    response = self.handle_exception(e)
++            
++            # Start WSGI response
++            start_response(response.status, response.get_wsgi_headers())
++            return [response.get_body_bytes()]
++            
++        finally:
++            # Clean up context
++            _app_ctx_stack.pop()
++    
++    def __call__(self, environ, start_response):
++        """Make the app callable for WSGI."""
++        return self.wsgi_app(environ, start_response)
++    
++    def run(self, host='127.0.0.1', port=5000, debug=False):
++        """Run the application with built-in development server."""
++        print(f" * Running on http://{host}:{port}")
++        if debug:
++            print(" * Debug mode: on")
++        
++        try:
++            server = make_server(host, port, self)
++            server.serve_forever()
++        except KeyboardInterrupt:
++            print("\n * Shutting down...")
++
++
++# Helper functions for common HTTP errors
++class HTTPException(Exception):
++    """Base class for HTTP exceptions."""
++    def __init__(self, description=None):
++        self.code = getattr(self, 'code', 500)
++        self.description = description or getattr(self, 'description', 'Unknown error')
++
++
++class NotFound(HTTPException):
++    code = 404
++    description = 'Not Found'
++
++
++class BadRequest(HTTPException):
++    code = 400
++    description = 'Bad Request'
++
++
++class MethodNotAllowed(HTTPException):
++    code = 405
++    description = 'Method Not Allowed'
+diff --git a/flaskframework/blueprints.py b/flaskframework/blueprints.py
+new file mode 100644
+index 0000000..5e3df5e
+--- /dev/null
++++ b/flaskframework/blueprints.py
+@@ -0,0 +1,61 @@
++"""
++Blueprint-based modular applications with URL prefix inheritance.
++"""
++from typing import List, Callable, Optional
++
++
++class Blueprint:
++    """A blueprint for organizing routes and handlers."""
++    
++    def __init__(self, name: str, import_name: str, url_prefix: str = None):
++        self.name = name
++        self.import_name = import_name
++        self.url_prefix = url_prefix or ''
++        self.deferred_functions = []
++    
++    def route(self, rule: str, methods: List[str] = None):
++        """Decorator to register a route with this blueprint."""
++        def decorator(func: Callable):
++            self.add_url_rule(rule, func.__name__, func, methods)
++            return func
++        return decorator
++    
++    def add_url_rule(self, rule: str, endpoint: str, view_func: Callable, methods: List[str] = None):
++        """Add a URL rule to this blueprint."""
++        # Prepend the blueprint's URL prefix
++        full_rule = self.url_prefix.rstrip('/') + rule
++        if not full_rule.startswith('/'):
++            full_rule = '/' + full_rule
++        
++        # Store the rule to be registered later when blueprint is registered with app
++        self.deferred_functions.append({
++            'rule': full_rule,
++            'endpoint': f"{self.name}.{endpoint}",
++            'view_func': view_func,
++            'methods': methods
++        })
++    
++    def register(self, app, options):
++        """Register this blueprint with an application."""
++        # Apply any options like url_prefix override
++        url_prefix = options.get('url_prefix', self.url_prefix)
++        
++        for deferred in self.deferred_functions:
++            rule = deferred['rule']
++            
++            # Apply url_prefix from registration if different from blueprint's
++            if url_prefix and url_prefix != self.url_prefix:
++                # Remove blueprint's prefix and add registration prefix
++                if self.url_prefix and rule.startswith(self.url_prefix):
++                    rule = rule[len(self.url_prefix):]
++                rule = url_prefix.rstrip('/') + rule
++            
++            if not rule.startswith('/'):
++                rule = '/' + rule
++            
++            app.add_url_rule(
++                rule,
++                deferred['endpoint'],
++                deferred['view_func'],
++                deferred['methods']
++            )
+diff --git a/flaskframework/context.py b/flaskframework/context.py
+new file mode 100644
+index 0000000..8ce5fda
+--- /dev/null
++++ b/flaskframework/context.py
+@@ -0,0 +1,91 @@
++"""
++Application context management using thread-local storage.
++"""
++import threading
++from typing import Any
++
++
++class LocalProxy:
++    """A proxy object that forwards all operations to a thread-local object."""
++    
++    def __init__(self, local, name):
++        object.__setattr__(self, '_local', local)
++        object.__setattr__(self, '_name', name)
++    
++    def _get_current_object(self):
++        """Get the current object from thread-local storage."""
++        try:
++            return getattr(self._local, self._name)
++        except AttributeError:
++            raise RuntimeError(f'Working outside of application context')
++    
++    def __getattr__(self, name):
++        return getattr(self._get_current_object(), name)
++    
++    def __setattr__(self, name, value):
++        setattr(self._get_current_object(), name, value)
++    
++    def __delattr__(self, name):
++        delattr(self._get_current_object(), name)
++
++
++class AppContext:
++    """Application context that holds app and g objects."""
++    
++    def __init__(self, app):
++        self.app = app
++        self.g = G()
++
++
++class G:
++    """A simple object to store data during a request."""
++    pass
++
++
++class LocalStack:
++    """A thread-local stack for managing contexts."""
++    
++    def __init__(self):
++        self._local = threading.local()
++    
++    def push(self, obj):
++        """Push an object onto the stack."""
++        if not hasattr(self._local, 'stack'):
++            self._local.stack = []
++        self._local.stack.append(obj)
++    
++    def pop(self):
++        """Pop an object from the stack."""
++        if not hasattr(self._local, 'stack') or not self._local.stack:
++            return None
++        return self._local.stack.pop()
++    
++    @property
++    def top(self):
++        """Get the top object from the stack."""
++        if not hasattr(self._local, 'stack') or not self._local.stack:
++            return None
++        return self._local.stack[-1]
++
++
++# Global context stack
++_app_ctx_stack = LocalStack()
++
++# Create a custom proxy for current_app and g
++class _AppProxy(LocalProxy):
++    def _get_current_object(self):
++        ctx = _app_ctx_stack.top
++        if ctx is None:
++            raise RuntimeError('Working outside of application context')
++        return ctx.app
++
++class _GProxy(LocalProxy):
++    def _get_current_object(self):
++        ctx = _app_ctx_stack.top
++        if ctx is None:
++            raise RuntimeError('Working outside of application context')
++        return ctx.g
++
++# Proxy objects for current_app and g
++current_app = _AppProxy(_app_ctx_stack, 'top')
++g = _GProxy(_app_ctx_stack, 'top')
+diff --git a/flaskframework/request.py b/flaskframework/request.py
+new file mode 100644
+index 0000000..8926664
+--- /dev/null
++++ b/flaskframework/request.py
+@@ -0,0 +1,61 @@
++"""
++Request object implementation.
++"""
++import urllib.parse
++from io import BytesIO
++
++
++class Request:
++    """Request object encapsulating method, path, headers, query string, and body."""
++    
++    def __init__(self, environ):
++        self.environ = environ
++        self.method = environ.get('REQUEST_METHOD', 'GET')
++        self.path = environ.get('PATH_INFO', '/')
++        self.query_string = environ.get('QUERY_STRING', '')
++        self.headers = self._get_headers(environ)
++        self._body = None
++        
++    def _get_headers(self, environ):
++        """Extract headers from WSGI environ."""
++        headers = {}
++        for key, value in environ.items():
++            if key.startswith('HTTP_'):
++                # Convert HTTP_HEADER_NAME to Header-Name
++                header_name = key[5:].replace('_', '-').title()
++                headers[header_name] = value
++            elif key in ('CONTENT_TYPE', 'CONTENT_LENGTH'):
++                # Special case for content headers
++                header_name = key.replace('_', '-').title()
++                headers[header_name] = value
++        return headers
++    
++    @property
++    def body(self):
++        """Get request body as bytes."""
++        if self._body is None:
++            try:
++                content_length = int(self.environ.get('CONTENT_LENGTH', 0))
++            except ValueError:
++                content_length = 0
++            
++            if content_length > 0:
++                self._body = self.environ['wsgi.input'].read(content_length)
++            else:
++                self._body = b''
++        return self._body
++    
++    @property
++    def args(self):
++        """Get query string parameters as a dict."""
++        if not self.query_string:
++            return {}
++        return dict(urllib.parse.parse_qsl(self.query_string))
++    
++    @property
++    def json(self):
++        """Get JSON data from request body."""
++        import json
++        if self.headers.get('Content-Type', '').startswith('application/json'):
++            return json.loads(self.body.decode('utf-8'))
++        return None
+diff --git a/flaskframework/response.py b/flaskframework/response.py
+new file mode 100644
+index 0000000..456cf91
+--- /dev/null
++++ b/flaskframework/response.py
+@@ -0,0 +1,45 @@
++"""
++Response object implementation.
++"""
++
++
++class Response:
++    """Response object with status code, headers, and body."""
++    
++    def __init__(self, body='', status=200, headers=None, content_type='text/html'):
++        self.body = body
++        self.status_code = status
++        self.headers = headers or {}
++        
++        # Set default content type if not provided
++        if 'Content-Type' not in self.headers:
++            self.headers['Content-Type'] = content_type
++    
++    @property
++    def status(self):
++        """Get status line for WSGI."""
++        status_messages = {
++            200: 'OK',
++            201: 'Created',
++            400: 'Bad Request',
++            401: 'Unauthorized',
++            403: 'Forbidden',
++            404: 'Not Found',
++            405: 'Method Not Allowed',
++            500: 'Internal Server Error',
++        }
++        message = status_messages.get(self.status_code, 'Unknown')
++        return f"{self.status_code} {message}"
++    
++    def get_wsgi_headers(self):
++        """Get headers in WSGI format (list of tuples)."""
++        return list(self.headers.items())
++    
++    def get_body_bytes(self):
++        """Get body as bytes for WSGI."""
++        if isinstance(self.body, str):
++            return self.body.encode('utf-8')
++        elif isinstance(self.body, bytes):
++            return self.body
++        else:
++            return str(self.body).encode('utf-8')
+diff --git a/flaskframework/routing.py b/flaskframework/routing.py
+new file mode 100644
+index 0000000..ca54968
+--- /dev/null
++++ b/flaskframework/routing.py
+@@ -0,0 +1,106 @@
++"""
++URL routing with variable segments and HTTP method filtering.
++"""
++import re
++from typing import Dict, List, Tuple, Callable, Optional
++
++
++class Rule:
++    """A URL routing rule."""
++    
++    def __init__(self, pattern: str, endpoint: str, methods: List[str] = None):
++        self.pattern = pattern
++        self.endpoint = endpoint
++        self.methods = methods or ['GET']
++        self.regex, self.variables = self._compile_pattern(pattern)
++        self.priority = self._calculate_priority(pattern)
++    
++    def _calculate_priority(self, pattern: str) -> int:
++        """Calculate rule priority. Higher priority = more specific."""
++        priority = 0
++        
++        # Static segments have higher priority than variable segments
++        segments = pattern.split('/')
++        for segment in segments:
++            if segment and not segment.startswith('<'):
++                priority += 10  # Static segment
++            elif segment.startswith('<') and ':' in segment:
++                priority += 5   # Typed variable segment
++            elif segment.startswith('<'):
++                priority += 1   # Generic variable segment
++        
++        return priority
++    
++    def _compile_pattern(self, pattern: str) -> Tuple[re.Pattern, List[str]]:
++        """Compile URL pattern to regex and extract variable names."""
++        variables = []
++        
++        # Find all variable segments like <name> or <int:name>
++        def replace_variable(match):
++            full_match = match.group(0)
++            var_spec = match.group(1)
++            
++            if ':' in var_spec:
++                converter, name = var_spec.split(':', 1)
++                variables.append(name)
++                
++                # Define converters
++                if converter == 'int':
++                    return r'(\d+)'
++                elif converter == 'float':
++                    return r'(\d+\.\d+)'
++                elif converter == 'path':
++                    return r'([^/]+(?:/[^/]+)*)'
++                else:
++                    return r'([^/]+)'
++            else:
++                variables.append(var_spec)
++                return r'([^/]+)'
++        
++        # Replace variable segments with regex groups
++        regex_pattern = re.sub(r'<([^>]+)>', replace_variable, pattern)
++        
++        # Ensure exact match
++        regex_pattern = f'^{regex_pattern}$'
++        
++        return re.compile(regex_pattern), variables
++    
++    def match(self, path: str, method: str) -> Optional[Dict[str, str]]:
++        """Check if this rule matches the given path and method."""
++        if method not in self.methods:
++            return None
++        
++        match = self.regex.match(path)
++        if not match:
++            return None
++        
++        # Extract variables
++        values = {}
++        for i, name in enumerate(self.variables):
++            values[name] = match.group(i + 1)
++        
++        return values
++
++
++class Router:
++    """URL router that manages routing rules."""
++    
++    def __init__(self):
++        self.rules: List[Rule] = []
++        self.endpoints: Dict[str, Callable] = {}
++    
++    def add_rule(self, pattern: str, endpoint: str, view_func: Callable, methods: List[str] = None):
++        """Add a routing rule."""
++        rule = Rule(pattern, endpoint, methods)
++        self.rules.append(rule)
++        self.endpoints[endpoint] = view_func
++    
++    def match(self, path: str, method: str) -> Tuple[Optional[Callable], Dict[str, str]]:
++        """Find a matching rule for the given path and method."""
++        for rule in self.rules:
++            variables = rule.match(path, method)
++            if variables is not None:
++                view_func = self.endpoints.get(rule.endpoint)
++                return view_func, variables
++        
++        return None, {}
+diff --git a/flaskframework/templating.py b/flaskframework/templating.py
+new file mode 100644
+index 0000000..bead436
+--- /dev/null
++++ b/flaskframework/templating.py
+@@ -0,0 +1,53 @@
++"""
++Jinja2 template rendering integrated with the application context.
++"""
++import os
++from typing import Dict, Any
++
++
++class TemplateEngine:
++    """Simple template engine with Jinja2 integration."""
++    
++    def __init__(self, template_folder: str = 'templates'):
++        self.template_folder = template_folder
++        self._jinja_env = None
++    
++    @property
++    def jinja_env(self):
++        """Get or create Jinja2 environment."""
++        if self._jinja_env is None:
++            try:
++                from jinja2 import Environment, FileSystemLoader
++                loader = FileSystemLoader(self.template_folder)
++                self._jinja_env = Environment(loader=loader, autoescape=True)
++            except ImportError:
++                # Fallback to simple string replacement if Jinja2 not available
++                self._jinja_env = None
++        return self._jinja_env
++    
++    def render_template(self, template_name: str, **context) -> str:
++        """Render a template with the given context."""
++        if self.jinja_env:
++            # Use Jinja2 if available
++            template = self.jinja_env.get_template(template_name)
++            return template.render(**context)
++        else:
++            # Fallback to simple file reading and string replacement
++            template_path = os.path.join(self.template_folder, template_name)
++            try:
++                with open(template_path, 'r', encoding='utf-8') as f:
++                    content = f.read()
++                
++                # Simple variable replacement for {{ variable }}
++                for key, value in context.items():
++                    content = content.replace(f'{{{{{key}}}}}', str(value))
++                
++                return content
++            except FileNotFoundError:
++                return f"Template '{template_name}' not found"
++
++
++def render_template(template_name: str, **context) -> str:
++    """Render a template using the current app's template engine."""
++    from .context import current_app
++    return current_app.template_engine.render_template(template_name, **context)
+diff --git a/pyproject.toml b/pyproject.toml
+index 20a172f..0ed7d95 100644
+--- a/pyproject.toml
++++ b/pyproject.toml
+@@ -1,5 +1,39 @@
++[build-system]
++requires = ["setuptools>=61.0", "wheel"]
++build-backend = "setuptools.build_meta"
++
+ [project]
+ name = "flaskframework"
+ version = "0.1.0"
++description = "A WSGI-compatible micro web framework"
++authors = [{name = "Framework Author", email = "author@example.com"}]
++license = {text = "MIT"}
++readme = "README.md"
+ requires-python = ">=3.11"
+-dependencies = ["jinja2", "werkzeug", "pytest"]
++classifiers = [
++    "Development Status :: 3 - Alpha",
++    "Intended Audience :: Developers",
++    "License :: OSI Approved :: MIT License",
++    "Programming Language :: Python :: 3",
++    "Programming Language :: Python :: 3.11",
++    "Topic :: Internet :: WWW/HTTP :: WSGI",
++    "Topic :: Software Development :: Libraries :: Python Modules",
++]
++dependencies = [
++    "jinja2>=3.0.0",
++]
++
++[project.optional-dependencies]
++dev = [
++    "pytest>=7.0.0",
++    "pytest-cov",
++]
++
++[project.urls]
++Homepage = "https://github.com/example/flaskframework"
++Repository = "https://github.com/example/flaskframework.git"
++Issues = "https://github.com/example/flaskframework/issues"
++
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["flaskframework*"]
+diff --git a/test_framework.py b/test_framework.py
+new file mode 100644
+index 0000000..9af64e5
+--- /dev/null
++++ b/test_framework.py
+@@ -0,0 +1,470 @@
++#!/usr/bin/env python3
++"""
++Comprehensive test script for the Flask framework.
++Tests all required features:
++1. URL routing with variable segments and HTTP method filtering
++2. Request object encapsulating method, path, headers, query string, and body
++3. Response object with status code, headers, and body
++4. Jinja2 template rendering integrated with the application context
++5. Application context management using thread-local storage
++6. Blueprint-based modular applications with URL prefix inheritance
++7. WSGI compliance and built-in development server
++"""
++
++import os
++import sys
++import tempfile
++import threading
++import time
++from io import StringIO
++from wsgiref.simple_server import make_server
++
++# Add the current directory to Python path
++sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
++
++from flaskframework import Flask, Blueprint, current_app, g, Request, Response, render_template
++
++
++def test_basic_routing():
++    """Test 1: URL routing with variable segments and HTTP method filtering"""
++    print("Testing URL routing with variable segments and HTTP method filtering...")
++    
++    app = Flask(__name__)
++    
++    @app.route('/')
++    def index():
++        return 'Hello World'
++    
++    @app.route('/user/<name>')
++    def user_profile(name):
++        return f'User: {name}'
++    
++    @app.route('/user/<int:user_id>')
++    def user_by_id(user_id):
++        return f'User ID: {user_id}'
++    
++    @app.route('/api/data', methods=['GET', 'POST'])
++    def api_data():
++        return 'API Data'
++    
++    # Test routing
++    environ_base = {
++        'REQUEST_METHOD': 'GET',
++        'PATH_INFO': '/',
++        'QUERY_STRING': '',
++        'CONTENT_TYPE': '',
++        'CONTENT_LENGTH': '0',
++        'wsgi.input': StringIO(),
++        'wsgi.version': (1, 0),
++        'wsgi.url_scheme': 'http',
++        'wsgi.errors': sys.stderr,
++        'wsgi.multithread': False,
++        'wsgi.multiprocess': True,
++        'wsgi.run_once': False
++    }
++    
++    def start_response(status, headers):
++        pass
++    
++    # Test basic route
++    environ = environ_base.copy()
++    environ['PATH_INFO'] = '/'
++    result = app(environ, start_response)
++    assert b'Hello World' in b''.join(result)
++    
++    # Test variable segment
++    environ = environ_base.copy()
++    environ['PATH_INFO'] = '/user/john'
++    result = app(environ, start_response)
++    assert b'User: john' in b''.join(result)
++    
++    # Test integer converter
++    environ = environ_base.copy()
++    environ['PATH_INFO'] = '/user/123'
++    result = app(environ, start_response)
++    assert b'User ID: 123' in b''.join(result)
++    
++    print("✓ URL routing tests passed")
++
++
++def test_request_object():
++    """Test 2: Request object encapsulating method, path, headers, query string, and body"""
++    print("Testing request object...")
++    
++    app = Flask(__name__)
++    
++    @app.route('/test', methods=['GET', 'POST'])
++    def test_request():
++        # We'll access request through WSGI environ in a real implementation
++        return 'Request handled'
++    
++    # Create a request object directly
++    environ = {
++        'REQUEST_METHOD': 'POST',
++        'PATH_INFO': '/test',
++        'QUERY_STRING': 'param1=value1&param2=value2',
++        'CONTENT_TYPE': 'application/json',
++        'CONTENT_LENGTH': '13',
++        'HTTP_USER_AGENT': 'Test Agent',
++        'HTTP_ACCEPT': 'application/json',
++        'wsgi.input': StringIO('{"key":"value"}'),
++    }
++    
++    request = Request(environ)
++    
++    # Test request properties
++    assert request.method == 'POST'
++    assert request.path == '/test'
++    assert request.query_string == 'param1=value1&param2=value2'
++    assert request.headers['User-Agent'] == 'Test Agent'
++    assert request.headers['Accept'] == 'application/json'
++    assert request.headers['Content-Type'] == 'application/json'
++    assert request.args['param1'] == 'value1'
++    assert request.args['param2'] == 'value2'
++    
++    print("✓ Request object tests passed")
++
++
++def test_response_object():
++    """Test 3: Response object with status code, headers, and body"""
++    print("Testing response object...")
++    
++    # Test basic response
++    response = Response('Hello World')
++    assert response.body == 'Hello World'
++    assert response.status_code == 200
++    assert response.status == '200 OK'
++    assert response.headers['Content-Type'] == 'text/html'
++    
++    # Test custom response
++    response = Response('{"message": "success"}', status=201, 
++                       headers={'Custom-Header': 'value'}, 
++                       content_type='application/json')
++    assert response.status_code == 201
++    assert response.status == '201 Created'
++    assert response.headers['Content-Type'] == 'application/json'
++    assert response.headers['Custom-Header'] == 'value'
++    
++    # Test WSGI format
++    wsgi_headers = response.get_wsgi_headers()
++    assert ('Content-Type', 'application/json') in wsgi_headers
++    assert ('Custom-Header', 'value') in wsgi_headers
++    
++    body_bytes = response.get_body_bytes()
++    assert isinstance(body_bytes, bytes)
++    assert body_bytes == b'{"message": "success"}'
++    
++    print("✓ Response object tests passed")
++
++
++def test_template_rendering():
++    """Test 4: Jinja2 template rendering integrated with the application context"""
++    print("Testing template rendering...")
++    
++    # Create temporary template directory
++    with tempfile.TemporaryDirectory() as temp_dir:
++        template_dir = os.path.join(temp_dir, 'templates')
++        os.makedirs(template_dir)
++        
++        # Create a test template
++        template_content = """<html>
++<head><title>{{title}}</title></head>
++<body><h1>Hello {{name}}!</h1></body>
++</html>"""
++        
++        with open(os.path.join(template_dir, 'test.html'), 'w') as f:
++            f.write(template_content)
++        
++        app = Flask(__name__, template_folder=template_dir)
++        
++        @app.route('/template/<name>')
++        def template_test(name):
++            return render_template('test.html', title='Test Page', name=name)
++        
++        # Test template rendering within app context
++        environ = {
++            'REQUEST_METHOD': 'GET',
++            'PATH_INFO': '/template/world',
++            'QUERY_STRING': '',
++            'CONTENT_TYPE': '',
++            'CONTENT_LENGTH': '0',
++            'wsgi.input': StringIO(),
++            'wsgi.version': (1, 0),
++            'wsgi.url_scheme': 'http',
++            'wsgi.errors': sys.stderr,
++            'wsgi.multithread': False,
++            'wsgi.multiprocess': True,
++            'wsgi.run_once': False
++        }
++        
++        def start_response(status, headers):
++            pass
++        
++        result = app(environ, start_response)
++        response_body = b''.join(result).decode('utf-8')
++        
++        # Check if template was rendered (fallback to simple replacement)
++        assert 'Hello world!' in response_body
++        assert 'Test Page' in response_body
++    
++    print("✓ Template rendering tests passed")
++
++
++def test_application_context():
++    """Test 5: Application context management using thread-local storage"""
++    print("Testing application context management...")
++    
++    app = Flask(__name__)
++    
++    @app.route('/context')
++    def context_test():
++        # Test current_app access
++        app_name = current_app.import_name
++        
++        # Test g object
++        g.test_value = 'context_data'
++        
++        return f'App: {app_name}, G: {g.test_value}'
++    
++    # Test context in different threads
++    results = []
++    
++    def thread_test():
++        environ = {
++            'REQUEST_METHOD': 'GET',
++            'PATH_INFO': '/context',
++            'QUERY_STRING': '',
++            'CONTENT_TYPE': '',
++            'CONTENT_LENGTH': '0',
++            'wsgi.input': StringIO(),
++            'wsgi.version': (1, 0),
++            'wsgi.url_scheme': 'http',
++            'wsgi.errors': sys.stderr,
++            'wsgi.multithread': False,
++            'wsgi.multiprocess': True,
++            'wsgi.run_once': False
++        }
++        
++        def start_response(status, headers):
++            pass
++        
++        result = app(environ, start_response)
++        response_body = b''.join(result).decode('utf-8')
++        results.append(response_body)
++    
++    # Run in multiple threads
++    threads = []
++    for i in range(3):
++        t = threading.Thread(target=thread_test)
++        threads.append(t)
++        t.start()
++    
++    for t in threads:
++        t.join()
++    
++    # All threads should have successful context access
++    assert len(results) == 3
++    for result in results:
++        assert 'App: __main__' in result
++        assert 'G: context_data' in result
++    
++    print("✓ Application context tests passed")
++
++
++def test_blueprints():
++    """Test 6: Blueprint-based modular applications with URL prefix inheritance"""
++    print("Testing Blueprint-based modular applications...")
++    
++    # Create a blueprint
++    api_bp = Blueprint('api', __name__, url_prefix='/api')
++    
++    @api_bp.route('/users')
++    def list_users():
++        return 'Users list'
++    
++    @api_bp.route('/users/<int:user_id>')
++    def get_user(user_id):
++        return f'User {user_id}'
++    
++    # Create another blueprint with different prefix
++    admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
++    
++    @admin_bp.route('/dashboard')
++    def dashboard():
++        return 'Admin dashboard'
++    
++    # Create main app and register blueprints
++    app = Flask(__name__)
++    app.register_blueprint(api_bp)
++    app.register_blueprint(admin_bp)
++    
++    @app.route('/')
++    def index():
++        return 'Main page'
++    
++    # Test blueprint routes
++    environ_base = {
++        'REQUEST_METHOD': 'GET',
++        'QUERY_STRING': '',
++        'CONTENT_TYPE': '',
++        'CONTENT_LENGTH': '0',
++        'wsgi.input': StringIO(),
++        'wsgi.version': (1, 0),
++        'wsgi.url_scheme': 'http',
++        'wsgi.errors': sys.stderr,
++        'wsgi.multithread': False,
++        'wsgi.multiprocess': True,
++        'wsgi.run_once': False
++    }
++    
++    def start_response(status, headers):
++        pass
++    
++    # Test main route
++    environ = environ_base.copy()
++    environ['PATH_INFO'] = '/'
++    result = app(environ, start_response)
++    assert b'Main page' in b''.join(result)
++    
++    # Test blueprint route with prefix
++    environ = environ_base.copy()
++    environ['PATH_INFO'] = '/api/users'
++    result = app(environ, start_response)
++    assert b'Users list' in b''.join(result)
++    
++    # Test blueprint route with variable
++    environ = environ_base.copy()
++    environ['PATH_INFO'] = '/api/users/123'
++    result = app(environ, start_response)
++    assert b'User 123' in b''.join(result)
++    
++    # Test second blueprint
++    environ = environ_base.copy()
++    environ['PATH_INFO'] = '/admin/dashboard'
++    result = app(environ, start_response)
++    assert b'Admin dashboard' in b''.join(result)
++    
++    print("✓ Blueprint tests passed")
++
++
++def test_wsgi_compliance():
++    """Test 7: WSGI compliance and built-in development server"""
++    print("Testing WSGI compliance...")
++    
++    app = Flask(__name__)
++    
++    @app.route('/')
++    def index():
++        return 'WSGI Test'
++    
++    @app.route('/status')
++    def status():
++        return Response('OK', status=200, headers={'X-Test': 'value'})
++    
++    # Test WSGI interface
++    environ = {
++        'REQUEST_METHOD': 'GET',
++        'PATH_INFO': '/',
++        'QUERY_STRING': '',
++        'CONTENT_TYPE': '',
++        'CONTENT_LENGTH': '0',
++        'wsgi.input': StringIO(),
++        'wsgi.version': (1, 0),
++        'wsgi.url_scheme': 'http',
++        'wsgi.errors': sys.stderr,
++        'wsgi.multithread': False,
++        'wsgi.multiprocess': True,
++        'wsgi.run_once': False
++    }
++    
++    response_started = False
++    response_status = None
++    response_headers = None
++    
++    def start_response(status, headers):
++        nonlocal response_started, response_status, response_headers
++        response_started = True
++        response_status = status
++        response_headers = headers
++    
++    # Test WSGI call
++    result = app(environ, start_response)
++    
++    # Verify WSGI compliance
++    assert response_started, "start_response was not called"
++    assert response_status == '200 OK', f"Expected '200 OK', got '{response_status}'"
++    assert isinstance(response_headers, list), "Headers should be a list"
++    assert all(isinstance(h, tuple) and len(h) == 2 for h in response_headers), "Headers should be tuples"
++    
++    # Verify response body is iterable of bytes
++    assert hasattr(result, '__iter__'), "Response should be iterable"
++    body = b''.join(result)
++    assert isinstance(body, bytes), "Response body should be bytes"
++    assert b'WSGI Test' in body
++    
++    # Test custom status and headers
++    environ['PATH_INFO'] = '/status'
++    result = app(environ, start_response)
++    assert response_status == '200 OK'
++    header_dict = dict(response_headers)
++    assert 'X-Test' in header_dict
++    
++    print("✓ WSGI compliance tests passed")
++
++
++def test_development_server():
++    """Test built-in development server (basic functionality)"""
++    print("Testing built-in development server...")
++    
++    app = Flask(__name__)
++    
++    @app.route('/')
++    def index():
++        return 'Server Test'
++    
++    # Test that the server can be created (we won't actually run it)
++    try:
++        server = make_server('127.0.0.1', 0, app)  # Port 0 for any available port
++        port = server.server_port
++        server.server_close()
++        print(f"✓ Development server can be created on port {port}")
++    except Exception as e:
++        print(f"✗ Development server test failed: {e}")
++        raise
++
++
++def main():
++    """Run all tests"""
++    print("Running Flask Framework Tests")
++    print("=" * 50)
++    
++    try:
++        test_basic_routing()
++        test_request_object()
++        test_response_object()
++        test_template_rendering()
++        test_application_context()
++        test_blueprints()
++        test_wsgi_compliance()
++        test_development_server()
++        
++        print("=" * 50)
++        print("✓ All tests passed! Framework meets all requirements:")
++        print("  1. ✓ URL routing with variable segments and HTTP method filtering")
++        print("  2. ✓ Request object encapsulating method, path, headers, query string, and body")
++        print("  3. ✓ Response object with status code, headers, and body")
++        print("  4. ✓ Jinja2 template rendering integrated with the application context")
++        print("  5. ✓ Application context management using thread-local storage")
++        print("  6. ✓ Blueprint-based modular applications with URL prefix inheritance")
++        print("  7. ✓ WSGI compliance and built-in development server")
++        print("\nScript completed successfully, no errors.")
++        
++    except Exception as e:
++        print(f"✗ Test failed: {e}")
++        import traceback
++        traceback.print_exc()
++        sys.exit(1)
++
++
++if __name__ == '__main__':
++    main()

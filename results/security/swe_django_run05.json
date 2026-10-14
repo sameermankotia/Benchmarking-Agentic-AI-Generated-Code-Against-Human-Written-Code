@@ -1,0 +1,260 @@
+{
+  "by_cwe": {
+    "CWE-617": 27
+  },
+  "by_severity": {
+    "HIGH": 0,
+    "LOW": 27,
+    "MEDIUM": 0
+  },
+  "density_per_100_loc": 7.38,
+  "findings": [
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 42,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 43,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 44,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 94,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 95,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 103,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 104,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 112,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 113,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 122,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 123,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 131,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 132,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 165,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 166,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 204,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 205,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 213,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 214,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 248,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 257,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 258,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 259,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 293,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 294,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 327,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    },
+    {
+      "confidence": "HIGH",
+      "cwe": "CWE-617",
+      "file": "tests/test_wsgi_compliance.py",
+      "line": 328,
+      "severity": "LOW",
+      "test_id": "B101",
+      "text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code."
+    }
+  ],
+  "label": "SWE-agent/Dj. (A) r05",
+  "min_confidence": "MEDIUM",
+  "subject": "swe_django_run05",
+  "total_findings": 27
+}

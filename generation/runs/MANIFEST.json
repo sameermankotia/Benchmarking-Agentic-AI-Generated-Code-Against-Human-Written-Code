@@ -1,0 +1,150 @@
+{
+  "generated_utc": "2026-10-14T04:46:17+00:00",
+  "budget": {
+    "wall_clock_seconds": 5400,
+    "tool_calls": 500,
+    "temperature": 0.2,
+    "per_run_cost_limit_usd": 10.0,
+    "runs_per_config": 5,
+    "concurrency": 2
+  },
+  "configurations": [
+    {
+      "id": "swe_flask",
+      "agent": "swe-agent",
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "spec": "flask",
+      "key_env": "OPENROUTER_API_KEY",
+      "pair": "flask",
+      "label": "SWE-agent (A)",
+      "secret_ref": ""
+    },
+    {
+      "id": "openhands_flask",
+      "agent": "openhands",
+      "model": "gpt-4o-2024-11-20",
+      "spec": "flask",
+      "key_env": "OPENAI_API_KEY",
+      "pair": "flask",
+      "label": "OpenHands (A)",
+      "secret_ref": ""
+    },
+    {
+      "id": "swe_django",
+      "agent": "swe-agent",
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "spec": "django",
+      "key_env": "OPENROUTER_API_KEY",
+      "pair": "django",
+      "label": "SWE-agent/Dj. (A)",
+      "secret_ref": ""
+    }
+  ],
+  "runs": [
+    {
+      "run_id": "swe_django_run01",
+      "config": "swe_django",
+      "agent": "swe-agent",
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "spec": "django",
+      "started_utc": "2026-10-14T04:24:56+00:00",
+      "finished_utc": "2026-10-14T04:32:03+00:00",
+      "wall_seconds": 426.3,
+      "tool_calls": null,
+      "exit_status": "ok",
+      "commit": "da859093348b0e67000faf3dd524e36b0eda40c4",
+      "note": "",
+      "files_written": 11,
+      "trace_path": "generation/runs/swe_django_run01",
+      "extra": {
+        "patch_recovery": "applied patch from 859eb1.patch; dropped 8 build-artifact path(s)",
+        "py_files_written": 11,
+        "concurrency": 2
+      }
+    },
+    {
+      "run_id": "swe_django_run02",
+      "config": "swe_django",
+      "agent": "swe-agent",
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "spec": "django",
+      "started_utc": "2026-10-14T04:24:56+00:00",
+      "finished_utc": "2026-10-14T04:31:35+00:00",
+      "wall_seconds": 398.6,
+      "tool_calls": null,
+      "exit_status": "ok",
+      "commit": "81e1ec52df50350c244ffd6be77afdf5e62ba240",
+      "note": "",
+      "files_written": 11,
+      "trace_path": "generation/runs/swe_django_run02",
+      "extra": {
+        "patch_recovery": "applied patch from 859eb1.patch; dropped 5 build-artifact path(s)",
+        "py_files_written": 11,
+        "concurrency": 2
+      }
+    },
+    {
+      "run_id": "swe_django_run03",
+      "config": "swe_django",
+      "agent": "swe-agent",
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "spec": "django",
+      "started_utc": "2026-10-14T04:31:35+00:00",
+      "finished_utc": "2026-10-14T04:37:26+00:00",
+      "wall_seconds": 350.9,
+      "tool_calls": null,
+      "exit_status": "ok",
+      "commit": "550f517812609f2750866725a8bfc2484001a10b",
+      "note": "",
+      "files_written": 9,
+      "trace_path": "generation/runs/swe_django_run03",
+      "extra": {
+        "patch_recovery": "applied patch from 859eb1.patch; dropped 7 build-artifact path(s)",
+        "py_files_written": 9,
+        "concurrency": 2
+      }
+    },
+    {
+      "run_id": "swe_django_run04",
+      "config": "swe_django",
+      "agent": "swe-agent",
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "spec": "django",
+      "started_utc": "2026-10-14T04:32:03+00:00",
+      "finished_utc": "2026-10-14T04:38:36+00:00",
+      "wall_seconds": 393.7,
+      "tool_calls": null,
+      "exit_status": "ok",
+      "commit": "b37a39f2df1b88ccd49d007c1a504ac2fcb47cac",
+      "note": "",
+      "files_written": 8,
+      "trace_path": "generation/runs/swe_django_run04",
+      "extra": {
+        "patch_recovery": "applied patch from 859eb1.patch; dropped 6 build-artifact path(s)",
+        "py_files_written": 8,
+        "concurrency": 2
+      }
+    },
+    {
+      "run_id": "swe_django_run05",
+      "config": "swe_django",
+      "agent": "swe-agent",
+      "model": "openrouter/anthropic/claude-sonnet-4",
+      "spec": "django",
+      "started_utc": "2026-10-14T04:37:26+00:00",
+      "finished_utc": "2026-10-14T04:46:17+00:00",
+      "wall_seconds": 530.6,
+      "tool_calls": null,
+      "exit_status": "ok",
+      "commit": "54f14b8241984efae15f31b6653391450d7742a6",
+      "note": "",
+      "files_written": 20,
+      "trace_path": "generation/runs/swe_django_run05",
+      "extra": {
+        "patch_recovery": "applied patch from 859eb1.patch; dropped 6 build-artifact path(s)",
+        "py_files_written": 20,
+        "concurrency": 2
+      }
+    }
+  ]
+}

@@ -1,17 +1,17 @@
-metric,Flask (H),"Flask 0.1 (H, first draft)",Django mod. (H)
-Total findings (>= medium conf.),11,1,1
-Findings / 100 LOC,0.26,0.4,0.03
-High severity,1,1,0
-Fisher's exact p (High vs. human baseline),ref.,ref.,ref.
-Medium severity,3,0,0
-Fisher's exact p (Medium vs. human baseline),ref.,ref.,ref.
-Low severity,7,0,1
-Fisher's exact p (Low vs. human baseline),ref.,ref.,ref.
-  CWE-259,1,0,0
-  CWE-327,1,0,0
-  CWE-617,5,0,0
-  CWE-703,1,0,0
-  CWE-78,2,0,0
-  CWE-79,1,0,0
-  CWE-94,0,1,0
-  CWE-502,0,0,1
+metric,Flask (H),"Flask 0.1 (H, first draft)",Django mod. (H),SWE-agent (A) r01,OpenHands (A) r01,OpenHands (A) r02,OpenHands (A) r03,OpenHands (A) r04,OpenHands (A) r05,SWE-agent (A) r02,SWE-agent (A) r03,SWE-agent (A) r04,SWE-agent (A) r05,SWE-agent/Dj. (A) r01,SWE-agent/Dj. (A) r02,SWE-agent/Dj. (A) r03,SWE-agent/Dj. (A) r04,SWE-agent/Dj. (A) r05
+Total findings (>= medium conf.),11,1,1,0,0,1,1,0,1,1,0,0,1,0,0,0,0,27
+Findings / 100 LOC,0.26,0.4,0.03,0.0,0.0,1.92,2.08,0.0,1.35,0.18,0.0,0.0,0.23,0.0,0.0,0.0,0.0,7.38
+High severity,1,1,0,0,0,1,1,0,1,1,0,0,1,0,0,0,0,0
+Fisher's exact p (High vs. human baseline),ref.,ref.,ref.,1.0000,1.0000,0.1667,0.1667,1.0000,0.1667,0.1667,1.0000,1.0000,0.1667,1.0000,1.0000,1.0000,1.0000,1.0000
+Medium severity,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Fisher's exact p (Medium vs. human baseline),ref.,ref.,ref.,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000,1.0000
+Low severity,7,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27
+Fisher's exact p (Low vs. human baseline),ref.,ref.,ref.,1.0000,1.0000,0.4167,0.4167,1.0000,0.4167,0.4167,1.0000,1.0000,0.4167,1.0000,1.0000,1.0000,1.0000,1.0000
+  CWE-259,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  CWE-327,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  CWE-617,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27
+  CWE-703,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  CWE-78,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  CWE-79,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+  CWE-94,0,1,0,0,0,1,1,0,1,1,0,0,1,0,0,0,0,0
+  CWE-502,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

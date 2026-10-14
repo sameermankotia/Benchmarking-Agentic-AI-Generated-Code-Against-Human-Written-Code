@@ -1,0 +1,140 @@
+{
+  "cc": {
+    "max": 7,
+    "mean": 2.0,
+    "median": 1,
+    "n": 9,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cc": 3,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 6,
+        "name": "FlaskPair"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 7,
+        "name": "FlaskPair.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 12,
+        "name": "FlaskPair.route"
+      },
+      {
+        "cc": 7,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 18,
+        "name": "FlaskPair.wsgi_app"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 37,
+        "name": "FlaskPair.run"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 42,
+        "name": "FlaskPair.__call__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 45,
+        "name": "FlaskPair.render_template"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 50,
+        "name": "FlaskPair.current_app"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 54,
+        "name": "FlaskPair.g"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 5,
+    "mean": 0.8,
+    "median": 0.0,
+    "n": 8,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::__call__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::current_app"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::render_template"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::route"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::run"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::g"
+      },
+      {
+        "cogc": 5,
+        "file": "flask_pair/flask_pair/__init__.py",
+        "lineno": 0,
+        "name": "FlaskPair::wsgi_app"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "OpenHands (A) r03",
+  "mi": {
+    "files": [
+      {
+        "file": "flask_pair/flask_pair/__init__.py",
+        "mi": 49.99
+      }
+    ],
+    "mean": 50.0,
+    "median": 50.0,
+    "min": 50.0,
+    "n": 1,
+    "pct_below_threshold": 100.0,
+    "threshold": 65
+  },
+  "subject": "openhands_flask_run03"
+}

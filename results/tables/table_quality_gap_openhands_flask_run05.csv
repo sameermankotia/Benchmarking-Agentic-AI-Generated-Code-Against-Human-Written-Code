@@ -1,0 +1,7 @@
+Dimension,Flask (H),OpenHands (A) r05,Delta
+Oracle pass rate (%),100.0,19.3,-80.7 pp
+Mean CC,2.8,2.1,-25%
+Mean CogC,2.1,0.7,-67%
+Mean MI,64.1,80.0,+15.9 pts
+Security findings / 100 LOC,0.26,1.35,+419%
+Duplicated LOC (%),3.4,0.0,-100%

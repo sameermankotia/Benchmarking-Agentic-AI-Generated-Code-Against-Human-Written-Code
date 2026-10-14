@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "flask_pair_framework"
+version = "0.1.0"
+description = "A WSGI-compatible micro web framework in Python 3.11."
+authors = [
+    { name = "OpenHands", email = "openhands@all-hands.dev" }
+]
+license = { text = "MIT" }
+dependencies = [
+    "jinja2>=3.1.0"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

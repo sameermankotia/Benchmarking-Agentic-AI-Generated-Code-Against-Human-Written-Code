@@ -1,0 +1,222 @@
+{
+  "cc": {
+    "max": 5,
+    "mean": 2.1,
+    "median": 2.0,
+    "n": 16,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cc": 2,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 7,
+        "name": "FlaskApp"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 8,
+        "name": "FlaskApp.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 14,
+        "name": "FlaskApp.route"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 24,
+        "name": "FlaskApp.wsgi_app"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 30,
+        "name": "FlaskApp.handle_request"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 36,
+        "name": "FlaskApp.run"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 41,
+        "name": "FlaskApp.__call__"
+      },
+      {
+        "cc": 3,
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "lineno": 1,
+        "name": "Blueprint"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "lineno": 2,
+        "name": "Blueprint.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "lineno": 8,
+        "name": "Blueprint.route"
+      },
+      {
+        "cc": 3,
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "lineno": 18,
+        "name": "Blueprint.register"
+      },
+      {
+        "cc": 5,
+        "file": "flask_pair_framework/src/flask_pair_framework/request.py",
+        "lineno": 3,
+        "name": "Request"
+      },
+      {
+        "cc": 4,
+        "file": "flask_pair_framework/src/flask_pair_framework/request.py",
+        "lineno": 4,
+        "name": "Request.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "flask_pair_framework/src/flask_pair_framework/response.py",
+        "lineno": 1,
+        "name": "Response"
+      },
+      {
+        "cc": 2,
+        "file": "flask_pair_framework/src/flask_pair_framework/response.py",
+        "lineno": 2,
+        "name": "Response.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/response.py",
+        "lineno": 7,
+        "name": "Response._status_text"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 3,
+    "mean": 0.7,
+    "median": 0.5,
+    "n": 12,
+    "pct_over_threshold": 0.0,
+    "records": [
+      {
+        "cogc": 0,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 0,
+        "name": "FlaskApp::__call__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 0,
+        "name": "FlaskApp::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 0,
+        "name": "FlaskApp::run"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 0,
+        "name": "FlaskApp::wsgi_app"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 0,
+        "name": "FlaskApp::handle_request"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "lineno": 0,
+        "name": "FlaskApp::route"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "lineno": 0,
+        "name": "Blueprint::__init__"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "lineno": 0,
+        "name": "Blueprint::route"
+      },
+      {
+        "cogc": 3,
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "lineno": 0,
+        "name": "Blueprint::register"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/request.py",
+        "lineno": 0,
+        "name": "Request::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "flask_pair_framework/src/flask_pair_framework/response.py",
+        "lineno": 0,
+        "name": "Response::_status_text"
+      },
+      {
+        "cogc": 1,
+        "file": "flask_pair_framework/src/flask_pair_framework/response.py",
+        "lineno": 0,
+        "name": "Response::__init__"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "OpenHands (A) r05",
+  "mi": {
+    "files": [
+      {
+        "file": "flask_pair_framework/src/flask_pair_framework/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "flask_pair_framework/src/flask_pair_framework/app.py",
+        "mi": 57.37
+      },
+      {
+        "file": "flask_pair_framework/src/flask_pair_framework/blueprint.py",
+        "mi": 67.48
+      },
+      {
+        "file": "flask_pair_framework/src/flask_pair_framework/request.py",
+        "mi": 100.0
+      },
+      {
+        "file": "flask_pair_framework/src/flask_pair_framework/response.py",
+        "mi": 75.02
+      }
+    ],
+    "mean": 80.0,
+    "median": 75.0,
+    "min": 57.4,
+    "n": 5,
+    "pct_below_threshold": 20.0,
+    "threshold": 65
+  },
+  "subject": "openhands_flask_run05"
+}

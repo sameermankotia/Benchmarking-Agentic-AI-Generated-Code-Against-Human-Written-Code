@@ -1,0 +1,14 @@
+{
+  "avg_function_length": 10.3,
+  "classes": 16,
+  "comment_density_pct": 7.7,
+  "docstring_coverage_pct": 75.0,
+  "functions": 32,
+  "kind": "agentic",
+  "label": "SWE-agent/Dj. (A) r02",
+  "language": "Python",
+  "loc": 299,
+  "source_files": 5,
+  "subject": "swe_django_run02",
+  "test_files": 0
+}

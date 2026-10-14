@@ -1,0 +1,29 @@
+{
+  "by_category": {
+    "convention": 136,
+    "error": 0,
+    "refactor": 10,
+    "warning": 37
+  },
+  "label": "SWE-agent (A) r01",
+  "per_100_loc": 28.42,
+  "subject": "swe_flask_run01",
+  "top_symbols": {
+    "broad-exception-caught": 1,
+    "import-outside-toplevel": 5,
+    "missing-class-docstring": 1,
+    "missing-function-docstring": 3,
+    "no-else-return": 4,
+    "redefined-builtin": 1,
+    "too-few-public-methods": 2,
+    "too-many-arguments": 2,
+    "too-many-instance-attributes": 1,
+    "too-many-locals": 1,
+    "trailing-whitespace": 127,
+    "unnecessary-pass": 1,
+    "unused-argument": 11,
+    "unused-import": 20,
+    "unused-variable": 1
+  },
+  "total_findings": 183
+}

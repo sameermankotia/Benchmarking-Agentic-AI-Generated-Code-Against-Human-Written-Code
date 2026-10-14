@@ -22,7 +22,7 @@ def rendered(api, route, app, get):
         counter["n"] += 1
         path = f"/tpl{counter['n']}"
 
-        def view(**_params):
+        def view(*_req, **_params):
             return api.render(source, **context)
         view.__name__ = f"tpl_{counter['n']}"
         route(path)(view)
@@ -95,7 +95,7 @@ def test_renders_arithmetic_expression(rendered):
 # --- Integration with the request and application context ------------------ #
 
 def test_rendered_output_becomes_the_response_body(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.render("in-response")
     route("/ir")(view)
     result = get("/ir")
@@ -103,10 +103,9 @@ def test_rendered_output_becomes_the_response_body(api, route, get):
 
 
 def test_renders_inside_a_request_with_request_data(api, route, get):
-    req = api.request
-
-    def view(**_):
-        return api.render("path={{ p }}", p=api.path(req))
+    def view(*view_args, **_):
+        return api.render("path={{ p }}",
+                          p=api.path(api.current_request(view_args)))
     route("/withreq")(view)
     assert b"path=/withreq" in get("/withreq").body
 

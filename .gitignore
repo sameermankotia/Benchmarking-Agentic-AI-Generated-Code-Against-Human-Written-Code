@@ -8,8 +8,24 @@ __pycache__/
 
 # Third-party baseline snapshots are cloned locally, not vendored into this repo.
 # See README ("What is wired") for the clone commands.
+# Third-party baselines are cloned, not vendored (see README, "What is wired").
 subjects/flask/
 subjects/django/
-subjects/*/
+subjects/flask-0.1/
+
+# The agent-generated snapshots ARE committed. They are the output of
+# stochastic generation runs against pinned models and cannot be regenerated
+# identically, so they are the one part of this package that is irreplaceable
+# rather than reproducible. All 15 together are about 1 MB.
+!subjects/*_run*/
 !subjects/.gitkeep
 !subjects/subjects.json
+
+# Agent scratch space for in-flight generation runs. The frozen result of each
+# run is copied to subjects/<run_id>/ and its trace archived under
+# generation/runs/, both of which ARE committed; this is the working tree the
+# agent edits while running and is not part of the artifact.
+generation/work/
+generation/.venv-sweagent/
+generation/.venv-openhands/
+generation/.swe-agent-src/

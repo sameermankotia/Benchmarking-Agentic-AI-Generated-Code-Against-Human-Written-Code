@@ -54,10 +54,31 @@ def _sut_import(subject: common.Subject) -> tuple[str, Path]:
     root = subject.root
     if (root / "__init__.py").exists():
         return root.name, root.parent
+
+    # An `include` filter names the analysed package(s) explicitly; honour the
+    # first one so the tested scope matches the measured scope.
+    for inc in subject.include:
+        candidate = root / inc
+        if (candidate / "__init__.py").exists():
+            return candidate.name, candidate.parent
+
     pkgs = [p for p in root.iterdir()
             if p.is_dir() and (p / "__init__.py").exists()]
     if len(pkgs) == 1:
         return pkgs[0].name, root
+
+    # Nested layouts: an agent may create a project directory that itself
+    # contains the package (e.g. <root>/proj/proj/__init__.py), so the package
+    # is not a direct child of the root. Search for the shallowest package
+    # whose own parent is not a package, and import it from that parent.
+    nested = sorted(
+        (q.parent for q in root.rglob("__init__.py")
+         if not (q.parent.parent / "__init__.py").exists()
+         and ".git" not in q.parts),
+        key=lambda d: len(d.relative_to(root).parts))
+    if nested:
+        return nested[0].name, nested[0].parent
+
     return root.name, root.parent
 
 

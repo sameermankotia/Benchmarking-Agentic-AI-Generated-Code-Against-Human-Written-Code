@@ -1,0 +1,47 @@
+{
+  "categories": {
+    "App Context": {
+      "n": 21,
+      "pass_rate": 9.5,
+      "passed": 2,
+      "skipped": 0
+    },
+    "Blueprints": {
+      "n": 22,
+      "pass_rate": 4.5,
+      "passed": 1,
+      "skipped": 0
+    },
+    "Request Handling": {
+      "n": 28,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "skipped": 0
+    },
+    "Response Rendering": {
+      "n": 24,
+      "pass_rate": 66.7,
+      "passed": 16,
+      "skipped": 0
+    },
+    "Templating": {
+      "n": 15,
+      "pass_rate": 13.3,
+      "passed": 2,
+      "skipped": 0
+    },
+    "URL Routing": {
+      "n": 30,
+      "pass_rate": 0.0,
+      "passed": 0,
+      "skipped": 0
+    }
+  },
+  "label": "OpenHands (A) r01",
+  "oracle": "flask",
+  "pass_rate": 15.0,
+  "passed": 21,
+  "skipped": 0,
+  "subject": "openhands_flask_run01",
+  "total": 140
+}

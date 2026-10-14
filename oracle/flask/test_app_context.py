@@ -43,14 +43,14 @@ def ctx_route(api, marked_app):
 # --- current_app ----------------------------------------------------------- #
 
 def test_current_app_accessible_in_a_view(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         return "yes" if api.current_app is not None else "no"
     path = ctx_route(view)
     assert b"yes" in wsgi.call(marked_app, "GET", path).body
 
 
 def test_current_app_is_the_handling_application(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         return getattr(api.current_app, "oracle_marker", "absent")
     path = ctx_route(view)
     assert b"marker-value" in wsgi.call(marked_app, "GET", path).body
@@ -60,7 +60,7 @@ def test_current_app_accessible_from_a_nested_call(api, marked_app, ctx_route):
     def helper():
         return getattr(api.current_app, "oracle_marker", "absent")
 
-    def view(**_):
+    def view(*_req, **_):
         return helper()
     path = ctx_route(view)
     assert b"marker-value" in wsgi.call(marked_app, "GET", path).body
@@ -71,7 +71,7 @@ def test_current_app_distinguishes_two_applications(api):
     first.oracle_marker, second.oracle_marker = "first", "second"
 
     def make(app, name):
-        def view(**_):
+        def view(*_req, **_):
             return getattr(api.current_app, "oracle_marker", "absent")
         view.__name__ = name
         api.route(app, "/who")(view)
@@ -90,7 +90,7 @@ def test_current_app_unavailable_outside_a_request(api):
 # --- g --------------------------------------------------------------------- #
 
 def test_g_is_writable_in_a_view(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         api.g.value = "stored"
         return "written"
     path = ctx_route(view)
@@ -98,7 +98,7 @@ def test_g_is_writable_in_a_view(api, marked_app, ctx_route):
 
 
 def test_g_value_readable_back_in_the_same_request(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         api.g.value = "roundtrip"
         return api.g.value
     path = ctx_route(view)
@@ -109,7 +109,7 @@ def test_g_shared_between_view_and_helper(api, marked_app, ctx_route):
     def helper():
         return api.g.value
 
-    def view(**_):
+    def view(*_req, **_):
         api.g.value = "via-helper"
         return helper()
     path = ctx_route(view)
@@ -117,7 +117,7 @@ def test_g_shared_between_view_and_helper(api, marked_app, ctx_route):
 
 
 def test_g_is_empty_at_the_start_of_each_request(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         seen = getattr(api.g, "leaked", "clean")
         api.g.leaked = "dirty"
         return seen
@@ -127,7 +127,7 @@ def test_g_is_empty_at_the_start_of_each_request(api, marked_app, ctx_route):
 
 
 def test_g_does_not_leak_between_sequential_requests(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         previous = getattr(api.g, "n", "none")
         api.g.n = "set"
         return str(previous)
@@ -138,7 +138,7 @@ def test_g_does_not_leak_between_sequential_requests(api, marked_app, ctx_route)
 
 
 def test_g_missing_attribute_raises(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         try:
             _ = api.g.never_set
         except AttributeError:
@@ -149,14 +149,14 @@ def test_g_missing_attribute_raises(api, marked_app, ctx_route):
 
 
 def test_g_getattr_default_works(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         return getattr(api.g, "never_set", "defaulted")
     path = ctx_route(view)
     assert b"defaulted" in wsgi.call(marked_app, "GET", path).body
 
 
 def test_g_holds_non_string_values(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         api.g.payload = {"k": [1, 2, 3]}
         return str(api.g.payload["k"][2])
     path = ctx_route(view)
@@ -171,26 +171,22 @@ def test_g_unavailable_outside_a_request(api):
 # --- request, alongside the context ---------------------------------------- #
 
 def test_request_accessible_in_the_same_context(api, marked_app, ctx_route):
-    req = api.request
-
-    def view(**_):
-        return api.path(req)
+    def view(*view_args, **_):
+        return api.path(api.current_request(view_args))
     path = ctx_route(view, path="/both")
     assert b"/both" in wsgi.call(marked_app, "GET", path).body
 
 
 def test_request_and_g_coexist(api, marked_app, ctx_route):
-    req = api.request
-
-    def view(**_):
-        api.g.seen = api.path(req)
+    def view(*view_args, **_):
+        api.g.seen = api.path(api.current_request(view_args))
         return api.g.seen
     path = ctx_route(view, path="/coexist")
     assert b"/coexist" in wsgi.call(marked_app, "GET", path).body
 
 
 def test_current_app_and_g_coexist(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         api.g.marker = getattr(api.current_app, "oracle_marker", "absent")
         return api.g.marker
     path = ctx_route(view)
@@ -207,10 +203,9 @@ def test_g_is_isolated_between_concurrent_threads(api, marked_app, ctx_route):
     of sequential cleanup.
     """
     barrier = threading.Barrier(2, timeout=5)
-    req = api.request
 
-    def view(**_):
-        own = api.query_get(req, "tag")
+    def view(*view_args, **_):
+        own = api.query_get(api.current_request(view_args), "tag")
         api.g.tag = own
         try:
             barrier.wait()
@@ -241,7 +236,7 @@ def test_current_app_is_correct_in_concurrent_threads(api):
     barrier = threading.Barrier(2, timeout=5)
 
     def make(app, name):
-        def view(**_):
+        def view(*_req, **_):
             marker = getattr(api.current_app, "oracle_marker", "absent")
             try:
                 barrier.wait()
@@ -270,7 +265,7 @@ def test_current_app_is_correct_in_concurrent_threads(api):
 
 
 def test_context_is_released_after_the_request(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         api.g.inside = "yes"
         return "done"
     path = ctx_route(view)
@@ -280,7 +275,7 @@ def test_context_is_released_after_the_request(api, marked_app, ctx_route):
 
 
 def test_many_sequential_requests_keep_context_clean(api, marked_app, ctx_route):
-    def view(**_):
+    def view(*_req, **_):
         seen = getattr(api.g, "count", 0)
         api.g.count = seen + 1
         return str(seen)

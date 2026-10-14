@@ -1,13 +1,13 @@
-metric,Flask (H),"Flask 0.1 (H, first draft)",Django mod. (H)
-Mean Maintainability Index,64.1,40.6,75.1
-Median Maintainability Index,59.3,40.6,74.8
-Files with MI < 65 (%),66.7,100.0,35.7
-Min file MI,24.1,40.6,13.3
-Mann-Whitney U p (MI vs. human baseline),ref.,ref.,ref.
-Rank-biserial r (MI),ref.,ref.,ref.
-Total pylint findings,270,39,384
-Convention violations (C),144,3,195
-Refactoring suggestions (R),42,10,72
-Warnings (W),58,13,106
-Error-category findings (E),26,13,11
-Findings / 100 LOC,6.36,15.66,10.91
+metric,Flask (H),"Flask 0.1 (H, first draft)",Django mod. (H),SWE-agent (A) r01,OpenHands (A) r01,OpenHands (A) r02,OpenHands (A) r03,OpenHands (A) r04,OpenHands (A) r05,SWE-agent (A) r02,SWE-agent (A) r03,SWE-agent (A) r04,SWE-agent (A) r05,SWE-agent/Dj. (A) r01,SWE-agent/Dj. (A) r02,SWE-agent/Dj. (A) r03,SWE-agent/Dj. (A) r04,SWE-agent/Dj. (A) r05
+Mean Maintainability Index,64.1,40.6,75.1,69.1,85.0,50.1,50.0,91.7,80.0,72.3,74.0,70.7,72.4,82.8,78.6,64.9,82.0,70.6
+Median Maintainability Index,59.3,40.6,74.8,63.8,87.5,50.1,50.0,100.0,75.0,63.2,71.4,65.2,72.2,80.2,75.7,56.6,79.5,60.6
+Files with MI < 65 (%),66.7,100.0,35.7,55.6,16.7,100.0,100.0,0.0,20.0,62.5,37.5,50.0,28.6,14.3,20.0,60.0,0.0,57.1
+Min file MI,24.1,40.6,13.3,56.0,64.9,50.1,50.0,67.2,57.4,55.8,61.2,60.0,50.1,58.7,56.2,42.0,67.6,41.3
+Mann-Whitney U p (MI vs. human baseline),ref.,ref.,ref.,0.3511,0.0279,0.4439,0.4439,0.0062,0.1382,0.2290,0.0605,0.1265,0.2005,0.4874,0.9796,0.2293,0.6637,0.4362
+Rank-biserial r (MI),ref.,ref.,ref.,-0.218,-0.590,+0.500,+0.500,-0.685,-0.433,-0.292,-0.453,-0.370,-0.327,-0.173,+0.014,+0.343,-0.129,+0.194
+Total pylint findings,270,39,384,183,30,14,11,36,24,170,105,158,120,96,95,141,83,202
+Convention violations (C),144,3,195,136,27,12,11,28,21,133,82,134,96,71,69,108,63,157
+Refactoring suggestions (R),42,10,72,10,2,2,0,3,3,6,8,9,9,9,11,9,9,10
+Warnings (W),58,13,106,37,0,0,0,2,0,31,15,15,15,16,15,24,11,35
+Error-category findings (E),26,13,11,0,1,0,0,3,0,0,0,0,0,0,0,0,0,0
+Findings / 100 LOC,6.36,15.66,10.91,28.42,38.46,26.92,22.92,35.29,32.43,30.58,25.36,29.26,27.52,28.49,31.77,29.13,30.74,55.19

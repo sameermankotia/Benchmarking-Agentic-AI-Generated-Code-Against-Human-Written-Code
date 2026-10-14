@@ -1,0 +1,42 @@
+{
+  "blocks": [],
+  "duplicated_blocks": 0,
+  "duplicated_loc": 0,
+  "duplicated_pct": 0.0,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "djangoframework/__init__.py",
+      "loc": 22
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "djangoframework/http.py",
+      "loc": 174
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "djangoframework/urls.py",
+      "loc": 122
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "djangoframework/views.py",
+      "loc": 101
+    },
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "djangoframework/wsgi.py",
+      "loc": 65
+    }
+  ],
+  "label": "SWE-agent/Dj. (A) r03",
+  "max_block_tokens": 0,
+  "min_tokens": 50,
+  "subject": "swe_django_run03"
+}

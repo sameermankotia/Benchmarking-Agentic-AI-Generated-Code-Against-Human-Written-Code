@@ -1,0 +1,41 @@
+{
+  "categories": {
+    "Class-Based Views": {
+      "n": 10,
+      "pass_rate": 100.0,
+      "passed": 10,
+      "skipped": 0
+    },
+    "Request Object": {
+      "n": 26,
+      "pass_rate": 84.6,
+      "passed": 22,
+      "skipped": 0
+    },
+    "Response Handling": {
+      "n": 21,
+      "pass_rate": 100.0,
+      "passed": 21,
+      "skipped": 0
+    },
+    "URL Resolution": {
+      "n": 25,
+      "pass_rate": 100.0,
+      "passed": 25,
+      "skipped": 0
+    },
+    "View Dispatch": {
+      "n": 22,
+      "pass_rate": 100.0,
+      "passed": 22,
+      "skipped": 0
+    }
+  },
+  "label": "SWE-agent/Dj. (A) r03",
+  "oracle": "django",
+  "pass_rate": 96.2,
+  "passed": 100,
+  "skipped": 0,
+  "subject": "swe_django_run03",
+  "total": 104
+}

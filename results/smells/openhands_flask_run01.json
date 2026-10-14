@@ -1,0 +1,22 @@
+{
+  "by_category": {
+    "convention": 27,
+    "error": 1,
+    "refactor": 2,
+    "warning": 0
+  },
+  "label": "OpenHands (A) r01",
+  "per_100_loc": 38.46,
+  "subject": "openhands_flask_run01",
+  "top_symbols": {
+    "import-outside-toplevel": 1,
+    "invalid-name": 1,
+    "missing-class-docstring": 6,
+    "missing-final-newline": 6,
+    "missing-function-docstring": 7,
+    "missing-module-docstring": 6,
+    "too-few-public-methods": 2,
+    "undefined-variable": 1
+  },
+  "total_findings": 30
+}

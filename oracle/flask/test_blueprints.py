@@ -14,7 +14,7 @@ import pytest
 import wsgi
 
 
-def _view(**params):
+def _view(*_req, **params):
     return "|".join(f"{k}={v}" for k, v in sorted(params.items())) or "ok"
 
 
@@ -46,7 +46,7 @@ def test_blueprint_route_is_reachable_after_registration(mount, get):
 
 
 def test_blueprint_route_returns_its_body(mount, get):
-    def view(**_):
+    def view(*_req, **_):
         return "from-blueprint"
     mount([("/body", None, view)])
     assert b"from-blueprint" in get("/body").body
@@ -60,10 +60,10 @@ def test_unregistered_blueprint_route_is_not_reachable(api, app, get):
 
 
 def test_blueprint_with_several_routes(mount, get):
-    def one(**_):
+    def one(*_req, **_):
         return "one"
 
-    def two(**_):
+    def two(*_req, **_):
         return "two"
     mount([("/one", None, one), ("/two", None, two)])
     assert b"one" in get("/one").body
@@ -83,10 +83,10 @@ def test_route_not_reachable_without_the_prefix(mount, get):
 
 
 def test_all_blueprint_routes_inherit_the_prefix(mount, get):
-    def a(**_):
+    def a(*_req, **_):
         return "a"
 
-    def b(**_):
+    def b(*_req, **_):
         return "b"
     mount([("/a", None, a), ("/b", None, b)], url_prefix="/v1")
     assert b"a" in get("/v1/a").body
@@ -104,10 +104,10 @@ def test_blueprint_root_route_under_prefix(mount, get):
 
 
 def test_two_blueprints_with_different_prefixes(mount, get):
-    def first(**_):
+    def first(*_req, **_):
         return "first"
 
-    def second(**_):
+    def second(*_req, **_):
         return "second"
     mount([("/x", None, first)], url_prefix="/one", name="bp_one")
     mount([("/x", None, second)], url_prefix="/two", name="bp_two")
@@ -146,11 +146,11 @@ def test_multi_method_route_inside_a_blueprint(mount, request_):
 
 
 def test_blueprint_and_app_routes_coexist(api, app, mount, route, get):
-    def app_view(**_):
+    def app_view(*_req, **_):
         return "app-level"
     route("/app-route")(app_view)
 
-    def bp_view(**_):
+    def bp_view(*_req, **_):
         return "bp-level"
     mount([("/bp-route", None, bp_view)], url_prefix="/mod")
 
@@ -163,7 +163,7 @@ def test_blueprint_and_app_routes_coexist(api, app, mount, route, get):
 def test_prefix_does_not_leak_to_app_routes(mount, route, get):
     mount([("/inside", None, _view)], url_prefix="/pre")
 
-    def app_view(**_):
+    def app_view(*_req, **_):
         return "root"
     route("/inside")(app_view)
     assert b"root" in get("/inside").body
@@ -171,13 +171,13 @@ def test_prefix_does_not_leak_to_app_routes(mount, route, get):
 
 
 def test_three_blueprints_mounted_together(mount, get):
-    def a(**_):
+    def a(*_req, **_):
         return "alpha"
 
-    def b(**_):
+    def b(*_req, **_):
         return "beta"
 
-    def c(**_):
+    def c(*_req, **_):
         return "gamma"
     mount([("/x", None, a)], url_prefix="/a", name="bp_a")
     mount([("/x", None, b)], url_prefix="/b", name="bp_b")

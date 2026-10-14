@@ -12,7 +12,7 @@ from __future__ import annotations
 import pytest
 
 
-def _view(**params):
+def _view(*_req, **params):
     """Report the captured variable segments, or "ok" when there are none."""
     return "|".join(f"{k}={v}" for k, v in sorted(params.items())) or "ok"
 
@@ -40,10 +40,10 @@ def test_unregistered_path_is_404(route, get):
 
 
 def test_two_routes_dispatch_independently(route, get):
-    def first(**_):
+    def first(*_req, **_):
         return "first"
 
-    def second(**_):
+    def second(*_req, **_):
         return "second"
     route("/one")(first)
     route("/two")(second)
@@ -52,7 +52,7 @@ def test_two_routes_dispatch_independently(route, get):
 
 
 def test_response_is_200_with_a_body(route, get):
-    def body(**_):
+    def body(*_req, **_):
         return "content-here"
     route("/body")(body)
     result = get("/body")
@@ -99,7 +99,7 @@ def test_variable_and_literal_segments_combined(api, route, get):
 
 
 def test_static_route_takes_precedence_over_variable(api, route, get):
-    def literal(**_):
+    def literal(*_req, **_):
         return "literal"
     route("/u/me")(literal)
     route(api.rule("u", ":name"))(_view)
@@ -143,10 +143,10 @@ def test_405_advertises_an_allow_header(route, get):
 
 
 def test_method_filtering_is_per_route(route, get, request_):
-    def readonly(**_):
+    def readonly(*_req, **_):
         return "r"
 
-    def writeonly(**_):
+    def writeonly(*_req, **_):
         return "w"
     route("/readonly", methods=["GET"])(readonly)
     route("/writeonly", methods=["POST"])(writeonly)

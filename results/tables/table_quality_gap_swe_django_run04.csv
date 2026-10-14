@@ -1,0 +1,7 @@
+Dimension,Django mod. (H),SWE-agent/Dj. (A) r04,Delta
+Oracle pass rate (%),100.0,100.0,+0.0 pp
+Mean CC,2.8,2.6,-7%
+Mean CogC,2.7,1.6,-41%
+Mean MI,75.1,82.0,+6.9 pts
+Security findings / 100 LOC,0.03,0.0,-100%
+Duplicated LOC (%),1.0,0.0,-100%

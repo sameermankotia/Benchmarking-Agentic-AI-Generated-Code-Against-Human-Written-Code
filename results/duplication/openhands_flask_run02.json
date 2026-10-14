@@ -1,0 +1,18 @@
+{
+  "blocks": [],
+  "duplicated_blocks": 0,
+  "duplicated_loc": 0,
+  "duplicated_pct": 0.0,
+  "files": [
+    {
+      "duplicated_loc": 0,
+      "duplicated_pct": 0.0,
+      "file": "flask_pair/flask_pair/__init__.py",
+      "loc": 52
+    }
+  ],
+  "label": "OpenHands (A) r02",
+  "max_block_tokens": 0,
+  "min_tokens": 50,
+  "subject": "openhands_flask_run02"
+}

@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "djangoframework"
+version = "1.0.0"
+description = "A Django-like WSGI framework with URL routing and class-based views"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Django Framework", email = "info@djangoframework.dev"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Internet :: WWW/HTTP :: WSGI",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-cov", "black", "flake8", "mypy"]
+test = ["pytest>=7.0", "pytest-cov"]
+
+[project.urls]
+Homepage = "https://github.com/djangoframework/djangoframework"
+Repository = "https://github.com/djangoframework/djangoframework.git"
+Documentation = "https://djangoframework.readthedocs.io/"
+"Bug Tracker" = "https://github.com/djangoframework/djangoframework/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["djangoframework*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-v --tb=short"
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

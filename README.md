@@ -136,7 +136,21 @@ differently declares them once in `subjects.json`; no test body changes.
 
 ### Agentic subjects
 
-Three agentic subjects are registered `available: false`:
+**All 15 are now generated, committed and scored** (2026-10-13). See
+`generation/` for the harness that produced them and
+`docs/manuscript-audit.md` §9 for the results, which contradict the
+manuscript's claimed gaps on four of six dimensions. The snapshots live under
+`subjects/*_run*/` and are committed rather than ignored: they are the output
+of stochastic runs against pinned models and cannot be regenerated
+identically, so they are the one part of this package that is irreplaceable
+rather than reproducible.
+
+Two forced departures from the manuscript's design: Claude was reached through
+OpenRouter as `anthropic/claude-sonnet-4` (no Anthropic key on this account,
+and OpenRouter does not expose the dated snapshot), and each run carried a $10
+cost cap, which bound on `swe_flask_run03`.
+
+The three configurations:
 
 | id                | agent + model                          | spec pair |
 |-------------------|----------------------------------------|-----------|

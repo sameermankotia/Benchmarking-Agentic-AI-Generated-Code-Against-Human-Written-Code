@@ -114,19 +114,27 @@ has a median identical to its mean, while Flask 3.0.3's 64.1 is a mean over 24
 files. That is worth a sentence in the paper rather than being left for a
 reviewer to find.
 
-## 4. What this package cannot check at all
+## 4. The agentic subjects now exist and are measured
 
-- **Every agentic number.** All three agentic subjects are `available: false`;
-  their snapshots are absent from this checkout and from the author's machine
-  (searched 2026-09-15 and again 2026-10-08). That covers the abstract's
-  10–13 pp correctness gap, 47–53% CC, 38–46% CogC, 12.5–14.2 MI points,
-  2.2–2.3x security density, and 152–161% duplication, plus every agentic cell
-  in Tables 1 and 2 and all of Sections IV–V.
-- **Every p-value and effect size.** `analysis/significance.py` tests each
-  agentic subject against the human baseline in its own pair, so with no
-  agentic subject registered the stage exits with
-  `SKIP: no agentic/human pair had results for any dimension`
-  (`logs/stages/significance.log`). There is no `results/significance/`.
+**Superseded.** Earlier versions of this audit recorded that no agentic
+snapshot existed anywhere. All 15 were generated on 2026-10-13 by
+`generation/run_generation.py`, are committed under `subjects/*_run*/`, and
+are scored by the same pipeline as the human baselines. Section 9 reports the
+results, which contradict the manuscript's claimed gaps on four of six
+dimensions.
+
+Two departures from the manuscript's stated design were forced and must be
+disclosed:
+
+- **Claude was reached through OpenRouter**, as `anthropic/claude-sonnet-4`.
+  The account has no Anthropic API key, and OpenRouter does not expose the
+  dated `claude-sonnet-4-20250514` snapshot, so Section III-B2's "both model
+  snapshots were pinned" is no longer accurate as written.
+- **Each run carried a $10 cost cap** in addition to the wall-clock and
+  tool-call budgets. This is not in the manuscript, and it bound on one run
+  (Section 9.3).
+- **P-values and effect sizes now compute.** `analysis/significance.py` runs
+  against every agentic subject; the stage no longer skips.
 - **The manuscript's oracle pass rates.** The committed oracle files are
   documented in their own `oracle/{flask,django}/README.md` as a partial
   stand-in ("the full case set ... is distributed separately"); that fuller set
@@ -357,3 +365,97 @@ those three attributes they hash identically.
 | Oracle pass rates | **suites rebuilt over WSGI** (§5); baselines now 140/140 and 104/104, and the paper's 120/85 case counts become 140/104 |
 | Code-smell numbers | **measured, and now reproducible**; Flask 6.5 -> 6.36, Django 10.99 -> 10.91 per 100 LOC |
 | Package determinism claim | **was false, now verified** (see §6.1-6.2) |
+
+## 9. Measured results for the 15 agentic runs
+
+Generated 2026-10-13 by `generation/run_generation.py`; scored by the same
+pipeline as the human baselines. Medians across the five runs of each
+configuration, with observed ranges.
+
+| Metric | Flask (H) | SWE-agent/Flask | OpenHands/Flask | Django (H) | SWE-agent/Django |
+|---|---|---|---|---|---|
+| Oracle pass % | 100 | **73.6** [66.4, 75.0] | **15.0** [5.0, 20.0] | 100 | **96.2** [91.3, 100] |
+| LOC | 4,243 | 540 [414, 644] | 74 [48, 102] | 3,520 | 337 [270, 484] |
+| Mean CC | 2.8 | **2.3** [2.1, 2.4] | **2.0** [1.6, 2.5] | 2.8 | **2.5** [2.4, 2.7] |
+| Mean CogC | 2.1 | **1.9** [1.4, 2.3] | **0.7** [0.2, 0.8] | 2.7 | **1.7** [1.6, 1.8] |
+| Mean MI | 64.1 | **72.3** [69.1, 74.0] | **80.0** [50.0, 91.7] | 75.1 | **78.6** [64.9, 82.8] |
+| pylint / 100 LOC | 6.36 | **28.42** [25.4, 30.6] | **32.43** [22.9, 38.5] | 10.91 | **30.74** [28.5, 55.2] |
+| Security / 100 LOC | 0.26 | **0** [0, 0.23] | **1.35** [0, 2.08] | 0.03 | **0** [0, 7.38] |
+| Duplicated % | 3.4 | **0** [0, 2.3] | **0** [0, 0] | 1.0 | **0** [0, 50.3] |
+
+### 9.1 Four of six abstract claims are contradicted in direction
+
+| Dimension | Abstract claims | Measured |
+|---|---|---|
+| Correctness | −10 to −13 pp | −26.4 pp (SWE/Flask), −85.0 pp (OpenHands), −3.8 pp (SWE/Django) |
+| Mean CC | +47 to +53% | **−18%**, **−29%**, **−11%** |
+| Mean CogC | +38 to +46% | **−10%**, **−67%**, **−37%** |
+| Mean MI | −12.5 to −14.2 pts | **+8.2**, **+15.9**, **+3.5 pts** |
+| Security density | 2.2–2.3x | 0x, 5.2x, 0x |
+| Duplication | +152 to +161% | **−100%**, **−100%**, **−100%** |
+
+The direction reverses on complexity, cognitive complexity, maintainability
+and duplication, in all three configurations, across fifteen runs. Correctness
+goes the predicted way but far harder than claimed. Security is mixed: only
+OpenHands exceeds its baseline.
+
+**The one robust agentic deficit not in the abstract is code smells**: 28–31
+findings per 100 LOC against 6.4–10.9 for the baselines, a 3–5x gap present in
+every configuration. On the current evidence this is the headline result, not
+complexity.
+
+**The Django pair is the strongest single finding.** SWE-agent's median is
+96.2%, with two runs at a perfect 104/104, and its complexity distribution is
+statistically indistinguishable from Django's own (CC p=0.47–0.90). An agent
+given a five-area specification produced a URL/view layer that satisfies it
+completely. That is the opposite of the manuscript's thesis and deserves to be
+reported as such.
+
+### 9.2 Scale is a confound on every density
+
+The agentic repositories are 7x to 88x smaller than their baselines
+(48–644 LOC against 3,520–4,243). Per-function means and per-100-LOC
+densities are not comparable across that range, and OpenHands' Maintainability
+Index of 80 largely reflects very small files rather than good structure. Any
+density figure quoted from the OpenHands configuration needs this stated
+alongside it.
+
+Run-to-run spread is also wide where the manuscript implies stability:
+OpenHands correctness spans 5.0–20.0% and MI spans 50.0–91.7. The five-run
+design earns its place.
+
+### 9.3 One run was truncated by the cost cap
+
+`swe_flask_run03` ended with SWE-agent's `exit_status: "submitted
+(exit_cost)"` at $10.06, i.e. it hit the harness's $10 per-run guard rather
+than the study's wall-clock or tool-call budget. Its metrics come from an
+incomplete run and it should be re-run with a higher cap or excluded. Observed
+costs for the other SWE-agent runs were $4.45–$9.75, so the cap was close to
+binding on several.
+
+### 9.4 Seven oracle defects were fixed to obtain these numbers
+
+Every one was the oracle penalising a working framework for a convention the
+specification does not fix. They are listed because they bound how much
+confidence these figures carry:
+
+1. `app_class` unresolvable by name (`FlaskPair`) — now also resolved by shape.
+2. Views called with the request positionally — all oracle views now accept it.
+3. Blueprint registration inverted (`bp.register(app)`) — three directions now accepted.
+4. Response headers set via Django's `resp[name] = value` only — now convention-agnostic.
+5. Django wiring assumed settings + `ROOT_URLCONF` — a factory taking urlpatterns is now accepted.
+6. `include` matched only the first path component, so **all five OpenHands subjects measured zero files**.
+7. URL patterns assumed Django's slashless spelling — the subject's convention is now detected per session.
+
+Fix 7 alone moved `swe_django_run01` from 12.5% to 95.2%. The human baselines
+held at 140/140 and 104/104 through all seven changes, which is the control
+that makes the rest trustworthy. The OpenHands figures remain the least
+settled and warrant a second pass before publication.
+
+### 9.5 Cost
+
+Roughly $70 on the keys in `op://OCR-Eval-Dashboard/dashboard-secrets`
+($4.45–$10.06 per SWE-agent run; the OpenHands runs were cheap, finishing in
+48–64 s). Those keys belong to a different project. One of them was briefly
+exposed in a process listing by an earlier version of the harness and should
+be rotated.

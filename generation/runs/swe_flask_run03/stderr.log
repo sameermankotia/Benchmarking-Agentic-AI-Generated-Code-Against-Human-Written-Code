@@ -1,0 +1,4 @@
+[sweagent_entry] registered with litellm: openrouter/anthropic/claude-sonnet-4, openrouter/anthropic/claude-sonnet-5.5, openrouter/anthropic/claude-opus-5.5
+/Users/sameermankotia/Desktop/Agentic/generation/.venv-sweagent/lib/python3.11/site-packages/swerex/deployment/abstract.py:60: RuntimeWarning: coroutine 'DockerDeployment.stop' was never awaited
+  pass
+RuntimeWarning: Enable tracemalloc to get the object allocation traceback

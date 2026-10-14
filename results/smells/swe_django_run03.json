@@ -1,0 +1,28 @@
+{
+  "by_category": {
+    "convention": 108,
+    "error": 0,
+    "refactor": 9,
+    "warning": 24
+  },
+  "label": "SWE-agent/Dj. (A) r03",
+  "per_100_loc": 29.13,
+  "subject": "swe_django_run03",
+  "top_symbols": {
+    "attribute-defined-outside-init": 3,
+    "bare-except": 1,
+    "broad-exception-caught": 2,
+    "invalid-name": 6,
+    "no-else-return": 2,
+    "redefined-outer-name": 3,
+    "too-few-public-methods": 4,
+    "too-many-arguments": 1,
+    "too-many-instance-attributes": 1,
+    "too-many-locals": 1,
+    "trailing-whitespace": 102,
+    "unnecessary-pass": 2,
+    "unused-argument": 9,
+    "unused-import": 4
+  },
+  "total_findings": 141
+}

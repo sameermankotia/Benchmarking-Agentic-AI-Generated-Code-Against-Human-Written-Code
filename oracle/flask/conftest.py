@@ -14,6 +14,16 @@ import pytest
 import wsgi
 
 
+# Every view in this suite is declared `def view(*_req, **params)`. The
+# leading star-args is load-bearing, not stylistic: the specification requires
+# a request object but does not say how a handler receives it, and
+# implementations differ -- some expose a module-level proxy, others pass the
+# request to the view positionally. A keyword-only view signature would raise
+# TypeError against the latter and score a working framework at zero.
+# `api.current_request(view_args)` reads the request from whichever route it
+# arrived by.
+
+
 @pytest.fixture
 def app(api):
     """A fresh application instance for one test."""
@@ -26,7 +36,7 @@ def route(api, app):
 
     Usage:
         @route("/path", methods=["GET"])
-        def view(**params): ...
+        def view(*_req, **params): ...
     """
     def _route(rule, methods=None):
         return api.route(app, rule, methods)
@@ -59,12 +69,11 @@ def echo(api):
     import json as _json
 
     def _echo(**extra):
-        req = api.request
-
-        def view(**_params):
+        def view(*view_args, **_params):
+            req = api.current_request(view_args)
             payload = {
-                "method": req.method,
-                "path": req.path,
+                "method": api.method(req),
+                "path": api.path(req),
             }
             payload.update({k: fn(req) for k, fn in extra.items()})
             return _json.dumps(payload)

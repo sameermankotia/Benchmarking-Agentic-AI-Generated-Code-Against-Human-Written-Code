@@ -15,28 +15,28 @@ import pytest
 # --- Basic: a view's return value becomes a response ----------------------- #
 
 def test_string_return_is_200(route, get):
-    def view(**_):
+    def view(*_req, **_):
         return "hello"
     route("/s")(view)
     assert get("/s").status_code == 200
 
 
 def test_string_return_becomes_the_body(route, get):
-    def view(**_):
+    def view(*_req, **_):
         return "body-text"
     route("/s")(view)
     assert b"body-text" in get("/s").body
 
 
 def test_response_has_a_content_type(route, get):
-    def view(**_):
+    def view(*_req, **_):
         return "typed"
     route("/t")(view)
     assert get("/t").header("Content-Type") != ""
 
 
 def test_status_line_is_well_formed(route, get):
-    def view(**_):
+    def view(*_req, **_):
         return "ok"
     route("/w")(view)
     status = get("/w").status
@@ -44,7 +44,7 @@ def test_status_line_is_well_formed(route, get):
 
 
 def test_empty_body_is_allowed(route, get):
-    def view(**_):
+    def view(*_req, **_):
         return ""
     route("/e")(view)
     result = get("/e")
@@ -55,14 +55,14 @@ def test_empty_body_is_allowed(route, get):
 
 @pytest.mark.parametrize("code", [200, 201, 202, 400, 404, 418, 500])
 def test_response_status_code_is_honoured(api, route, get, code):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("x", status=code)
     route("/code")(view)
     assert get("/code").status_code == code
 
 
 def test_created_201_with_body(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("made", status=201)
     route("/c")(view)
     result = get("/c")
@@ -70,7 +70,7 @@ def test_created_201_with_body(api, route, get):
 
 
 def test_error_status_with_body(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("nope", status=400)
     route("/b")(view)
     result = get("/b")
@@ -80,14 +80,14 @@ def test_error_status_with_body(api, route, get):
 # --- Behavioural: headers -------------------------------------------------- #
 
 def test_response_custom_header(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("h", headers={"X-Custom": "set"})
     route("/h")(view)
     assert get("/h").header("X-Custom") == "set"
 
 
 def test_response_multiple_custom_headers(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("h", headers={"X-One": "1", "X-Two": "2"})
     route("/hh")(view)
     result = get("/hh")
@@ -95,14 +95,14 @@ def test_response_multiple_custom_headers(api, route, get):
 
 
 def test_response_explicit_content_type(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("{}", headers={"Content-Type": "application/json"})
     route("/j")(view)
     assert "application/json" in get("/j").header("Content-Type")
 
 
 def test_response_header_and_status_together(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("both", status=503, headers={"X-Why": "test"})
     route("/bo")(view)
     result = get("/bo")
@@ -112,28 +112,28 @@ def test_response_header_and_status_together(api, route, get):
 # --- Behavioural: body ----------------------------------------------------- #
 
 def test_response_object_carries_body(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("carried")
     route("/cb")(view)
     assert b"carried" in get("/cb").body
 
 
 def test_response_body_is_bytes_over_wsgi(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("bytes-check")
     route("/by")(view)
     assert isinstance(get("/by").body, bytes)
 
 
 def test_response_body_preserves_utf8(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("caffè-ü")
     route("/u")(view)
     assert "caffè-ü" in get("/u").text
 
 
 def test_response_content_length_matches_body(api, route, get):
-    def view(**_):
+    def view(*_req, **_):
         return api.response("1234567890")
     route("/cl")(view)
     result = get("/cl")
@@ -147,10 +147,10 @@ def test_response_content_length_matches_body(api, route, get):
 # --- Edge cases ------------------------------------------------------------ #
 
 def test_distinct_routes_get_distinct_responses(api, route, get):
-    def first(**_):
+    def first(*_req, **_):
         return api.response("A", status=201)
 
-    def second(**_):
+    def second(*_req, **_):
         return api.response("B", status=202)
     route("/r1")(first)
     route("/r2")(second)
@@ -162,7 +162,7 @@ def test_distinct_routes_get_distinct_responses(api, route, get):
 def test_response_is_regenerated_per_request(api, route, get):
     calls = {"n": 0}
 
-    def view(**_):
+    def view(*_req, **_):
         calls["n"] += 1
         return api.response(str(calls["n"]))
     route("/n")(view)

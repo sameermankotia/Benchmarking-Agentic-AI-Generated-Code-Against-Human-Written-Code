@@ -1,0 +1,14 @@
+{
+  "avg_function_length": 3.6,
+  "classes": 6,
+  "comment_density_pct": 0.0,
+  "docstring_coverage_pct": 0.0,
+  "functions": 19,
+  "kind": "agentic",
+  "label": "OpenHands (A) r01",
+  "language": "Python",
+  "loc": 78,
+  "source_files": 6,
+  "subject": "openhands_flask_run01",
+  "test_files": 0
+}

@@ -28,6 +28,7 @@ from __future__ import annotations
 import inspect
 import json
 import os
+from types import ModuleType
 
 #: role -> conventional names, most conventional first.
 CANDIDATES: dict[str, tuple[str, ...]] = {
@@ -61,7 +62,11 @@ CANDIDATES: dict[str, tuple[str, ...]] = {
 }
 
 #: Roles the specification names outright, reached as plain module attributes.
-SPEC_NAMED = ("request", "g", "current_app", "Blueprint")
+#: `request` is deliberately NOT here: the specification requires a "request
+#: object encapsulating method, path, headers, query string, and body" but
+#: never says it is a module-level global, so how a handler obtains it is a
+#: convention, not a fixed name. Use `current_request()` instead.
+SPEC_NAMED = ("g", "current_app", "Blueprint")
 
 
 class RoleUnresolved(Exception):
@@ -88,7 +93,7 @@ class Api:
 
     # --- resolution -------------------------------------------------------- #
 
-    def name_for(self, role: str, target=None) -> str:
+    def name_for(self, role: str, target=None) -> str:  # noqa: D401
         """The attribute name this subject uses for `role`.
 
         `target` is the object the role lives on. Some roles are module-level
@@ -104,7 +109,59 @@ class Api:
         for candidate in CANDIDATES.get(role, ()):
             if any(hasattr(t, candidate) for t in targets):
                 return candidate
+        duck = self._duck_typed(role)
+        if duck is not None:
+            return duck[0]
         raise RoleUnresolved(self._unresolved_message(role, target))
+
+    def _duck_typed(self, role: str):
+        """Find a role by shape when no conventional name matched.
+
+        Names are the weakest part of the declared surface: an implementation
+        written from the specification may call its application class anything
+        (observed: ``FlaskPair``). Rather than grow the candidate list without
+        end, the application class is identified by what it does -- it offers
+        route registration and is usable as a WSGI callable -- which is
+        precisely what the specification requires of it.
+        """
+        import inspect as _inspect
+
+        if role != "app_class":
+            return None
+        route_names = CANDIDATES["route"]
+
+        def declares(cls, attr: str) -> bool:
+            """Whether `cls` itself defines `attr`.
+
+            `getattr(cls, "__call__")` is true for *every* class, because the
+            metaclass supplies it for instantiation. Only an own-namespace
+            lookup across the MRO (minus ``object``) distinguishes a class
+            that is genuinely callable as a WSGI application.
+            """
+            return any(attr in base.__dict__ for base in cls.__mro__[:-1])
+
+        found = []
+        for name in dir(self.mod):
+            if name.startswith("_"):
+                continue
+            obj = getattr(self.mod, name, None)
+            if not _inspect.isclass(obj):
+                continue
+            route_rank = next((i for i, r in enumerate(route_names)
+                               if declares(obj, r)), None)
+            if route_rank is None:
+                continue
+            if not any(declares(obj, w)
+                       for w in ("__call__", "wsgi_app", "wsgi")):
+                continue
+            # Rank by how conventional the route method's name is, so a
+            # router helper exposing only `add_route` loses to the
+            # application class exposing `route`.
+            found.append((route_rank, name, obj))
+        if not found:
+            return None
+        found.sort(key=lambda t: (t[0], len(t[1])))
+        return found[0][1], found[0][2]
 
     def resolve(self, role: str):
         """The object this subject provides for `role`."""
@@ -240,21 +297,46 @@ class Api:
         return bp
 
     def register(self, app, bp, url_prefix: str | None = None):
-        """Mount `bp` on `app`, under `url_prefix` when one is given."""
-        name = self.name_for("register_blueprint", app)
-        do = getattr(app, name, None)
-        if do is None:
-            do = self.resolve("register_blueprint")
-            base = (app, bp)
-        else:
-            base = (bp,)
+        """Mount `bp` on `app`, under `url_prefix` when one is given.
+
+        Three directions are accepted, because the specification requires
+        blueprint-based modularity but not the direction of the call:
+        ``app.register_blueprint(bp)``, a module-level ``register(app, bp)``,
+        or ``bp.register(app)`` -- the last being how an implementation that
+        puts the method on the blueprint does it.
+        """
         prefix = url_prefix or getattr(bp, "_oracle_prefix", None)
-        if prefix is None:
-            return do(*base)
+
+        def attempt(fn, base):
+            if prefix is None:
+                return fn(*base)
+            try:
+                return fn(*base, url_prefix=prefix)
+            except TypeError:
+                return fn(*base, prefix)
+
+        # 1. a method on the application
         try:
-            return do(*base, url_prefix=prefix)
-        except TypeError:
-            return do(*base, prefix)
+            name = self.name_for("register_blueprint", app)
+            fn = getattr(app, name, None)
+            if fn is not None:
+                return attempt(fn, (bp,))
+            # 2. a free function in the module
+            return attempt(self.resolve("register_blueprint"), (app, bp))
+        except RoleUnresolved:
+            pass
+
+        # 3. a method on the blueprint, taking the application
+        for name in CANDIDATES["register_blueprint"] + ("attach", "bind"):
+            fn = getattr(bp, name, None)
+            if callable(fn):
+                return attempt(fn, (app,))
+        raise RoleUnresolved(
+            f"subject {self.mod.__name__!r} offers no way to mount a "
+            f"blueprint on an application: neither the application nor the "
+            f"module nor the blueprint exposes a registration call. The "
+            f"specification requires Blueprint-based modular applications "
+            f"with URL prefix inheritance.")
 
     def render(self, source: str, **context):
         """Render `source` as a template with `context`."""
@@ -283,6 +365,59 @@ class Api:
         except (AttributeError, TypeError):
             pass
         return resp
+
+    # --- obtaining the in-flight request ----------------------------------- #
+
+    @staticmethod
+    def _looks_like_request(obj) -> bool:
+        """Whether `obj` plausibly is a request object.
+
+        Checked by behaviour, not by type or name. Modules are excluded
+        explicitly: a package exporting a `Request` class from a submodule
+        called `request` leaves `mod.request` bound to the *module*, which is
+        a trap worth naming rather than silently mis-resolving.
+        """
+        if obj is None or isinstance(obj, ModuleType):
+            return False
+        return sum(hasattr(obj, a) for a in ("method", "path", "headers")) >= 2
+
+    def current_request(self, view_args: tuple = ()):
+        """The request for the call in flight, however this subject delivers it.
+
+        Three conventions are accepted, because the specification fixes the
+        request's *content* and not the route by which a handler reaches it:
+
+        1. passed to the handler (the first argument that looks like a request);
+        2. a module-level object, conventionally ``request``;
+        3. hung off the application or request context.
+
+        If none of them yields a request, the subject gives a handler no way to
+        see the request it is handling, which is a specification failure and is
+        reported as one.
+        """
+        for candidate in view_args:
+            if self._looks_like_request(candidate):
+                return candidate
+        for name in ("request", "req"):
+            if self._looks_like_request(getattr(self.mod, name, None)):
+                return getattr(self.mod, name)
+        for holder_name in ("current_app", "g"):
+            holder = getattr(self.mod, holder_name, None)
+            if holder is None:
+                continue
+            for attr in ("request", "req", "_request"):
+                try:
+                    obj = getattr(holder, attr, None)
+                except Exception:                          # noqa: BLE001
+                    continue
+                if self._looks_like_request(obj):
+                    return obj
+        raise RoleUnresolved(
+            f"subject {self.mod.__name__!r} gives a handler no way to reach "
+            f"the request it is handling: nothing was passed to it, no "
+            f"module-level request object exists, and neither current_app nor "
+            f"g carries one. The specification requires a request object "
+            f"encapsulating method, path, headers, query string and body.")
 
     # --- request accessors ------------------------------------------------- #
 

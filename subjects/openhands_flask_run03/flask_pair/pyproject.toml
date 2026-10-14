@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "flask_pair"
+version = "0.1.0"
+description = "A WSGI-compatible micro web framework in Python 3.11."
+authors = ["openhands <openhands@all-hands.dev>"]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+jinja2 = "^3.1.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

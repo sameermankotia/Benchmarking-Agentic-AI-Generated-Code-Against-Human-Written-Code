@@ -24,10 +24,9 @@ def report(api, route, app):
 
     def _report(fn, path="/r", methods=None):
         counter["n"] += 1
-        req = api.request
 
-        def view(**_params):
-            return str(fn(req))
+        def view(*view_args, **_params):
+            return str(fn(api.current_request(view_args)))
         view.__name__ = f"view_{counter['n']}"
         route(path, methods)(view)
         return path

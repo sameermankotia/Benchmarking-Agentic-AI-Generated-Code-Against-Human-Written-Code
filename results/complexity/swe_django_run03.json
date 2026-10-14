@@ -1,0 +1,792 @@
+{
+  "cc": {
+    "max": 12,
+    "mean": 2.4,
+    "median": 1,
+    "n": 71,
+    "pct_over_threshold": 1.4,
+    "records": [
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 215,
+        "name": "HttpResponseNotFound"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 220,
+        "name": "HttpResponseNotAllowed"
+      },
+      {
+        "cc": 4,
+        "file": "djangoframework/http.py",
+        "lineno": 9,
+        "name": "HttpRequest"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 12,
+        "name": "HttpRequest.__init__"
+      },
+      {
+        "cc": 7,
+        "file": "djangoframework/http.py",
+        "lineno": 23,
+        "name": "HttpRequest._build_meta"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/http.py",
+        "lineno": 47,
+        "name": "HttpRequest._parse_query_string"
+      },
+      {
+        "cc": 5,
+        "file": "djangoframework/http.py",
+        "lineno": 55,
+        "name": "HttpRequest._read_body"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/http.py",
+        "lineno": 72,
+        "name": "HttpRequest.get_full_path"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 79,
+        "name": "HttpRequest.is_secure"
+      },
+      {
+        "cc": 3,
+        "file": "djangoframework/http.py",
+        "lineno": 84,
+        "name": "HttpResponse"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 87,
+        "name": "HttpResponse.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 94,
+        "name": "HttpResponse.__setitem__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 98,
+        "name": "HttpResponse.__getitem__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 102,
+        "name": "HttpResponse.__delitem__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 106,
+        "name": "HttpResponse.get"
+      },
+      {
+        "cc": 10,
+        "file": "djangoframework/http.py",
+        "lineno": 110,
+        "name": "HttpResponse.set_cookie"
+      },
+      {
+        "cc": 7,
+        "file": "djangoframework/http.py",
+        "lineno": 144,
+        "name": "HttpResponse.write"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/http.py",
+        "lineno": 158,
+        "name": "HttpResponse.get_content_as_bytes"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 164,
+        "name": "HttpResponse.get_status_text"
+      },
+      {
+        "cc": 5,
+        "file": "djangoframework/http.py",
+        "lineno": 186,
+        "name": "JsonResponse"
+      },
+      {
+        "cc": 4,
+        "file": "djangoframework/http.py",
+        "lineno": 189,
+        "name": "JsonResponse.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 202,
+        "name": "Http404"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/http.py",
+        "lineno": 207,
+        "name": "Http405"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 210,
+        "name": "Http405.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 154,
+        "name": "path"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 159,
+        "name": "re_path"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/urls.py",
+        "lineno": 8,
+        "name": "Converter"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 13,
+        "name": "Converter.to_python"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 17,
+        "name": "Converter.to_url"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 22,
+        "name": "StringConverter"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/urls.py",
+        "lineno": 27,
+        "name": "IntConverter"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 31,
+        "name": "IntConverter.to_python"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 35,
+        "name": "SlugConverter"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/urls.py",
+        "lineno": 40,
+        "name": "UUIDConverter"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 44,
+        "name": "UUIDConverter.to_python"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 48,
+        "name": "PathConverter"
+      },
+      {
+        "cc": 5,
+        "file": "djangoframework/urls.py",
+        "lineno": 63,
+        "name": "URLPattern"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 66,
+        "name": "URLPattern.__init__"
+      },
+      {
+        "cc": 7,
+        "file": "djangoframework/urls.py",
+        "lineno": 72,
+        "name": "URLPattern._compile_pattern"
+      },
+      {
+        "cc": 3,
+        "file": "djangoframework/urls.py",
+        "lineno": 121,
+        "name": "URLPattern.match"
+      },
+      {
+        "cc": 3,
+        "file": "djangoframework/urls.py",
+        "lineno": 136,
+        "name": "RegexURLPattern"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 139,
+        "name": "RegexURLPattern.__init__"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/urls.py",
+        "lineno": 144,
+        "name": "RegexURLPattern.match"
+      },
+      {
+        "cc": 3,
+        "file": "djangoframework/urls.py",
+        "lineno": 164,
+        "name": "URLResolver"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 167,
+        "name": "URLResolver.__init__"
+      },
+      {
+        "cc": 3,
+        "file": "djangoframework/urls.py",
+        "lineno": 170,
+        "name": "URLResolver.resolve"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 181,
+        "name": "Http404"
+      },
+      {
+        "cc": 5,
+        "file": "djangoframework/views.py",
+        "lineno": 7,
+        "name": "View"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/views.py",
+        "lineno": 12,
+        "name": "View.__init__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 18,
+        "name": "View.as_view"
+      },
+      {
+        "cc": 12,
+        "file": "djangoframework/views.py",
+        "lineno": 39,
+        "name": "View.dispatch"
+      },
+      {
+        "cc": 3,
+        "file": "djangoframework/views.py",
+        "lineno": 69,
+        "name": "View.http_method_not_allowed"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/views.py",
+        "lineno": 76,
+        "name": "TemplateView"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/views.py",
+        "lineno": 82,
+        "name": "TemplateView.get_template_name"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 89,
+        "name": "TemplateView.get_context_data"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 93,
+        "name": "TemplateView.get"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/views.py",
+        "lineno": 104,
+        "name": "RedirectView"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/views.py",
+        "lineno": 110,
+        "name": "RedirectView.get_redirect_url"
+      },
+      {
+        "cc": 3,
+        "file": "djangoframework/views.py",
+        "lineno": 116,
+        "name": "RedirectView.get"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 128,
+        "name": "RedirectView.head"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 132,
+        "name": "RedirectView.post"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 136,
+        "name": "RedirectView.options"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 140,
+        "name": "RedirectView.delete"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 144,
+        "name": "RedirectView.put"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 148,
+        "name": "RedirectView.patch"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 94,
+        "name": "get_wsgi_application"
+      },
+      {
+        "cc": 4,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 9,
+        "name": "WSGIApplication"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 12,
+        "name": "WSGIApplication.__init__"
+      },
+      {
+        "cc": 10,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 15,
+        "name": "WSGIApplication.__call__"
+      },
+      {
+        "cc": 1,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 68,
+        "name": "WSGIApplication._handle_view_exception"
+      },
+      {
+        "cc": 2,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 75,
+        "name": "WSGIApplication._handle_application_exception"
+      }
+    ],
+    "threshold": 10
+  },
+  "cogc": {
+    "max": 22,
+    "mean": 1.8,
+    "median": 0.0,
+    "n": 52,
+    "pct_over_threshold": 1.9,
+    "records": [
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "Http405::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpRequest::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpRequest::is_secure"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::__delitem__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::__getitem__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::__setitem__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::get"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::get_status_text"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponseNotAllowed"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponseNotFound"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpRequest::_parse_query_string"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpRequest::get_full_path"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::get_content_as_bytes"
+      },
+      {
+        "cogc": 3,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "JsonResponse::__init__"
+      },
+      {
+        "cogc": 6,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::write"
+      },
+      {
+        "cogc": 7,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpRequest::_read_body"
+      },
+      {
+        "cogc": 8,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpRequest::_build_meta"
+      },
+      {
+        "cogc": 10,
+        "file": "djangoframework/http.py",
+        "lineno": 0,
+        "name": "HttpResponse::set_cookie"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "Converter::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "Converter::to_url"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "IntConverter::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "RegexURLPattern::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "URLPattern::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "URLResolver::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "UUIDConverter::to_python"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "path"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "re_path"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "RegexURLPattern::match"
+      },
+      {
+        "cogc": 2,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "URLPattern::match"
+      },
+      {
+        "cogc": 3,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "URLResolver::resolve"
+      },
+      {
+        "cogc": 13,
+        "file": "djangoframework/urls.py",
+        "lineno": 0,
+        "name": "URLPattern::_compile_pattern"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::delete"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::head"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::options"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::patch"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::post"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::put"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "TemplateView::get"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "TemplateView::get_context_data"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "View::as_view"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "View::http_method_not_allowed"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::get_redirect_url"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "TemplateView::get_template_name"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "View::__init__"
+      },
+      {
+        "cogc": 3,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "RedirectView::get"
+      },
+      {
+        "cogc": 11,
+        "file": "djangoframework/views.py",
+        "lineno": 0,
+        "name": "View::dispatch"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 0,
+        "name": "WSGIApplication::__init__"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 0,
+        "name": "WSGIApplication::_handle_view_exception"
+      },
+      {
+        "cogc": 0,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 0,
+        "name": "get_wsgi_application"
+      },
+      {
+        "cogc": 1,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 0,
+        "name": "WSGIApplication::_handle_application_exception"
+      },
+      {
+        "cogc": 22,
+        "file": "djangoframework/wsgi.py",
+        "lineno": 0,
+        "name": "WSGIApplication::__call__"
+      }
+    ],
+    "threshold": 15
+  },
+  "label": "SWE-agent/Dj. (A) r03",
+  "mi": {
+    "files": [
+      {
+        "file": "djangoframework/__init__.py",
+        "mi": 100.0
+      },
+      {
+        "file": "djangoframework/http.py",
+        "mi": 42.02
+      },
+      {
+        "file": "djangoframework/urls.py",
+        "mi": 52.14
+      },
+      {
+        "file": "djangoframework/views.py",
+        "mi": 56.6
+      },
+      {
+        "file": "djangoframework/wsgi.py",
+        "mi": 73.67
+      }
+    ],
+    "mean": 64.9,
+    "median": 56.6,
+    "min": 42.0,
+    "n": 5,
+    "pct_below_threshold": 60.0,
+    "threshold": 65
+  },
+  "subject": "swe_django_run03"
+}

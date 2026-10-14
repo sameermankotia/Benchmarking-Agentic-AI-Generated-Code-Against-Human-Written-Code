@@ -69,19 +69,21 @@ def test_error_status_with_body(serve, pattern, response_class):
 
 # --- Headers --------------------------------------------------------------- #
 
-def test_response_custom_header(serve, pattern, response_class):
+def test_response_custom_header(serve, pattern, response_class, set_header):
     def view(request, **_):
         resp = response_class("h")
-        resp["X-Custom"] = "set"
+        set_header(resp, "X-Custom", "set")
         return resp
     result = serve([pattern("r/", view)], "GET", "/r/")
     assert result.header("X-Custom") == "set"
 
 
-def test_response_multiple_custom_headers(serve, pattern, response_class):
+def test_response_multiple_custom_headers(serve, pattern, response_class,
+                                           set_header):
     def view(request, **_):
         resp = response_class("h")
-        resp["X-One"], resp["X-Two"] = "1", "2"
+        set_header(resp, "X-One", "1")
+        set_header(resp, "X-Two", "2")
         return resp
     result = serve([pattern("r/", view)], "GET", "/r/")
     assert result.header("X-One") == "1" and result.header("X-Two") == "2"
@@ -94,10 +96,11 @@ def test_response_explicit_content_type(serve, pattern, response_class):
     assert "application/json" in result.header("Content-Type")
 
 
-def test_response_header_and_status_together(serve, pattern, response_class):
+def test_response_header_and_status_together(serve, pattern, response_class,
+                                             set_header):
     def view(request, **_):
         resp = response_class("both", status=503)
-        resp["X-Why"] = "test"
+        set_header(resp, "X-Why", "test")
         return resp
     result = serve([pattern("r/", view)], "GET", "/r/")
     assert result.status_code == 503 and result.header("X-Why") == "test"

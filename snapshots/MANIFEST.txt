@@ -1,11 +1,13 @@
 Subject snapshot manifest
 =========================
 
-Every subject is pinned to an exact upstream commit. The human baselines are
-cloned from their public repositories at the tags/SHAs below; the agentic
-subjects are frozen at the final commit of their generation run and are
-distributed in the separate generation bundle (they are not reproducible from
-this harness -- see README, "Agentic subjects").
+Every subject is pinned to an exact commit. The human baselines are cloned from
+their public repositories at the tags/SHAs below. The 15 agentic subjects are
+frozen at the final commit of their generation run and are committed inside
+this repository under subjects/<run id>/, together with their traces under
+generation/runs/<run id>/: they are the output of stochastic runs against
+hosted models and cannot be regenerated identically, so they are shipped rather
+than reproduced.
 
 Human baselines (cloned into subjects/<id>/ before running the pipeline)
 -----------------------------------------------------------------------
@@ -16,16 +18,12 @@ flask_0_1  github.com/pallets/flask       0.1      8605cc310d260c3b08160881b09da
 
   flask     : analysis scope is src/flask/  (the core package)
   django    : analysis scope is django/urls/ and django/views/  (see subjects.json "include")
-  flask_0_1 : maturity control, structural metrics only, no oracle evaluation.
-              flask.py at this tag uses Python 2's `except X, e:` syntax (2
-              occurrences), a SyntaxError under Python 3 that blocks every
-              tool in this pipeline; both are mechanically rewritten to
+  flask_0_1 : maturity reference point, structural metrics only, no oracle
+              evaluation. flask.py at this tag uses Python 2's `except X, e:`
+              syntax (2 occurrences), a SyntaxError under Python 3 that blocks
+              every tool in this pipeline; both are mechanically rewritten to
               `except X as e:` before analysis. See
               snapshots/flask-0.1-patch.md for the exact diff.
-
-Wired in this checkout: flask, django, flask_0_1 (all `available: true`).
-swe_flask, openhands_flask, swe_django remain `available: false` -- their
-snapshots are not present (see "Agentic subjects" below).
 
 Clone commands
 --------------
@@ -33,17 +31,54 @@ git clone --depth 1 --branch 3.0.3 https://github.com/pallets/flask  subjects/fl
 git clone --depth 1 --branch 5.0.6 https://github.com/django/django  subjects/django
 git clone --depth 1 --branch 0.1   https://github.com/pallets/flask  subjects/flask-0.1
 
-Agentic subjects (from the generation bundle; register with available: true once present)
-----------------------------------------------------------------------------------------
-id               agent + model                             spec pair   runs
-swe_flask        SWE-agent 1.0.0  + claude-sonnet-4-20250514   flask       5
-openhands_flask  OpenHands 0.14.0 + gpt-4o-2024-11-20          flask       5
-swe_django       SWE-agent 1.0.0  + claude-sonnet-4-20250514   django      5
+Agentic subjects
+----------------
+Generated 2026-10-14 (UTC) by generation/run_generation.py, five runs per
+configuration under one budget: 90 min wall-clock, 500 tool calls, temperature
+0.2, and a $10 per-run cost cap. generation/runs/MANIFEST.json records each
+run's start and end time, wall-clock, exit status and frozen commit; the
+per-run cost and model-call counts are in each SWE-agent run's trajectory
+(generation/runs/<id>/*/*.traj.gz) and are aggregated by
+analysis/paper_numbers.py.
+
+config           agent + model                                  spec pair  runs
+swe_flask        SWE-agent 1.0.0  + openrouter/anthropic/claude-sonnet-4  flask   5
+openhands_flask  OpenHands 0.14.0 + gpt-4o-2024-11-20                     flask   5
+swe_django       SWE-agent 1.0.0  + openrouter/anthropic/claude-sonnet-4  django  5
+
+  Model identifiers are recorded exactly as they were requested. Claude was
+  reached through OpenRouter as `anthropic/claude-sonnet-4`, which does not
+  expose the dated snapshot identifier, so the snapshot actually served is not
+  recorded and no dated Claude identifier appears anywhere in this package
+  (paper §III-B4 and the threats section say the same). The OpenAI model was
+  requested by its dated snapshot, `gpt-4o-2024-11-20`, and is recorded as
+  such.
+
+frozen run commits (subjects/<id>/, registered in subjects/subjects.json)
+  swe_flask_run01        a73357ac3561    openhands_flask_run01  7677254295b0
+  swe_flask_run02        d2db45063fb3    openhands_flask_run02  6c0f51f34eff
+  swe_flask_run03        e1965ade4013    openhands_flask_run03  5406b0db74a1
+  swe_flask_run04        e2d22e647f4c    openhands_flask_run04  7f3341904022
+  swe_flask_run05        e34289d89e8c    openhands_flask_run05  e795c662daab
+  swe_django_run01       da859093348b    swe_django_run04       b37a39f2df1b
+  swe_django_run02       81e1ec52df50    swe_django_run05       54f14b824198
+  swe_django_run03       550f51781260
+
+  Analysis scope, for every agentic run, is the framework package the agent
+  created, declared per run as "include" in subjects/subjects.json. Test
+  files, example applications and scratch scripts left outside that package
+  are excluded, so each subject is measured on its implementation code only.
+  swe_django_run05 also left a tests/ package behind; it is outside the scope
+  for the same reason.
+
+  All 18 subjects are registered `available: true`. Two runs ended at the
+  cost cap rather than at the agent's own submission (swe_flask_run03 and
+  swe_django_run05); the trajectories record the exit status.
 
 Analysis toolchain
 ------------------
-Pinned in requirements-analysis.txt (Radon, complexipy, Bandit, pylint, pytest).
-The baseline snapshots' own runtime dependencies are pinned separately in
+Pinned in requirements-analysis.txt (Radon, complexipy, Bandit, pylint, pytest,
+SciPy). The snapshots' own runtime dependencies are pinned separately in
 requirements-subjects.txt and must be installed, or neither pylint nor the
 oracle can resolve a subject's imports. CPD ships with PMD 7.0.0, installed in
 the Dockerfile.

@@ -40,13 +40,13 @@
       "test": "fisher_exact"
     },
     "Request Object": {
-      "odds_ratio": 0.0,
-      "p": 0.11044417767106841,
+      "odds_ratio": null,
+      "p": 1.0,
       "significant": false,
       "table": [
         [
-          22,
-          4
+          26,
+          0
         ],
         [
           26,
@@ -73,12 +73,12 @@
     },
     "Total": {
       "odds_ratio": 0.0,
-      "p": 0.059502768940732885,
+      "p": 1.0,
       "significant": false,
       "table": [
         [
-          99,
-          5
+          103,
+          1
         ],
         [
           104,

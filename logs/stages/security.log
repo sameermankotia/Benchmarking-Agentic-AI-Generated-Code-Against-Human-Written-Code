@@ -6,4 +6,19 @@
 [security] SKIP openhands_flask: snapshot not present
 [security] django: 1 findings (0.03/100 LOC)
 [security] SKIP swe_django: snapshot not present
-[security] done in 0.8s
+[security] swe_flask_run01: 0 findings (0.0/100 LOC)
+[security] openhands_flask_run01: 0 findings (0.0/100 LOC)
+[security] openhands_flask_run02: 1 findings (1.92/100 LOC)
+[security] openhands_flask_run03: 1 findings (2.08/100 LOC)
+[security] openhands_flask_run04: 0 findings (0.0/100 LOC)
+[security] openhands_flask_run05: 1 findings (1.35/100 LOC)
+[security] swe_flask_run02: 1 findings (0.18/100 LOC)
+[security] swe_flask_run03: 0 findings (0.0/100 LOC)
+[security] swe_flask_run04: 0 findings (0.0/100 LOC)
+[security] swe_flask_run05: 1 findings (0.23/100 LOC)
+[security] swe_django_run01: 0 findings (0.0/100 LOC)
+[security] swe_django_run02: 0 findings (0.0/100 LOC)
+[security] swe_django_run03: 0 findings (0.0/100 LOC)
+[security] swe_django_run04: 0 findings (0.0/100 LOC)
+[security] swe_django_run05: 0 findings (0.0/100 LOC)
+[security] done in 9.1s

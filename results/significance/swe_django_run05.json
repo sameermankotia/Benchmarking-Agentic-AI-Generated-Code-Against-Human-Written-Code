@@ -4,22 +4,22 @@
   "alpha": 0.05,
   "complexity": {
     "cc": {
-      "n_agentic": 65,
+      "n_agentic": 58,
       "n_human": 330,
-      "p": 0.5705619724219526,
-      "rank_biserial": 0.043,
+      "p": 0.11744529154182612,
+      "rank_biserial": 0.123,
       "significant": false,
       "test": "mannwhitney",
-      "u": 10268.5
+      "u": 8394.0
     },
     "cogc": {
-      "n_agentic": 47,
+      "n_agentic": 40,
       "n_human": 261,
-      "p": 0.011918850178181622,
-      "rank_biserial": 0.216,
+      "p": 0.04708692933367551,
+      "rank_biserial": 0.184,
       "significant": true,
       "test": "mannwhitney",
-      "u": 4806.0
+      "u": 4261.0
     }
   },
   "correctness": {
@@ -122,26 +122,26 @@
   },
   "duplication": {
     "duplicated_pct": {
-      "n_agentic": 6,
+      "n_agentic": 5,
       "n_human": 27,
-      "p": 0.8810775198386724,
-      "rank_biserial": -0.031,
+      "p": 0.39093296416049095,
+      "rank_biserial": 0.148,
       "significant": false,
       "test": "mannwhitney",
-      "u": 83.5
+      "u": 57.5
     }
   },
   "human": "django",
   "human_label": "Django mod. (H)",
   "maintainability": {
     "mi": {
-      "n_agentic": 7,
+      "n_agentic": 5,
       "n_human": 28,
-      "p": 0.436167077191023,
-      "rank_biserial": 0.194,
+      "p": 0.39860158493693965,
+      "rank_biserial": 0.243,
       "significant": false,
       "test": "mannwhitney",
-      "u": 79.0
+      "u": 53.0
     }
   },
   "pair": "django",
@@ -153,7 +153,7 @@
       "table": [
         [
           0,
-          27
+          0
         ],
         [
           0,
@@ -168,7 +168,7 @@
       "significant": false,
       "table": [
         [
-          27,
+          0,
           0
         ],
         [
@@ -185,7 +185,7 @@
       "table": [
         [
           0,
-          27
+          0
         ],
         [
           0,

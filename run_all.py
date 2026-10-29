@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
-"""Drive every analysis stage in order, then aggregate the paper tables.
+"""Drive every analysis stage in order, aggregate the paper tables, and
+compute the paper's figure set.
 
 Usage:
     python run_all.py                         # all subjects, all stages
     python run_all.py --subjects flask swe_flask
     python run_all.py --stages repo_stats complexity aggregate
+    python run_all.py --stages paper_numbers       # just the paper's figure set
 
 Stages run in dependency order: repo_stats first (its LOC feeds the density
 metrics), then the five dimensions, then significance (Mann-Whitney U /
 Fisher's exact against each pair's human baseline, requiring the five
-dimensions' per-subject JSON to already exist), then aggregate. Missing
+dimensions' per-subject JSON to already exist), then aggregate, then
+paper_numbers (the medians, ranges and ratios the paper quotes, read back from
+the aggregated per-subject JSON). Missing
 snapshots or uninstalled external tools are reported and skipped, not fatal —
 the pipeline always produces whatever tables the available data supports.
 """
@@ -21,7 +25,8 @@ import sys
 import time
 
 from analysis import (aggregate, complexity, correctness, duplication,
-                      repo_stats, security, significance, smells)
+                      paper_numbers, repo_stats, security, significance,
+                      smells)
 
 STAGES = {
     "repo_stats": repo_stats.run,
@@ -42,14 +47,18 @@ def main() -> int:
     ap.add_argument("--subjects", nargs="*", default=None,
                     help="subject ids to analyze (default: all)")
     ap.add_argument("--stages", nargs="*", default=None,
-                    help="stages to run (default: all + aggregate)")
+                    help="stages to run (default: all + aggregate + paper_numbers)")
     args = ap.parse_args()
 
-    stages = args.stages or (ORDER + ["aggregate"])
+    stages = args.stages or (ORDER + ["aggregate", "paper_numbers"])
     for stage in stages:
         if stage == "aggregate":
             print("\n=== aggregate ===")
             aggregate.run()
+            continue
+        if stage == "paper_numbers":
+            print("\n=== paper_numbers ===")
+            paper_numbers.run()
             continue
         if stage not in STAGES:
             print(f"unknown stage: {stage}", file=sys.stderr)

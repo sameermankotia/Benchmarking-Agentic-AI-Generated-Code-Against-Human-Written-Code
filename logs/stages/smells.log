@@ -6,4 +6,19 @@
 [smells] SKIP openhands_flask: snapshot not present
 [smells] django: 384 findings (10.91/100 LOC)
 [smells] SKIP swe_django: snapshot not present
-[smells] done in 11.9s
+[smells] swe_flask_run01: 183 findings (28.42/100 LOC)
+[smells] openhands_flask_run01: 30 findings (38.46/100 LOC)
+[smells] openhands_flask_run02: 14 findings (26.92/100 LOC)
+[smells] openhands_flask_run03: 11 findings (22.92/100 LOC)
+[smells] openhands_flask_run04: 36 findings (35.29/100 LOC)
+[smells] openhands_flask_run05: 24 findings (32.43/100 LOC)
+[smells] swe_flask_run02: 170 findings (30.58/100 LOC)
+[smells] swe_flask_run03: 105 findings (25.36/100 LOC)
+[smells] swe_flask_run04: 158 findings (29.26/100 LOC)
+[smells] swe_flask_run05: 120 findings (27.52/100 LOC)
+[smells] swe_django_run01: 96 findings (28.49/100 LOC)
+[smells] swe_django_run02: 95 findings (31.77/100 LOC)
+[smells] swe_django_run03: 141 findings (29.13/100 LOC)
+[smells] swe_django_run04: 83 findings (30.74/100 LOC)
+[smells] swe_django_run05: 112 findings (30.6/100 LOC)
+[smells] done in 77.8s

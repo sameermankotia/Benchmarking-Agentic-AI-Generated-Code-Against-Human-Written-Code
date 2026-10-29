@@ -1,4 +1,3 @@
 Bandit ID,CWE,Django mod. (H),SWE-agent/Dj. (A) r01,SWE-agent/Dj. (A) r02,SWE-agent/Dj. (A) r03,SWE-agent/Dj. (A) r04,SWE-agent/Dj. (A) r05
-B101,CWE-617,0,0,0,0,0,27
 Other,Various,1,0,0,0,0,0
-Total,,1,0,0,0,0,27
+Total,,1,0,0,0,0,0

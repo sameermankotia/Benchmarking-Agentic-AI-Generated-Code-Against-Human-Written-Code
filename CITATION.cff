@@ -5,14 +5,15 @@ abstract: >-
   Analysis harness for the paper "Structural Quality and Security in Agentic
   Software Engineering: A Multi-Dimensional Empirical Evaluation". Runs one
   deterministic pipeline (Radon, complexipy, Bandit, pylint, CPD) plus two
-  specification-derived oracle test suites over the study subjects and renders
-  the paper's tables as CSV.
+  specification-derived oracle test suites over all 18 study subjects, renders
+  the paper's tables as CSV, and computes every number the paper quotes into
+  results/paper_numbers.json. Ships the 15 frozen agent-generated repositories
+  and their generation traces.
 type: software
 authors:
   - family-names: Mankotia
     given-names: Sameer
     affiliation: "University of Idaho"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
   - family-names: Rimal
     given-names: "Bhaskar P."
     affiliation: "University of Idaho"
@@ -23,9 +24,9 @@ authors:
     given-names: Nate
     affiliation: "University of Idaho"
 license: MIT
-repository-code: "https://github.com/<org>/<repo>"
-version: "1.0.0"
-date-released: "2026-09-10"
+repository-code: "https://github.com/sameermankotia/Benchmarking-Agentic-AI-Generated-Code-Against-Human-Written-Code"
+version: "1.0-ieee-access"
+date-released: "2026-10-29"
 keywords:
   - agentic code generation
   - software quality
@@ -51,4 +52,5 @@ preferred-citation:
       given-names: Nate
   journal: "IEEE Access"
   year: 2026
-  doi: "10.1109/ACCESS.2024.0429000"
+  # The DOI is assigned on acceptance; it is deliberately absent rather than
+  # carrying the IEEE Access template value.

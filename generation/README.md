@@ -29,14 +29,17 @@ temperature 0.2**, against a pinned model snapshot.
 | `swe_django`      | SWE-agent 1.0.0    | `--anthropic-model`     | django |    5 |
 
 **Models are a study variable, not a default.** `--anthropic-model` defaults to
-`claude-sonnet-5-5`, the current successor to the Sonnet tier the manuscript
+`claude-sonnet-5-5`, the current successor to the Sonnet tier the study
 used, which keeps the comparison like-for-like; `claude-opus-5-5` is the more
 capable option. `--openai-model` has no default on purpose — run
 `--list-models` with a key present to see what the account actually serves,
-rather than having a guessed id baked in. `--manuscript-models` restores the
-originally pinned `claude-sonnet-4-20250514` and `gpt-4o-2024-11-20` if the
-providers still serve them. **Whichever pair is used must be named in the
-manuscript**, including in Section III-B2, Table 1's caption, and the abstract.
+rather than having a guessed id baked in. `--study-models` restores the
+pair the study used, `anthropic/claude-sonnet-4` and `gpt-4o-2024-11-20`, if
+the providers still serve them; note that OpenRouter resolves the Claude id to
+whatever snapshot it is serving and does not report which, so the dated Claude
+snapshot cannot be pinned on this route and the paper does not claim it was
+(§III-B4). **Whichever pair is used must be named in the paper**, including in
+Section III-B, the study-design figure, and the abstract.
 
 Hitting the 90-minute cap is a study outcome, not a failure: the tree is frozen
 as it stands, which is what the budget is for. On completion each run is
@@ -89,15 +92,17 @@ or written into a trace, a manifest, or any other artifact.
 
 ## Two things to settle before generating
 
-**Which models.** The manuscript pins `claude-sonnet-4-20250514` and
-`gpt-4o-2024-11-20`; both are old snapshots and may no longer be served.
-Preflight queries each provider's model endpoint and fails with an explicit
-message on a 404, and `--list-models` shows what the account can reach, marking
-the manuscript's snapshot if it is still there. Generating against current
-models is the better study — but it is a *different* study from the one the
-manuscript currently describes, and every claim about Claude Sonnet 4 and
-GPT-4o has to change with it, including the paper's title-level framing of
-which systems were compared.
+**Which models.** The study used Claude Sonnet 4, reached through OpenRouter
+as `anthropic/claude-sonnet-4`, and `gpt-4o-2024-11-20`; both are old and may
+no longer be served. The OpenAI snapshot is dated and therefore pinnable; the
+Claude one is not, because OpenRouter does not expose the dated identifier of
+the snapshot it serves — which is why the paper records the identifier it
+requested and states that the snapshot served is unknown (§III-B4). Preflight
+queries each provider's model endpoint and fails with an explicit message on a
+404, and `--list-models` shows what the account can reach. Generating against
+current models is the better study — but it is a *different* study from the one
+the paper describes, and every claim about Claude Sonnet 4 and GPT-4o has to
+change with it, including the paper's framing of which systems were compared.
 
 **The Django specification in `specs/django.md` is a reconstruction.** Unlike
 the Flask specification, its text appears nowhere in the manuscript or in any

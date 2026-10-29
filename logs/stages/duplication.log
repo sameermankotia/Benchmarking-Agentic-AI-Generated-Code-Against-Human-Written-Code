@@ -6,4 +6,19 @@
 [duplication] SKIP openhands_flask: snapshot not present
 [duplication] django: 3 blocks, 1.0% duplicated
 [duplication] SKIP swe_django: snapshot not present
-[duplication] done in 1.6s
+[duplication] swe_flask_run01: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run01: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run02: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run03: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run04: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run05: 0 blocks, 0.0% duplicated
+[duplication] swe_flask_run02: 1 blocks, 2.3% duplicated
+[duplication] swe_flask_run03: 1 blocks, 1.4% duplicated
+[duplication] swe_flask_run04: 0 blocks, 0.0% duplicated
+[duplication] swe_flask_run05: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run01: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run02: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run03: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run04: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run05: 0 blocks, 0.0% duplicated
+[duplication] done in 29.6s

@@ -1,12 +1,14 @@
 # Agentic-vs-human benchmark harness (paper §3.6).
-# `make all` runs the five analysis stages in order and aggregates the tables.
+# `make all` runs the five analysis stages in order, aggregates the tables, and
+# computes results/paper_numbers.json (every number the paper quotes).
 
 PYTHON ?= python
 SUBJECTS ?=            # e.g. make all SUBJECTS="flask swe_flask"
 SUBJ_ARG := $(if $(SUBJECTS),--subjects $(SUBJECTS),)
 
 .PHONY: all repo_stats correctness complexity smells security duplication \
-        significance aggregate tables clean docker docker-run help
+        significance aggregate tables paper-numbers check-paper-numbers clean \
+        docker docker-run help
 
 all: ## Run every stage + aggregate (the paper's `make all`)
 	$(PYTHON) run_all.py $(SUBJ_ARG)
@@ -35,8 +37,14 @@ significance: ## Mann-Whitney U / Fisher's exact vs. each pair's human baseline
 aggregate tables: ## Rebuild CSV tables from existing result JSON
 	$(PYTHON) run_all.py --stages aggregate
 
+paper-numbers: ## Compute results/paper_numbers.json (every number the paper quotes)
+	$(PYTHON) -m analysis.paper_numbers
+
+check-paper-numbers: ## Verify the committed paper_numbers.json against results/
+	$(PYTHON) -m analysis.paper_numbers --check
+
 clean: ## Remove all generated results
-	rm -rf results/*/ results/*.csv
+	rm -rf results/*/ results/*.csv results/paper_numbers.json
 
 docker: ## Build the hermetic analysis image
 	docker build -t agentic-benchmark .

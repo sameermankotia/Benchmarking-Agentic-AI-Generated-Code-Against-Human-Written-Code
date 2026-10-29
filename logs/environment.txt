@@ -1,21 +1,21 @@
 Agentic-vs-Human benchmark harness - pipeline run log
-generated (UTC): 2026-10-08T22:13Z
-base commit:     688da6b788a60dae520eb31209f134ed89194dd2  (+ the changes in this commit)
+generated (UTC): 2026-10-29T21:33Z
+base commit:     1e688041e6f22db8c23e30f86304f39a981dc30c  (+ the changes in this commit)
 path:            hermetic Docker image (make docker && make docker-run) -- the
-                 whole of results/ now comes from this one path. The previously
-                 committed results/ came from a host virtualenv whose versions
-                 had drifted from requirements-analysis.txt (complexipy 6.0.1,
-                 pylint 4.0.6, pytest 9.1.1 instead of the pinned 0.4.0 / 3.1.0
-                 / 8.1.1), so the package's toolchain record did not describe
-                 the numbers it shipped. It does now.
+                 whole of results/ comes from this one path, for all 18
+                 subjects: the two human baselines, the maturity reference
+                 point, and the 15 agentic runs.
 
 image:           agentic-benchmark (Dockerfile, PMD_VERSION=7.0.0)
-python:          Python 3.11.17   (python:3.11-slim)
+base image:      python:3.11-slim (Debian 13 "trixie")
+python:          Python 3.11.18
 PMD / CPD:       PMD 7.0.0 (7979570d39909195e173de05450fb1acf8b3eec5, 2024-03-22)
-JRE:             openjdk 21.0.12.1 (Debian)
+JRE:             openjdk 21.0.13 (Debian)
+
 subjects:        flask (pallets/flask@3.0.3), django (django/django@5.0.6, urls+views),
-                 flask_0_1 (pallets/flask@0.1, maturity control, structural only)
-                 agentic snapshots are not part of this harness checkout
+                 flask_0_1 (pallets/flask@0.1, maturity reference point, structural only),
+                 and the 15 agentic runs frozen under subjects/*_run*/ (see
+                 snapshots/MANIFEST.txt for every commit and analysis scope)
 
 analysis toolchain == requirements-analysis.txt, verbatim:
   bandit==1.9.4
@@ -32,19 +32,44 @@ subject runtime deps == requirements-subjects.txt, verbatim:
   (installed so the subjects' imports resolve: without them pylint reports 63
   spurious import-errors for Flask and the oracle cannot import any subject.)
 
+resolved transitively (not pinned, recorded for the record): astroid 3.1.0,
+  dill 0.4.1, isort 5.13.2, mando 0.7.1, mccabe 0.7.0, numpy 2.4.6,
+  platformdirs 4.14.0, pluggy 1.7.0, Pygments 2.21.0, PyYAML 6.0.3,
+  rich 15.0.0, six 1.17.0, stevedore 5.9.1, tomlkit 0.15.2, typer 0.27.3
+
 determinism:     two independent `make all` runs of this image over the same
                  mounted snapshots produced byte-identical results/ -- every
-                 JSON and every CSV. The two JUnit XML reports differ only in
-                 their per-test `time`, `timestamp`, and container `hostname`
-                 attributes; with those stripped they hash identically.
-                 Verified 2026-10-08. Reproducing this requires excluding
-                 pylint's cyclic-import (R0401), which is order-dependent --
-                 see analysis/smells.py.
+                 JSON (including results/paper_numbers.json) and every CSV.
+                 Verified 2026-10-29. The 17 JUnit XML reports are the one
+                 exception, and differ only in (a) the per-test `time`,
+                 `timestamp` and container `hostname` attributes and (b) the
+                 CPython object addresses pytest embeds in the failure text of
+                 a failing case; normalising those two, all 17 hash
+                 identically. (Earlier runs of this check covered only the two
+                 fully-passing baselines, where no failure text exists, which
+                 is why the second exception was not recorded before.)
+                 Reproducing byte-identity also requires excluding pylint's
+                 cyclic-import (R0401), which is order-dependent -- see
+                 analysis/smells.py.
 
-oracle suites:   rebuilt on oracle/wsgi.py (PEP 3333 driver) + oracle/api.py
-                 (declared role surface). Flask 117 functions / 140 cases,
-                 Django 85 functions / 104 cases; both human baselines pass
-                 100% with no skips. No test body names a framework symbol.
+oracle suites:   oracle/wsgi.py (PEP 3333 driver) + oracle/api.py (declared
+                 role surface). Flask 117 functions / 140 cases, Django 85
+                 functions / 104 cases; both human baselines pass 100% with no
+                 skips (logs/oracle-flask-verbose.log,
+                 logs/oracle-django-verbose.log list every case). No test body
+                 names a framework symbol.
 
-not exercised here:
-  - significance:      needs >=1 available agentic subject per pair
+paper figure set: results/paper_numbers.json, written by the paper_numbers
+                 stage of this same run (`make paper-numbers`, or
+                 `make check-paper-numbers` to verify the committed file
+                 against results/). Its `_meta.harness_commit` is null on this
+                 path because the image does not carry .git; the base commit is
+                 the one recorded above.
+
+stages run:      repo_stats, correctness, complexity, smells, security,
+                 duplication, significance, aggregate, paper_numbers -- all of
+                 them, over all 18 subjects. Nothing was skipped except the
+                 three registry placeholders that carry no snapshot
+                 (swe_flask, openhands_flask, swe_django: the configuration
+                 rows, whose runs are the *_run0N subjects) and the oracle for
+                 flask_0_1, which is a structural reference point only.

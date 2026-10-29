@@ -52,3 +52,11 @@ Out of scope, because the specification does not fix them: middleware,
 sessions, authentication, ORM access, template-directory discovery, URL
 reversing, and the framework's own debug pages (hence no assertion on what is
 served for an empty URL configuration).
+
+## Binding defects
+
+Every case where this suite failed a working framework for a convention
+the specification does not fix is recorded in
+[`../BINDING-DEFECTS.md`](../BINDING-DEFECTS.md), together with what it
+cost and what was changed. Both human baselines held at 100% through all
+nine of them.

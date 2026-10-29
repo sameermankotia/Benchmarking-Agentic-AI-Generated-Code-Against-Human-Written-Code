@@ -7,7 +7,22 @@ python run_all.py
 [repo_stats] SKIP openhands_flask: snapshot not present
 [repo_stats] django: 3520 LOC, 296 fns, MI-inputs ready
 [repo_stats] SKIP swe_django: snapshot not present
-[repo_stats] done in 0.9s
+[repo_stats] swe_flask_run01: 644 LOC, 76 fns, MI-inputs ready
+[repo_stats] openhands_flask_run01: 78 LOC, 19 fns, MI-inputs ready
+[repo_stats] openhands_flask_run02: 52 LOC, 9 fns, MI-inputs ready
+[repo_stats] openhands_flask_run03: 48 LOC, 9 fns, MI-inputs ready
+[repo_stats] openhands_flask_run04: 102 LOC, 26 fns, MI-inputs ready
+[repo_stats] openhands_flask_run05: 74 LOC, 14 fns, MI-inputs ready
+[repo_stats] swe_flask_run02: 556 LOC, 67 fns, MI-inputs ready
+[repo_stats] swe_flask_run03: 414 LOC, 50 fns, MI-inputs ready
+[repo_stats] swe_flask_run04: 540 LOC, 72 fns, MI-inputs ready
+[repo_stats] swe_flask_run05: 436 LOC, 55 fns, MI-inputs ready
+[repo_stats] swe_django_run01: 337 LOC, 38 fns, MI-inputs ready
+[repo_stats] swe_django_run02: 299 LOC, 32 fns, MI-inputs ready
+[repo_stats] swe_django_run03: 484 LOC, 53 fns, MI-inputs ready
+[repo_stats] swe_django_run04: 270 LOC, 27 fns, MI-inputs ready
+[repo_stats] swe_django_run05: 366 LOC, 41 fns, MI-inputs ready
+[repo_stats] done in 4.8s
 
 === correctness ===
 [correctness] flask: 140/140 (100.0%)
@@ -16,7 +31,22 @@ python run_all.py
 [correctness] SKIP openhands_flask: snapshot not present
 [correctness] django: 104/104 (100.0%)
 [correctness] SKIP swe_django: snapshot not present
-[correctness] done in 0.9s
+[correctness] swe_flask_run01: 105/140 (75.0%)
+[correctness] openhands_flask_run01: 21/140 (15.0%)
+[correctness] openhands_flask_run02: 28/140 (20.0%)
+[correctness] openhands_flask_run03: 12/140 (8.6%)
+[correctness] openhands_flask_run04: 7/140 (5.0%)
+[correctness] openhands_flask_run05: 29/140 (20.7%)
+[correctness] swe_flask_run02: 103/140 (73.6%)
+[correctness] swe_flask_run03: 93/140 (66.4%)
+[correctness] swe_flask_run04: 103/140 (73.6%)
+[correctness] swe_flask_run05: 93/140 (66.4%)
+[correctness] swe_django_run01: 103/104 (99.0%)
+[correctness] swe_django_run02: 104/104 (100.0%)
+[correctness] swe_django_run03: 104/104 (100.0%)
+[correctness] swe_django_run04: 104/104 (100.0%)
+[correctness] swe_django_run05: 95/104 (91.3%)
+[correctness] done in 16.0s
 
 === complexity ===
 [complexity] flask: mean CC=2.8 mean CogC=2.1 mean MI=64.1
@@ -25,7 +55,22 @@ python run_all.py
 [complexity] SKIP openhands_flask: snapshot not present
 [complexity] django: mean CC=2.8 mean CogC=2.7 mean MI=75.1
 [complexity] SKIP swe_django: snapshot not present
-[complexity] done in 0.8s
+[complexity] swe_flask_run01: mean CC=2.4 mean CogC=2.2 mean MI=69.1
+[complexity] openhands_flask_run01: mean CC=1.8 mean CogC=0.4 mean MI=85.0
+[complexity] openhands_flask_run02: mean CC=2.5 mean CogC=0.8 mean MI=50.1
+[complexity] openhands_flask_run03: mean CC=2.0 mean CogC=0.8 mean MI=50.0
+[complexity] openhands_flask_run04: mean CC=1.6 mean CogC=0.2 mean MI=91.7
+[complexity] openhands_flask_run05: mean CC=2.1 mean CogC=0.7 mean MI=80.0
+[complexity] swe_flask_run02: mean CC=2.3 mean CogC=2.3 mean MI=72.3
+[complexity] swe_flask_run03: mean CC=2.4 mean CogC=1.8 mean MI=74.0
+[complexity] swe_flask_run04: mean CC=2.1 mean CogC=1.9 mean MI=70.7
+[complexity] swe_flask_run05: mean CC=2.2 mean CogC=1.4 mean MI=72.4
+[complexity] swe_django_run01: mean CC=2.4 mean CogC=1.7 mean MI=82.8
+[complexity] swe_django_run02: mean CC=2.5 mean CogC=1.6 mean MI=78.6
+[complexity] swe_django_run03: mean CC=2.4 mean CogC=1.8 mean MI=64.9
+[complexity] swe_django_run04: mean CC=2.6 mean CogC=1.6 mean MI=82.0
+[complexity] swe_django_run05: mean CC=2.4 mean CogC=1.9 mean MI=70.6
+[complexity] done in 2.5s
 
 === smells ===
 [smells] flask: 270 findings (6.36/100 LOC)
@@ -34,7 +79,22 @@ python run_all.py
 [smells] SKIP openhands_flask: snapshot not present
 [smells] django: 384 findings (10.91/100 LOC)
 [smells] SKIP swe_django: snapshot not present
-[smells] done in 11.9s
+[smells] swe_flask_run01: 183 findings (28.42/100 LOC)
+[smells] openhands_flask_run01: 30 findings (38.46/100 LOC)
+[smells] openhands_flask_run02: 14 findings (26.92/100 LOC)
+[smells] openhands_flask_run03: 11 findings (22.92/100 LOC)
+[smells] openhands_flask_run04: 36 findings (35.29/100 LOC)
+[smells] openhands_flask_run05: 24 findings (32.43/100 LOC)
+[smells] swe_flask_run02: 170 findings (30.58/100 LOC)
+[smells] swe_flask_run03: 105 findings (25.36/100 LOC)
+[smells] swe_flask_run04: 158 findings (29.26/100 LOC)
+[smells] swe_flask_run05: 120 findings (27.52/100 LOC)
+[smells] swe_django_run01: 96 findings (28.49/100 LOC)
+[smells] swe_django_run02: 95 findings (31.77/100 LOC)
+[smells] swe_django_run03: 141 findings (29.13/100 LOC)
+[smells] swe_django_run04: 83 findings (30.74/100 LOC)
+[smells] swe_django_run05: 112 findings (30.6/100 LOC)
+[smells] done in 77.8s
 
 === security ===
 [security] flask: 11 findings (0.26/100 LOC)
@@ -43,7 +103,22 @@ python run_all.py
 [security] SKIP openhands_flask: snapshot not present
 [security] django: 1 findings (0.03/100 LOC)
 [security] SKIP swe_django: snapshot not present
-[security] done in 0.8s
+[security] swe_flask_run01: 0 findings (0.0/100 LOC)
+[security] openhands_flask_run01: 0 findings (0.0/100 LOC)
+[security] openhands_flask_run02: 1 findings (1.92/100 LOC)
+[security] openhands_flask_run03: 1 findings (2.08/100 LOC)
+[security] openhands_flask_run04: 0 findings (0.0/100 LOC)
+[security] openhands_flask_run05: 1 findings (1.35/100 LOC)
+[security] swe_flask_run02: 1 findings (0.18/100 LOC)
+[security] swe_flask_run03: 0 findings (0.0/100 LOC)
+[security] swe_flask_run04: 0 findings (0.0/100 LOC)
+[security] swe_flask_run05: 1 findings (0.23/100 LOC)
+[security] swe_django_run01: 0 findings (0.0/100 LOC)
+[security] swe_django_run02: 0 findings (0.0/100 LOC)
+[security] swe_django_run03: 0 findings (0.0/100 LOC)
+[security] swe_django_run04: 0 findings (0.0/100 LOC)
+[security] swe_django_run05: 0 findings (0.0/100 LOC)
+[security] done in 9.1s
 
 === duplication ===
 [duplication] flask: 7 blocks, 3.4% duplicated
@@ -52,11 +127,40 @@ python run_all.py
 [duplication] SKIP openhands_flask: snapshot not present
 [duplication] django: 3 blocks, 1.0% duplicated
 [duplication] SKIP swe_django: snapshot not present
-[duplication] done in 1.6s
+[duplication] swe_flask_run01: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run01: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run02: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run03: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run04: 0 blocks, 0.0% duplicated
+[duplication] openhands_flask_run05: 0 blocks, 0.0% duplicated
+[duplication] swe_flask_run02: 1 blocks, 2.3% duplicated
+[duplication] swe_flask_run03: 1 blocks, 1.4% duplicated
+[duplication] swe_flask_run04: 0 blocks, 0.0% duplicated
+[duplication] swe_flask_run05: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run01: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run02: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run03: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run04: 0 blocks, 0.0% duplicated
+[duplication] swe_django_run05: 0 blocks, 0.0% duplicated
+[duplication] done in 29.6s
 
 === significance ===
-[significance] SKIP: no agentic/human pair had results for any dimension
-[significance] done in 0.0s
+[significance] swe_flask_run01 vs flask: CC p=0.30066576267253253 r=0.069  MI p=0.35110359408969694 r=-0.218
+[significance] openhands_flask_run01 vs flask: CC p=0.08037147124877767 r=0.207  MI p=0.027932356057725444 r=-0.59
+[significance] openhands_flask_run02 vs flask: CC p=0.6836304052024245 r=-0.069  MI p=0.4438766612262952 r=0.5
+[significance] openhands_flask_run03 vs flask: CC p=0.20290360005830166 r=0.237  MI p=0.4438766612262952 r=0.5
+[significance] openhands_flask_run04 vs flask: CC p=0.0052283356047701695 r=0.287  MI p=0.0061637783571109606 r=-0.685
+[significance] openhands_flask_run05 vs flask: CC p=0.7545391509908672 r=0.044  MI p=0.13820654716737235 r=-0.433
+[significance] swe_flask_run02 vs flask: CC p=0.15080290052470577 r=0.103  MI p=0.2289866044937091 r=-0.292
+[significance] swe_flask_run03 vs flask: CC p=0.9517113007581552 r=0.005  MI p=0.06046793437941256 r=-0.453
+[significance] swe_flask_run04 vs flask: CC p=0.012588766752711695 r=0.17  MI p=0.12649052011296438 r=-0.37
+[significance] swe_flask_run05 vs flask: CC p=0.2532195660654696 r=0.088  MI p=0.20049071031111776 r=-0.327
+[significance] swe_django_run01 vs django: CC p=0.9034173658500924 r=0.01  MI p=0.4873686136545585 r=-0.173
+[significance] swe_django_run02 vs django: CC p=0.47356905979966546 r=0.062  MI p=0.9795927887337673 r=0.014
+[significance] swe_django_run03 vs django: CC p=0.10734773446671707 r=0.116  MI p=0.2292730842235663 r=0.343
+[significance] swe_django_run04 vs django: CC p=0.7466446881098079 r=0.03  MI p=0.6636710154898113 r=-0.129
+[significance] swe_django_run05 vs django: CC p=0.11744529154182612 r=0.123  MI p=0.39860158493693965 r=0.243
+[significance] done in 1.0s
 
 === aggregate ===
 [aggregate] wrote results/tables/table_repo_stats.csv
@@ -68,4 +172,22 @@ python run_all.py
 [aggregate] wrote results/tables/table_cwe_flask.csv
 [aggregate] wrote results/tables/table_cwe_django.csv
 [aggregate] wrote results/tables/table_duplication.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_flask_run01.csv
+[aggregate] wrote results/tables/table_quality_gap_openhands_flask_run01.csv
+[aggregate] wrote results/tables/table_quality_gap_openhands_flask_run02.csv
+[aggregate] wrote results/tables/table_quality_gap_openhands_flask_run03.csv
+[aggregate] wrote results/tables/table_quality_gap_openhands_flask_run04.csv
+[aggregate] wrote results/tables/table_quality_gap_openhands_flask_run05.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_flask_run02.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_flask_run03.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_flask_run04.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_flask_run05.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_django_run01.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_django_run02.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_django_run03.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_django_run04.csv
+[aggregate] wrote results/tables/table_quality_gap_swe_django_run05.csv
 [aggregate] wrote results/tables/summary.csv
+
+=== paper_numbers ===
+[paper_numbers] wrote results/paper_numbers.json (18 subjects, 3 configurations) at 2026-10-29T21:33Z

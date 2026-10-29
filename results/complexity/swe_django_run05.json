@@ -1,10 +1,10 @@
 {
   "cc": {
     "max": 12,
-    "mean": 2.7,
-    "median": 2,
-    "n": 65,
-    "pct_over_threshold": 3.1,
+    "mean": 2.4,
+    "median": 1.0,
+    "n": 58,
+    "pct_over_threshold": 1.7,
     "records": [
       {
         "cc": 5,
@@ -353,58 +353,16 @@
         "file": "djangoframework/wsgi.py",
         "lineno": 16,
         "name": "WSGIApplication.__call__"
-      },
-      {
-        "cc": 4,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 10,
-        "name": "test_basic_wsgi_compliance"
-      },
-      {
-        "cc": 11,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 48,
-        "name": "test_url_resolution_with_converters"
-      },
-      {
-        "cc": 3,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 136,
-        "name": "test_404_handling"
-      },
-      {
-        "cc": 5,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 170,
-        "name": "test_class_based_views"
-      },
-      {
-        "cc": 7,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 218,
-        "name": "test_method_not_allowed"
-      },
-      {
-        "cc": 3,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 263,
-        "name": "test_head_request_handling"
-      },
-      {
-        "cc": 3,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 298,
-        "name": "test_regex_patterns"
       }
     ],
     "threshold": 10
   },
   "cogc": {
     "max": 17,
-    "mean": 1.7,
-    "median": 0,
-    "n": 47,
-    "pct_over_threshold": 2.1,
+    "mean": 1.9,
+    "median": 0.0,
+    "n": 40,
+    "pct_over_threshold": 2.5,
     "records": [
       {
         "cogc": 0,
@@ -645,48 +603,6 @@
         "file": "djangoframework/wsgi.py",
         "lineno": 0,
         "name": "WSGIApplication::__call__"
-      },
-      {
-        "cogc": 0,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 0,
-        "name": "test_404_handling"
-      },
-      {
-        "cogc": 0,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 0,
-        "name": "test_basic_wsgi_compliance"
-      },
-      {
-        "cogc": 0,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 0,
-        "name": "test_class_based_views"
-      },
-      {
-        "cogc": 0,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 0,
-        "name": "test_head_request_handling"
-      },
-      {
-        "cogc": 0,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 0,
-        "name": "test_regex_patterns"
-      },
-      {
-        "cogc": 0,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 0,
-        "name": "test_url_resolution_with_converters"
-      },
-      {
-        "cogc": 3,
-        "file": "tests/test_wsgi_compliance.py",
-        "lineno": 0,
-        "name": "test_method_not_allowed"
       }
     ],
     "threshold": 15
@@ -713,21 +629,13 @@
       {
         "file": "djangoframework/wsgi.py",
         "mi": 88.35
-      },
-      {
-        "file": "tests/__init__.py",
-        "mi": 100.0
-      },
-      {
-        "file": "tests/test_wsgi_compliance.py",
-        "mi": 41.26
       }
     ],
     "mean": 70.6,
     "median": 60.6,
-    "min": 41.3,
-    "n": 7,
-    "pct_below_threshold": 57.1,
+    "min": 51.6,
+    "n": 5,
+    "pct_below_threshold": 60.0,
     "threshold": 65
   },
   "subject": "swe_django_run05"

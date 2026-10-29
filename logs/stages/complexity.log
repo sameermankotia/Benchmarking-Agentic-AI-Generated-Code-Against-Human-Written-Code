@@ -6,4 +6,19 @@
 [complexity] SKIP openhands_flask: snapshot not present
 [complexity] django: mean CC=2.8 mean CogC=2.7 mean MI=75.1
 [complexity] SKIP swe_django: snapshot not present
-[complexity] done in 0.8s
+[complexity] swe_flask_run01: mean CC=2.4 mean CogC=2.2 mean MI=69.1
+[complexity] openhands_flask_run01: mean CC=1.8 mean CogC=0.4 mean MI=85.0
+[complexity] openhands_flask_run02: mean CC=2.5 mean CogC=0.8 mean MI=50.1
+[complexity] openhands_flask_run03: mean CC=2.0 mean CogC=0.8 mean MI=50.0
+[complexity] openhands_flask_run04: mean CC=1.6 mean CogC=0.2 mean MI=91.7
+[complexity] openhands_flask_run05: mean CC=2.1 mean CogC=0.7 mean MI=80.0
+[complexity] swe_flask_run02: mean CC=2.3 mean CogC=2.3 mean MI=72.3
+[complexity] swe_flask_run03: mean CC=2.4 mean CogC=1.8 mean MI=74.0
+[complexity] swe_flask_run04: mean CC=2.1 mean CogC=1.9 mean MI=70.7
+[complexity] swe_flask_run05: mean CC=2.2 mean CogC=1.4 mean MI=72.4
+[complexity] swe_django_run01: mean CC=2.4 mean CogC=1.7 mean MI=82.8
+[complexity] swe_django_run02: mean CC=2.5 mean CogC=1.6 mean MI=78.6
+[complexity] swe_django_run03: mean CC=2.4 mean CogC=1.8 mean MI=64.9
+[complexity] swe_django_run04: mean CC=2.6 mean CogC=1.6 mean MI=82.0
+[complexity] swe_django_run05: mean CC=2.4 mean CogC=1.9 mean MI=70.6
+[complexity] done in 2.5s

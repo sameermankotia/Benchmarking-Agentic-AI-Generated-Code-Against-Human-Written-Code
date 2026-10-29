@@ -166,12 +166,6 @@ ratios to a baseline, counts of runs that differ significantly, and a handful
 of generation facts. None of those is a stage output, so none of them is read
 off a table by hand:
 
-```bash
-make paper-numbers          # write results/paper_numbers.json
-make check-paper-numbers    # verify the committed file against results/
-python -m analysis.paper_numbers --print
-```
-
 `results/paper_numbers.json` is keyed by paper element — `table_repo_stats`,
 `rq1_correctness` … `rq5_duplication`, `maturity_reference_point`,
 `generation`, `claims` — and each entry carries the figure, its range over the

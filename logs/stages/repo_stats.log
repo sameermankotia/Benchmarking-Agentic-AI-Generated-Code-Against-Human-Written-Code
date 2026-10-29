@@ -6,4 +6,19 @@
 [repo_stats] SKIP openhands_flask: snapshot not present
 [repo_stats] django: 3520 LOC, 296 fns, MI-inputs ready
 [repo_stats] SKIP swe_django: snapshot not present
-[repo_stats] done in 0.9s
+[repo_stats] swe_flask_run01: 644 LOC, 76 fns, MI-inputs ready
+[repo_stats] openhands_flask_run01: 78 LOC, 19 fns, MI-inputs ready
+[repo_stats] openhands_flask_run02: 52 LOC, 9 fns, MI-inputs ready
+[repo_stats] openhands_flask_run03: 48 LOC, 9 fns, MI-inputs ready
+[repo_stats] openhands_flask_run04: 102 LOC, 26 fns, MI-inputs ready
+[repo_stats] openhands_flask_run05: 74 LOC, 14 fns, MI-inputs ready
+[repo_stats] swe_flask_run02: 556 LOC, 67 fns, MI-inputs ready
+[repo_stats] swe_flask_run03: 414 LOC, 50 fns, MI-inputs ready
+[repo_stats] swe_flask_run04: 540 LOC, 72 fns, MI-inputs ready
+[repo_stats] swe_flask_run05: 436 LOC, 55 fns, MI-inputs ready
+[repo_stats] swe_django_run01: 337 LOC, 38 fns, MI-inputs ready
+[repo_stats] swe_django_run02: 299 LOC, 32 fns, MI-inputs ready
+[repo_stats] swe_django_run03: 484 LOC, 53 fns, MI-inputs ready
+[repo_stats] swe_django_run04: 270 LOC, 27 fns, MI-inputs ready
+[repo_stats] swe_django_run05: 366 LOC, 41 fns, MI-inputs ready
+[repo_stats] done in 4.8s

@@ -6,4 +6,19 @@
 [correctness] SKIP openhands_flask: snapshot not present
 [correctness] django: 104/104 (100.0%)
 [correctness] SKIP swe_django: snapshot not present
-[correctness] done in 0.9s
+[correctness] swe_flask_run01: 105/140 (75.0%)
+[correctness] openhands_flask_run01: 21/140 (15.0%)
+[correctness] openhands_flask_run02: 28/140 (20.0%)
+[correctness] openhands_flask_run03: 12/140 (8.6%)
+[correctness] openhands_flask_run04: 7/140 (5.0%)
+[correctness] openhands_flask_run05: 29/140 (20.7%)
+[correctness] swe_flask_run02: 103/140 (73.6%)
+[correctness] swe_flask_run03: 93/140 (66.4%)
+[correctness] swe_flask_run04: 103/140 (73.6%)
+[correctness] swe_flask_run05: 93/140 (66.4%)
+[correctness] swe_django_run01: 103/104 (99.0%)
+[correctness] swe_django_run02: 104/104 (100.0%)
+[correctness] swe_django_run03: 104/104 (100.0%)
+[correctness] swe_django_run04: 104/104 (100.0%)
+[correctness] swe_django_run05: 95/104 (91.3%)
+[correctness] done in 16.0s

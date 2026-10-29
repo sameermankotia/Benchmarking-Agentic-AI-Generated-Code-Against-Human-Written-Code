@@ -1,579 +1,411 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="47" skipped="0" tests="140" time="0.150" timestamp="2026-10-14T04:47:14.234260" hostname="7313fbe3e4e6"><testcase classname="oracle.flask.test_app_context" name="test_current_app_accessible_in_a_view" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_is_the_handling_application" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_accessible_from_a_nested_call" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_distinguishes_two_applications" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_unavailable_outside_a_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_is_writable_in_a_view" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_value_readable_back_in_the_same_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_shared_between_view_and_helper" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_is_empty_at_the_start_of_each_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_does_not_leak_between_sequential_requests" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_missing_attribute_raises" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_getattr_default_works" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_holds_non_string_values" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_unavailable_outside_a_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_request_accessible_in_the_same_context" time="0.000"><failure message="AssertionError: assert b'/both' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa528dd90&gt;, 'GET', '/both')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-marked_app = &lt;flaskframework.app.Flask object at 0xffffa528dd90&gt;
-ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffffa5bed1c0&gt;
-
-    def test_request_accessible_in_the_same_context(api, marked_app, ctx_route):
-        def view(*view_args, **_):
-            return api.path(api.current_request(view_args))
-        path = ctx_route(view, path="/both")
-&gt;       assert b"/both" in wsgi.call(marked_app, "GET", path).body
-E       AssertionError: assert b'/both' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa528dd90&gt;, 'GET', '/both')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_app_context.py:177: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_request_and_g_coexist" time="0.000"><failure message="AssertionError: assert b'/coexist' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5270550&gt;, 'GET', '/coexist')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-marked_app = &lt;flaskframework.app.Flask object at 0xffffa5270550&gt;
-ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffffa5bed8a0&gt;
-
-    def test_request_and_g_coexist(api, marked_app, ctx_route):
-        def view(*view_args, **_):
-            api.g.seen = api.path(api.current_request(view_args))
-            return api.g.seen
-        path = ctx_route(view, path="/coexist")
-&gt;       assert b"/coexist" in wsgi.call(marked_app, "GET", path).body
-E       AssertionError: assert b'/coexist' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5270550&gt;, 'GET', '/coexist')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_app_context.py:185: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_and_g_coexist" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_is_isolated_between_concurrent_threads" time="0.001"><failure message="AssertionError: assert b'Internal Server Error' == b'aaa'&#10;  &#10;  At index 0 diff: b'I' != b'a'&#10;  Use -v to get more diff">api = &lt;api.Api object at 0xffffa520ba50&gt;
-marked_app = &lt;flaskframework.app.Flask object at 0xffffa5c4dd90&gt;
-ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffffa5bede40&gt;
-
-    def test_g_is_isolated_between_concurrent_threads(api, marked_app, ctx_route):
-        """Two in-flight requests must not see each other's `g`.
-    
-        The barrier forces both views to be inside their request at the same
-        time, which is what makes this a test of thread-local storage rather than
-        of sequential cleanup.
-        """
-        barrier = threading.Barrier(2, timeout=5)
-    
-        def view(*view_args, **_):
-            own = api.query_get(api.current_request(view_args), "tag")
-            api.g.tag = own
-            try:
-                barrier.wait()
-            except threading.BrokenBarrierError:
-                pass
-            return api.g.tag
-        path = ctx_route(view)
-    
-        results: dict[str, bytes] = {}
-    
-        def run(tag):
-            results[tag] = wsgi.call(
-                marked_app, "GET", path, query={"tag": tag}).body
-    
-        threads = [threading.Thread(target=run, args=(t,)) for t in ("aaa", "bbb")]
-        for t in threads:
-            t.start()
-        for t in threads:
-            t.join(timeout=10)
-    
-&gt;       assert results.get("aaa") == b"aaa"
-E       AssertionError: assert b'Internal Server Error' == b'aaa'
-E         
-E         At index 0 diff: b'I' != b'a'
-E         Use -v to get more diff
-
-oracle/flask/test_app_context.py:229: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_is_correct_in_concurrent_threads" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_context_is_released_after_the_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_many_sequential_requests_keep_context_clean" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_can_be_constructed" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_route_is_reachable_after_registration" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_route_returns_its_body" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_unregistered_blueprint_route_is_not_reachable" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_with_several_routes" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_url_prefix_is_applied" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_route_not_reachable_without_the_prefix" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_all_blueprint_routes_inherit_the_prefix" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_prefix_with_multiple_segments" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_root_route_under_prefix" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_two_blueprints_with_different_prefixes" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_without_prefix_mounts_at_root" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_inside_a_blueprint" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[one]" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[2]" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[three-3]" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_method_filtering_inside_a_blueprint" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5befe20&gt;('/api/post-only')">mount = &lt;function mount.&lt;locals&gt;._mount at 0xffffa5befd80&gt;
-get = &lt;function get.&lt;locals&gt;._get at 0xffffa5befe20&gt;
-request_ = &lt;function request_.&lt;locals&gt;._call at 0xffffa5befec0&gt;
-
-    def test_method_filtering_inside_a_blueprint(mount, get, request_):
-        mount([("/post-only", ["POST"], _view)], url_prefix="/api")
-        assert request_("POST", "/api/post-only").status_code == 200
-&gt;       assert get("/api/post-only").status_code == 405
-E       AssertionError: assert 404 == 405
-E        +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
-E        +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5befe20&gt;('/api/post-only')
-
-oracle/flask/test_blueprints.py:139: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_multi_method_route_inside_a_blueprint" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_and_app_routes_coexist" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_prefix_does_not_leak_to_app_routes" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_three_blueprints_mounted_together" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_unknown_path_under_a_prefix_is_404" time="0.000" /><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[GET]" time="0.000"><failure message="AssertionError: assert b'GET' in b'Internal Server Error'&#10; +  where b'GET' = &lt;built-in method encode of str object at 0xffffa5f0e670&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffa5f0e670&gt; = 'GET'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa528cfd0&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa528cfd0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa52840e0&gt;, method = 'GET'
-
-    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
-    def test_request_exposes_method(api, app, report, method):
-        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-&gt;       assert method.encode() in wsgi.call(app, method, path).body
-E       AssertionError: assert b'GET' in b'Internal Server Error'
-E        +  where b'GET' = &lt;built-in method encode of str object at 0xffffa5f0e670&gt;()
-E        +    where &lt;built-in method encode of str object at 0xffffa5f0e670&gt; = 'GET'.encode
-E        +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa528cfd0&gt;, 'GET', '/r')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[POST]" time="0.000"><failure message="AssertionError: assert b'POST' in b'Internal Server Error'&#10; +  where b'POST' = &lt;built-in method encode of str object at 0xffffa5d7f8b0&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffa5d7f8b0&gt; = 'POST'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa51f26d0&gt;, 'POST', '/r')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa51f26d0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa52845e0&gt;, method = 'POST'
-
-    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
-    def test_request_exposes_method(api, app, report, method):
-        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-&gt;       assert method.encode() in wsgi.call(app, method, path).body
-E       AssertionError: assert b'POST' in b'Internal Server Error'
-E        +  where b'POST' = &lt;built-in method encode of str object at 0xffffa5d7f8b0&gt;()
-E        +    where &lt;built-in method encode of str object at 0xffffa5d7f8b0&gt; = 'POST'.encode
-E        +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa51f26d0&gt;, 'POST', '/r')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[PUT]" time="0.000"><failure message="AssertionError: assert b'PUT' in b'Internal Server Error'&#10; +  where b'PUT' = &lt;built-in method encode of str object at 0xffffa5d7f5b0&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffa5d7f5b0&gt; = 'PUT'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52026d0&gt;, 'PUT', '/r')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa52026d0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5284ae0&gt;, method = 'PUT'
-
-    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
-    def test_request_exposes_method(api, app, report, method):
-        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-&gt;       assert method.encode() in wsgi.call(app, method, path).body
-E       AssertionError: assert b'PUT' in b'Internal Server Error'
-E        +  where b'PUT' = &lt;built-in method encode of str object at 0xffffa5d7f5b0&gt;()
-E        +    where &lt;built-in method encode of str object at 0xffffa5d7f5b0&gt; = 'PUT'.encode
-E        +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52026d0&gt;, 'PUT', '/r')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[DELETE]" time="0.000"><failure message="AssertionError: assert b'DELETE' in b'Internal Server Error'&#10; +  where b'DELETE' = &lt;built-in method encode of str object at 0xffffa5d7f530&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffa5d7f530&gt; = 'DELETE'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5254950&gt;, 'DELETE', '/r')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5254950&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5285120&gt;, method = 'DELETE'
-
-    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
-    def test_request_exposes_method(api, app, report, method):
-        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-&gt;       assert method.encode() in wsgi.call(app, method, path).body
-E       AssertionError: assert b'DELETE' in b'Internal Server Error'
-E        +  where b'DELETE' = &lt;built-in method encode of str object at 0xffffa5d7f530&gt;()
-E        +    where &lt;built-in method encode of str object at 0xffffa5d7f530&gt; = 'DELETE'.encode
-E        +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5254950&gt;, 'DELETE', '/r')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[PATCH]" time="0.000"><failure message="AssertionError: assert b'PATCH' in b'Internal Server Error'&#10; +  where b'PATCH' = &lt;built-in method encode of str object at 0xffffa5d7fb30&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffa5d7fb30&gt; = 'PATCH'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa524ad90&gt;, 'PATCH', '/r')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa524ad90&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5284cc0&gt;, method = 'PATCH'
-
-    @pytest.mark.parametrize("method", ["GET", "POST", "PUT", "DELETE", "PATCH"])
-    def test_request_exposes_method(api, app, report, method):
-        path = report(api.method, methods=["GET", "POST", "PUT", "DELETE", "PATCH"])
-&gt;       assert method.encode() in wsgi.call(app, method, path).body
-E       AssertionError: assert b'PATCH' in b'Internal Server Error'
-E        +  where b'PATCH' = &lt;built-in method encode of str object at 0xffffa5d7fb30&gt;()
-E        +    where &lt;built-in method encode of str object at 0xffffa5d7fb30&gt; = 'PATCH'.encode
-E        +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa524ad90&gt;, 'PATCH', '/r')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_method_is_upper_case" time="0.000"><failure message="AssertionError: assert False&#10; +  where False = &lt;built-in method isupper of str object at 0xffffa5250c10&gt;()&#10; +    where &lt;built-in method isupper of str object at 0xffffa5250c10&gt; = 'Internal Server Error'.isupper&#10; +      where 'Internal Server Error' = &lt;built-in method strip of str object at 0xffffa5250c10&gt;()&#10; +        where &lt;built-in method strip of str object at 0xffffa5250c10&gt; = 'Internal Server Error'.strip&#10; +          where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +            where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52c66d0&gt;, 'GET', '/r')&#10; +              where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa52c66d0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa52845e0&gt;
-
-    def test_request_method_is_upper_case(api, app, report):
-        path = report(api.method)
-&gt;       assert wsgi.call(app, "GET", path).text.strip().isupper()
-E       AssertionError: assert False
-E        +  where False = &lt;built-in method isupper of str object at 0xffffa5250c10&gt;()
-E        +    where &lt;built-in method isupper of str object at 0xffffa5250c10&gt; = 'Internal Server Error'.isupper
-E        +      where 'Internal Server Error' = &lt;built-in method strip of str object at 0xffffa5250c10&gt;()
-E        +        where &lt;built-in method strip of str object at 0xffffa5250c10&gt; = 'Internal Server Error'.strip
-E        +          where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
-E        +            where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52c66d0&gt;, 'GET', '/r')
-E        +              where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:46: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_path" time="0.000"><failure message="AssertionError: assert b'/where' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5c5a810&gt;, 'GET', '/where')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5c5a810&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5285580&gt;
-
-    def test_request_exposes_path(api, app, report):
-        path = report(api.path, path="/where")
-&gt;       assert b"/where" in wsgi.call(app, "GET", path).body
-E       AssertionError: assert b'/where' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5c5a810&gt;, 'GET', '/where')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:53: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_path_excludes_query_string" time="0.000"><failure message="AssertionError: assert ('/noquery' in 'Internal Server Error')">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa523dd90&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5285d00&gt;
-
-    def test_request_path_excludes_query_string(api, app, report):
-        path = report(api.path, path="/noquery")
-        body = wsgi.call(app, "GET", path, query={"x": "1"}).text
-&gt;       assert "/noquery" in body and "x=1" not in body
-E       AssertionError: assert ('/noquery' in 'Internal Server Error')
-
-oracle/flask/test_request_handling.py:59: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_path_for_nested_route" time="0.000"><failure message="AssertionError: assert b'/a/b/c' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52012d0&gt;, 'GET', '/a/b/c')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa52012d0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5285940&gt;
-
-    def test_request_path_for_nested_route(api, app, report):
-        path = report(api.path, path="/a/b/c")
-&gt;       assert b"/a/b/c" in wsgi.call(app, "GET", path).body
-E       AssertionError: assert b'/a/b/c' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52012d0&gt;, 'GET', '/a/b/c')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:64: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter" time="0.000"><failure message="AssertionError: assert b'hello' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa523da10&gt;, 'GET', '/r', query={'x': 'hello'})&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa523da10&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5284a40&gt;
-
-    def test_request_query_parameter(api, app, report):
-        path = report(lambda r: api.query_get(r, "x"))
-&gt;       assert b"hello" in wsgi.call(app, "GET", path, query={"x": "hello"}).body
-E       AssertionError: assert b'hello' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa523da10&gt;, 'GET', '/r', query={'x': 'hello'})
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:71: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_missing_query_parameter_is_empty" time="0.000"><failure message="AssertionError: assert b'MISSING' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52a7d10&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa52a7d10&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5286520&gt;
-
-    def test_request_missing_query_parameter_is_empty(api, app, report):
-        path = report(lambda r: api.query_get(r, "x", "MISSING"))
-&gt;       assert b"MISSING" in wsgi.call(app, "GET", path).body
-E       AssertionError: assert b'MISSING' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa52a7d10&gt;, 'GET', '/r')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:76: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[a]" time="0.000" /><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[b b]" time="0.000"><failure message="AssertionError: assert 'b b' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5249fd0&gt;, 'GET', '/r', query={'x': 'b b'})&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5249fd0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5286ac0&gt;, value = 'b b'
-
-    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
-    def test_request_query_parameter_values(api, app, report, value):
-        path = report(lambda r: api.query_get(r, "x"))
-&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
-E       AssertionError: assert 'b b' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5249fd0&gt;, 'GET', '/r', query={'x': 'b b'})
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[1+1]" time="0.000"><failure message="AssertionError: assert '1+1' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5254e50&gt;, 'GET', '/r', query={'x': '1+1'})&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5254e50&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5286480&gt;, value = '1+1'
-
-    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
-    def test_request_query_parameter_values(api, app, report, value):
-        path = report(lambda r: api.query_get(r, "x"))
-&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
-E       AssertionError: assert '1+1' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5254e50&gt;, 'GET', '/r', query={'x': '1+1'})
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[sp ace]" time="0.000"><failure message="AssertionError: assert 'sp ace' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa523e590&gt;, 'GET', '/r', query={'x': 'sp ace'})&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa523e590&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5285580&gt;, value = 'sp ace'
-
-    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
-    def test_request_query_parameter_values(api, app, report, value):
-        path = report(lambda r: api.query_get(r, "x"))
-&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
-E       AssertionError: assert 'sp ace' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa523e590&gt;, 'GET', '/r', query={'x': 'sp ace'})
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[\xfc]" time="0.000"><failure message="AssertionError: assert 'ü' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa51fa310&gt;, 'GET', '/r', query={'x': 'ü'})&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa51fa310&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5287380&gt;, value = 'ü'
-
-    @pytest.mark.parametrize("value", ["a", "b b", "1+1", "sp ace", "ü"])
-    def test_request_query_parameter_values(api, app, report, value):
-        path = report(lambda r: api.query_get(r, "x"))
-&gt;       assert value in wsgi.call(app, "GET", path, query={"x": value}).text
-E       AssertionError: assert 'ü' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa51fa310&gt;, 'GET', '/r', query={'x': 'ü'})
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_multiple_query_parameters" time="0.000"><failure message="AssertionError: assert '1,2' in 'Internal Server Error'">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa51fbc90&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa52879c0&gt;
-
-    def test_request_multiple_query_parameters(api, app, report):
-        path = report(lambda r: f"{api.query_get(r, 'a')},{api.query_get(r, 'b')}")
-        body = wsgi.call(app, "GET", path, query={"a": "1", "b": "2"}).text
-&gt;       assert "1,2" in body
-E       AssertionError: assert '1,2' in 'Internal Server Error'
-
-oracle/flask/test_request_handling.py:88: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_empty_value" time="0.000"><failure message="AssertionError: assert '[]' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa51f7e10&gt;, 'GET', '/r', query='x=')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa51f7e10&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5287380&gt;
-
-    def test_request_query_parameter_empty_value(api, app, report):
-        path = report(lambda r: f"[{api.query_get(r, 'x')}]")
-&gt;       assert "[]" in wsgi.call(app, "GET", path, query="x=").text
-E       AssertionError: assert '[]' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa51f7e10&gt;, 'GET', '/r', query='x=')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:93: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_custom_header" time="0.000"><failure message="AssertionError: assert b'yes' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa523a150&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa52840e0&gt;
-
-    def test_request_custom_header(api, app, report):
-        path = report(lambda r: api.header(r, "X-Test"))
-        result = wsgi.call(app, "GET", path, headers={"X-Test": "yes"})
-&gt;       assert b"yes" in result.body
-E       AssertionError: assert b'yes' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-
-oracle/flask/test_request_handling.py:101: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_header_read_case_insensitively" time="0.000"><failure message="AssertionError: assert b'mixed' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa51fa5d0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5287d80&gt;
-
-    def test_request_header_read_case_insensitively(api, app, report):
-        path = report(lambda r: api.header(r, "x-test"))
-        result = wsgi.call(app, "GET", path, headers={"X-Test": "mixed"})
-&gt;       assert b"mixed" in result.body
-E       AssertionError: assert b'mixed' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-
-oracle/flask/test_request_handling.py:107: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_missing_header_default" time="0.000"><failure message="AssertionError: assert b'NONE' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5256710&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5256710&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5258360&gt;
-
-    def test_request_missing_header_default(api, app, report):
-        path = report(lambda r: api.header(r, "X-Absent", "NONE"))
-&gt;       assert b"NONE" in wsgi.call(app, "GET", path).body
-E       AssertionError: assert b'NONE' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5256710&gt;, 'GET', '/r')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:112: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_content_type_header" time="0.000"><failure message="AssertionError: assert b'application/json' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa511fb10&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5c1fa60&gt;
-
-    def test_request_content_type_header(api, app, report):
-        path = report(lambda r: api.header(r, "Content-Type"), methods=["POST"])
-        body, ctype = wsgi.json_body({"a": 1})
-        result = wsgi.call(app, "POST", path, body=body, content_type=ctype)
-&gt;       assert b"application/json" in result.body
-E       AssertionError: assert b'application/json' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-
-oracle/flask/test_request_handling.py:119: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_bytes" time="0.000"><failure message="AssertionError: assert b'5' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa511d750&gt;, 'POST', '/r', body=b'12345')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa511d750&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5bed4e0&gt;
-
-    def test_request_body_bytes(api, app, report):
-        path = report(lambda r: len(api.body_bytes(r)), methods=["POST"])
-&gt;       assert b"5" in wsgi.call(app, "POST", path, body=b"12345").body
-E       AssertionError: assert b'5' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa511d750&gt;, 'POST', '/r', body=b'12345')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:126: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_content" time="0.000"><failure message="AssertionError: assert b'payload' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5c58f90&gt;, 'POST', '/r', body=b'payload')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5c58f90&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5287c40&gt;
-
-    def test_request_body_content(api, app, report):
-        path = report(lambda r: api.body_bytes(r).decode(), methods=["POST"])
-&gt;       assert b"payload" in wsgi.call(app, "POST", path, body=b"payload").body
-E       AssertionError: assert b'payload' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5c58f90&gt;, 'POST', '/r', body=b'payload')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:131: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_empty_body" time="0.000"><failure message="AssertionError: assert b'0' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5205bd0&gt;, 'POST', '/r', body=b'')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5205bd0&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5286ac0&gt;
-
-    def test_request_empty_body(api, app, report):
-        path = report(lambda r: len(api.body_bytes(r)), methods=["POST"])
-&gt;       assert b"0" in wsgi.call(app, "POST", path, body=b"").body
-E       AssertionError: assert b'0' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5205bd0&gt;, 'POST', '/r', body=b'')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:136: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_json_body_is_readable" time="0.000" /><testcase classname="oracle.flask.test_request_handling" name="test_request_body_with_explicit_content_type" time="0.000"><failure message="AssertionError: assert b'plain text body' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa520cd90&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5bed620&gt;
-
-    def test_request_body_with_explicit_content_type(api, app, report):
-        """A text body is delivered intact when its content type says so.
-    
-        A form-encoded body is deliberately not asserted on here: the
-        specification names "body" but no form mapping, and an implementation is
-        free to parse a form body out of the raw stream (Werkzeug does), so a raw
-        assertion would test an unspecified choice.
-        """
-        path = report(lambda r: api.body_bytes(r).decode(), methods=["POST"])
-        result = wsgi.call(app, "POST", path, body=b"plain text body",
-                           content_type="text/plain")
-&gt;       assert b"plain text body" in result.body
-E       AssertionError: assert b'plain text body' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-
-oracle/flask/test_request_handling.py:159: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_not_consumed_by_routing" time="0.000"><failure message="AssertionError: assert b'intact' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5243810&gt;, 'POST', '/r', body=b'intact')&#10; +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffa520ba50&gt;
-app = &lt;flaskframework.app.Flask object at 0xffffa5243810&gt;
-report = &lt;function report.&lt;locals&gt;._report at 0xffffa5287f60&gt;
-
-    def test_request_body_not_consumed_by_routing(api, app, report):
-        """The body is still readable inside the view after dispatch."""
-        path = report(lambda r: api.body_bytes(r).decode() or "EMPTY",
-                      methods=["POST"])
-&gt;       assert b"intact" in wsgi.call(app, "POST", path, body=b"intact").body
-E       AssertionError: assert b'intact' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffa5b725c0&gt;(&lt;flaskframework.app.Flask object at 0xffffa5243810&gt;, 'POST', '/r', body=b'intact')
-E        +      where &lt;function call at 0xffffa5b725c0&gt; = wsgi.call
-
-oracle/flask/test_request_handling.py:166: AssertionError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_string_return_is_200" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_string_return_becomes_the_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_has_a_content_type" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_status_line_is_well_formed" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_empty_body_is_allowed" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[200]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[201]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[202]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[400]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[404]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[418]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[500]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_created_201_with_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_error_status_with_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_custom_header" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_multiple_custom_headers" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_explicit_content_type" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_header_and_status_together" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_object_carries_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_body_is_bytes_over_wsgi" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_body_preserves_utf8" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_content_length_matches_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_distinct_routes_get_distinct_responses" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_is_regenerated_per_request" time="0.000" /><testcase classname="oracle.flask.test_templating" name="test_renders_literal_text" time="0.000"><failure message="AssertionError: assert 'plain text' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259300&gt;('plain text')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259300&gt;
-
-    def test_renders_literal_text(rendered):
-&gt;       assert "plain text" in rendered("plain text")
-E       AssertionError: assert 'plain text' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259300&gt;('plain text')
-
-oracle/flask/test_templating.py:36: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_variable" time="0.000"><failure message="AssertionError: assert 'world' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa52598a0&gt;('hello {{ name }}', name='world')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa52598a0&gt;
-
-    def test_renders_a_variable(rendered):
-&gt;       assert "world" in rendered("hello {{ name }}", name="world")
-E       AssertionError: assert 'world' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa52598a0&gt;('hello {{ name }}', name='world')
-
-oracle/flask/test_templating.py:40: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_multiple_variables" time="0.000"><failure message="AssertionError: assert 'x-y' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259e40&gt;
-
-    def test_renders_multiple_variables(rendered):
-        out = rendered("{{ a }}-{{ b }}", a="x", b="y")
-&gt;       assert "x-y" in out
-E       AssertionError: assert 'x-y' in 'Internal Server Error'
-
-oracle/flask/test_templating.py:45: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_variable_not_left_in_output" time="0.000" /><testcase classname="oracle.flask.test_templating" name="test_renders_a_for_loop" time="0.000"><failure message="AssertionError: assert '1,2,3,' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525a520&gt;
-
-    def test_renders_a_for_loop(rendered):
-        out = rendered("{% for i in items %}{{ i }},{% endfor %}",
-                       items=[1, 2, 3])
-&gt;       assert "1,2,3," in out
-E       AssertionError: assert '1,2,3,' in 'Internal Server Error'
-
-oracle/flask/test_templating.py:57: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_conditional_true_branch" time="0.000"><failure message="AssertionError: assert ('yes' in 'Internal Server Error')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5287b00&gt;
-
-    def test_renders_a_conditional_true_branch(rendered):
-        out = rendered("{% if flag %}yes{% else %}no{% endif %}", flag=True)
-&gt;       assert "yes" in out and "no" not in out
-E       AssertionError: assert ('yes' in 'Internal Server Error')
-
-oracle/flask/test_templating.py:62: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_conditional_false_branch" time="0.000"><failure message="AssertionError: assert 'no' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525a7a0&gt;
-
-    def test_renders_a_conditional_false_branch(rendered):
-        out = rendered("{% if flag %}yes{% else %}no{% endif %}", flag=False)
-&gt;       assert "no" in out
-E       AssertionError: assert 'no' in 'Internal Server Error'
-
-oracle/flask/test_templating.py:67: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_filter" time="0.000"><failure message="AssertionError: assert 'SHOUT' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259a80&gt;('{{ word|upper }}', word='shout')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259a80&gt;
-
-    def test_renders_a_filter(rendered):
-&gt;       assert "SHOUT" in rendered("{{ word|upper }}", word="shout")
-E       AssertionError: assert 'SHOUT' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259a80&gt;('{{ word|upper }}', word='shout')
-
-oracle/flask/test_templating.py:71: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_dict_access" time="0.000"><failure message="assert 'inner' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259300&gt;(&quot;{{ d['k'] }}&quot;, d={'k': 'inner'})">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259300&gt;
-
-    def test_renders_dict_access(rendered):
-&gt;       assert "inner" in rendered("{{ d['k'] }}", d={"k": "inner"})
-E       assert 'inner' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa5259300&gt;("{{ d['k'] }}", d={'k': 'inner'})
-
-oracle/flask/test_templating.py:75: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_attribute_access" time="0.000"><failure message="AssertionError: assert 'got-attr' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525ac00&gt;('{{ o.attr }}', o=&lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffa5c58190&gt;)&#10; +    where &lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffa5c58190&gt; = &lt;class 'test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj'&gt;()">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525ac00&gt;
-
-    def test_renders_attribute_access(rendered):
-        class Obj:
-            attr = "got-attr"
-&gt;       assert "got-attr" in rendered("{{ o.attr }}", o=Obj())
-E       AssertionError: assert 'got-attr' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525ac00&gt;('{{ o.attr }}', o=&lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffa5c58190&gt;)
-E        +    where &lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffa5c58190&gt; = &lt;class 'test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj'&gt;()
-
-oracle/flask/test_templating.py:81: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_nested_loop_and_conditional" time="0.000"><failure message="AssertionError: assert '23' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525b1a0&gt;
-
-    def test_renders_nested_loop_and_conditional(rendered):
-        out = rendered(
-            "{% for i in items %}{% if i &gt; 1 %}{{ i }}{% endif %}{% endfor %}",
-            items=[1, 2, 3])
-&gt;       assert "23" in out
-E       AssertionError: assert '23' in 'Internal Server Error'
-
-oracle/flask/test_templating.py:88: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_arithmetic_expression" time="0.000"><failure message="AssertionError: assert '7' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525b740&gt;('{{ 3 + 4 }}')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525b740&gt;
-
-    def test_renders_arithmetic_expression(rendered):
-&gt;       assert "7" in rendered("{{ 3 + 4 }}")
-E       AssertionError: assert '7' in 'Internal Server Error'
-E        +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffa525b740&gt;('{{ 3 + 4 }}')
-
-oracle/flask/test_templating.py:92: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_rendered_output_becomes_the_response_body" time="0.000"><failure message="AssertionError: assert (500 == 200)&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).status_code">api = &lt;api.Api object at 0xffffa520ba50&gt;
-route = &lt;function route.&lt;locals&gt;._route at 0xffffa525bb00&gt;
-get = &lt;function get.&lt;locals&gt;._get at 0xffffa525bc40&gt;
-
-    def test_rendered_output_becomes_the_response_body(api, route, get):
-        def view(*_req, **_):
-            return api.render("in-response")
-        route("/ir")(view)
-        result = get("/ir")
-&gt;       assert result.status_code == 200 and b"in-response" in result.body
-E       AssertionError: assert (500 == 200)
-E        +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).status_code
-
-oracle/flask/test_templating.py:102: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_inside_a_request_with_request_data" time="0.000"><failure message="AssertionError: assert b'path=/withreq' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5154180&gt;('/withreq')">api = &lt;api.Api object at 0xffffa520ba50&gt;
-route = &lt;function route.&lt;locals&gt;._route at 0xffffa5154040&gt;
-get = &lt;function get.&lt;locals&gt;._get at 0xffffa5154180&gt;
-
-    def test_renders_inside_a_request_with_request_data(api, route, get):
-        def view(*view_args, **_):
-            return api.render("path={{ p }}",
-                              p=api.path(api.current_request(view_args)))
-        route("/withreq")(view)
-&gt;       assert b"path=/withreq" in get("/withreq").body
-E       AssertionError: assert b'path=/withreq' in b'Internal Server Error'
-E        +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
-E        +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5154180&gt;('/withreq')
-
-oracle/flask/test_templating.py:110: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_autoescapes_html_in_a_variable" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_route_accepts_rule_string" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_static_route_returns_view_body" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_root_route" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_unregistered_path_is_404" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_two_routes_dispatch_independently" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_response_is_200_with_a_body" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[alice]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[bob]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[123]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[a-b_c]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_matches_any_single_segment" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_does_not_span_slash" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_requires_a_value" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multiple_variable_segments[/mix/x/9-expected0]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multiple_variable_segments[/mix/y/0-expected1]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_and_literal_segments_combined" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_static_route_takes_precedence_over_variable" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_default_route_allows_get" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_method_restricted_route_accepts_its_method" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_method_restricted_route_rejects_other_method" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5155f80&gt;('/p')">route = &lt;function route.&lt;locals&gt;._route at 0xffffa5155ee0&gt;
-get = &lt;function get.&lt;locals&gt;._get at 0xffffa5155f80&gt;
-
-    def test_method_restricted_route_rejects_other_method(route, get):
-        route("/p", methods=["POST"])(_view)
-&gt;       assert get("/p").status_code == 405
-E       AssertionError: assert 404 == 405
-E        +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
-E        +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5155f80&gt;('/p')
-
-oracle/flask/test_url_routing.py:124: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[GET]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[POST]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[PUT]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[DELETE]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_method_not_in_list_is_rejected" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function request_.&lt;locals&gt;._call at 0xffffa525b7e0&gt;('DELETE', '/limited')">route = &lt;function route.&lt;locals&gt;._route at 0xffffa525b560&gt;
-request_ = &lt;function request_.&lt;locals&gt;._call at 0xffffa525b7e0&gt;
-
-    def test_method_not_in_list_is_rejected(route, request_):
-        route("/limited", methods=["GET", "POST"])(_view)
-&gt;       assert request_("DELETE", "/limited").status_code == 405
-E       AssertionError: assert 404 == 405
-E        +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
-E        +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function request_.&lt;locals&gt;._call at 0xffffa525b7e0&gt;('DELETE', '/limited')
-
-oracle/flask/test_url_routing.py:135: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_405_advertises_an_allow_header" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code">route = &lt;function route.&lt;locals&gt;._route at 0xffffa525b240&gt;
-get = &lt;function get.&lt;locals&gt;._get at 0xffffa525a980&gt;
-
-    def test_405_advertises_an_allow_header(route, get):
-        route("/only", methods=["POST"])(_view)
-        result = get("/only")
-&gt;       assert result.status_code == 405
-E       AssertionError: assert 404 == 405
-E        +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
-
-oracle/flask/test_url_routing.py:141: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_method_filtering_is_per_route" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5259940&gt;('/writeonly')">route = &lt;function route.&lt;locals&gt;._route at 0xffffa525aca0&gt;
-get = &lt;function get.&lt;locals&gt;._get at 0xffffa5259940&gt;
-request_ = &lt;function request_.&lt;locals&gt;._call at 0xffffa52593a0&gt;
-
-    def test_method_filtering_is_per_route(route, get, request_):
-        def readonly(*_req, **_):
-            return "r"
-    
-        def writeonly(*_req, **_):
-            return "w"
-        route("/readonly", methods=["GET"])(readonly)
-        route("/writeonly", methods=["POST"])(writeonly)
-        assert get("/readonly").status_code == 200
-&gt;       assert get("/writeonly").status_code == 405
-E       AssertionError: assert 404 == 405
-E        +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
-E        +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa5259940&gt;('/writeonly')
-
-oracle/flask/test_url_routing.py:154: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_path_matching_is_case_sensitive" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_query_string_does_not_affect_matching" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_unregistered_method_on_unregistered_path_is_404" time="0.002" /></testsuite></testsuites>
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="47" skipped="0" tests="140" time="0.188" timestamp="2026-10-29T21:44:18.829312" hostname="1775dbc3bb4e"><testcase classname="oracle.flask.test_app_context" name="test_current_app_accessible_in_a_view" time="0.001" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_is_the_handling_application" time="0.001" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_accessible_from_a_nested_call" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_distinguishes_two_applications" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_current_app_unavailable_outside_a_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_is_writable_in_a_view" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_value_readable_back_in_the_same_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_shared_between_view_and_helper" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_is_empty_at_the_start_of_each_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_does_not_leak_between_sequential_requests" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_missing_attribute_raises" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_getattr_default_works" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_holds_non_string_values" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_unavailable_outside_a_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_request_accessible_in_the_same_context" time="0.001"><failure message="AssertionError: assert b'/both' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa76b650&gt;, 'GET', '/both')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+marked_app = &lt;flaskframework.app.Flask object at 0xffffaa76b650&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffffaa71a0c0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'/both' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa76b650&gt;, 'GET', '/both')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_app_context.py:177: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_request_and_g_coexist" time="0.001"><failure message="AssertionError: assert b'/coexist' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa771490&gt;, 'GET', '/coexist')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+marked_app = &lt;flaskframework.app.Flask object at 0xffffaa771490&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffffaa71a7a0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'/coexist' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa771490&gt;, 'GET', '/coexist')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_app_context.py:185: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_and_g_coexist" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_g_is_isolated_between_concurrent_threads" time="0.001"><failure message="AssertionError: assert b'Internal Server Error' == b'aaa'&#10;  &#10;  At index 0 diff: b'I' != b'a'&#10;  Use -v to get more diff">api = &lt;api.Api object at 0xffffaa720d90&gt;
+marked_app = &lt;flaskframework.app.Flask object at 0xffffaa772e90&gt;
+ctx_route = &lt;function ctx_route.&lt;locals&gt;._route at 0xffffaa71a2a0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'Internal Server Error' == b'aaa'
+E     
+E     At index 0 diff: b'I' != b'a'
+E     Use -v to get more diff
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_app_context.py:229: AssertionError</failure></testcase><testcase classname="oracle.flask.test_app_context" name="test_current_app_is_correct_in_concurrent_threads" time="0.001" /><testcase classname="oracle.flask.test_app_context" name="test_context_is_released_after_the_request" time="0.000" /><testcase classname="oracle.flask.test_app_context" name="test_many_sequential_requests_keep_context_clean" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_can_be_constructed" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_route_is_reachable_after_registration" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_route_returns_its_body" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_unregistered_blueprint_route_is_not_reachable" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_with_several_routes" time="0.001" /><testcase classname="oracle.flask.test_blueprints" name="test_url_prefix_is_applied" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_route_not_reachable_without_the_prefix" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_all_blueprint_routes_inherit_the_prefix" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_prefix_with_multiple_segments" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_root_route_under_prefix" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_two_blueprints_with_different_prefixes" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_without_prefix_mounts_at_root" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_inside_a_blueprint" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[one]" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[2]" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_variable_segment_values_inside_a_blueprint[three-3]" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_method_filtering_inside_a_blueprint" time="0.001"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffaa71be20&gt;('/api/post-only')">mount = &lt;function mount.&lt;locals&gt;._mount at 0xffffaa71bd80&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffffaa71be20&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffffaa71bec0&gt;
+
+&gt;   ???
+E   AssertionError: assert 404 == 405
+E    +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
+E    +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffaa71be20&gt;('/api/post-only')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_blueprints.py:139: AssertionError</failure></testcase><testcase classname="oracle.flask.test_blueprints" name="test_multi_method_route_inside_a_blueprint" time="0.001" /><testcase classname="oracle.flask.test_blueprints" name="test_blueprint_and_app_routes_coexist" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_prefix_does_not_leak_to_app_routes" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_three_blueprints_mounted_together" time="0.000" /><testcase classname="oracle.flask.test_blueprints" name="test_unknown_path_under_a_prefix_is_404" time="0.000" /><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[GET]" time="0.001"><failure message="AssertionError: assert b'GET' in b'Internal Server Error'&#10; +  where b'GET' = &lt;built-in method encode of str object at 0xffffab46d630&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffab46d630&gt; = 'GET'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a1590&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7a1590&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79c9a0&gt;, method = 'GET'
+
+&gt;   ???
+E   AssertionError: assert b'GET' in b'Internal Server Error'
+E    +  where b'GET' = &lt;built-in method encode of str object at 0xffffab46d630&gt;()
+E    +    where &lt;built-in method encode of str object at 0xffffab46d630&gt; = 'GET'.encode
+E    +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a1590&gt;, 'GET', '/r')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[POST]" time="0.001"><failure message="AssertionError: assert b'POST' in b'Internal Server Error'&#10; +  where b'POST' = &lt;built-in method encode of str object at 0xffffab2b36b0&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffab2b36b0&gt; = 'POST'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a3c50&gt;, 'POST', '/r')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7a3c50&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79cea0&gt;, method = 'POST'
+
+&gt;   ???
+E   AssertionError: assert b'POST' in b'Internal Server Error'
+E    +  where b'POST' = &lt;built-in method encode of str object at 0xffffab2b36b0&gt;()
+E    +    where &lt;built-in method encode of str object at 0xffffab2b36b0&gt; = 'POST'.encode
+E    +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a3c50&gt;, 'POST', '/r')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[PUT]" time="0.001"><failure message="AssertionError: assert b'PUT' in b'Internal Server Error'&#10; +  where b'PUT' = &lt;built-in method encode of str object at 0xffffab451870&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffab451870&gt; = 'PUT'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a5e10&gt;, 'PUT', '/r')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7a5e10&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d3a0&gt;, method = 'PUT'
+
+&gt;   ???
+E   AssertionError: assert b'PUT' in b'Internal Server Error'
+E    +  where b'PUT' = &lt;built-in method encode of str object at 0xffffab451870&gt;()
+E    +    where &lt;built-in method encode of str object at 0xffffab451870&gt; = 'PUT'.encode
+E    +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a5e10&gt;, 'PUT', '/r')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[DELETE]" time="0.001"><failure message="AssertionError: assert b'DELETE' in b'Internal Server Error'&#10; +  where b'DELETE' = &lt;built-in method encode of str object at 0xffffab2b0930&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffab2b0930&gt; = 'DELETE'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a7150&gt;, 'DELETE', '/r')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7a7150&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d620&gt;, method = 'DELETE'
+
+&gt;   ???
+E   AssertionError: assert b'DELETE' in b'Internal Server Error'
+E    +  where b'DELETE' = &lt;built-in method encode of str object at 0xffffab2b0930&gt;()
+E    +    where &lt;built-in method encode of str object at 0xffffab2b0930&gt; = 'DELETE'.encode
+E    +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a7150&gt;, 'DELETE', '/r')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_method[PATCH]" time="0.001"><failure message="AssertionError: assert b'PATCH' in b'Internal Server Error'&#10; +  where b'PATCH' = &lt;built-in method encode of str object at 0xffffab453e70&gt;()&#10; +    where &lt;built-in method encode of str object at 0xffffab453e70&gt; = 'PATCH'.encode&#10; +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c1190&gt;, 'PATCH', '/r')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7c1190&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79db20&gt;, method = 'PATCH'
+
+&gt;   ???
+E   AssertionError: assert b'PATCH' in b'Internal Server Error'
+E    +  where b'PATCH' = &lt;built-in method encode of str object at 0xffffab453e70&gt;()
+E    +    where &lt;built-in method encode of str object at 0xffffab453e70&gt; = 'PATCH'.encode
+E    +  and   b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c1190&gt;, 'PATCH', '/r')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:41: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_method_is_upper_case" time="0.000"><failure message="AssertionError: assert False&#10; +  where False = &lt;built-in method isupper of str object at 0xffffaa7bcc10&gt;()&#10; +    where &lt;built-in method isupper of str object at 0xffffaa7bcc10&gt; = 'Internal Server Error'.isupper&#10; +      where 'Internal Server Error' = &lt;built-in method strip of str object at 0xffffaa7bcc10&gt;()&#10; +        where &lt;built-in method strip of str object at 0xffffaa7bcc10&gt; = 'Internal Server Error'.strip&#10; +          where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +            where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c3010&gt;, 'GET', '/r')&#10; +              where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7c3010&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79e020&gt;
+
+&gt;   ???
+E   AssertionError: assert False
+E    +  where False = &lt;built-in method isupper of str object at 0xffffaa7bcc10&gt;()
+E    +    where &lt;built-in method isupper of str object at 0xffffaa7bcc10&gt; = 'Internal Server Error'.isupper
+E    +      where 'Internal Server Error' = &lt;built-in method strip of str object at 0xffffaa7bcc10&gt;()
+E    +        where &lt;built-in method strip of str object at 0xffffaa7bcc10&gt; = 'Internal Server Error'.strip
+E    +          where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
+E    +            where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c3010&gt;, 'GET', '/r')
+E    +              where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:46: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_exposes_path" time="0.000"><failure message="AssertionError: assert b'/where' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c3c90&gt;, 'GET', '/where')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7c3c90&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79ca40&gt;
+
+&gt;   ???
+E   AssertionError: assert b'/where' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c3c90&gt;, 'GET', '/where')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:53: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_path_excludes_query_string" time="0.000"><failure message="AssertionError: assert ('/noquery' in 'Internal Server Error')">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7c4550&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d3a0&gt;
+
+&gt;   ???
+E   AssertionError: assert ('/noquery' in 'Internal Server Error')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:59: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_path_for_nested_route" time="0.000"><failure message="AssertionError: assert b'/a/b/c' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c6250&gt;, 'GET', '/a/b/c')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7c6250&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79e700&gt;
+
+&gt;   ???
+E   AssertionError: assert b'/a/b/c' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7c6250&gt;, 'GET', '/a/b/c')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:64: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter" time="0.001"><failure message="AssertionError: assert b'hello' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7cc2d0&gt;, 'GET', '/r', query={'x': 'hello'})&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7cc2d0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79ee80&gt;
+
+&gt;   ???
+E   AssertionError: assert b'hello' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7cc2d0&gt;, 'GET', '/r', query={'x': 'hello'})
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:71: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_missing_query_parameter_is_empty" time="0.000"><failure message="AssertionError: assert b'MISSING' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a78d0&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7a78d0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d3a0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'MISSING' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7a78d0&gt;, 'GET', '/r')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:76: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[a]" time="0.000" /><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[b b]" time="0.000"><failure message="AssertionError: assert 'b b' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7cdd10&gt;, 'GET', '/r', query={'x': 'b b'})&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7cdd10&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d800&gt;, value = 'b b'
+
+&gt;   ???
+E   AssertionError: assert 'b b' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7cdd10&gt;, 'GET', '/r', query={'x': 'b b'})
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[1+1]" time="0.001"><failure message="AssertionError: assert '1+1' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7d81d0&gt;, 'GET', '/r', query={'x': '1+1'})&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7d81d0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79f740&gt;, value = '1+1'
+
+&gt;   ???
+E   AssertionError: assert '1+1' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7d81d0&gt;, 'GET', '/r', query={'x': '1+1'})
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[sp ace]" time="0.001"><failure message="AssertionError: assert 'sp ace' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7cf450&gt;, 'GET', '/r', query={'x': 'sp ace'})&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7cf450&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d800&gt;, value = 'sp ace'
+
+&gt;   ???
+E   AssertionError: assert 'sp ace' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7cf450&gt;, 'GET', '/r', query={'x': 'sp ace'})
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_values[\xfc]" time="0.001"><failure message="AssertionError: assert 'ü' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7d9ad0&gt;, 'GET', '/r', query={'x': 'ü'})&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7d9ad0&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d300&gt;, value = 'ü'
+
+&gt;   ???
+E   AssertionError: assert 'ü' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7d9ad0&gt;, 'GET', '/r', query={'x': 'ü'})
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:82: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_multiple_query_parameters" time="0.000"><failure message="AssertionError: assert '1,2' in 'Internal Server Error'">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7db650&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79fc40&gt;
+
+&gt;   ???
+E   AssertionError: assert '1,2' in 'Internal Server Error'
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:88: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_query_parameter_empty_value" time="0.001"><failure message="AssertionError: assert '[]' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7dd450&gt;, 'GET', '/r', query='x=')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7dd450&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa7e4220&gt;
+
+&gt;   ???
+E   AssertionError: assert '[]' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).text
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7dd450&gt;, 'GET', '/r', query='x=')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:93: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_custom_header" time="0.000"><failure message="AssertionError: assert b'yes' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7dbc90&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79fce0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'yes' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:101: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_header_read_case_insensitively" time="0.000"><failure message="AssertionError: assert b'mixed' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7de950&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79d1c0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'mixed' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:107: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_missing_header_default" time="0.000"><failure message="AssertionError: assert b'NONE' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7ec310&gt;, 'GET', '/r')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7ec310&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa7e45e0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'NONE' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7ec310&gt;, 'GET', '/r')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:112: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_content_type_header" time="0.001"><failure message="AssertionError: assert b'application/json' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7ee250&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79f2e0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'application/json' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:119: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_bytes" time="0.000"><failure message="AssertionError: assert b'5' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7daa50&gt;, 'POST', '/r', body=b'12345')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7daa50&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79fd80&gt;
+
+&gt;   ???
+E   AssertionError: assert b'5' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7daa50&gt;, 'POST', '/r', body=b'12345')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:126: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_content" time="0.000"><failure message="AssertionError: assert b'payload' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7ef450&gt;, 'POST', '/r', body=b'payload')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7ef450&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa7e42c0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'payload' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa7ef450&gt;, 'POST', '/r', body=b'payload')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:131: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_empty_body" time="0.000"><failure message="AssertionError: assert b'0' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa801390&gt;, 'POST', '/r', body=b'')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa801390&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa7e4f40&gt;
+
+&gt;   ???
+E   AssertionError: assert b'0' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa801390&gt;, 'POST', '/r', body=b'')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:136: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_json_body_is_readable" time="0.000" /><testcase classname="oracle.flask.test_request_handling" name="test_request_body_with_explicit_content_type" time="0.000"><failure message="AssertionError: assert b'plain text body' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa7deb90&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa79fce0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'plain text body' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:159: AssertionError</failure></testcase><testcase classname="oracle.flask.test_request_handling" name="test_request_body_not_consumed_by_routing" time="0.000"><failure message="AssertionError: assert b'intact' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa802f10&gt;, 'POST', '/r', body=b'intact')&#10; +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call">api = &lt;api.Api object at 0xffffaa720d90&gt;
+app = &lt;flaskframework.app.Flask object at 0xffffaa802f10&gt;
+report = &lt;function report.&lt;locals&gt;._report at 0xffffaa7e49a0&gt;
+
+&gt;   ???
+E   AssertionError: assert b'intact' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function call at 0xffffab09b6a0&gt;(&lt;flaskframework.app.Flask object at 0xffffaa802f10&gt;, 'POST', '/r', body=b'intact')
+E    +      where &lt;function call at 0xffffab09b6a0&gt; = wsgi.call
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_request_handling.py:166: AssertionError</failure></testcase><testcase classname="oracle.flask.test_response_rendering" name="test_string_return_is_200" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_string_return_becomes_the_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_has_a_content_type" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_status_line_is_well_formed" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_empty_body_is_allowed" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[200]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[201]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[202]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[400]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[404]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[418]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_status_code_is_honoured[500]" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_created_201_with_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_error_status_with_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_custom_header" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_multiple_custom_headers" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_explicit_content_type" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_header_and_status_together" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_object_carries_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_body_is_bytes_over_wsgi" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_body_preserves_utf8" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_content_length_matches_body" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_distinct_routes_get_distinct_responses" time="0.000" /><testcase classname="oracle.flask.test_response_rendering" name="test_response_is_regenerated_per_request" time="0.000" /><testcase classname="oracle.flask.test_templating" name="test_renders_literal_text" time="0.001"><failure message="AssertionError: assert 'plain text' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e6a20&gt;('plain text')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e6a20&gt;
+
+&gt;   ???
+E   AssertionError: assert 'plain text' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e6a20&gt;('plain text')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:36: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_variable" time="0.000"><failure message="AssertionError: assert 'world' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7060&gt;('hello {{ name }}', name='world')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7060&gt;
+
+&gt;   ???
+E   AssertionError: assert 'world' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7060&gt;('hello {{ name }}', name='world')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:40: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_multiple_variables" time="0.001"><failure message="AssertionError: assert 'x-y' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7600&gt;
+
+&gt;   ???
+E   AssertionError: assert 'x-y' in 'Internal Server Error'
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:45: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_variable_not_left_in_output" time="0.000" /><testcase classname="oracle.flask.test_templating" name="test_renders_a_for_loop" time="0.000"><failure message="AssertionError: assert '1,2,3,' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e6ca0&gt;
+
+&gt;   ???
+E   AssertionError: assert '1,2,3,' in 'Internal Server Error'
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:57: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_conditional_true_branch" time="0.000"><failure message="AssertionError: assert ('yes' in 'Internal Server Error')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e79c0&gt;
+
+&gt;   ???
+E   AssertionError: assert ('yes' in 'Internal Server Error')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:62: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_conditional_false_branch" time="0.000"><failure message="AssertionError: assert 'no' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7f60&gt;
+
+&gt;   ???
+E   AssertionError: assert 'no' in 'Internal Server Error'
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:67: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_a_filter" time="0.000"><failure message="AssertionError: assert 'SHOUT' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7a60&gt;('{{ word|upper }}', word='shout')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7a60&gt;
+
+&gt;   ???
+E   AssertionError: assert 'SHOUT' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7a60&gt;('{{ word|upper }}', word='shout')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:71: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_dict_access" time="0.000"><failure message="assert 'inner' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7240&gt;(&quot;{{ d['k'] }}&quot;, d={'k': 'inner'})">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7240&gt;
+
+&gt;   ???
+E   assert 'inner' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e7240&gt;("{{ d['k'] }}", d={'k': 'inner'})
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:75: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_attribute_access" time="0.001"><failure message="AssertionError: assert 'got-attr' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e4f40&gt;('{{ o.attr }}', o=&lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffaa7ec350&gt;)&#10; +    where &lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffaa7ec350&gt; = &lt;class 'test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj'&gt;()">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e4f40&gt;
+
+&gt;   ???
+E   AssertionError: assert 'got-attr' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e4f40&gt;('{{ o.attr }}', o=&lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffaa7ec350&gt;)
+E    +    where &lt;test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj object at 0xffffaa7ec350&gt; = &lt;class 'test_templating.test_renders_attribute_access.&lt;locals&gt;.Obj'&gt;()
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:81: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_nested_loop_and_conditional" time="0.011"><failure message="AssertionError: assert '23' in 'Internal Server Error'">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e4680&gt;
+
+&gt;   ???
+E   AssertionError: assert '23' in 'Internal Server Error'
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:88: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_arithmetic_expression" time="0.001"><failure message="AssertionError: assert '7' in 'Internal Server Error'&#10; +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e51c0&gt;('{{ 3 + 4 }}')">rendered = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e51c0&gt;
+
+&gt;   ???
+E   AssertionError: assert '7' in 'Internal Server Error'
+E    +  where 'Internal Server Error' = &lt;function rendered.&lt;locals&gt;._rendered at 0xffffaa7e51c0&gt;('{{ 3 + 4 }}')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:92: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_rendered_output_becomes_the_response_body" time="0.001"><failure message="AssertionError: assert (500 == 200)&#10; +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).status_code">api = &lt;api.Api object at 0xffffaa720d90&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffffaa7e6d40&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffffaa7e7b00&gt;
+
+&gt;   ???
+E   AssertionError: assert (500 == 200)
+E    +  where 500 = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).status_code
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:102: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_renders_inside_a_request_with_request_data" time="0.001"><failure message="AssertionError: assert b'path=/withreq' in b'Internal Server Error'&#10; +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body&#10; +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffaa7e7f60&gt;('/withreq')">api = &lt;api.Api object at 0xffffaa720d90&gt;
+route = &lt;function route.&lt;locals&gt;._route at 0xffffaa7e7ce0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffffaa7e7f60&gt;
+
+&gt;   ???
+E   AssertionError: assert b'path=/withreq' in b'Internal Server Error'
+E    +  where b'Internal Server Error' = WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None).body
+E    +    where WsgiResult(status='500 Internal Server Error', headers=[('Content-Type', 'text/html')], body=b'Internal Server Error', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffaa7e7f60&gt;('/withreq')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_templating.py:110: AssertionError</failure></testcase><testcase classname="oracle.flask.test_templating" name="test_autoescapes_html_in_a_variable" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_route_accepts_rule_string" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_static_route_returns_view_body" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_root_route" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_unregistered_path_is_404" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_two_routes_dispatch_independently" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_response_is_200_with_a_body" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[alice]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[bob]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[123]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_value_reaches_view[a-b_c]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_matches_any_single_segment" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_does_not_span_slash" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_segment_requires_a_value" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multiple_variable_segments[/mix/x/9-expected0]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multiple_variable_segments[/mix/y/0-expected1]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_variable_and_literal_segments_combined" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_static_route_takes_precedence_over_variable" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_default_route_allows_get" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_method_restricted_route_accepts_its_method" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_method_restricted_route_rejects_other_method" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa9628360&gt;('/p')">route = &lt;function route.&lt;locals&gt;._route at 0xffffa96282c0&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffffa9628360&gt;
+
+&gt;   ???
+E   AssertionError: assert 404 == 405
+E    +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
+E    +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa9628360&gt;('/p')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_url_routing.py:124: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[GET]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[POST]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[PUT]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_multi_method_route_accepts_each[DELETE]" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_method_not_in_list_is_rejected" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function request_.&lt;locals&gt;._call at 0xffffa9628220&gt;('DELETE', '/limited')">route = &lt;function route.&lt;locals&gt;._route at 0xffffa9628c20&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffffa9628220&gt;
+
+&gt;   ???
+E   AssertionError: assert 404 == 405
+E    +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
+E    +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function request_.&lt;locals&gt;._call at 0xffffa9628220&gt;('DELETE', '/limited')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_url_routing.py:135: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_405_advertises_an_allow_header" time="0.000"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code">route = &lt;function route.&lt;locals&gt;._route at 0xffffa9628d60&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffffa9628e00&gt;
+
+&gt;   ???
+E   AssertionError: assert 404 == 405
+E    +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_url_routing.py:141: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_method_filtering_is_per_route" time="0.001"><failure message="AssertionError: assert 404 == 405&#10; +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code&#10; +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa9629300&gt;('/writeonly')">route = &lt;function route.&lt;locals&gt;._route at 0xffffa9629260&gt;
+get = &lt;function get.&lt;locals&gt;._get at 0xffffa9629300&gt;
+request_ = &lt;function request_.&lt;locals&gt;._call at 0xffffa96293a0&gt;
+
+&gt;   ???
+E   AssertionError: assert 404 == 405
+E    +  where 404 = WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None).status_code
+E    +    where WsgiResult(status='404 Not Found', headers=[('Content-Type', 'text/html')], body=b'Not Found', exc=None) = &lt;function get.&lt;locals&gt;._get at 0xffffa9629300&gt;('/writeonly')
+
+/Users/sameermankotia/Desktop/Agentic/oracle/flask/test_url_routing.py:154: AssertionError</failure></testcase><testcase classname="oracle.flask.test_url_routing" name="test_path_matching_is_case_sensitive" time="0.001" /><testcase classname="oracle.flask.test_url_routing" name="test_query_string_does_not_affect_matching" time="0.000" /><testcase classname="oracle.flask.test_url_routing" name="test_unregistered_method_on_unregistered_path_is_404" time="0.005" /></testsuite></testsuites>

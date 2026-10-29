@@ -1,4 +1,18 @@
 
 === significance ===
-[significance] SKIP: no agentic/human pair had results for any dimension
-[significance] done in 0.0s
+[significance] swe_flask_run01 vs flask: CC p=0.30066576267253253 r=0.069  MI p=0.35110359408969694 r=-0.218
+[significance] openhands_flask_run01 vs flask: CC p=0.08037147124877767 r=0.207  MI p=0.027932356057725444 r=-0.59
+[significance] openhands_flask_run02 vs flask: CC p=0.6836304052024245 r=-0.069  MI p=0.4438766612262952 r=0.5
+[significance] openhands_flask_run03 vs flask: CC p=0.20290360005830166 r=0.237  MI p=0.4438766612262952 r=0.5
+[significance] openhands_flask_run04 vs flask: CC p=0.0052283356047701695 r=0.287  MI p=0.0061637783571109606 r=-0.685
+[significance] openhands_flask_run05 vs flask: CC p=0.7545391509908672 r=0.044  MI p=0.13820654716737235 r=-0.433
+[significance] swe_flask_run02 vs flask: CC p=0.15080290052470577 r=0.103  MI p=0.2289866044937091 r=-0.292
+[significance] swe_flask_run03 vs flask: CC p=0.9517113007581552 r=0.005  MI p=0.06046793437941256 r=-0.453
+[significance] swe_flask_run04 vs flask: CC p=0.012588766752711695 r=0.17  MI p=0.12649052011296438 r=-0.37
+[significance] swe_flask_run05 vs flask: CC p=0.2532195660654696 r=0.088  MI p=0.20049071031111776 r=-0.327
+[significance] swe_django_run01 vs django: CC p=0.9034173658500924 r=0.01  MI p=0.4873686136545585 r=-0.173
+[significance] swe_django_run02 vs django: CC p=0.47356905979966546 r=0.062  MI p=0.9795927887337673 r=0.014
+[significance] swe_django_run03 vs django: CC p=0.10734773446671707 r=0.116  MI p=0.2292730842235663 r=0.343
+[significance] swe_django_run04 vs django: CC p=0.7466446881098079 r=0.03  MI p=0.6636710154898113 r=-0.129
+[significance] swe_django_run05 vs django: CC p=0.11744529154182612 r=0.123  MI p=0.39860158493693965 r=0.243
+[significance] done in 1.0s

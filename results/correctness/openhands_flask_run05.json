@@ -8,8 +8,8 @@
     },
     "Blueprints": {
       "n": 22,
-      "pass_rate": 9.1,
-      "passed": 2,
+      "pass_rate": 18.2,
+      "passed": 4,
       "skipped": 0
     },
     "Request Handling": {
@@ -39,8 +39,8 @@
   },
   "label": "OpenHands (A) r05",
   "oracle": "flask",
-  "pass_rate": 19.3,
-  "passed": 27,
+  "pass_rate": 20.7,
+  "passed": 29,
   "skipped": 0,
   "subject": "openhands_flask_run05",
   "total": 140

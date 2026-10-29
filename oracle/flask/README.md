@@ -63,3 +63,11 @@ handlers, typed URL converters, form parsing, cookie handling, URL building,
 and anything reached through a private attribute. Each omission is a thing the
 specification does not mention, so requiring it would penalise a subject for
 not having guessed Flask.
+
+## Binding defects
+
+Every case where this suite failed a working framework for a convention
+the specification does not fix is recorded in
+[`../BINDING-DEFECTS.md`](../BINDING-DEFECTS.md), together with what it
+cost and what was changed. Both human baselines held at 100% through all
+nine of them.

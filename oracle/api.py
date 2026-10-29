@@ -49,7 +49,13 @@ CANDIDATES: dict[str, tuple[str, ...]] = {
     # not fix the attribute names, so each concept is a role.
     "req_method": ("method",),
     "req_path": ("path", "path_info", "url_path"),
-    "req_headers": ("headers",),
+    # A request may carry its headers as an HTTP-named mapping, or only in the
+    # CGI spelling PEP 3333 delivers them in (``HTTP_X_TEST``, plus
+    # ``CONTENT_TYPE`` and ``CONTENT_LENGTH`` without the prefix), which is
+    # what Django calls META. The specification requires that the request
+    # encapsulate headers, not which of the two spellings it keeps them in, so
+    # both are accepted here and `header()` reads either.
+    "req_headers": ("headers", "META", "environ"),
     "req_query": ("args", "query", "query_params", "params", "GET",
                   "query_dict"),
     "req_body": ("data", "body", "raw_body", "content", "get_data"),
@@ -304,8 +310,22 @@ class Api:
         ``app.register_blueprint(bp)``, a module-level ``register(app, bp)``,
         or ``bp.register(app)`` -- the last being how an implementation that
         puts the method on the blueprint does it.
+
+        The prefix is supplied here only if the blueprint is not already
+        carrying it. A blueprint that accepted ``url_prefix`` at construction
+        (see `blueprint`) owns it, and naming it a second time at registration
+        is an error of the oracle's, not the subject's: a registration call
+        that takes no prefix argument rejects it with a TypeError, and one
+        that concatenates applies it twice. Flask tolerates both because its
+        ``register_blueprint(url_prefix=...)`` overrides rather than appends,
+        which is a convention of Flask's and not something the specification
+        fixes.
         """
-        prefix = url_prefix or getattr(bp, "_oracle_prefix", None)
+        carried = getattr(bp, "url_prefix", None)
+        if url_prefix is not None and carried == url_prefix:
+            prefix = None
+        else:
+            prefix = url_prefix or getattr(bp, "_oracle_prefix", None)
 
         def attempt(fn, base):
             if prefix is None:
@@ -433,22 +453,41 @@ class Api:
     def path(self, req) -> str:
         return str(self._req_attr(req, "req_path"))
 
+    @staticmethod
+    def _header_spellings(name: str) -> tuple[str, ...]:
+        """Every spelling under which `name` may be stored, most direct first.
+
+        A request that keeps its headers in the CGI form PEP 3333 hands it
+        (Django's META) stores ``X-Test`` as ``HTTP_X_TEST``, and the two
+        entity headers without the prefix at all. Both are the same header,
+        so both spellings are looked for.
+        """
+        cgi = name.upper().replace("-", "_")
+        if cgi in ("CONTENT_TYPE", "CONTENT_LENGTH"):
+            return (name, cgi, f"HTTP_{cgi}")
+        return (name, f"HTTP_{cgi}")
+
     def header(self, req, name: str, default: str = "") -> str:
-        """One request header, read case-insensitively."""
+        """One request header, read case-insensitively and spelling-agnostically."""
         headers = self._req_attr(req, "req_headers")
+        wanted = self._header_spellings(name)
+        getter = getattr(headers, "get", None)
+        if callable(getter):
+            for spelling in wanted:
+                try:
+                    value = getter(spelling)
+                except TypeError:
+                    break
+                if value is not None:
+                    return str(value)
+        lowered = {s.lower() for s in wanted}
         try:
-            value = headers.get(name)
-        except AttributeError:
-            value = None
-        if value is None:
-            lowered = name.lower()
-            try:
-                for key in headers:
-                    if str(key).lower() == lowered:
-                        return str(headers[key])
-            except TypeError:
-                return default
-        return default if value is None else str(value)
+            for key in headers:
+                if str(key).lower() in lowered:
+                    return str(headers[key])
+        except TypeError:
+            return default
+        return default
 
     def query_get(self, req, name: str, default: str = "") -> str:
         """One query-string parameter."""

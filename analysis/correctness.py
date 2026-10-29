@@ -1,6 +1,6 @@
 """RQ1 functional correctness: run an oracle pytest suite against a subject.
 
-The oracle suites (120 Flask cases, 85 Django cases) live under ``oracle/`` and
+The oracle suites (140 Flask cases, 104 Django cases) live under ``oracle/`` and
 import the system-under-test through the canonical name ``sut`` — the runner
 puts the subject's source root on ``PYTHONPATH`` and exports ``SUT_IMPORT`` (the
 subject's top-level package) so a shared ``conftest.py`` can alias it to ``sut``.

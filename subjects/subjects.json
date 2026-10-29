@@ -261,9 +261,9 @@
       "oracle": "django",
       "available": true,
       "include": [
-        "djangoframework",
-        "tests"
-      ]
+        "djangoframework"
+      ],
+      "_note": "Scope is the framework package only, as for every other subject (paper \u00a7III-B7). This run also left a tests/ package behind, which must stay outside the measured scope: including it put a 340-line test file inside the scope and distorted this run's duplication, smell and complexity figures."
     }
   ]
 }

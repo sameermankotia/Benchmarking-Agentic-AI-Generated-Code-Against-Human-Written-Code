@@ -103,11 +103,11 @@ class Config:
 
 # Default model per provider.
 #
-# The manuscript pinned claude-sonnet-4-20250514 and gpt-4o-2024-11-20. Both
-# are old snapshots and may no longer be served, so the defaults below are the
-# current generation instead, and both are overridable with --anthropic-model
-# / --openai-model. Whichever is used must be stated in the manuscript: the
-# model is a study variable, not an implementation detail.
+# The study used Claude Sonnet 4 (requested as anthropic/claude-sonnet-4) and
+# gpt-4o-2024-11-20. Both are old and may no longer be served, so the defaults
+# below are the current generation instead, and both are overridable with
+# --anthropic-model / --openai-model. Whichever is used must be stated in the
+# paper: the model is a study variable, not an implementation detail.
 #
 # Anthropic's current family is Claude 5. claude-sonnet-5-5 is the direct
 # successor to the Sonnet tier the study used, which keeps the comparison
@@ -125,7 +125,10 @@ DEFAULT_OPENAI_MODEL = "gpt-4o-2024-11-20"
 
 #: The snapshots the manuscript pins, kept for reference and for reproducing
 #: the original design if the provider still serves them.
-MANUSCRIPT_MODELS = {
+#: The identifiers this study requested. The OpenAI one is a dated snapshot;
+#: the Claude one is not, because OpenRouter does not expose the dated
+#: identifier of the snapshot it serves (paper §III-B4).
+STUDY_MODELS = {
     "OPENROUTER_API_KEY": "openrouter/anthropic/claude-sonnet-4",
     "OPENAI_API_KEY": "gpt-4o-2024-11-20",
 }
@@ -309,11 +312,11 @@ def list_models() -> int:
         ids = sorted(entry.get("id", "?") for entry in payload.get("data", []))
         for model_id in ids:
             marker = ""
-            if model_id == MANUSCRIPT_MODELS.get(env):
-                marker = "   <- the snapshot the manuscript pins"
+            if model_id == STUDY_MODELS.get(env):
+                marker = "   <- the identifier this study requested"
             print(f"  {model_id}{marker}")
-        if MANUSCRIPT_MODELS.get(env) not in ids:
-            print(f"  (the manuscript's {MANUSCRIPT_MODELS.get(env)!r} is "
+        if STUDY_MODELS.get(env) not in ids:
+            print(f"  (the study's {STUDY_MODELS.get(env)!r} is "
                   f"NOT in this list)")
         print()
     return 0
@@ -794,9 +797,9 @@ def main() -> int:
     parser.add_argument("--openai-model", default=DEFAULT_OPENAI_MODEL,
                         help="model for the OpenHands configuration (required: "
                              "run --list-models to see what the account serves)")
-    parser.add_argument("--manuscript-models", action="store_true",
-                        help="use the snapshots the manuscript pins, if the "
-                             "providers still serve them")
+    parser.add_argument("--study-models", "--manuscript-models", action="store_true",
+                        help="use the identifiers this study requested, if "
+                             "the providers still serve them")
     parser.add_argument("--list-models", action="store_true",
                         help="print the models each provider will serve, then stop")
     parser.add_argument("--parallel", type=int, default=1, metavar="N",
@@ -814,8 +817,8 @@ def main() -> int:
 
     # Model selection, applied before preflight so it is validated.
     for config in configs:
-        if args.manuscript_models:
-            config.model = MANUSCRIPT_MODELS[config.key_env]
+        if args.study_models:
+            config.model = STUDY_MODELS[config.key_env]
         elif config.key_env == "OPENROUTER_API_KEY":
             config.model = args.anthropic_model
         else:

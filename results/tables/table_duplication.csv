@@ -1,7 +1,7 @@
 metric,Flask (H),"Flask 0.1 (H, first draft)",Django mod. (H),SWE-agent (A) r01,OpenHands (A) r01,OpenHands (A) r02,OpenHands (A) r03,OpenHands (A) r04,OpenHands (A) r05,SWE-agent (A) r02,SWE-agent (A) r03,SWE-agent (A) r04,SWE-agent (A) r05,SWE-agent/Dj. (A) r01,SWE-agent/Dj. (A) r02,SWE-agent/Dj. (A) r03,SWE-agent/Dj. (A) r04,SWE-agent/Dj. (A) r05
-Duplicated blocks,7,0,3,0,0,0,0,0,0,1,1,0,0,0,0,0,0,2
-Duplicated LOC,146,0,35,0,0,0,0,0,0,13,6,0,0,0,0,0,0,184
-Duplicated LOC (% of total),3.4,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,2.3,1.4,0.0,0.0,0.0,0.0,0.0,0.0,50.3
-"Mann-Whitney U p (Duplicated % vs. human baseline, per-file)",ref.,ref.,ref.,0.1113,0.1941,0.6436,0.6436,0.1603,0.2371,0.5677,1.0000,0.1332,0.1603,0.3042,0.3909,0.3909,0.3909,0.8811
-Rank-biserial r (Duplicated %),ref.,ref.,ref.,+0.250,+0.250,+0.250,+0.250,+0.250,+0.250,+0.104,+0.000,+0.250,+0.250,+0.148,+0.148,+0.148,+0.148,-0.031
-Max block size (tokens),167,0,58,0,0,0,0,0,0,52,53,0,0,0,0,0,0,68
+Duplicated blocks,7,0,3,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0
+Duplicated LOC,146,0,35,0,0,0,0,0,0,13,6,0,0,0,0,0,0,0
+Duplicated LOC (% of total),3.4,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,2.3,1.4,0.0,0.0,0.0,0.0,0.0,0.0,0.0
+"Mann-Whitney U p (Duplicated % vs. human baseline, per-file)",ref.,ref.,ref.,0.1113,0.1941,0.6436,0.6436,0.1603,0.2371,0.5677,1.0000,0.1332,0.1603,0.3042,0.3909,0.3909,0.3909,0.3909
+Rank-biserial r (Duplicated %),ref.,ref.,ref.,+0.250,+0.250,+0.250,+0.250,+0.250,+0.250,+0.104,+0.000,+0.250,+0.250,+0.148,+0.148,+0.148,+0.148,+0.148
+Max block size (tokens),167,0,58,0,0,0,0,0,0,52,53,0,0,0,0,0,0,0

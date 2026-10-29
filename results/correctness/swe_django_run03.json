@@ -8,8 +8,8 @@
     },
     "Request Object": {
       "n": 26,
-      "pass_rate": 84.6,
-      "passed": 22,
+      "pass_rate": 100.0,
+      "passed": 26,
       "skipped": 0
     },
     "Response Handling": {
@@ -33,8 +33,8 @@
   },
   "label": "SWE-agent/Dj. (A) r03",
   "oracle": "django",
-  "pass_rate": 96.2,
-  "passed": 100,
+  "pass_rate": 100.0,
+  "passed": 104,
   "skipped": 0,
   "subject": "swe_django_run03",
   "total": 104

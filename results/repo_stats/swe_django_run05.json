@@ -8,7 +8,7 @@
   "label": "SWE-agent/Dj. (A) r05",
   "language": "Python",
   "loc": 366,
-  "source_files": 6,
+  "source_files": 5,
   "subject": "swe_django_run05",
-  "test_files": 1
+  "test_files": 0
 }

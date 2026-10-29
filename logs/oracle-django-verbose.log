@@ -1,7 +1,7 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.11.17, pytest-8.1.1, pluggy-1.6.0 -- /usr/local/bin/python
+platform linux -- Python 3.11.18, pytest-8.1.1, pluggy-1.7.0 -- /usr/local/bin/python
 rootdir: /work
-plugins: platformdirs-4.12.4
+plugins: platformdirs-4.14.0
 collecting ... collected 104 items
 
 oracle/django/test_class_based_views.py::test_class_based_view_handles_get PASSED [  0%]
@@ -109,4 +109,4 @@ oracle/django/test_view_dispatch.py::test_query_string_reaches_the_view_not_the_
 oracle/django/test_view_dispatch.py::test_two_patterns_to_the_same_view PASSED [ 99%]
 oracle/django/test_view_dispatch.py::test_dispatch_with_an_empty_body_post PASSED [100%]
 
-============================= 104 passed in 0.33s ==============================
+============================= 104 passed in 1.45s ==============================

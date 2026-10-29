@@ -1,0 +1,2022 @@
+{
+  "_meta": {
+    "configurations": {
+      "openhands_flask": {
+        "agent": "openhands",
+        "baseline": "flask",
+        "label": "OpenHands (A)",
+        "model": "gpt-4o-2024-11-20",
+        "n_runs": 5,
+        "pair": "flask",
+        "runs": [
+          "openhands_flask_run01",
+          "openhands_flask_run02",
+          "openhands_flask_run03",
+          "openhands_flask_run04",
+          "openhands_flask_run05"
+        ],
+        "spec": "flask"
+      },
+      "swe_django": {
+        "agent": "swe-agent",
+        "baseline": "django",
+        "label": "SWE-agent/Dj. (A)",
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "n_runs": 5,
+        "pair": "django",
+        "runs": [
+          "swe_django_run01",
+          "swe_django_run02",
+          "swe_django_run03",
+          "swe_django_run04",
+          "swe_django_run05"
+        ],
+        "spec": "django"
+      },
+      "swe_flask": {
+        "agent": "swe-agent",
+        "baseline": "flask",
+        "label": "SWE-agent (A)",
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "n_runs": 5,
+        "pair": "flask",
+        "runs": [
+          "swe_flask_run01",
+          "swe_flask_run02",
+          "swe_flask_run03",
+          "swe_flask_run04",
+          "swe_flask_run05"
+        ],
+        "spec": "flask"
+      }
+    },
+    "harness_commit": "1e688041e6f22db8c23e30f86304f39a981dc30c",
+    "incomplete_subjects": {},
+    "subjects_measured": [
+      "django",
+      "flask",
+      "flask_0_1",
+      "openhands_flask_run01",
+      "openhands_flask_run02",
+      "openhands_flask_run03",
+      "openhands_flask_run04",
+      "openhands_flask_run05",
+      "swe_django_run01",
+      "swe_django_run02",
+      "swe_django_run03",
+      "swe_django_run04",
+      "swe_django_run05",
+      "swe_flask_run01",
+      "swe_flask_run02",
+      "swe_flask_run03",
+      "swe_flask_run04",
+      "swe_flask_run05"
+    ],
+    "toolchain": {
+      "bandit": "1.9.4",
+      "complexipy": "0.4.0",
+      "pylint": "3.1.0",
+      "pytest": "8.1.1",
+      "radon": "6.0.1",
+      "scipy": "1.16.2"
+    }
+  },
+  "claims": {
+    "agentic_repositories_times_smaller": {
+      "at_median_max": 57.3,
+      "at_median_min": 7.9,
+      "max": 88.4,
+      "min": 6.6
+    },
+    "baseline_oracle_pass_rate_pct": {
+      "django": 100.0,
+      "flask": 100.0
+    },
+    "duplicated_pct_median": {
+      "openhands_flask": 0.0,
+      "swe_django": 0.0,
+      "swe_flask": 0.0
+    },
+    "flask_spec_runs_with_autoescaping_off": {
+      "n": 5,
+      "of": 10
+    },
+    "generation": {
+      "openhands_agent_steps": {
+        "max": 35.0,
+        "min": 13.0
+      },
+      "openhands_wall_seconds": {
+        "max": 55.0,
+        "min": 39.0
+      },
+      "swe_agent_cost_usd": {
+        "max": 10.06,
+        "min": 4.45
+      },
+      "swe_agent_model_calls": {
+        "max": 108.0,
+        "min": 51.0
+      },
+      "swe_agent_wall_minutes_by_spec": {
+        "django": {
+          "max": 8.8,
+          "min": 5.8
+        },
+        "flask": {
+          "max": 11.9,
+          "min": 7.7
+        }
+      }
+    },
+    "mean_cc_relative_to_baseline_pct": {
+      "openhands_flask": -28.6,
+      "swe_django": -14.3,
+      "swe_flask": -17.9
+    },
+    "mean_cogc_relative_to_baseline_pct": {
+      "openhands_flask": -66.7,
+      "swe_django": -37.0,
+      "swe_flask": -9.5
+    },
+    "mean_mi_gap_points": {
+      "openhands_flask": 15.9,
+      "swe_django": 3.5,
+      "swe_flask": 8.2
+    },
+    "mean_mi_gap_points_size_matched": {
+      "openhands_flask": -12.5,
+      "swe_django": -2.1,
+      "swe_flask": 0.8
+    },
+    "median_oracle_pass_rate_pct": {
+      "openhands_flask": 15.0,
+      "swe_django": 100.0,
+      "swe_flask": 73.6
+    },
+    "pylint_density_ratio_to_baseline_at_median": {
+      "per_configuration": {
+        "openhands_flask": 5.1,
+        "swe_django": 2.8,
+        "swe_flask": 4.5
+      },
+      "range": {
+        "max": 5.1,
+        "min": 2.8
+      }
+    },
+    "runs_with_any_duplication": {
+      "n": 2,
+      "of": 15,
+      "runs": [
+        "swe_flask_run02",
+        "swe_flask_run03"
+      ]
+    },
+    "security_density_per_100_loc_median": {
+      "openhands_flask": 1.35,
+      "swe_django": 0.0,
+      "swe_flask": 0.0
+    },
+    "security_density_ratio_to_baseline_at_median": {
+      "openhands_flask": 5.2,
+      "swe_django": 0.0,
+      "swe_flask": 0.0
+    },
+    "trailing_whitespace_share_pct_at_median": {
+      "openhands_flask": 0.0,
+      "swe_django": 68.8,
+      "swe_flask": 71.8
+    }
+  },
+  "generation": {
+    "budget": {
+      "concurrency": 2,
+      "per_run_cost_limit_usd": 10.0,
+      "runs_per_config": 5,
+      "temperature": 0.2,
+      "tool_calls": 500,
+      "wall_clock_seconds": 5400
+    },
+    "generated_utc": "2026-10-14T04:46:17+00:00",
+    "per_configuration": {
+      "openhands_flask": {
+        "agent": "openhands",
+        "agent_steps": {
+          "max": 35.0,
+          "median": 21.0,
+          "min": 13.0,
+          "n": 3
+        },
+        "cost_usd": null,
+        "exit_statuses": [],
+        "model": "gpt-4o-2024-11-20",
+        "model_calls": null,
+        "model_calls_pct_of_tool_call_budget": null,
+        "runs_pausing_for_user_input": 3,
+        "spec": "flask",
+        "traces_captured": 3,
+        "wall_minutes": {
+          "max": 0.9,
+          "median": 0.9,
+          "min": 0.7,
+          "n": 3
+        },
+        "wall_seconds": {
+          "max": 55.0,
+          "median": 53.0,
+          "min": 39.0,
+          "n": 3
+        }
+      },
+      "swe_django": {
+        "agent": "swe-agent",
+        "agent_steps": null,
+        "cost_usd": {
+          "max": 10.01,
+          "median": 6.14,
+          "min": 4.45,
+          "n": 5
+        },
+        "exit_statuses": [
+          "submitted",
+          "submitted (exit_cost)"
+        ],
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": {
+          "max": 103.0,
+          "median": 72.0,
+          "min": 51.0,
+          "n": 5
+        },
+        "model_calls_pct_of_tool_call_budget": 20.6,
+        "runs_pausing_for_user_input": null,
+        "spec": "django",
+        "traces_captured": 5,
+        "wall_minutes": {
+          "max": 8.8,
+          "median": 6.6,
+          "min": 5.8,
+          "n": 5
+        },
+        "wall_seconds": {
+          "max": 530.6,
+          "median": 398.6,
+          "min": 350.9,
+          "n": 5
+        }
+      },
+      "swe_flask": {
+        "agent": "swe-agent",
+        "agent_steps": null,
+        "cost_usd": {
+          "max": 10.06,
+          "median": 7.63,
+          "min": 5.95,
+          "n": 5
+        },
+        "exit_statuses": [
+          "submitted",
+          "submitted (exit_cost)"
+        ],
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": {
+          "max": 108.0,
+          "median": 81.0,
+          "min": 67.0,
+          "n": 5
+        },
+        "model_calls_pct_of_tool_call_budget": 21.6,
+        "runs_pausing_for_user_input": null,
+        "spec": "flask",
+        "traces_captured": 5,
+        "wall_minutes": {
+          "max": 11.9,
+          "median": 10.0,
+          "min": 7.7,
+          "n": 5
+        },
+        "wall_seconds": {
+          "max": 713.0,
+          "median": 598.0,
+          "min": 461.0,
+          "n": 5
+        }
+      }
+    },
+    "runs": {
+      "openhands_flask_run01": {
+        "agent": "openhands",
+        "commit": "7677254295b0",
+        "exit_status": null,
+        "files_written": null,
+        "model": "gpt-4o-2024-11-20",
+        "trace_captured": false,
+        "wall_seconds": null,
+        "wall_seconds_from_run_log": null,
+        "wall_seconds_source": null
+      },
+      "openhands_flask_run02": {
+        "agent": "openhands",
+        "commit": "6c0f51f34eff",
+        "exit_status": null,
+        "files_written": null,
+        "model": "gpt-4o-2024-11-20",
+        "trace_captured": false,
+        "wall_seconds": null,
+        "wall_seconds_from_run_log": null,
+        "wall_seconds_source": null
+      },
+      "openhands_flask_run03": {
+        "agent": "openhands",
+        "agent_steps": 21,
+        "asked_for_user_input": true,
+        "commit": "5406b0db74a1",
+        "exit_status": null,
+        "files_written": null,
+        "model": "gpt-4o-2024-11-20",
+        "trace_captured": true,
+        "wall_seconds": 55.0,
+        "wall_seconds_from_run_log": 55.0,
+        "wall_seconds_source": "run log"
+      },
+      "openhands_flask_run04": {
+        "agent": "openhands",
+        "agent_steps": 35,
+        "asked_for_user_input": true,
+        "commit": "7f3341904022",
+        "exit_status": null,
+        "files_written": null,
+        "model": "gpt-4o-2024-11-20",
+        "trace_captured": true,
+        "wall_seconds": 53.0,
+        "wall_seconds_from_run_log": 53.0,
+        "wall_seconds_source": "run log"
+      },
+      "openhands_flask_run05": {
+        "agent": "openhands",
+        "agent_steps": 13,
+        "asked_for_user_input": true,
+        "commit": "e795c662daab",
+        "exit_status": null,
+        "files_written": null,
+        "model": "gpt-4o-2024-11-20",
+        "trace_captured": true,
+        "wall_seconds": 39.0,
+        "wall_seconds_from_run_log": 39.0,
+        "wall_seconds_source": "run log"
+      },
+      "swe_django_run01": {
+        "agent": "swe-agent",
+        "commit": "da859093348b0e67000faf3dd524e36b0eda40c4",
+        "cost_usd": 6.14,
+        "exit_status": "submitted",
+        "files_written": 11,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 72,
+        "tokens_sent": 1521944,
+        "trajectory_steps": 72,
+        "wall_seconds": 426.3,
+        "wall_seconds_from_run_log": 424.0,
+        "wall_seconds_source": "generation manifest"
+      },
+      "swe_django_run02": {
+        "agent": "swe-agent",
+        "commit": "81e1ec52df50350c244ffd6be77afdf5e62ba240",
+        "cost_usd": 5.17,
+        "exit_status": "submitted",
+        "files_written": 11,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 62,
+        "tokens_sent": 1284783,
+        "trajectory_steps": 62,
+        "wall_seconds": 398.6,
+        "wall_seconds_from_run_log": 396.0,
+        "wall_seconds_source": "generation manifest"
+      },
+      "swe_django_run03": {
+        "agent": "swe-agent",
+        "commit": "550f517812609f2750866725a8bfc2484001a10b",
+        "cost_usd": 4.45,
+        "exit_status": "submitted",
+        "files_written": 9,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 51,
+        "tokens_sent": 1107425,
+        "trajectory_steps": 51,
+        "wall_seconds": 350.9,
+        "wall_seconds_from_run_log": 349.0,
+        "wall_seconds_source": "generation manifest"
+      },
+      "swe_django_run04": {
+        "agent": "swe-agent",
+        "commit": "b37a39f2df1b88ccd49d007c1a504ac2fcb47cac",
+        "cost_usd": 6.34,
+        "exit_status": "submitted",
+        "files_written": 8,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 76,
+        "tokens_sent": 1589909,
+        "trajectory_steps": 76,
+        "wall_seconds": 393.7,
+        "wall_seconds_from_run_log": 391.0,
+        "wall_seconds_source": "generation manifest"
+      },
+      "swe_django_run05": {
+        "agent": "swe-agent",
+        "commit": "54f14b8241984efae15f31b6653391450d7742a6",
+        "cost_usd": 10.01,
+        "exit_status": "submitted (exit_cost)",
+        "files_written": 20,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 103,
+        "tokens_sent": 2566956,
+        "trajectory_steps": 103,
+        "wall_seconds": 530.6,
+        "wall_seconds_from_run_log": 529.0,
+        "wall_seconds_source": "generation manifest"
+      },
+      "swe_flask_run01": {
+        "agent": "swe-agent",
+        "commit": "a73357ac3561",
+        "cost_usd": 5.95,
+        "exit_status": "submitted",
+        "files_written": null,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 67,
+        "tokens_sent": 1486554,
+        "trajectory_steps": 67,
+        "wall_seconds": 713.0,
+        "wall_seconds_from_run_log": 713.0,
+        "wall_seconds_source": "run log"
+      },
+      "swe_flask_run02": {
+        "agent": "swe-agent",
+        "commit": "d2db45063fb3",
+        "cost_usd": 7.17,
+        "exit_status": "submitted",
+        "files_written": null,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 79,
+        "tokens_sent": 1813491,
+        "trajectory_steps": 79,
+        "wall_seconds": 461.0,
+        "wall_seconds_from_run_log": 461.0,
+        "wall_seconds_source": "run log"
+      },
+      "swe_flask_run03": {
+        "agent": "swe-agent",
+        "commit": "e1965ade4013",
+        "cost_usd": 10.06,
+        "exit_status": "submitted (exit_cost)",
+        "files_written": null,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 108,
+        "tokens_sent": 2538633,
+        "trajectory_steps": 108,
+        "wall_seconds": 598.0,
+        "wall_seconds_from_run_log": 598.0,
+        "wall_seconds_source": "run log"
+      },
+      "swe_flask_run04": {
+        "agent": "swe-agent",
+        "commit": "e2d22e647f4c",
+        "cost_usd": 7.63,
+        "exit_status": "submitted",
+        "files_written": null,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 81,
+        "tokens_sent": 1934953,
+        "trajectory_steps": 81,
+        "wall_seconds": 478.0,
+        "wall_seconds_from_run_log": 478.0,
+        "wall_seconds_source": "run log"
+      },
+      "swe_flask_run05": {
+        "agent": "swe-agent",
+        "commit": "e34289d89e8c",
+        "cost_usd": 9.75,
+        "exit_status": "submitted",
+        "files_written": null,
+        "model": "openrouter/anthropic/claude-sonnet-4",
+        "model_calls": 107,
+        "tokens_sent": 2435173,
+        "trajectory_steps": 107,
+        "wall_seconds": 636.0,
+        "wall_seconds_from_run_log": 636.0,
+        "wall_seconds_source": "run log"
+      }
+    },
+    "total_cost_usd": 72.67
+  },
+  "maturity_reference_point": {
+    "first_draft": "flask_0_1",
+    "first_draft_better": {
+      "duplicated_pct": true,
+      "mean_cc": true,
+      "mean_cogc": true,
+      "mean_mi": false,
+      "security_per_100_loc": false,
+      "smells_per_100_loc": false
+    },
+    "mature_release": "flask",
+    "metrics_compared": 6,
+    "metrics_where_first_draft_is_better": 3,
+    "note": "Radon computes MI per file, so the single-module first draft contributes one file-level value and its mean equals its median.",
+    "values": {
+      "flask": {
+        "duplicated_pct": 3.4,
+        "loc": 4243,
+        "mean_cc": 2.8,
+        "mean_cogc": 2.1,
+        "mean_mi": 64.1,
+        "security_per_100_loc": 0.26,
+        "smells_per_100_loc": 6.36,
+        "source_files": 24
+      },
+      "flask_0_1": {
+        "duplicated_pct": 0.0,
+        "loc": 249,
+        "mean_cc": 1.7,
+        "mean_cogc": 0.8,
+        "mean_mi": 40.6,
+        "security_per_100_loc": 0.4,
+        "smells_per_100_loc": 15.66,
+        "source_files": 1
+      }
+    }
+  },
+  "rq1_correctness": {
+    "agentic": {
+      "openhands_flask": {
+        "baseline": "flask",
+        "baseline_pass_rate_pct": 100.0,
+        "cases_failing_in_every_run": [
+          "test_405_advertises_an_allow_header",
+          "test_all_blueprint_routes_inherit_the_prefix",
+          "test_blueprint_and_app_routes_coexist",
+          "test_blueprint_root_route_under_prefix",
+          "test_blueprint_route_is_reachable_after_registration",
+          "test_blueprint_route_returns_its_body",
+          "test_blueprint_with_several_routes",
+          "test_blueprint_without_prefix_mounts_at_root",
+          "test_context_is_released_after_the_request",
+          "test_current_app_accessible_from_a_nested_call",
+          "test_current_app_accessible_in_a_view",
+          "test_current_app_and_g_coexist",
+          "test_current_app_distinguishes_two_applications",
+          "test_current_app_is_correct_in_concurrent_threads",
+          "test_current_app_is_the_handling_application",
+          "test_default_route_allows_get",
+          "test_empty_body_is_allowed",
+          "test_g_does_not_leak_between_sequential_requests",
+          "test_g_getattr_default_works",
+          "test_g_holds_non_string_values",
+          "test_g_is_empty_at_the_start_of_each_request",
+          "test_g_is_isolated_between_concurrent_threads",
+          "test_g_is_writable_in_a_view",
+          "test_g_missing_attribute_raises",
+          "test_g_shared_between_view_and_helper",
+          "test_g_value_readable_back_in_the_same_request",
+          "test_many_sequential_requests_keep_context_clean",
+          "test_method_filtering_inside_a_blueprint",
+          "test_method_filtering_is_per_route",
+          "test_method_not_in_list_is_rejected",
+          "test_method_restricted_route_accepts_its_method",
+          "test_method_restricted_route_rejects_other_method",
+          "test_multi_method_route_accepts_each[DELETE]",
+          "test_multi_method_route_accepts_each[GET]",
+          "test_multi_method_route_accepts_each[POST]",
+          "test_multi_method_route_accepts_each[PUT]",
+          "test_multi_method_route_inside_a_blueprint",
+          "test_multiple_variable_segments[/mix/x/9-expected0]",
+          "test_multiple_variable_segments[/mix/y/0-expected1]",
+          "test_prefix_does_not_leak_to_app_routes",
+          "test_prefix_with_multiple_segments",
+          "test_query_string_does_not_affect_matching",
+          "test_rendered_output_becomes_the_response_body",
+          "test_renders_a_conditional_false_branch",
+          "test_renders_a_conditional_true_branch",
+          "test_renders_a_filter",
+          "test_renders_a_for_loop",
+          "test_renders_a_variable",
+          "test_renders_arithmetic_expression",
+          "test_renders_attribute_access",
+          "test_renders_dict_access",
+          "test_renders_inside_a_request_with_request_data",
+          "test_renders_literal_text",
+          "test_renders_multiple_variables",
+          "test_renders_nested_loop_and_conditional",
+          "test_request_accessible_in_the_same_context",
+          "test_request_and_g_coexist",
+          "test_request_body_bytes",
+          "test_request_body_content",
+          "test_request_body_not_consumed_by_routing",
+          "test_request_body_with_explicit_content_type",
+          "test_request_content_type_header",
+          "test_request_custom_header",
+          "test_request_empty_body",
+          "test_request_exposes_method[DELETE]",
+          "test_request_exposes_method[GET]",
+          "test_request_exposes_method[PATCH]",
+          "test_request_exposes_method[POST]",
+          "test_request_exposes_method[PUT]",
+          "test_request_exposes_path",
+          "test_request_header_read_case_insensitively",
+          "test_request_json_body_is_readable",
+          "test_request_method_is_upper_case",
+          "test_request_missing_header_default",
+          "test_request_missing_query_parameter_is_empty",
+          "test_request_multiple_query_parameters",
+          "test_request_path_excludes_query_string",
+          "test_request_path_for_nested_route",
+          "test_request_query_parameter",
+          "test_request_query_parameter_empty_value",
+          "test_request_query_parameter_values[1+1]",
+          "test_request_query_parameter_values[\\xfc]",
+          "test_request_query_parameter_values[a]",
+          "test_request_query_parameter_values[b b]",
+          "test_request_query_parameter_values[sp ace]",
+          "test_response_has_a_content_type",
+          "test_response_is_200_with_a_body",
+          "test_root_route",
+          "test_route_accepts_rule_string",
+          "test_static_route_returns_view_body",
+          "test_static_route_takes_precedence_over_variable",
+          "test_string_return_becomes_the_body",
+          "test_string_return_is_200",
+          "test_three_blueprints_mounted_together",
+          "test_two_blueprints_with_different_prefixes",
+          "test_two_routes_dispatch_independently",
+          "test_url_prefix_is_applied",
+          "test_variable_and_literal_segments_combined",
+          "test_variable_segment_inside_a_blueprint",
+          "test_variable_segment_matches_any_single_segment",
+          "test_variable_segment_value_reaches_view[123]",
+          "test_variable_segment_value_reaches_view[a-b_c]",
+          "test_variable_segment_value_reaches_view[alice]",
+          "test_variable_segment_value_reaches_view[bob]",
+          "test_variable_segment_values_inside_a_blueprint[2]",
+          "test_variable_segment_values_inside_a_blueprint[one]",
+          "test_variable_segment_values_inside_a_blueprint[three-3]"
+        ],
+        "median_deficit_pp": -85.0,
+        "n_cases_failing_in_every_run": 107,
+        "pass_rate_pct": {
+          "max": 20.7,
+          "median": 15.0,
+          "min": 5.0,
+          "n": 5
+        },
+        "passed_cases": {
+          "max": 29.0,
+          "median": 21.0,
+          "min": 7.0,
+          "n": 5
+        },
+        "per_category_pass_rate_pct": {
+          "App Context": {
+            "max": 9.5,
+            "median": 9.5,
+            "min": 4.8,
+            "n": 5
+          },
+          "Blueprints": {
+            "max": 18.2,
+            "median": 4.5,
+            "min": 0.0,
+            "n": 5
+          },
+          "Request Handling": {
+            "max": 0.0,
+            "median": 0.0,
+            "min": 0.0,
+            "n": 5
+          },
+          "Response Rendering": {
+            "max": 83.3,
+            "median": 66.7,
+            "min": 12.5,
+            "n": 5
+          },
+          "Templating": {
+            "max": 13.3,
+            "median": 13.3,
+            "min": 13.3,
+            "n": 5
+          },
+          "URL Routing": {
+            "max": 16.7,
+            "median": 16.7,
+            "min": 0.0,
+            "n": 5
+          }
+        },
+        "per_run_pass_rate_pct": {
+          "openhands_flask_run01": 15.0,
+          "openhands_flask_run02": 20.0,
+          "openhands_flask_run03": 8.6,
+          "openhands_flask_run04": 5.0,
+          "openhands_flask_run05": 20.7
+        },
+        "runs_differing_from_baseline": 5,
+        "suite_size": [
+          140
+        ]
+      },
+      "swe_django": {
+        "baseline": "django",
+        "baseline_pass_rate_pct": 100.0,
+        "cases_failing_in_every_run": [],
+        "median_deficit_pp": 0.0,
+        "n_cases_failing_in_every_run": 0,
+        "pass_rate_pct": {
+          "max": 100.0,
+          "median": 100.0,
+          "min": 91.3,
+          "n": 5
+        },
+        "passed_cases": {
+          "max": 104.0,
+          "median": 104.0,
+          "min": 95.0,
+          "n": 5
+        },
+        "per_category_pass_rate_pct": {
+          "Class-Based Views": {
+            "max": 100.0,
+            "median": 100.0,
+            "min": 100.0,
+            "n": 5
+          },
+          "Request Object": {
+            "max": 100.0,
+            "median": 100.0,
+            "min": 100.0,
+            "n": 5
+          },
+          "Response Handling": {
+            "max": 100.0,
+            "median": 100.0,
+            "min": 100.0,
+            "n": 5
+          },
+          "URL Resolution": {
+            "max": 100.0,
+            "median": 100.0,
+            "min": 68.0,
+            "n": 5
+          },
+          "View Dispatch": {
+            "max": 100.0,
+            "median": 100.0,
+            "min": 95.5,
+            "n": 5
+          }
+        },
+        "per_run_pass_rate_pct": {
+          "swe_django_run01": 99.0,
+          "swe_django_run02": 100.0,
+          "swe_django_run03": 100.0,
+          "swe_django_run04": 100.0,
+          "swe_django_run05": 91.3
+        },
+        "runs_differing_from_baseline": 1,
+        "suite_size": [
+          104
+        ]
+      },
+      "swe_flask": {
+        "baseline": "flask",
+        "baseline_pass_rate_pct": 100.0,
+        "cases_failing_in_every_run": [
+          "test_405_advertises_an_allow_header",
+          "test_g_is_isolated_between_concurrent_threads",
+          "test_method_filtering_inside_a_blueprint",
+          "test_method_filtering_is_per_route",
+          "test_method_not_in_list_is_rejected",
+          "test_method_restricted_route_rejects_other_method",
+          "test_renders_inside_a_request_with_request_data",
+          "test_request_accessible_in_the_same_context",
+          "test_request_and_g_coexist",
+          "test_request_body_bytes",
+          "test_request_body_content",
+          "test_request_body_not_consumed_by_routing",
+          "test_request_body_with_explicit_content_type",
+          "test_request_content_type_header",
+          "test_request_custom_header",
+          "test_request_empty_body",
+          "test_request_exposes_method[DELETE]",
+          "test_request_exposes_method[GET]",
+          "test_request_exposes_method[PATCH]",
+          "test_request_exposes_method[POST]",
+          "test_request_exposes_method[PUT]",
+          "test_request_exposes_path",
+          "test_request_header_read_case_insensitively",
+          "test_request_method_is_upper_case",
+          "test_request_missing_header_default",
+          "test_request_missing_query_parameter_is_empty",
+          "test_request_multiple_query_parameters",
+          "test_request_path_excludes_query_string",
+          "test_request_path_for_nested_route",
+          "test_request_query_parameter",
+          "test_request_query_parameter_empty_value",
+          "test_request_query_parameter_values[1+1]",
+          "test_request_query_parameter_values[\\xfc]",
+          "test_request_query_parameter_values[b b]",
+          "test_request_query_parameter_values[sp ace]"
+        ],
+        "median_deficit_pp": -26.4,
+        "n_cases_failing_in_every_run": 35,
+        "pass_rate_pct": {
+          "max": 75.0,
+          "median": 73.6,
+          "min": 66.4,
+          "n": 5
+        },
+        "passed_cases": {
+          "max": 105.0,
+          "median": 103.0,
+          "min": 93.0,
+          "n": 5
+        },
+        "per_category_pass_rate_pct": {
+          "App Context": {
+            "max": 85.7,
+            "median": 85.7,
+            "min": 76.2,
+            "n": 5
+          },
+          "Blueprints": {
+            "max": 95.5,
+            "median": 95.5,
+            "min": 90.9,
+            "n": 5
+          },
+          "Request Handling": {
+            "max": 7.1,
+            "median": 7.1,
+            "min": 7.1,
+            "n": 5
+          },
+          "Response Rendering": {
+            "max": 100.0,
+            "median": 100.0,
+            "min": 100.0,
+            "n": 5
+          },
+          "Templating": {
+            "max": 93.3,
+            "median": 86.7,
+            "min": 13.3,
+            "n": 5
+          },
+          "URL Routing": {
+            "max": 86.7,
+            "median": 86.7,
+            "min": 86.7,
+            "n": 5
+          }
+        },
+        "per_run_pass_rate_pct": {
+          "swe_flask_run01": 75.0,
+          "swe_flask_run02": 73.6,
+          "swe_flask_run03": 66.4,
+          "swe_flask_run04": 73.6,
+          "swe_flask_run05": 66.4
+        },
+        "runs_differing_from_baseline": 5,
+        "suite_size": [
+          140
+        ]
+      }
+    },
+    "human": {
+      "django": {
+        "categories": {
+          "Class-Based Views": 100.0,
+          "Request Object": 100.0,
+          "Response Handling": 100.0,
+          "URL Resolution": 100.0,
+          "View Dispatch": 100.0
+        },
+        "pass_rate_pct": 100.0,
+        "passed": 104,
+        "skipped": 0,
+        "total": 104
+      },
+      "flask": {
+        "categories": {
+          "App Context": 100.0,
+          "Blueprints": 100.0,
+          "Request Handling": 100.0,
+          "Response Rendering": 100.0,
+          "Templating": 100.0,
+          "URL Routing": 100.0
+        },
+        "pass_rate_pct": 100.0,
+        "passed": 140,
+        "skipped": 0,
+        "total": 140
+      }
+    },
+    "suite_composition": {
+      "django": {
+        "Class-Based Views": 10,
+        "Request Object": 26,
+        "Response Handling": 21,
+        "URL Resolution": 25,
+        "View Dispatch": 22
+      },
+      "flask": {
+        "App Context": 21,
+        "Blueprints": 22,
+        "Request Handling": 28,
+        "Response Rendering": 24,
+        "Templating": 15,
+        "URL Routing": 30
+      }
+    },
+    "suite_size": {
+      "django": 104,
+      "flask": 140
+    }
+  },
+  "rq2_complexity": {
+    "agentic": {
+      "openhands_flask": {
+        "baseline": "flask",
+        "max_cc": {
+          "max": 7.0,
+          "median": 5.0,
+          "min": 4.0,
+          "n": 5
+        },
+        "max_cogc": {
+          "max": 5.0,
+          "median": 4.0,
+          "min": 2.0,
+          "n": 5
+        },
+        "mean_cc": {
+          "max": 2.5,
+          "median": 2.0,
+          "min": 1.6,
+          "n": 5
+        },
+        "mean_cogc": {
+          "max": 0.8,
+          "median": 0.7,
+          "min": 0.2,
+          "n": 5
+        },
+        "median_cc": {
+          "max": 2.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 5
+        },
+        "median_cogc": {
+          "max": 1.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "n_functions_cc": {
+          "max": 31.0,
+          "median": 16.0,
+          "min": 9.0,
+          "n": 5
+        },
+        "n_functions_cogc": {
+          "max": 24.0,
+          "median": 12.0,
+          "min": 8.0,
+          "n": 5
+        },
+        "pct_cc_over_threshold": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "pct_cogc_over_threshold": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "relative_to_baseline_pct": {
+          "mean_cc": -28.6,
+          "mean_cogc": -66.7
+        },
+        "runs_differing_from_baseline": {
+          "cc": 1,
+          "cogc": 2
+        }
+      },
+      "swe_django": {
+        "baseline": "django",
+        "max_cc": {
+          "max": 12.0,
+          "median": 10.0,
+          "min": 8.0,
+          "n": 5
+        },
+        "max_cogc": {
+          "max": 22.0,
+          "median": 11.0,
+          "min": 9.0,
+          "n": 5
+        },
+        "mean_cc": {
+          "max": 2.6,
+          "median": 2.4,
+          "min": 2.4,
+          "n": 5
+        },
+        "mean_cogc": {
+          "max": 1.9,
+          "median": 1.7,
+          "min": 1.6,
+          "n": 5
+        },
+        "median_cc": {
+          "max": 2.0,
+          "median": 2.0,
+          "min": 1.0,
+          "n": 5
+        },
+        "median_cogc": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "n_functions_cc": {
+          "max": 71.0,
+          "median": 52.0,
+          "min": 40.0,
+          "n": 5
+        },
+        "n_functions_cogc": {
+          "max": 52.0,
+          "median": 36.0,
+          "min": 25.0,
+          "n": 5
+        },
+        "pct_cc_over_threshold": {
+          "max": 1.7,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "pct_cogc_over_threshold": {
+          "max": 2.5,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "relative_to_baseline_pct": {
+          "mean_cc": -14.3,
+          "mean_cogc": -37.0
+        },
+        "runs_differing_from_baseline": {
+          "cc": 0,
+          "cogc": 2
+        }
+      },
+      "swe_flask": {
+        "baseline": "flask",
+        "max_cc": {
+          "max": 11.0,
+          "median": 8.0,
+          "min": 7.0,
+          "n": 5
+        },
+        "max_cogc": {
+          "max": 17.0,
+          "median": 14.0,
+          "min": 12.0,
+          "n": 5
+        },
+        "mean_cc": {
+          "max": 2.4,
+          "median": 2.3,
+          "min": 2.1,
+          "n": 5
+        },
+        "mean_cogc": {
+          "max": 2.3,
+          "median": 1.9,
+          "min": 1.4,
+          "n": 5
+        },
+        "median_cc": {
+          "max": 2.0,
+          "median": 1.5,
+          "min": 1.0,
+          "n": 5
+        },
+        "median_cogc": {
+          "max": 1.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "n_functions_cc": {
+          "max": 84.0,
+          "median": 70.0,
+          "min": 60.0,
+          "n": 5
+        },
+        "n_functions_cogc": {
+          "max": 70.0,
+          "median": 59.0,
+          "min": 46.0,
+          "n": 5
+        },
+        "pct_cc_over_threshold": {
+          "max": 1.4,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "pct_cogc_over_threshold": {
+          "max": 1.5,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "relative_to_baseline_pct": {
+          "mean_cc": -17.9,
+          "mean_cogc": -9.5
+        },
+        "runs_differing_from_baseline": {
+          "cc": 1,
+          "cogc": 0
+        }
+      }
+    },
+    "human": {
+      "django": {
+        "max_cc": 24,
+        "max_cogc": 48,
+        "mean_cc": 2.8,
+        "mean_cogc": 2.7,
+        "median_cc": 2.0,
+        "median_cogc": 1,
+        "n_functions_cc": 330,
+        "n_functions_cogc": 261,
+        "pct_cc_over_threshold": 3.0,
+        "pct_cogc_over_threshold": 3.4
+      },
+      "flask": {
+        "max_cc": 23,
+        "max_cogc": 28,
+        "mean_cc": 2.8,
+        "mean_cogc": 2.1,
+        "median_cc": 2.0,
+        "median_cogc": 0.5,
+        "n_functions_cc": 380,
+        "n_functions_cogc": 334,
+        "pct_cc_over_threshold": 2.4,
+        "pct_cogc_over_threshold": 1.2
+      },
+      "flask_0_1": {
+        "max_cc": 6,
+        "max_cogc": 7,
+        "mean_cc": 1.7,
+        "mean_cogc": 0.8,
+        "median_cc": 1,
+        "median_cogc": 0.0,
+        "n_functions_cc": 39,
+        "n_functions_cogc": 34,
+        "pct_cc_over_threshold": 0.0,
+        "pct_cogc_over_threshold": 0.0
+      }
+    },
+    "thresholds": {
+      "cc": 10,
+      "cogc": 15
+    }
+  },
+  "rq3_maintainability": {
+    "agentic": {
+      "openhands_flask": {
+        "baseline": "flask",
+        "mean_mi": {
+          "max": 91.7,
+          "median": 80.0,
+          "min": 50.0,
+          "n": 5
+        },
+        "median_mi": {
+          "max": 100.0,
+          "median": 75.0,
+          "min": 50.0,
+          "n": 5
+        },
+        "non_cosmetic_per_100_loc": {
+          "max": 38.46,
+          "median": 32.43,
+          "min": 22.92,
+          "n": 5
+        },
+        "pct_mi_below_threshold": {
+          "max": 100.0,
+          "median": 20.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "runs_differing_from_baseline_mi": 2,
+        "size_matched_mi": {
+          "agentic_file_loc_range": [
+            5,
+            52
+          ],
+          "agentic_files": 20,
+          "agentic_median_mi": 87.5,
+          "bands": {
+            "0-50": {
+              "agentic_files": 19,
+              "agentic_median_mi": 100.0,
+              "human_files": 5,
+              "human_median_mi": 100.0
+            },
+            "100-200": {
+              "agentic_files": 0,
+              "agentic_median_mi": null,
+              "human_files": 6,
+              "human_median_mi": 59.3
+            },
+            "200-400": {
+              "agentic_files": 0,
+              "agentic_median_mi": null,
+              "human_files": 5,
+              "human_median_mi": 46.2
+            },
+            "400+": {
+              "agentic_files": 0,
+              "agentic_median_mi": null,
+              "human_files": 2,
+              "human_median_mi": 26.1
+            },
+            "50-100": {
+              "agentic_files": 1,
+              "agentic_median_mi": 50.1,
+              "human_files": 6,
+              "human_median_mi": 63.1
+            }
+          },
+          "baseline": "flask",
+          "human_files_all": 24,
+          "human_files_in_range": 4,
+          "human_median_mi_all": 59.3,
+          "human_median_mi_in_range": 100.0,
+          "median_mi_gap_matched": -12.5
+        },
+        "smells_per_100_loc": {
+          "max": 38.46,
+          "median": 32.43,
+          "min": 22.92,
+          "n": 5
+        },
+        "smells_ratio_to_baseline_at_median": 5.1,
+        "smells_total": {
+          "max": 36.0,
+          "median": 24.0,
+          "min": 11.0,
+          "n": 5
+        },
+        "trailing_whitespace_share_pct": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        }
+      },
+      "swe_django": {
+        "baseline": "django",
+        "mean_mi": {
+          "max": 82.8,
+          "median": 78.6,
+          "min": 64.9,
+          "n": 5
+        },
+        "median_mi": {
+          "max": 80.2,
+          "median": 75.7,
+          "min": 56.6,
+          "n": 5
+        },
+        "non_cosmetic_per_100_loc": {
+          "max": 10.37,
+          "median": 9.56,
+          "min": 8.06,
+          "n": 5
+        },
+        "pct_mi_below_threshold": {
+          "max": 60.0,
+          "median": 20.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "runs_differing_from_baseline_mi": 0,
+        "size_matched_mi": {
+          "agentic_file_loc_range": [
+            9,
+            174
+          ],
+          "agentic_files": 27,
+          "agentic_median_mi": 75.2,
+          "bands": {
+            "0-50": {
+              "agentic_files": 12,
+              "agentic_median_mi": 95.6,
+              "human_files": 11,
+              "human_median_mi": 100.0
+            },
+            "100-200": {
+              "agentic_files": 8,
+              "agentic_median_mi": 54.4,
+              "human_files": 6,
+              "human_median_mi": 60.3
+            },
+            "200-400": {
+              "agentic_files": 0,
+              "agentic_median_mi": null,
+              "human_files": 1,
+              "human_median_mi": 52.6
+            },
+            "400+": {
+              "agentic_files": 0,
+              "agentic_median_mi": null,
+              "human_files": 3,
+              "human_median_mi": 27.6
+            },
+            "50-100": {
+              "agentic_files": 7,
+              "agentic_median_mi": 73.7,
+              "human_files": 7,
+              "human_median_mi": 73.8
+            }
+          },
+          "baseline": "django",
+          "human_files_all": 28,
+          "human_files_in_range": 18,
+          "human_median_mi_all": 74.8,
+          "human_median_mi_in_range": 77.3,
+          "median_mi_gap_matched": -2.1
+        },
+        "smells_per_100_loc": {
+          "max": 31.77,
+          "median": 30.6,
+          "min": 28.49,
+          "n": 5
+        },
+        "smells_ratio_to_baseline_at_median": 2.8,
+        "smells_total": {
+          "max": 141.0,
+          "median": 96.0,
+          "min": 83.0,
+          "n": 5
+        },
+        "trailing_whitespace_share_pct": {
+          "max": 72.3,
+          "median": 68.8,
+          "min": 67.4,
+          "n": 5
+        }
+      },
+      "swe_flask": {
+        "baseline": "flask",
+        "mean_mi": {
+          "max": 74.0,
+          "median": 72.3,
+          "min": 69.1,
+          "n": 5
+        },
+        "median_mi": {
+          "max": 72.2,
+          "median": 65.2,
+          "min": 63.2,
+          "n": 5
+        },
+        "non_cosmetic_per_100_loc": {
+          "max": 8.7,
+          "median": 7.73,
+          "min": 6.88,
+          "n": 5
+        },
+        "pct_mi_below_threshold": {
+          "max": 62.5,
+          "median": 50.0,
+          "min": 28.6,
+          "n": 5
+        },
+        "runs_differing_from_baseline_mi": 0,
+        "size_matched_mi": {
+          "agentic_file_loc_range": [
+            9,
+            158
+          ],
+          "agentic_files": 40,
+          "agentic_median_mi": 66.0,
+          "bands": {
+            "0-50": {
+              "agentic_files": 17,
+              "agentic_median_mi": 79.8,
+              "human_files": 5,
+              "human_median_mi": 100.0
+            },
+            "100-200": {
+              "agentic_files": 6,
+              "agentic_median_mi": 58.5,
+              "human_files": 6,
+              "human_median_mi": 59.3
+            },
+            "200-400": {
+              "agentic_files": 0,
+              "agentic_median_mi": null,
+              "human_files": 5,
+              "human_median_mi": 46.2
+            },
+            "400+": {
+              "agentic_files": 0,
+              "agentic_median_mi": null,
+              "human_files": 2,
+              "human_median_mi": 26.1
+            },
+            "50-100": {
+              "agentic_files": 17,
+              "agentic_median_mi": 62.7,
+              "human_files": 6,
+              "human_median_mi": 63.1
+            }
+          },
+          "baseline": "flask",
+          "human_files_all": 24,
+          "human_files_in_range": 13,
+          "human_median_mi_all": 59.3,
+          "human_median_mi_in_range": 65.2,
+          "median_mi_gap_matched": 0.8
+        },
+        "smells_per_100_loc": {
+          "max": 30.58,
+          "median": 28.42,
+          "min": 25.36,
+          "n": 5
+        },
+        "smells_ratio_to_baseline_at_median": 4.5,
+        "smells_total": {
+          "max": 183.0,
+          "median": 158.0,
+          "min": 105.0,
+          "n": 5
+        },
+        "trailing_whitespace_share_pct": {
+          "max": 75.0,
+          "median": 71.8,
+          "min": 69.4,
+          "n": 5
+        }
+      }
+    },
+    "human": {
+      "django": {
+        "mean_mi": 75.1,
+        "median_mi": 74.8,
+        "min_mi": 13.3,
+        "pct_mi_below_threshold": 35.7,
+        "smells": {
+          "by_category": {
+            "convention": 195,
+            "error": 11,
+            "refactor": 72,
+            "warning": 106
+          },
+          "non_cosmetic_per_100_loc": 10.91,
+          "per_100_loc": 10.91,
+          "total_findings": 384,
+          "trailing_whitespace": 0,
+          "trailing_whitespace_share_pct": 0.0,
+          "whitespace_family": 0,
+          "whitespace_family_share_pct": 0.0
+        }
+      },
+      "flask": {
+        "mean_mi": 64.1,
+        "median_mi": 59.3,
+        "min_mi": 24.1,
+        "pct_mi_below_threshold": 66.7,
+        "smells": {
+          "by_category": {
+            "convention": 144,
+            "error": 26,
+            "refactor": 42,
+            "warning": 58
+          },
+          "non_cosmetic_per_100_loc": 6.36,
+          "per_100_loc": 6.36,
+          "total_findings": 270,
+          "trailing_whitespace": 0,
+          "trailing_whitespace_share_pct": 0.0,
+          "whitespace_family": 8,
+          "whitespace_family_share_pct": 3.0
+        }
+      },
+      "flask_0_1": {
+        "mean_mi": 40.6,
+        "median_mi": 40.6,
+        "min_mi": 40.6,
+        "pct_mi_below_threshold": 100.0,
+        "smells": {
+          "by_category": {
+            "convention": 3,
+            "error": 13,
+            "refactor": 10,
+            "warning": 13
+          },
+          "non_cosmetic_per_100_loc": 15.66,
+          "per_100_loc": 15.66,
+          "total_findings": 39,
+          "trailing_whitespace": 0,
+          "trailing_whitespace_share_pct": 0.0,
+          "whitespace_family": 0,
+          "whitespace_family_share_pct": 0.0
+        }
+      }
+    },
+    "smells_ratio_across_configurations": {
+      "max": 5.1,
+      "min": 2.8
+    }
+  },
+  "rq4_security": {
+    "agentic": {
+      "openhands_flask": {
+        "baseline": "flask",
+        "baseline_density_per_100_loc": 0.26,
+        "density_per_100_loc": {
+          "max": 2.08,
+          "median": 1.35,
+          "min": 0.0,
+          "n": 5
+        },
+        "findings_by_cwe_across_runs": {
+          "CWE-94": 3
+        },
+        "runs_differing_from_baseline_by_severity": {
+          "HIGH": 0,
+          "LOW": 0,
+          "MEDIUM": 0
+        },
+        "runs_with_any_finding": 3,
+        "total_findings": {
+          "max": 1.0,
+          "median": 1.0,
+          "min": 0.0,
+          "n": 5
+        }
+      },
+      "swe_django": {
+        "baseline": "django",
+        "baseline_density_per_100_loc": 0.03,
+        "density_per_100_loc": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "findings_by_cwe_across_runs": {},
+        "runs_differing_from_baseline_by_severity": {
+          "HIGH": 0,
+          "LOW": 0,
+          "MEDIUM": 0
+        },
+        "runs_with_any_finding": 0,
+        "total_findings": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        }
+      },
+      "swe_flask": {
+        "baseline": "flask",
+        "baseline_density_per_100_loc": 0.26,
+        "density_per_100_loc": {
+          "max": 0.23,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "findings_by_cwe_across_runs": {
+          "CWE-94": 2
+        },
+        "runs_differing_from_baseline_by_severity": {
+          "HIGH": 0,
+          "LOW": 0,
+          "MEDIUM": 0
+        },
+        "runs_with_any_finding": 2,
+        "total_findings": {
+          "max": 1.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        }
+      }
+    },
+    "human": {
+      "django": {
+        "by_cwe": {
+          "CWE-502": 1
+        },
+        "by_severity": {
+          "HIGH": 0,
+          "LOW": 1,
+          "MEDIUM": 0
+        },
+        "density_per_100_loc": 0.03,
+        "total_findings": 1
+      },
+      "flask": {
+        "by_cwe": {
+          "CWE-259": 1,
+          "CWE-327": 1,
+          "CWE-617": 5,
+          "CWE-703": 1,
+          "CWE-78": 2,
+          "CWE-79": 1
+        },
+        "by_severity": {
+          "HIGH": 1,
+          "LOW": 7,
+          "MEDIUM": 3
+        },
+        "density_per_100_loc": 0.26,
+        "total_findings": 11
+      },
+      "flask_0_1": {
+        "by_cwe": {
+          "CWE-94": 1
+        },
+        "by_severity": {
+          "HIGH": 1,
+          "LOW": 0,
+          "MEDIUM": 0
+        },
+        "density_per_100_loc": 0.4,
+        "total_findings": 1
+      }
+    },
+    "jinja2_autoescaping": {
+      "per_run": {
+        "openhands_flask_run01": "absent",
+        "openhands_flask_run02": "off",
+        "openhands_flask_run03": "off",
+        "openhands_flask_run04": "absent",
+        "openhands_flask_run05": "off",
+        "swe_flask_run01": "on",
+        "swe_flask_run02": "off",
+        "swe_flask_run03": "on",
+        "swe_flask_run04": "on",
+        "swe_flask_run05": "off"
+      },
+      "runs_examined": 10,
+      "runs_with_autoescaping_off": 5,
+      "runs_with_autoescaping_on": 3,
+      "runs_without_templating": 2
+    },
+    "min_confidence": "MEDIUM"
+  },
+  "rq5_duplication": {
+    "agentic": {
+      "openhands_flask": {
+        "baseline": "flask",
+        "baseline_duplicated_pct": 3.4,
+        "duplicated_blocks": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "duplicated_pct": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "runs_differing_from_baseline": 0,
+        "runs_with_any_duplication": 0
+      },
+      "swe_django": {
+        "baseline": "django",
+        "baseline_duplicated_pct": 1.0,
+        "duplicated_blocks": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "duplicated_pct": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "runs_differing_from_baseline": 0,
+        "runs_with_any_duplication": 0
+      },
+      "swe_flask": {
+        "baseline": "flask",
+        "baseline_duplicated_pct": 3.4,
+        "duplicated_blocks": {
+          "max": 1.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "duplicated_pct": {
+          "max": 2.3,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "runs_differing_from_baseline": 0,
+        "runs_with_any_duplication": 2
+      }
+    },
+    "human": {
+      "django": {
+        "duplicated_blocks": 3,
+        "duplicated_loc": 35,
+        "duplicated_pct": 1.0,
+        "max_block_tokens": 58
+      },
+      "flask": {
+        "duplicated_blocks": 7,
+        "duplicated_loc": 146,
+        "duplicated_pct": 3.4,
+        "max_block_tokens": 167
+      },
+      "flask_0_1": {
+        "duplicated_blocks": 0,
+        "duplicated_loc": 0,
+        "duplicated_pct": 0.0,
+        "max_block_tokens": 0
+      }
+    },
+    "min_tokens": 50,
+    "n_agentic_runs": 15,
+    "n_runs_with_any_duplication": 2,
+    "runs_with_any_duplication": [
+      "swe_flask_run02",
+      "swe_flask_run03"
+    ]
+  },
+  "table_repo_stats": {
+    "agentic": {
+      "openhands_flask": {
+        "avg_function_length": {
+          "max": 5.1,
+          "median": 4.9,
+          "min": 3.4,
+          "n": 5
+        },
+        "classes": {
+          "max": 7.0,
+          "median": 4.0,
+          "min": 1.0,
+          "n": 5
+        },
+        "comment_density_pct": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "docstring_coverage_pct": {
+          "max": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5
+        },
+        "files_outside_scope": {
+          "max": 1.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 5,
+          "per_run": {
+            "openhands_flask_run01": 1,
+            "openhands_flask_run02": 0,
+            "openhands_flask_run03": 0,
+            "openhands_flask_run04": 0,
+            "openhands_flask_run05": 0
+          }
+        },
+        "functions": {
+          "max": 26.0,
+          "median": 14.0,
+          "min": 9.0,
+          "n": 5
+        },
+        "loc": {
+          "max": 102.0,
+          "median": 74.0,
+          "min": 48.0,
+          "n": 5
+        },
+        "source_files": {
+          "max": 7.0,
+          "median": 5.0,
+          "min": 1.0,
+          "n": 5
+        }
+      },
+      "swe_django": {
+        "avg_function_length": {
+          "max": 11.1,
+          "median": 9.3,
+          "min": 8.6,
+          "n": 5
+        },
+        "classes": {
+          "max": 19.0,
+          "median": 16.0,
+          "min": 15.0,
+          "n": 5
+        },
+        "comment_density_pct": {
+          "max": 9.7,
+          "median": 9.1,
+          "min": 7.7,
+          "n": 5
+        },
+        "docstring_coverage_pct": {
+          "max": 84.7,
+          "median": 75.9,
+          "min": 69.0,
+          "n": 5
+        },
+        "files_outside_scope": {
+          "max": 15.0,
+          "median": 4.0,
+          "min": 3.0,
+          "n": 5,
+          "per_run": {
+            "swe_django_run01": 4,
+            "swe_django_run02": 6,
+            "swe_django_run03": 4,
+            "swe_django_run04": 3,
+            "swe_django_run05": 15
+          }
+        },
+        "functions": {
+          "max": 53.0,
+          "median": 38.0,
+          "min": 27.0,
+          "n": 5
+        },
+        "loc": {
+          "max": 484.0,
+          "median": 337.0,
+          "min": 270.0,
+          "n": 5
+        },
+        "source_files": {
+          "max": 7.0,
+          "median": 5.0,
+          "min": 5.0,
+          "n": 5
+        }
+      },
+      "swe_flask": {
+        "avg_function_length": {
+          "max": 10.4,
+          "median": 8.9,
+          "min": 8.4,
+          "n": 5
+        },
+        "classes": {
+          "max": 17.0,
+          "median": 13.0,
+          "min": 9.0,
+          "n": 5
+        },
+        "comment_density_pct": {
+          "max": 9.5,
+          "median": 7.6,
+          "min": 6.2,
+          "n": 5
+        },
+        "docstring_coverage_pct": {
+          "max": 72.5,
+          "median": 64.1,
+          "min": 62.5,
+          "n": 5
+        },
+        "files_outside_scope": {
+          "max": 5.0,
+          "median": 3.0,
+          "min": 1.0,
+          "n": 5,
+          "per_run": {
+            "swe_flask_run01": 1,
+            "swe_flask_run02": 3,
+            "swe_flask_run03": 2,
+            "swe_flask_run04": 3,
+            "swe_flask_run05": 5
+          }
+        },
+        "functions": {
+          "max": 76.0,
+          "median": 67.0,
+          "min": 50.0,
+          "n": 5
+        },
+        "loc": {
+          "max": 644.0,
+          "median": 540.0,
+          "min": 414.0,
+          "n": 5
+        },
+        "source_files": {
+          "max": 9.0,
+          "median": 8.0,
+          "min": 7.0,
+          "n": 5
+        }
+      }
+    },
+    "human": {
+      "django": {
+        "avg_function_length": 14.0,
+        "classes": 69,
+        "comment_density_pct": 5.8,
+        "docstring_coverage_pct": 53.4,
+        "functions": 296,
+        "loc": 3520,
+        "source_files": 28
+      },
+      "flask": {
+        "avg_function_length": 18.4,
+        "classes": 47,
+        "comment_density_pct": 12.7,
+        "docstring_coverage_pct": 60.6,
+        "functions": 362,
+        "loc": 4243,
+        "source_files": 24
+      },
+      "flask_0_1": {
+        "avg_function_length": 13.9,
+        "classes": 5,
+        "comment_density_pct": 18.9,
+        "docstring_coverage_pct": 80.5,
+        "functions": 36,
+        "loc": 249,
+        "source_files": 1
+      }
+    },
+    "size_ratio": {
+      "across_configurations": {
+        "times_smaller_max": 88.4,
+        "times_smaller_median_max": 57.3,
+        "times_smaller_median_min": 7.9,
+        "times_smaller_min": 6.6
+      },
+      "openhands_flask": {
+        "baseline": "flask",
+        "baseline_loc": 4243,
+        "times_smaller": {
+          "max": 88.4,
+          "median": 57.3,
+          "min": 41.6,
+          "n": 5
+        }
+      },
+      "swe_django": {
+        "baseline": "django",
+        "baseline_loc": 3520,
+        "times_smaller": {
+          "max": 13.0,
+          "median": 10.4,
+          "min": 7.3,
+          "n": 5
+        }
+      },
+      "swe_flask": {
+        "baseline": "flask",
+        "baseline_loc": 4243,
+        "times_smaller": {
+          "max": 10.2,
+          "median": 7.9,
+          "min": 6.6,
+          "n": 5
+        }
+      }
+    }
+  }
+}

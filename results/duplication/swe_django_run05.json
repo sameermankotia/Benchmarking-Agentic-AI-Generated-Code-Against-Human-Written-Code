@@ -1,69 +1,8 @@
 {
-  "blocks": [
-    {
-      "lines": 19,
-      "occurrences": [
-        {
-          "line": 25,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 79,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 189,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 278,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 312,
-          "path": "tests/test_wsgi_compliance.py"
-        }
-      ],
-      "tokens": 68
-    },
-    {
-      "lines": 18,
-      "occurrences": [
-        {
-          "line": 25,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 79,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 150,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 189,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 233,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 278,
-          "path": "tests/test_wsgi_compliance.py"
-        },
-        {
-          "line": 312,
-          "path": "tests/test_wsgi_compliance.py"
-        }
-      ],
-      "tokens": 64
-    }
-  ],
-  "duplicated_blocks": 2,
-  "duplicated_loc": 184,
-  "duplicated_pct": 50.3,
+  "blocks": [],
+  "duplicated_blocks": 0,
+  "duplicated_loc": 0,
+  "duplicated_pct": 0.0,
   "files": [
     {
       "duplicated_loc": 0,
@@ -94,22 +33,10 @@
       "duplicated_pct": 0.0,
       "file": "djangoframework/wsgi.py",
       "loc": 44
-    },
-    {
-      "duplicated_loc": 0,
-      "duplicated_pct": 0.0,
-      "file": "tests/__init__.py",
-      "loc": 0
-    },
-    {
-      "duplicated_loc": 221,
-      "duplicated_pct": 89.8,
-      "file": "tests/test_wsgi_compliance.py",
-      "loc": 246
     }
   ],
   "label": "SWE-agent/Dj. (A) r05",
-  "max_block_tokens": 68,
+  "max_block_tokens": 0,
   "min_tokens": 50,
   "subject": "swe_django_run05"
 }

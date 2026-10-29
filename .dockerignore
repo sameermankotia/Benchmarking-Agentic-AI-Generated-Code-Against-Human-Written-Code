@@ -11,3 +11,13 @@ __pycache__/
 subjects/*/
 !subjects/subjects.json
 results/
+
+# Generation-side working state: the two agent virtualenvs, the SWE-agent
+# source clone, and the in-flight scratch tree. None is an input to the
+# analysis pipeline, and together they are ~500 MB of build context. The frozen
+# traces under generation/runs/ ARE copied in: analysis/paper_numbers.py reads
+# each run's cost and model-call counts out of them.
+generation/.venv-sweagent/
+generation/.venv-openhands/
+generation/.swe-agent-src/
+generation/work/

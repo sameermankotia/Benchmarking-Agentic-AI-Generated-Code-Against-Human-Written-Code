@@ -154,6 +154,11 @@ CONFIGS: list[Config] = [
            model=DEFAULT_ANTHROPIC_MODEL, spec="django",
            key_env="OPENROUTER_API_KEY", pair="django",
            label="SWE-agent/Dj. (A)"),
+    # Added in revision: completes the 2x2 design (agent x specification).
+    Config(id="openhands_django", agent="openhands",
+           model=DEFAULT_OPENAI_MODEL, spec="django",
+           key_env="OPENAI_API_KEY", pair="django",
+           label="OpenHands/Dj. (A)"),
 ]
 
 

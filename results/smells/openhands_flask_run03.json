@@ -8,6 +8,13 @@
   "label": "OpenHands (A) r03",
   "per_100_loc": 22.92,
   "subject": "openhands_flask_run03",
+  "symbols": {
+    "missing-class-docstring": 1,
+    "missing-function-docstring": 6,
+    "missing-module-docstring": 1,
+    "multiple-statements": 1,
+    "wrong-import-order": 2
+  },
   "top_symbols": {
     "missing-class-docstring": 1,
     "missing-function-docstring": 6,

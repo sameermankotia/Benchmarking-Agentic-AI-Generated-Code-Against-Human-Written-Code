@@ -7,7 +7,8 @@ SUBJECTS ?=            # e.g. make all SUBJECTS="flask swe_flask"
 SUBJ_ARG := $(if $(SUBJECTS),--subjects $(SUBJECTS),)
 
 .PHONY: all repo_stats correctness complexity smells security duplication \
-        significance aggregate tables paper-numbers check-paper-numbers clean \
+        significance aggregate tables paper-numbers check-paper-numbers \
+        paper-tests check-paper-tests clean \
         docker docker-run help
 
 all: ## Run every stage + aggregate (the paper's `make all`)
@@ -43,8 +44,14 @@ paper-numbers: ## Compute results/paper_numbers.json (every number the paper quo
 check-paper-numbers: ## Verify the committed paper_numbers.json against results/
 	$(PYTHON) -m analysis.paper_numbers --check
 
+paper-tests: ## Compute results/paper_tests.json (the per-run tests the paper reports)
+	$(PYTHON) -m analysis.paper_tests
+
+check-paper-tests: ## Verify the committed paper_tests.json against results/
+	$(PYTHON) -m analysis.paper_tests --check
+
 clean: ## Remove all generated results
-	rm -rf results/*/ results/*.csv results/paper_numbers.json
+	rm -rf results/*/ results/*.csv results/paper_numbers.json results/paper_tests.json
 
 docker: ## Build the hermetic analysis image
 	docker build -t agentic-benchmark .

@@ -8,6 +8,21 @@
   "label": "SWE-agent/Dj. (A) r05",
   "per_100_loc": 30.6,
   "subject": "swe_django_run05",
+  "symbols": {
+    "broad-exception-caught": 2,
+    "invalid-name": 2,
+    "line-too-long": 3,
+    "no-else-return": 2,
+    "redefined-outer-name": 2,
+    "too-few-public-methods": 6,
+    "too-many-branches": 1,
+    "too-many-instance-attributes": 1,
+    "trailing-whitespace": 77,
+    "unnecessary-pass": 1,
+    "unused-argument": 7,
+    "unused-import": 6,
+    "unused-variable": 2
+  },
   "top_symbols": {
     "broad-exception-caught": 2,
     "invalid-name": 2,

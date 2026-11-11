@@ -22,8 +22,13 @@ correctness stage reports. Flask 3.0.3 passes 140/140 with no skips.
 ## Why WSGI
 
 The specification fixes behaviour, the WSGI interface ("must pass a WSGI
-compliance check"), and exactly four names: `request`, `g`, `current_app`, and
-`Blueprint`. It does not fix the name of the application class, the route
+compliance check"), and two names, `current_app` and `g`, which the suite
+reaches by name (`SPEC_NAMED` in `oracle/api.py`). It also asks for
+Blueprints and a request object, but the suite treats both as roles: the
+blueprint class is resolved like any other role (with `Blueprint` as its first
+candidate), and the request is accepted however a handler receives it, as an
+argument, as a module-level object, or through `current_app` or `g`. The
+specification does not fix the name of the application class, the route
 decorator, the response class, or the template renderer. An implementation
 written from it therefore has no reason to use Flask's names, so a suite that
 asserts through a framework-specific test client is a conformance suite for
@@ -70,4 +75,7 @@ Every case where this suite failed a working framework for a convention
 the specification does not fix is recorded in
 [`../BINDING-DEFECTS.md`](../BINDING-DEFECTS.md), together with what it
 cost and what was changed. Both human baselines held at 100% through all
-nine of them.
+nine changes (eight to the oracle's binding, one to the analysis scope filter).
+Two known conventions were left unfixed and are reported as bounds in the
+paper: the templating cases need a string renderer, and many oracle views
+return a plain string. Both are described in the same file.

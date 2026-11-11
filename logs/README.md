@@ -16,6 +16,14 @@ see the raw tool invocations and their results without re-running anything.
 | `stages/significance.log`  | Mann-Whitney U / Fisher's exact, each agentic run against its pair's baseline. |
 | `stages/aggregate.log`     | CSV table assembly. |
 | `stages/paper_numbers.log` | `results/paper_numbers.json` — the medians, ranges and ratios the paper quotes. |
+
+`analysis/paper_tests.py` (the per-run tests the paper reports, written to
+`results/paper_tests.json`) and the full per-symbol pylint counts (`symbols` in
+`results/smells/*.json`) were added after these logs were captured. They were
+produced with the same pinned tool versions under Python 3.11 outside the
+image: every field that the logged run wrote reproduced byte for byte, and
+`make check-paper-numbers` and `make check-paper-tests` both pass. The next
+`make docker && make docker-run` adds their stage logs here.
 | `oracle-flask-verbose.log` | Per-case `pytest -v` for the Flask oracle vs. the Flask baseline (140/140). |
 | `oracle-django-verbose.log`| Per-case `pytest -v` for the Django oracle vs. the Django baseline (104/104). |
 

@@ -1,0 +1,1644 @@
+{
+  "_meta": {
+    "alpha": 0.05,
+    "cosmetic_symbols": [
+      "bad-indentation",
+      "invalid-name",
+      "line-too-long",
+      "missing-final-newline",
+      "mixed-line-endings",
+      "multiple-imports",
+      "multiple-statements",
+      "superfluous-parens",
+      "trailing-newlines",
+      "trailing-whitespace",
+      "ungrouped-imports",
+      "wrong-import-order",
+      "wrong-import-position"
+    ]
+  },
+  "baselines": {
+    "django": {
+      "cosmetic_share_pct": 0.5,
+      "non_cosmetic_per_100_loc": 10.85,
+      "pylint_per_100_loc": 10.91
+    },
+    "flask": {
+      "cosmetic_share_pct": 15.2,
+      "non_cosmetic_per_100_loc": 5.4,
+      "pylint_per_100_loc": 6.36
+    },
+    "flask_0_1": {
+      "cosmetic_share_pct": 2.6,
+      "non_cosmetic_per_100_loc": 15.26,
+      "pylint_per_100_loc": 15.66
+    }
+  },
+  "configurations": {
+    "openhands_flask": {
+      "bandit_rate": {
+        "runs": {
+          "openhands_flask_run01": {
+            "counts": [
+              0,
+              11
+            ],
+            "loc": [
+              78,
+              4243
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run02": {
+            "counts": [
+              1,
+              11
+            ],
+            "loc": [
+              52,
+              4243
+            ],
+            "p": 0.136
+          },
+          "openhands_flask_run03": {
+            "counts": [
+              1,
+              11
+            ],
+            "loc": [
+              48,
+              4243
+            ],
+            "p": 0.1263
+          },
+          "openhands_flask_run04": {
+            "counts": [
+              0,
+              11
+            ],
+            "loc": [
+              102,
+              4243
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run05": {
+            "counts": [
+              1,
+              11
+            ],
+            "loc": [
+              74,
+              4243
+            ],
+            "p": 0.1874
+          }
+        },
+        "summary": "0/5"
+      },
+      "baseline": "flask",
+      "cc_mannwhitney": {
+        "median_r": -0.21,
+        "runs": {
+          "openhands_flask_run01": {
+            "p": 0.0804,
+            "r": -0.207
+          },
+          "openhands_flask_run02": {
+            "p": 0.6836,
+            "r": 0.069
+          },
+          "openhands_flask_run03": {
+            "p": 0.2029,
+            "r": -0.237
+          },
+          "openhands_flask_run04": {
+            "p": 0.0052,
+            "r": -0.287
+          },
+          "openhands_flask_run05": {
+            "p": 0.7545,
+            "r": -0.044
+          }
+        },
+        "summary": "1/5 lower"
+      },
+      "cc_over_10_fisher": {
+        "runs": {
+          "openhands_flask_run01": {
+            "agentic": [
+              0,
+              23
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run02": {
+            "agentic": [
+              0,
+              11
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run03": {
+            "agentic": [
+              0,
+              9
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run04": {
+            "agentic": [
+              0,
+              31
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run05": {
+            "agentic": [
+              0,
+              16
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "cogc_mannwhitney": {
+        "median_r": -0.26,
+        "runs": {
+          "openhands_flask_run01": {
+            "p": 0.0088,
+            "r": -0.349
+          },
+          "openhands_flask_run02": {
+            "p": 0.807,
+            "r": -0.048
+          },
+          "openhands_flask_run03": {
+            "p": 0.1726,
+            "r": -0.263
+          },
+          "openhands_flask_run04": {
+            "p": 0.0004,
+            "r": -0.396
+          },
+          "openhands_flask_run05": {
+            "p": 0.4088,
+            "r": -0.131
+          }
+        },
+        "summary": "2/5 lower"
+      },
+      "cogc_over_15_fisher": {
+        "runs": {
+          "openhands_flask_run01": {
+            "agentic": [
+              0,
+              17
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run02": {
+            "agentic": [
+              0,
+              8
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run03": {
+            "agentic": [
+              0,
+              8
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run04": {
+            "agentic": [
+              0,
+              24
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run05": {
+            "agentic": [
+              0,
+              12
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "cosmetic_share_pooled_pct": 18.3,
+      "cpd_block_rate": {
+        "runs": {
+          "openhands_flask_run01": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              78,
+              4243
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run02": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              52,
+              4243
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run03": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              48,
+              4243
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run04": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              102,
+              4243
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run05": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              74,
+              4243
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "mi_below_65_fisher": {
+        "runs": {
+          "openhands_flask_run01": {
+            "agentic": [
+              1,
+              6
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 0.0606
+          },
+          "openhands_flask_run02": {
+            "agentic": [
+              1,
+              1
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run03": {
+            "agentic": [
+              1,
+              1
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 1.0
+          },
+          "openhands_flask_run04": {
+            "agentic": [
+              0,
+              7
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 0.0024
+          },
+          "openhands_flask_run05": {
+            "agentic": [
+              1,
+              5
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 0.1296
+          }
+        },
+        "summary": "1/5 lower"
+      },
+      "mi_mannwhitney": {
+        "median_r": 0.43,
+        "runs": {
+          "openhands_flask_run01": {
+            "p": 0.0279,
+            "r": 0.59
+          },
+          "openhands_flask_run02": {
+            "p": 0.4439,
+            "r": -0.5
+          },
+          "openhands_flask_run03": {
+            "p": 0.4439,
+            "r": -0.5
+          },
+          "openhands_flask_run04": {
+            "p": 0.0062,
+            "r": 0.685
+          },
+          "openhands_flask_run05": {
+            "p": 0.1382,
+            "r": 0.433
+          }
+        },
+        "summary": "2/5 higher"
+      },
+      "non_cosmetic_per_100_loc": {
+        "max": 35.29,
+        "median": 24.32,
+        "min": 16.67
+      },
+      "oracle_total_fisher": {
+        "runs": {
+          "openhands_flask_run01": {
+            "p": 0.0
+          },
+          "openhands_flask_run02": {
+            "p": 0.0
+          },
+          "openhands_flask_run03": {
+            "p": 0.0
+          },
+          "openhands_flask_run04": {
+            "p": 0.0
+          },
+          "openhands_flask_run05": {
+            "p": 0.0
+          }
+        },
+        "summary": "5/5 lower"
+      },
+      "pylint_all_rate": {
+        "runs": {
+          "openhands_flask_run01": {
+            "counts": [
+              30,
+              270
+            ],
+            "loc": [
+              78,
+              4243
+            ],
+            "p": 0.0
+          },
+          "openhands_flask_run02": {
+            "counts": [
+              14,
+              270
+            ],
+            "loc": [
+              52,
+              4243
+            ],
+            "p": 0.0
+          },
+          "openhands_flask_run03": {
+            "counts": [
+              11,
+              270
+            ],
+            "loc": [
+              48,
+              4243
+            ],
+            "p": 0.0004
+          },
+          "openhands_flask_run04": {
+            "counts": [
+              36,
+              270
+            ],
+            "loc": [
+              102,
+              4243
+            ],
+            "p": 0.0
+          },
+          "openhands_flask_run05": {
+            "counts": [
+              24,
+              270
+            ],
+            "loc": [
+              74,
+              4243
+            ],
+            "p": 0.0
+          }
+        },
+        "summary": "5/5 higher"
+      },
+      "pylint_non_cosmetic_rate": {
+        "runs": {
+          "openhands_flask_run01": {
+            "counts": [
+              23,
+              229
+            ],
+            "loc": [
+              78,
+              4243
+            ],
+            "p": 0.0
+          },
+          "openhands_flask_run02": {
+            "counts": [
+              9,
+              229
+            ],
+            "loc": [
+              52,
+              4243
+            ],
+            "p": 0.0027
+          },
+          "openhands_flask_run03": {
+            "counts": [
+              8,
+              229
+            ],
+            "loc": [
+              48,
+              4243
+            ],
+            "p": 0.0057
+          },
+          "openhands_flask_run04": {
+            "counts": [
+              36,
+              229
+            ],
+            "loc": [
+              102,
+              4243
+            ],
+            "p": 0.0
+          },
+          "openhands_flask_run05": {
+            "counts": [
+              18,
+              229
+            ],
+            "loc": [
+              74,
+              4243
+            ],
+            "p": 0.0
+          }
+        },
+        "summary": "5/5 higher"
+      },
+      "size_matched_mi": {
+        "agentic_files": 20,
+        "agentic_median_mi": 87.5,
+        "file_size_cap_loc": 52,
+        "human_files": 5,
+        "human_median_mi": 100.0,
+        "p_descriptive": 0.14
+      }
+    },
+    "swe_django": {
+      "bandit_rate": {
+        "runs": {
+          "swe_django_run01": {
+            "counts": [
+              0,
+              1
+            ],
+            "loc": [
+              337,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run02": {
+            "counts": [
+              0,
+              1
+            ],
+            "loc": [
+              299,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run03": {
+            "counts": [
+              0,
+              1
+            ],
+            "loc": [
+              484,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run04": {
+            "counts": [
+              0,
+              1
+            ],
+            "loc": [
+              270,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run05": {
+            "counts": [
+              0,
+              1
+            ],
+            "loc": [
+              366,
+              3520
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "baseline": "django",
+      "cc_mannwhitney": {
+        "median_r": -0.06,
+        "runs": {
+          "swe_django_run01": {
+            "p": 0.9034,
+            "r": -0.01
+          },
+          "swe_django_run02": {
+            "p": 0.4736,
+            "r": -0.062
+          },
+          "swe_django_run03": {
+            "p": 0.1073,
+            "r": -0.116
+          },
+          "swe_django_run04": {
+            "p": 0.7466,
+            "r": -0.03
+          },
+          "swe_django_run05": {
+            "p": 0.1174,
+            "r": -0.123
+          }
+        },
+        "summary": "0/5"
+      },
+      "cc_over_10_fisher": {
+        "runs": {
+          "swe_django_run01": {
+            "agentic": [
+              0,
+              52
+            ],
+            "human": [
+              10,
+              330
+            ],
+            "p": 0.3698
+          },
+          "swe_django_run02": {
+            "agentic": [
+              0,
+              46
+            ],
+            "human": [
+              10,
+              330
+            ],
+            "p": 0.6179
+          },
+          "swe_django_run03": {
+            "agentic": [
+              1,
+              71
+            ],
+            "human": [
+              10,
+              330
+            ],
+            "p": 0.6973
+          },
+          "swe_django_run04": {
+            "agentic": [
+              0,
+              40
+            ],
+            "human": [
+              10,
+              330
+            ],
+            "p": 0.609
+          },
+          "swe_django_run05": {
+            "agentic": [
+              1,
+              58
+            ],
+            "human": [
+              10,
+              330
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "cogc_mannwhitney": {
+        "median_r": -0.14,
+        "runs": {
+          "swe_django_run01": {
+            "p": 0.4716,
+            "r": -0.07
+          },
+          "swe_django_run02": {
+            "p": 0.1966,
+            "r": -0.136
+          },
+          "swe_django_run03": {
+            "p": 0.0241,
+            "r": -0.186
+          },
+          "swe_django_run04": {
+            "p": 0.4269,
+            "r": -0.091
+          },
+          "swe_django_run05": {
+            "p": 0.0471,
+            "r": -0.184
+          }
+        },
+        "summary": "2/5 lower"
+      },
+      "cogc_over_15_fisher": {
+        "runs": {
+          "swe_django_run01": {
+            "agentic": [
+              0,
+              36
+            ],
+            "human": [
+              9,
+              261
+            ],
+            "p": 0.6065
+          },
+          "swe_django_run02": {
+            "agentic": [
+              0,
+              30
+            ],
+            "human": [
+              9,
+              261
+            ],
+            "p": 0.6049
+          },
+          "swe_django_run03": {
+            "agentic": [
+              1,
+              52
+            ],
+            "human": [
+              9,
+              261
+            ],
+            "p": 1.0
+          },
+          "swe_django_run04": {
+            "agentic": [
+              0,
+              25
+            ],
+            "human": [
+              9,
+              261
+            ],
+            "p": 1.0
+          },
+          "swe_django_run05": {
+            "agentic": [
+              1,
+              40
+            ],
+            "human": [
+              9,
+              261
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "cosmetic_share_pooled_pct": 73.8,
+      "cpd_block_rate": {
+        "runs": {
+          "swe_django_run01": {
+            "counts": [
+              0,
+              3
+            ],
+            "loc": [
+              337,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run02": {
+            "counts": [
+              0,
+              3
+            ],
+            "loc": [
+              299,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run03": {
+            "counts": [
+              0,
+              3
+            ],
+            "loc": [
+              484,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run04": {
+            "counts": [
+              0,
+              3
+            ],
+            "loc": [
+              270,
+              3520
+            ],
+            "p": 1.0
+          },
+          "swe_django_run05": {
+            "counts": [
+              0,
+              3
+            ],
+            "loc": [
+              366,
+              3520
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "mi_below_65_fisher": {
+        "runs": {
+          "swe_django_run01": {
+            "agentic": [
+              1,
+              7
+            ],
+            "human": [
+              10,
+              28
+            ],
+            "p": 0.3916
+          },
+          "swe_django_run02": {
+            "agentic": [
+              1,
+              5
+            ],
+            "human": [
+              10,
+              28
+            ],
+            "p": 0.6431
+          },
+          "swe_django_run03": {
+            "agentic": [
+              3,
+              5
+            ],
+            "human": [
+              10,
+              28
+            ],
+            "p": 0.36
+          },
+          "swe_django_run04": {
+            "agentic": [
+              0,
+              5
+            ],
+            "human": [
+              10,
+              28
+            ],
+            "p": 0.2911
+          },
+          "swe_django_run05": {
+            "agentic": [
+              3,
+              5
+            ],
+            "human": [
+              10,
+              28
+            ],
+            "p": 0.36
+          }
+        },
+        "summary": "0/5"
+      },
+      "mi_mannwhitney": {
+        "median_r": -0.01,
+        "runs": {
+          "swe_django_run01": {
+            "p": 0.4874,
+            "r": 0.173
+          },
+          "swe_django_run02": {
+            "p": 0.9796,
+            "r": -0.014
+          },
+          "swe_django_run03": {
+            "p": 0.2293,
+            "r": -0.343
+          },
+          "swe_django_run04": {
+            "p": 0.6637,
+            "r": 0.129
+          },
+          "swe_django_run05": {
+            "p": 0.3986,
+            "r": -0.243
+          }
+        },
+        "summary": "0/5"
+      },
+      "non_cosmetic_per_100_loc": {
+        "max": 9.03,
+        "median": 8.15,
+        "min": 6.82
+      },
+      "oracle_total_fisher": {
+        "runs": {
+          "swe_django_run01": {
+            "p": 1.0
+          },
+          "swe_django_run02": {
+            "p": 1.0
+          },
+          "swe_django_run03": {
+            "p": 1.0
+          },
+          "swe_django_run04": {
+            "p": 1.0
+          },
+          "swe_django_run05": {
+            "p": 0.0033
+          }
+        },
+        "summary": "1/5 lower"
+      },
+      "pylint_all_rate": {
+        "runs": {
+          "swe_django_run01": {
+            "counts": [
+              96,
+              384
+            ],
+            "loc": [
+              337,
+              3520
+            ],
+            "p": 0.0
+          },
+          "swe_django_run02": {
+            "counts": [
+              95,
+              384
+            ],
+            "loc": [
+              299,
+              3520
+            ],
+            "p": 0.0
+          },
+          "swe_django_run03": {
+            "counts": [
+              141,
+              384
+            ],
+            "loc": [
+              484,
+              3520
+            ],
+            "p": 0.0
+          },
+          "swe_django_run04": {
+            "counts": [
+              83,
+              384
+            ],
+            "loc": [
+              270,
+              3520
+            ],
+            "p": 0.0
+          },
+          "swe_django_run05": {
+            "counts": [
+              112,
+              384
+            ],
+            "loc": [
+              366,
+              3520
+            ],
+            "p": 0.0
+          }
+        },
+        "summary": "5/5 higher"
+      },
+      "pylint_non_cosmetic_rate": {
+        "runs": {
+          "swe_django_run01": {
+            "counts": [
+              26,
+              382
+            ],
+            "loc": [
+              337,
+              3520
+            ],
+            "p": 0.0956
+          },
+          "swe_django_run02": {
+            "counts": [
+              27,
+              382
+            ],
+            "loc": [
+              299,
+              3520
+            ],
+            "p": 0.4072
+          },
+          "swe_django_run03": {
+            "counts": [
+              33,
+              382
+            ],
+            "loc": [
+              484,
+              3520
+            ],
+            "p": 0.0083
+          },
+          "swe_django_run04": {
+            "counts": [
+              22,
+              382
+            ],
+            "loc": [
+              270,
+              3520
+            ],
+            "p": 0.2088
+          },
+          "swe_django_run05": {
+            "counts": [
+              30,
+              382
+            ],
+            "loc": [
+              366,
+              3520
+            ],
+            "p": 0.1513
+          }
+        },
+        "summary": "1/5 lower"
+      },
+      "size_matched_mi": {
+        "agentic_files": 27,
+        "agentic_median_mi": 75.2,
+        "file_size_cap_loc": 174,
+        "human_files": 22,
+        "human_median_mi": 85.6,
+        "p_descriptive": 0.1
+      }
+    },
+    "swe_flask": {
+      "bandit_rate": {
+        "runs": {
+          "swe_flask_run01": {
+            "counts": [
+              0,
+              11
+            ],
+            "loc": [
+              644,
+              4243
+            ],
+            "p": 0.3794
+          },
+          "swe_flask_run02": {
+            "counts": [
+              1,
+              11
+            ],
+            "loc": [
+              556,
+              4243
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run03": {
+            "counts": [
+              0,
+              11
+            ],
+            "loc": [
+              414,
+              4243
+            ],
+            "p": 0.6146
+          },
+          "swe_flask_run04": {
+            "counts": [
+              0,
+              11
+            ],
+            "loc": [
+              540,
+              4243
+            ],
+            "p": 0.6252
+          },
+          "swe_flask_run05": {
+            "counts": [
+              1,
+              11
+            ],
+            "loc": [
+              436,
+              4243
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "baseline": "flask",
+      "cc_mannwhitney": {
+        "median_r": -0.09,
+        "runs": {
+          "swe_flask_run01": {
+            "p": 0.3007,
+            "r": -0.069
+          },
+          "swe_flask_run02": {
+            "p": 0.1508,
+            "r": -0.103
+          },
+          "swe_flask_run03": {
+            "p": 0.9517,
+            "r": -0.005
+          },
+          "swe_flask_run04": {
+            "p": 0.0126,
+            "r": -0.17
+          },
+          "swe_flask_run05": {
+            "p": 0.2532,
+            "r": -0.088
+          }
+        },
+        "summary": "1/5 lower"
+      },
+      "cc_over_10_fisher": {
+        "runs": {
+          "swe_flask_run01": {
+            "agentic": [
+              0,
+              84
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 0.3744
+          },
+          "swe_flask_run02": {
+            "agentic": [
+              1,
+              70
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run03": {
+            "agentic": [
+              0,
+              63
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 0.3706
+          },
+          "swe_flask_run04": {
+            "agentic": [
+              0,
+              78
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 0.3685
+          },
+          "swe_flask_run05": {
+            "agentic": [
+              0,
+              60
+            ],
+            "human": [
+              9,
+              380
+            ],
+            "p": 0.6171
+          }
+        },
+        "summary": "0/5"
+      },
+      "cogc_mannwhitney": {
+        "median_r": -0.02,
+        "runs": {
+          "swe_flask_run01": {
+            "p": 0.7743,
+            "r": -0.02
+          },
+          "swe_flask_run02": {
+            "p": 0.9238,
+            "r": -0.007
+          },
+          "swe_flask_run03": {
+            "p": 0.6493,
+            "r": 0.039
+          },
+          "swe_flask_run04": {
+            "p": 0.1172,
+            "r": -0.113
+          },
+          "swe_flask_run05": {
+            "p": 0.2566,
+            "r": -0.092
+          }
+        },
+        "summary": "0/5"
+      },
+      "cogc_over_15_fisher": {
+        "runs": {
+          "swe_flask_run01": {
+            "agentic": [
+              0,
+              70
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run02": {
+            "agentic": [
+              0,
+              59
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run03": {
+            "agentic": [
+              0,
+              46
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run04": {
+            "agentic": [
+              1,
+              65
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 0.591
+          },
+          "swe_flask_run05": {
+            "agentic": [
+              0,
+              51
+            ],
+            "human": [
+              4,
+              334
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "cosmetic_share_pooled_pct": 73.9,
+      "cpd_block_rate": {
+        "runs": {
+          "swe_flask_run01": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              644,
+              4243
+            ],
+            "p": 0.6049
+          },
+          "swe_flask_run02": {
+            "counts": [
+              1,
+              7
+            ],
+            "loc": [
+              556,
+              4243
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run03": {
+            "counts": [
+              1,
+              7
+            ],
+            "loc": [
+              414,
+              4243
+            ],
+            "p": 0.5252
+          },
+          "swe_flask_run04": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              540,
+              4243
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run05": {
+            "counts": [
+              0,
+              7
+            ],
+            "loc": [
+              436,
+              4243
+            ],
+            "p": 1.0
+          }
+        },
+        "summary": "0/5"
+      },
+      "mi_below_65_fisher": {
+        "runs": {
+          "swe_flask_run01": {
+            "agentic": [
+              5,
+              9
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 0.6905
+          },
+          "swe_flask_run02": {
+            "agentic": [
+              5,
+              8
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 1.0
+          },
+          "swe_flask_run03": {
+            "agentic": [
+              3,
+              8
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 0.2191
+          },
+          "swe_flask_run04": {
+            "agentic": [
+              4,
+              8
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 0.4325
+          },
+          "swe_flask_run05": {
+            "agentic": [
+              2,
+              7
+            ],
+            "human": [
+              16,
+              24
+            ],
+            "p": 0.0994
+          }
+        },
+        "summary": "0/5"
+      },
+      "mi_mannwhitney": {
+        "median_r": 0.33,
+        "runs": {
+          "swe_flask_run01": {
+            "p": 0.3511,
+            "r": 0.218
+          },
+          "swe_flask_run02": {
+            "p": 0.229,
+            "r": 0.292
+          },
+          "swe_flask_run03": {
+            "p": 0.0605,
+            "r": 0.453
+          },
+          "swe_flask_run04": {
+            "p": 0.1265,
+            "r": 0.37
+          },
+          "swe_flask_run05": {
+            "p": 0.2005,
+            "r": 0.327
+          }
+        },
+        "summary": "0/5"
+      },
+      "non_cosmetic_per_100_loc": {
+        "max": 8.7,
+        "median": 7.0,
+        "min": 6.3
+      },
+      "oracle_total_fisher": {
+        "runs": {
+          "swe_flask_run01": {
+            "p": 0.0
+          },
+          "swe_flask_run02": {
+            "p": 0.0
+          },
+          "swe_flask_run03": {
+            "p": 0.0
+          },
+          "swe_flask_run04": {
+            "p": 0.0
+          },
+          "swe_flask_run05": {
+            "p": 0.0
+          }
+        },
+        "summary": "5/5 lower"
+      },
+      "pylint_all_rate": {
+        "runs": {
+          "swe_flask_run01": {
+            "counts": [
+              183,
+              270
+            ],
+            "loc": [
+              644,
+              4243
+            ],
+            "p": 0.0
+          },
+          "swe_flask_run02": {
+            "counts": [
+              170,
+              270
+            ],
+            "loc": [
+              556,
+              4243
+            ],
+            "p": 0.0
+          },
+          "swe_flask_run03": {
+            "counts": [
+              105,
+              270
+            ],
+            "loc": [
+              414,
+              4243
+            ],
+            "p": 0.0
+          },
+          "swe_flask_run04": {
+            "counts": [
+              158,
+              270
+            ],
+            "loc": [
+              540,
+              4243
+            ],
+            "p": 0.0
+          },
+          "swe_flask_run05": {
+            "counts": [
+              120,
+              270
+            ],
+            "loc": [
+              436,
+              4243
+            ],
+            "p": 0.0
+          }
+        },
+        "summary": "5/5 higher"
+      },
+      "pylint_non_cosmetic_rate": {
+        "runs": {
+          "swe_flask_run01": {
+            "counts": [
+              56,
+              229
+            ],
+            "loc": [
+              644,
+              4243
+            ],
+            "p": 0.0021
+          },
+          "swe_flask_run02": {
+            "counts": [
+              45,
+              229
+            ],
+            "loc": [
+              556,
+              4243
+            ],
+            "p": 0.0178
+          },
+          "swe_flask_run03": {
+            "counts": [
+              29,
+              229
+            ],
+            "loc": [
+              414,
+              4243
+            ],
+            "p": 0.1884
+          },
+          "swe_flask_run04": {
+            "counts": [
+              34,
+              229
+            ],
+            "loc": [
+              540,
+              4243
+            ],
+            "p": 0.3811
+          },
+          "swe_flask_run05": {
+            "counts": [
+              28,
+              229
+            ],
+            "loc": [
+              436,
+              4243
+            ],
+            "p": 0.3896
+          }
+        },
+        "summary": "2/5 higher"
+      },
+      "size_matched_mi": {
+        "agentic_files": 40,
+        "agentic_median_mi": 66.0,
+        "file_size_cap_loc": 158,
+        "human_files": 14,
+        "human_median_mi": 73.9,
+        "p_descriptive": 0.67
+      }
+    }
+  }
+}

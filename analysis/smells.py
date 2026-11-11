@@ -78,6 +78,9 @@ def analyze(subject: common.Subject, total_loc: int) -> dict:
         "per_100_loc": round(100.0 * kept / loc, 2),
         "by_category": by_category,
         "top_symbols": top,
+        # Every symbol, not only the 15 most frequent: the cosmetic /
+        # non-cosmetic split (analysis/paper_tests.py) needs the full counts.
+        "symbols": dict(sorted(by_symbol.items())),
     }
 
 

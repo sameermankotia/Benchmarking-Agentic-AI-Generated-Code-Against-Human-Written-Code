@@ -8,6 +8,15 @@
   "label": "OpenHands (A) r05",
   "per_100_loc": 32.43,
   "subject": "openhands_flask_run05",
+  "symbols": {
+    "duplicate-code": 1,
+    "missing-class-docstring": 4,
+    "missing-final-newline": 5,
+    "missing-function-docstring": 6,
+    "missing-module-docstring": 5,
+    "too-few-public-methods": 2,
+    "wrong-import-order": 1
+  },
   "top_symbols": {
     "duplicate-code": 1,
     "missing-class-docstring": 4,

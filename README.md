@@ -15,10 +15,10 @@ figure set. Five quality dimensions, five research questions:
 | RQ4 | Security density        | Bandit (+ CWE mapping)          | `analysis/security.py`     |
 | RQ5 | Code duplication        | CPD (PMD)                       | `analysis/duplication.py`  |
 
-Every dimension is also tested for statistical significance against the matched
-human baseline in the same pair — Mann-Whitney U for the per-function/per-file
-distributions (RQ2, RQ3, RQ5) and Fisher's exact for the pass/fail and severity
-counts (RQ1, RQ4) — by `analysis/significance.py` (see "Statistical testing").
+Every dimension is also tested for statistical significance against the
+human baseline of the same pair. The tests the paper reports (Mann-Whitney U,
+Fisher's exact, and an exact rate test with LOC exposure) are computed by
+`analysis/paper_tests.py`; see "Statistical testing".
 
 ## Layout
 
@@ -33,12 +33,14 @@ oracle/flask, oracle/django   specification-derived oracle suites + conftest
 oracle/BINDING-DEFECTS.md     every binding defect found while scoring, and its cost
 generation/                   the generation harness, specs, and frozen agent traces
 analysis/                     one module per stage + significance + aggregator
-analysis/paper_numbers.py     the figure set: every number the paper quotes
+analysis/paper_numbers.py     the figure set: medians, ranges, ratios, generation facts
+analysis/paper_tests.py       the per-run significance tests the paper reports
 run_all.py                    orchestrator (`make all` calls this)
 results/<dimension>/          per-subject result JSON        (committed)
 results/significance/         Mann-Whitney U / Fisher's exact per agentic run
 results/tables/               aggregated CSV tables          (committed)
 results/paper_numbers.json    medians, ranges, ratios, generation facts (committed)
+results/paper_tests.json      per-run tests and "k/5" counts as in the paper (committed)
 logs/                         frozen pipeline run transcripts (committed)
 requirements-analysis.txt     pinned analysis toolchain
 requirements-subjects.txt     pinned runtime deps of the baseline snapshots
@@ -72,6 +74,8 @@ make significance                  # Mann-Whitney U / Fisher's exact
 make tables                        # re-aggregate existing JSON
 make paper-numbers                 # rebuild results/paper_numbers.json
 make check-paper-numbers           # verify the committed figure set
+make paper-tests                   # rebuild results/paper_tests.json
+make check-paper-tests             # verify the committed test results
 ```
 
 `requirements-subjects.txt` is not optional. Without the subjects' runtime
@@ -112,13 +116,23 @@ of this package that is shipped rather than reproduced.
 | `openhands_flask` | OpenHands 0.14.0 + `gpt-4o-2024-11-20`          | flask     | 5 |
 | `swe_django`      | SWE-agent 1.0.0 + `anthropic/claude-sonnet-4`   | django    | 5 |
 
-Each run had the specification, a skeleton `pyproject.toml`, an empty Git
-repository, 90 minutes, 500 tool calls, temperature 0.2, and a $10 cost cap.
+Each run started from a new Git repository whose single commit holds two
+files: the specification as `SPECIFICATION.md` and a skeleton `pyproject.toml`
+declaring `jinja2`, `werkzeug` and `pytest` (none of them installed). The same
+specification file is also the agent's task: SWE-agent receives it as the issue
+text of its first prompt, OpenHands as its first user message. Each run had 90
+minutes, a 500 step budget, temperature 0.2, and a $10 cost cap. A step is one
+model call that issues one tool call: the budget is SWE-agent's
+`per_instance_call_limit` and OpenHands' `MAX_ITERATIONS`, and in every
+SWE-agent trajectory the number of model calls equals the number of tool calls.
+SWE-agent runs with its default configuration, which is written for resolving
+issues in an existing repository (and tells the agent not to install packages).
 Two departures from the paper's stated design, both disclosed in it: Claude was
 reached through OpenRouter, which does not expose the dated snapshot
 identifier, so the snapshot actually served is not recorded; and the $10 cap is
-additional to the paper's wall-clock and tool-call budgets, and bound on
-`swe_flask_run03` and `swe_django_run05`.
+additional to the paper's wall-clock and step budgets, and bound on
+`swe_flask_run03` and `swe_django_run05`. Two of the five OpenHands traces
+(`openhands_flask_run01`, `openhands_flask_run02`) were not captured.
 
 **Analysis scope.** For the human baselines, the measured package (which
 contains no tests). For each agentic run, the framework package the agent
@@ -155,9 +169,13 @@ so passing is the expected result. `logs/oracle-flask-verbose.log` and
 A specification-derived oracle can also fail a *working* framework over a
 convention the specification never fixes. Every time that happened while the 15
 agentic subjects were scored is recorded in
-[`oracle/BINDING-DEFECTS.md`](oracle/BINDING-DEFECTS.md) — nine defects, what
-each cost, and what was changed. Both baselines held at 100% through all nine,
-which is the control that makes the agentic figures trustworthy.
+[`oracle/BINDING-DEFECTS.md`](oracle/BINDING-DEFECTS.md): nine defects (eight
+in the oracle's binding, one in the analysis stage's scope filter), what each
+cost, and what was changed. Both baselines held at 100% through all nine. That
+shows no fix narrowed what the oracle accepts; it does not prove that a widened
+binding can never accept behaviour outside the specification. The same file
+lists the known conventions that were left unfixed and reported as bounds in
+the paper (string templates, plain string returns from views).
 
 ## The paper's figure set
 
@@ -177,16 +195,21 @@ Three things it measures that no stage does:
 
 - **the size-matched Maintainability Index.** Radon's MI falls with file
   length, so a repository of small files scores higher whatever it contains.
-  The baseline is restricted to the files whose SLOC falls inside the range the
-  configuration's own files span, and the comparison is also reported per LOC
-  band.
-- **Jinja2 autoescaping**, read at the `Environment` construction. Bandit does
-  not flag it, and the oracle cannot: a subject whose rendering fails emits no
-  markup to escape, so its autoescaping case passes vacuously.
+  Here the baseline is restricted to the files whose SLOC falls inside the range
+  the configuration's own files span, and the comparison is also reported per
+  LOC band. The variant the paper reports (human files no larger than the
+  largest agentic file, with a descriptive Mann-Whitney test) is computed by
+  `analysis/paper_tests.py`.
+- **Jinja2 autoescaping**, read at the `Environment` construction. Eight of the
+  ten Flask-specification runs create a Jinja2 environment and five of those
+  eight leave autoescaping off. Bandit flags all five (B701); the oracle sees
+  only one of them, because a subject whose rendering fails emits no markup to
+  escape, so its autoescaping case passes vacuously.
 - **the files each agent left outside the measured package.**
 
-`make all` runs this as its last stage, so the committed figure set always
-comes from the committed `results/`.
+`make all` runs this and then `analysis/paper_tests.py` as its last stages,
+so the committed figure set and test results always come from the committed
+`results/`.
 
 ## Adding subjects
 
@@ -202,10 +225,18 @@ data supports.
 
 ## How each metric is computed
 
-- **Complexity** — Radon's API gives per-function cyclomatic complexity and
-  per-file Maintainability Index (`multi=True`, comment-aware); complexipy
-  gives per-function cognitive complexity. Thresholds match the paper: CC > 10,
-  CogC > 15, MI < 65.
+- **Complexity** — Radon's `cc_visit` gives one cyclomatic complexity value
+  per block: every function, method and class. Class blocks are included in all
+  CC statistics; Radon folds nested functions into the function that encloses
+  them, so Flask 3.0.3 has 380 blocks (334 functions and methods plus 46
+  classes) against the 362 functions that `repo_stats` counts. complexipy gives
+  per-function cognitive complexity. Radon's per-file Maintainability Index uses
+  `multi=True` (multi-line strings count as comments), logical lines of code,
+  a cap at 100, and the value 100 for a file with zero Halstead volume (Radon
+  counts only unary, binary, Boolean, comparison and augmented-assignment
+  operators). Thresholds match the paper: CC > 10, CogC > 15, and MI < 65 on
+  Radon's 0 to 100 scale (a reference line, not Coleman et al.'s threshold,
+  which is 65 on the original 171-point scale, about 38 on Radon's).
 - **Security** — Bandit's full default plugin set, filtered to Medium
   confidence or higher, normalised per 100 LOC, with test-ids mapped to CWE
   classes (Cotroneo et al.'s mapping; see the paper's security-tool
@@ -216,8 +247,13 @@ data supports.
 - **Smells** — pylint JSON reporter; F/I categories dropped (see the paper's
   code-smell subsection), and `cyclic-import` (R0401) excluded as an
   order-dependent whole-import-graph message rather than a per-file smell (see
-  "Determinism"); reported as totals, per-100-LOC density, and C/R/W/E
-  breakdown.
+  "Determinism"); reported as totals, per-100-LOC density, C/R/W/E
+  breakdown, the 15 most frequent symbols, and the full per-symbol counts
+  (`symbols`). The cosmetic / non-cosmetic split the paper reports uses the
+  layout and naming symbols listed in `analysis/paper_tests.py` (`COSMETIC`).
+  `analysis/paper_numbers.py` also reports a narrower trailing-whitespace-only
+  split (`trailing_whitespace_share_pct`, `non_cosmetic_per_100_loc` there),
+  which is not the one in the paper.
 - **Duplication** — CPD with a 50-token minimum; duplicated blocks, duplicated
   LOC, duplicated fraction, largest block in tokens, and a per-file breakdown
   (which feeds the file-level significance test). Requires PMD + a JRE, so it
@@ -233,28 +269,38 @@ data supports.
 
 ### Statistical testing
 
-`analysis/significance.py` runs after the five dimension stages and tests each
-**agentic** run against the **human baseline in its own pair**:
+Every test compares one **agentic** run with the **human baseline of its own
+pair**, two-sided, at alpha = 0.05. Runs are not pooled; the paper reports,
+per configuration, in how many of the five runs a test rejects and in which
+direction ("5/5 higher").
 
-- **Mann-Whitney U** (two-sided) on the per-function CC and CogC distributions
-  (RQ2) and the per-file MI and duplicated-LOC-% distributions (RQ3, RQ5) —
-  complexity and duplication are right-skewed, so a rank-based test is more
-  appropriate than a *t*-test. Effect size is reported as rank-biserial
-  correlation (Kerby 2014's simple-difference formula,
-  `r = 1 - 2U/(n_agentic * n_human)`); `r > 0` means the agentic distribution
-  skews higher (worse, for CC/CogC/duplication) or lower (worse, for MI).
-- **Fisher's exact test** (two-sided) on the oracle pass/fail 2x2 tables, per
-  behavioural category and overall (RQ1), and on the Bandit severity-band 2x2
-  tables (RQ4), since several cells have small counts and a chi-square
-  approximation would be unreliable there.
+**What the paper reports: `analysis/paper_tests.py`** (`make paper-tests`,
+output `results/paper_tests.json`):
 
-All tests use alpha = 0.05. Results are written to
-`results/significance/<run_id>.json`, folded back into the tables by
-`analysis/aggregate.py` as p-value / effect-size rows, and summarised in
-`results/paper_numbers.json` as the number of runs per configuration that
-differ from their baseline — which is how the paper reports them. A cell reads
-`ref.` for the human baseline itself and `-` where the upstream dimension data
-was not available.
+- **Mann-Whitney U** on per-block CC, per-function CogC and per-file MI, with
+  effect size `r = 2*U_A/(n_A*n_H) - 1`, where `U_A` is the statistic of the
+  agentic sample, so `r > 0` means the agentic values tend to be larger.
+- **Fisher's exact test** on the share of blocks with CC > 10, of functions
+  with CogC > 15, of files with MI < 65, and on oracle pass/fail totals. Oracle
+  cases are not independent (one defect can fail many cases), so the RQ1
+  results are descriptive.
+- **Exact conditional binomial test of equal Poisson rates**, with LOC as the
+  exposure, for pylint messages (all, and non-cosmetic), Bandit findings and
+  CPD blocks.
+- **Size-matched MI**: agentic files pooled over the five runs against the
+  human files no larger than the largest agentic file; Mann-Whitney U,
+  descriptive because files of different runs are pooled.
+
+**Earlier per-run tests: `analysis/significance.py`** (`make significance`,
+output `results/significance/<run_id>.json`). This stage predates the paper's
+final test set and is kept because `analysis/aggregate.py` folds its p-values
+into the CSV tables. It runs Mann-Whitney U on CC, CogC, per-file MI and
+per-file duplicated-LOC %, and Fisher's exact on oracle pass/fail (per category
+and overall) and on Bandit severity bands. Its effect size is
+`rank_biserial = 1 - 2U/(n_agentic*n_human)`, the **opposite sign** of the
+paper's `r`. `results/paper_numbers.json` counts rejecting runs from this
+stage for the tests the two have in common, and those counts agree with
+`results/paper_tests.json`.
 
 ### Cross-repository consistency
 

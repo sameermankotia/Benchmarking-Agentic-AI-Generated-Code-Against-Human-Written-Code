@@ -8,6 +8,21 @@
   "label": "SWE-agent (A) r05",
   "per_100_loc": 27.52,
   "subject": "swe_flask_run05",
+  "symbols": {
+    "attribute-defined-outside-init": 2,
+    "broad-exception-caught": 1,
+    "f-string-without-interpolation": 1,
+    "import-outside-toplevel": 4,
+    "inconsistent-return-statements": 1,
+    "line-too-long": 1,
+    "missing-final-newline": 1,
+    "no-else-return": 5,
+    "raise-missing-from": 2,
+    "too-few-public-methods": 2,
+    "too-many-instance-attributes": 1,
+    "trailing-whitespace": 90,
+    "unused-import": 9
+  },
   "top_symbols": {
     "attribute-defined-outside-init": 2,
     "broad-exception-caught": 1,

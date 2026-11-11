@@ -768,6 +768,20 @@ def write_manifest(results: list[RunResult]) -> Path:
         "configurations": [asdict(c) for c in CONFIGS],
         "runs": [asdict(r) for r in results],
     }
+    # Merge with the existing manifest instead of replacing it, so a partial
+    # invocation (one configuration, or --from-run) does not erase the
+    # records of runs generated earlier.
+    if path.exists():
+        try:
+            old = json.loads(path.read_text())
+            new_ids = {r.run_id for r in results}
+            kept = [r for r in old.get("runs", []) if r.get("run_id") not in new_ids]
+            payload["runs"] = kept + payload["runs"]
+            payload["history"] = old.get("history", []) + [
+                {"generated_utc": old.get("generated_utc"),
+                 "budget": old.get("budget")}]
+        except (ValueError, OSError):
+            pass
     path.write_text(json.dumps(payload, indent=2) + "\n")
     return path
 

@@ -25,7 +25,7 @@ import sys
 import time
 
 from analysis import (aggregate, complexity, correctness, duplication,
-                      paper_numbers, repo_stats, security, significance,
+                      paper_numbers, paper_tests, repo_stats, security, significance,
                       smells)
 
 STAGES = {
@@ -50,7 +50,7 @@ def main() -> int:
                     help="stages to run (default: all + aggregate + paper_numbers)")
     args = ap.parse_args()
 
-    stages = args.stages or (ORDER + ["aggregate", "paper_numbers"])
+    stages = args.stages or (ORDER + ["aggregate", "paper_numbers", "paper_tests"])
     for stage in stages:
         if stage == "aggregate":
             print("\n=== aggregate ===")
@@ -59,6 +59,10 @@ def main() -> int:
         if stage == "paper_numbers":
             print("\n=== paper_numbers ===")
             paper_numbers.run()
+            continue
+        if stage == "paper_tests":
+            print("\n=== paper_tests ===")
+            paper_tests.run()
             continue
         if stage not in STAGES:
             print(f"unknown stage: {stage}", file=sys.stderr)

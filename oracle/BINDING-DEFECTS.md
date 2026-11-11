@@ -4,12 +4,19 @@ A specification-derived oracle can fail a working framework for a convention
 the specification never fixes. Every time that happened while the 15 agentic
 subjects were scored it is recorded here, with what the oracle had assumed,
 which subject exposed it, what the fix was, and what it moved. Nine defects,
-all fixed in the committed suites.
+all fixed in the committed suites: eight in the oracle's binding (1 to 5 and
+7 to 9) and one in the analysis stage's scope filter (6), which the paper
+reports separately.
 
 The control for every one of them is the pair of human baselines: Flask 3.0.3
 held at **140/140** and the Django URL module at **104/104** through all nine
 changes. A fix that moved a baseline would have been a change to what the
-suite tests, not a correction to how it binds.
+suite tests, not a correction to how it binds. This shows that no fix narrowed
+what the oracle accepts from an implementation that follows the
+specification. It does not show that a widened binding can never accept
+behaviour outside it; every fix only changes how a subject is constructed and
+how its request and response are read, never an asserted status, header or
+body.
 
 A defect is listed here only where the specification is genuinely silent. Where
 the specification does fix the behaviour, a failure stays a failure: see
@@ -31,11 +38,17 @@ Defects 1-7 were found in the first scoring pass, 8 and 9 in the audit of that
 pass; the pass rates in `results/correctness/` are the ones measured after all
 nine.
 
-## Not defects
+## Not fixed, and reported as bounds
 
-Three things that look like the same class of problem but are not, and were
-left failing:
+Four things that look like the same class of problem and were left failing.
+The paper reports a bound for the two that change a configuration's score.
 
+- **String templates.** The templating cases render template strings, but the
+  specification only asks for Jinja2 rendering. `swe_flask_run03` and
+  `swe_flask_run05` offer only file-based rendering by template name and fail
+  13 of the 15 templating cases for that reason. Counting all 13 as passes
+  would raise those two runs to at most 75.7% and the configuration median to
+  at most 75.0%.
 - **`swe_django_run01`'s regex patterns.** Its `path()` matches the raw
   `PATH_INFO` and so needs a leading slash (defect 7), but its `re_path()`
   compiles the regex it is handed and is anchored at the start, so the two
@@ -50,11 +63,18 @@ left failing:
   It is listed here rather than fixed because the specification does require a
   response object and says nothing about a string shortcut, so neither
   behaviour can be called the specified one, and changing it would widen the
-  construct rather than correct a binding.
+  construct rather than correct a binding. Measured effect, with the oracle's
+  views wrapped so that a string they return is converted into the subject's
+  own response class (`Api.response`): `openhands_flask_run01` 15.0% to 52.1%,
+  `run02` 20.0% to 50.0%, `run05` 20.7% to 46.4%, `run03` and `run04`
+  unchanged, so the OpenHands median moves from 15.0% to 46.4%. Every SWE-agent
+  Flask run and the Flask baseline (140/140) are unchanged. The paper reports
+  this as a bound.
 - **Autoescaping.** `test_autoescapes_html_in_a_variable` passes vacuously
   against a subject whose rendering fails outright: an empty body contains no
   unescaped markup. The case is kept as written because tightening it would
   change the measured pass rates, and the property it is meant to check is
   measured directly instead, at the Jinja2 `Environment` construction, by
-  `analysis/paper_numbers.py` (`rq4_security.jinja2_autoescaping`): five of the
-  ten Flask-specification runs leave it off.
+  `analysis/paper_numbers.py` (`rq4_security.jinja2_autoescaping`): eight of
+  the ten Flask-specification runs create a Jinja2 environment, and five of
+  those eight leave autoescaping off. Bandit flags all five (B701).

@@ -70,6 +70,16 @@
       "available": false
     },
     {
+      "id": "openhands_django",
+      "label": "OpenHands/Dj. (A)",
+      "kind": "agentic",
+      "pair": "django",
+      "path": "subjects/openhands-django/src",
+      "snapshot": "openhands-0.14.0 + gpt-4o",
+      "oracle": "django",
+      "available": false
+    },
+    {
       "id": "swe_flask_run01",
       "label": "SWE-agent (A) r01",
       "kind": "agentic",
